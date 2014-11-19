@@ -18,11 +18,25 @@
     </properties>
 
     <dependencies>
+        <!-- Logging Framework logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
         <!-- REST Server Sparkjava -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
             <version>2.0.0</version>
+        </dependency>
+
+        <!-- Json Umwandler Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3</version>
         </dependency>
 
         <!-- Datenbank H2 -->

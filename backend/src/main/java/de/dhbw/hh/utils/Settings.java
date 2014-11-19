@@ -52,10 +52,7 @@ public class Settings extends Properties {
 
         // server settings
         setProperty("server.port", "8080");
-        setProperty("server.web.source", "./www");
-        setProperty("server.web.path", "/*");
-        setProperty("server.rest.source", "de.robertschuette.cutera.rest");
-        setProperty("server.rest.path", "/*");
+        setProperty("server.web", "../frontend/app");
 
     }
 

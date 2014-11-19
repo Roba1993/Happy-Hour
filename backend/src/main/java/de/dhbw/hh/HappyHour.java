@@ -2,7 +2,13 @@ package de.dhbw.hh;
 
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.Testrun;
+import de.dhbw.hh.utils.LoggingConfiguration;
 import de.dhbw.hh.utils.Settings;
+import de.dhbw.hh.utils.Spark;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Scanner;
 
 /**
  * Dies ist die Java-Hauptklasse und der Einstiegspunkt
@@ -11,9 +17,13 @@ import de.dhbw.hh.utils.Settings;
  */
 public class HappyHour {
 
+    // Die Logger Klasse
+    static final Logger LOG = LoggerFactory.getLogger(HappyHour.class);
+
     // Die Eigenschaften für das Projekt
     public static Settings settings;
     public static DAOFactory daoFactory;
+    public static Spark spark;
 
     /**
      * Die main Funktion in der die Ausführung gestartet wird.
@@ -22,25 +32,25 @@ public class HappyHour {
      */
     public static void main( String[] args )
     {
+        LOG.info("Happy-Hour startet...");
+
         // Lade die Standart-Einstellungen
         settings = new Settings();
         settings.loadDefault();
 
+        // Setze Logging Einstellungen
+        LoggingConfiguration.setLoggingConfiguration(settings);
+
+        LOG.info("Verbinde zur Datenbank...");
+
         // Erstelle die DAOFactory
         daoFactory = DAOFactory.getDaoFactory(DAOFactory.H2, settings);
 
+        LOG.info("Starte den Server auf Port "+settings.getProperty("server.port"));
 
-        // Hole die Daten das Admins aus der Datenbank
-        Testrun[] runs = daoFactory.getTestrunDAO().findTestrunsByName("Admin");
+        // Starte den Spark-Server
+        spark = new Spark(settings, daoFactory);
 
-        // Wenn Daten existieren gebe diese aus
-        System.out.println( "Hello Admin deine Runden:" );
-
-        for(Testrun run: runs) {
-            System.out.println("Am " + run.getDate() + " fuhrst du " + run.getRounds() + " Runden");
-        }
-
-        // Schließe die Factory und alle damit verbundenen Connections
-        daoFactory.close();
+        LOG.info("Happy-Hour ist bereit für Anfragen...");
     }
 }
