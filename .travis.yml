@@ -1,0 +1,23 @@
+language: java
+
+install:
+#Frontend
+ - cd ${TRAVIS_BUILD_DIR}/frontend
+ - npm install -g grunt-cli
+ - npm install
+ - grunt
+ - npm start
+
+#Backend
+ - cd ${TRAVIS_BUILD_DIR}/backend
+ - mvn compile
+ - mvn package -Prun
+ 
+script:
+#Frontend
+ - cd ${TRAVIS_BUILD_DIR}/frontend
+ - grunt test
+
+#Backend
+ - cd ${TRAVIS_BUILD_DIR}/backend
+ - mvn test
