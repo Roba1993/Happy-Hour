@@ -1,12 +1,14 @@
 language: java
-
+jdk:
+  - oraclejdk8
+  
 install:
 #Frontend
  - cd ${TRAVIS_BUILD_DIR}/frontend
  - npm install -g grunt-cli
  - npm install
- - grunt
- - npm start
+ #- grunt
+ #- npm start
 
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
@@ -15,9 +17,9 @@ install:
  
 script:
 #Frontend
- - cd ${TRAVIS_BUILD_DIR}/frontend
- - grunt test
+ #- cd ${TRAVIS_BUILD_DIR}/frontend
+ #- grunt test
 
 #Backend
- #- cd ${TRAVIS_BUILD_DIR}/backend
- #- mvn test
+ - cd ${TRAVIS_BUILD_DIR}/backend
+ - mvn test
