@@ -1,5 +1,3 @@
-'use strict';
-
 // Definiere das Modul und seine Abhängigkeiten
 angular.module('myApp.view1', ['ngRoute'])
 
@@ -16,5 +14,5 @@ angular.module('myApp.view1', ['ngRoute'])
 // Definiere den Controller
 .controller('View1Ctrl', ['$scope', function($scope) {
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
-  $scope.testValue = "Welt";
+  $scope.testValue = 'Welt';
 }]);

@@ -1,5 +1,3 @@
-'use strict';
-
 describe('myApp.view2 module', function() {
 
   beforeEach(module('myApp.view2'));

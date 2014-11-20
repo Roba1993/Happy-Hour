@@ -1,5 +1,3 @@
-'use strict';
-
 // Definiere das Modul und seine Abhängigkeiten
 angular.module('myApp.view2', ['ngRoute'])
 
@@ -16,5 +14,5 @@ angular.module('myApp.view2', ['ngRoute'])
 // Definiere den Controller
 .controller('View2Ctrl', ['$scope', function($scope) {
   // Setze einen Wert in den Scope (um ihn im view2.html anzuzeigen)
-  $scope.name = "Markus";
+  $scope.name = 'Markus';
 }]);

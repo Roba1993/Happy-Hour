@@ -1,5 +1,3 @@
-'use strict';
-
 // Definiere anwendungsweite Abhängigkeiten
 angular.module('myApp', [
   'ngRoute',

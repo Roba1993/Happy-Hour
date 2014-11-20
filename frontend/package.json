@@ -5,9 +5,11 @@
   "description": "Ein Projekt des Kurses WI2012F",
   "license": "MIT",
   "devDependencies": {
-    "karma": "~0.10",
-    "http-server": "^0.6.1",
     "bower": "^1.3.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "http-server": "^0.6.1",
+    "karma": "~0.10",
     "karma-phantomjs-launcher": "^0.1.4"
   },
   "scripts": {
