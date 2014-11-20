@@ -19,5 +19,5 @@ script:
  - grunt test
 
 #Backend
- - cd ${TRAVIS_BUILD_DIR}/backend
- - mvn test
+ #- cd ${TRAVIS_BUILD_DIR}/backend
+ #- mvn test
