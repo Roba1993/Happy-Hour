@@ -15,12 +15,9 @@ script:
 #Frontend
  - cd ${TRAVIS_BUILD_DIR}/frontend
  - grunt
- - npm start &
 
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
- - mvn test
- - mvn compile
  - mvn package -Prun &
 
 after_success:
