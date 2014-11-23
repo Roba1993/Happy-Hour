@@ -13,7 +13,7 @@ install:
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
  - mvn compile
- - mvn package -Prun
+ - mvn package -Prun &
  
 script:
 #Frontend
