@@ -7,18 +7,18 @@ install:
  - cd ${TRAVIS_BUILD_DIR}/frontend
  - npm install -g grunt-cli
  - npm install
- #- grunt
+ - grunt
  #- npm start
 
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
  - mvn compile
- - mvn package -Prun &
+ #- mvn package -Prun &
  
 script:
 #Frontend
- #- cd ${TRAVIS_BUILD_DIR}/frontend
- #- grunt test
+ - cd ${TRAVIS_BUILD_DIR}/frontend
+ - grunt test
 
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
