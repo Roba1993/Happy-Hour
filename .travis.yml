@@ -30,5 +30,3 @@ after_success:
  
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
- - mvn compile
- - mvn package -Prun &
