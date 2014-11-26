@@ -18,7 +18,7 @@ script:
 
 #Backend
  - cd ${TRAVIS_BUILD_DIR}/backend
- - mvn package
+ - mvn package -Ptestrun
  #- mvn package -Prun &
 
 after_success:
