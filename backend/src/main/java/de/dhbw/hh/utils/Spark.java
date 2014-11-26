@@ -1,9 +1,14 @@
 package de.dhbw.hh.utils;
 
+import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.models.Testrun;
 import de.dhbw.hh.rest.TestrunREST;
 
 import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static spark.Spark.*;
 
@@ -11,6 +16,8 @@ import static spark.Spark.*;
  * Diese Klasse startet den Spark REST Server.
  */
 public class Spark {
+	
+    static final Logger LOG = LoggerFactory.getLogger(Spark.class);
 
     /**
      * Diese Funktion startet den Spark-Server und
@@ -29,7 +36,11 @@ public class Spark {
         }
 
         // Binde die Rest-Module ein
-        new TestrunREST(daoFactory);
+//        new TestrunREST(daoFactory);
+        get("/testrun/:name", "application/json", (request, response) -> {
+            return "Test";
+        });
+        
     }
 
     /**
@@ -37,5 +48,6 @@ public class Spark {
      */
     public void close() {
         stop();
+        LOG.info("Spark wurde beendet");
     }
 }

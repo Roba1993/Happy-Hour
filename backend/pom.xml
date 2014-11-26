@@ -88,7 +88,6 @@
                                 <configuration>
                                     <mainClass>de.dhbw.hh.HappyHour</mainClass>
                                     <arguments>
-                                        <argument>-run</argument>
                                     </arguments>
                                 </configuration>
                             </execution>

@@ -65,7 +65,7 @@ public class H2DAOFactory extends DAOFactory {
     }
 
     @Override
-    public void close() {
+    public void close() {	
         cpds.close();
     }
 }
