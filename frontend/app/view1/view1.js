@@ -16,6 +16,15 @@ angular.module('myApp.view1', ['ngRoute'])
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
   $scope.barSchalter = false;
   $scope.bars = [];
+  $scope.i = 0;
+  $scope.barClicked = function() {
+  	if($scope.i < $scope.bars.length-1) {
+  		$scope.i++;
+  	}
+  	else {
+  		$scope.i = 0;
+  	}
+  };
   var bar1 = {
   	name: 'Monobar',
   	description: 'Eine tolle Bar',
