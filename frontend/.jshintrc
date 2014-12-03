@@ -13,6 +13,7 @@
     "trailing": true,
     "undef": true,
     "unused": true,
+    "devel": true,
     "globals": {
         "module": true,
         "angular": true,
@@ -20,6 +21,7 @@
         "beforeEach": true,
         "it": true,
         "expect": true,
-        "inject": true
+        "inject": true,
+        "google": true
     }
 }
