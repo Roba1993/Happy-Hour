@@ -12,14 +12,23 @@
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
+    <li><a href="#/map">Angular Google Maps UI Example</a></li>
   </ul>
 
   <div ng-view></div>
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=FALSE"></script>
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+  <script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+  <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
+
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="map/map.js"></script>
+
 </body>
 </html>
