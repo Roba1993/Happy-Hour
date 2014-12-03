@@ -9,6 +9,8 @@
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
-    "angular-google-maps": "2.0.x"
+    "angular-google-maps": "2.0.x",
+    "angular-ui-map": "0.5.0",
+    "angular-ui-utils": "0.1.1"
   }
 }
