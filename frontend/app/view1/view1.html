@@ -1,1 +1,8 @@
-<p>Hallo {{testValue}}</p>
+<input type="checkbox" ng-model="barSchalter" />
+<ul ng-show="barSchalter">
+	<li ng-repeat="bar in bars">
+		<h1 ng-click="barMehr = !barMehr">{{bar.name}}</h1>
+		<p ng-show="barMehr">{{bar.description}}</p>
+		<strong ng-show="barMehr">{{bar.rating}}/5</strong>
+	</li>
+</ul>
