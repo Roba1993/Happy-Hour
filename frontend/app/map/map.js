@@ -21,7 +21,7 @@ angular.module('myApp.map', [
     })
 
   // Definiere den Controller
-    .controller( 'MapLoaderCtrl', MapLoaderCtrl )
+    .controller( 'MapLoaderCtrl', MapLoaderCtrl );
 
 function MapLoaderCtrl ( $scope, $timeout, uiGmapGoogleMapApi )
 {
@@ -56,18 +56,18 @@ function MapLoaderCtrl ( $scope, $timeout, uiGmapGoogleMapApi )
   $scope.click = function () {
     var geocoder = new google.maps.Geocoder();
 
-    alert("I am going to find your request :)");
+    alert('I am going to find your request :)');
     geocoder.geocode({'address': $scope.address}, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
+      if (status === google.maps.GeocoderStatus.OK) {
         console.log($scope.address);
         console.log(results[0].geometry.location);
         console.log($scope.model.myMap);
 
         $scope.model.myMap.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
+        new google.maps.Marker({
           map: $scope.model.myMap,
           position: results[0].geometry.location
-        })
+        });
       } else {
         alert(status);
       }
@@ -89,7 +89,7 @@ function MapLoaderCtrl ( $scope, $timeout, uiGmapGoogleMapApi )
     //directiondisplay object to display the route returned on the map
     $scope.directionsService.route(request, function(response, status) {
 
-      if (status == google.maps.DirectionsStatus.OK) {
+      if (status === google.maps.DirectionsStatus.OK) {
         console.log(response);
         $scope.directionsDisplay.setDirections(response);
         console.log(response.routes.length);
@@ -97,10 +97,10 @@ function MapLoaderCtrl ( $scope, $timeout, uiGmapGoogleMapApi )
 
       }
     });
-  }
+  };
 
-  uiGmapGoogleMapApi.then( function ( maps ) {
-    console.log( "loaded" );
+  uiGmapGoogleMapApi.then( function () {
+    console.log( 'loaded' );
     console.log( $scope );
   });
 }
