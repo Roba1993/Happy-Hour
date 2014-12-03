@@ -1,8 +1,9 @@
-<input type="checkbox" ng-model="barSchalter" />
-<ul ng-show="barSchalter">
-	<li>
-		<h1 ng-click="barClicked()">{{bars[i].name}}</h1>
-		<p>{{bars[i].description}}</p>
-		<strong>{{bars[i].rating}}/5</strong>
-	</li>
-</ul>
+<div id="slider">
+	<ul style="left:{{-100*i}}%">
+		<li ng-repeat="bar in bars">
+			<h1 ng-click="barClicked()">{{bar.name}}</h1>
+			<p>{{bar.description}}</p>
+			<strong>{{bar.rating}}/5</strong>
+		</li>
+	</ul>
+</div>

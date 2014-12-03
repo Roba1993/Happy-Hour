@@ -34,3 +34,20 @@
 }
 
 .map-canvas { height: 400px; }
+
+#slider {
+  width:100vw;
+  overflow:hidden;
+}
+
+#slider ul {
+  position:relative;
+  transition:0.3s linear left;
+  list-style:none;
+  width:300vw;
+}
+
+#slider li {
+  float:left;
+  width:100vw;
+}
