@@ -40,10 +40,16 @@ h3 {
     -webkit-transition: -webkit-transform .8s ease-in-out;
     transition: transform .8s ease-in-out;
 }
+#theatre,
+#theatre-head {
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
 /**
  * Sidebar open if checkbox is set
  */
-#is__sidebar-open[type=checkbox]:checked + #main > #theatre {
+#is__sidebar-open[type=checkbox]:checked + #main > #theatre,
+#is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
     -webkit-transform: translate3d(70%, 0px, 0);
     transform: translate3d(70%, 0px, 0);
 }
