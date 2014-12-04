@@ -85,7 +85,10 @@ h3 {
     display:block;
     line-height: 55px;
 }
+/* 120px + 0px */
 #theatre-stage {
-    /* 120px + 10px */
-    padding-top:130px;
+    padding-top:105px;
+}
+.is__ios-fullscreen #theatre-stage {
+    padding-top: 120px;
 }
