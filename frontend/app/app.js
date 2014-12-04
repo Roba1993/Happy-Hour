@@ -1,7 +1,6 @@
 // Definiere anwendungsweite Abhängigkeiten
 angular.module('myApp', [
   'ngRoute',
-  'LocalStorageModule',
   'happyHour.persistence.RoutesPersistence',
   'myApp.view1',
   'myApp.view2',

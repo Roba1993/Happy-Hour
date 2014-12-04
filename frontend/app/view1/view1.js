@@ -15,7 +15,6 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', ['$scope', 'RoutesPersistenceService', function($scope, RoutesPersistenceService) {
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
 
-  RoutesPersistenceService.remove();
   $scope.barSchalter = false;
   $scope.bars = [];
   $scope.i = 0;
@@ -28,18 +27,22 @@ angular.module('myApp.view1', ['ngRoute'])
   	}
   };
   var bar1 = {
+	id: 1,
   	name: 'Monobar',
   	description: 'Eine tolle Bar',
   	rating: 4
   };
+  console.log(RoutesPersistenceService);
   $scope.bars.push(bar1);
   var bar2 = {
+	id: 2,
   	name: 'Tequila Bar',
   	description: 'Eine tolle Bar mit tollen Getränken',
   	rating: 5
   };
   $scope.bars.push(bar2);
   var bar3 = {
+	id: 3,
   	name: 'Lutscher Bar',
   	description: 'Eine Bar mit hartem Lörres',
   	rating: 1

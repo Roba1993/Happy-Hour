@@ -22,6 +22,7 @@
         "it": true,
         "expect": true,
         "inject": true,
-        "google": true
+        "google": true,
+		"_": true
     }
 }
