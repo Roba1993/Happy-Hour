@@ -11,23 +11,53 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/helper.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Go Happy</a>
+    <div id="main" class="clearfix">
+        <aside id="sidebar">aaa</aside>
+        <div id="theatre">
+            <div id="theatre-head" class="grid">
+                <div id="theatre-head-topbar" class="grid">
+                    <div class="col-3">Nav</div>
+                    <div class="col-6"><h1>Go Happy</h1></div>
+                    <div class="col-3">
+                        <a href="#refresh" class="i-refresh">Refresh</a>
+                        <a href="#map" class="i-map">Map</a>
+                    </div>
+                </div>
+                <nav id="theatre-head-subbar" class="col-12">
+                    <ul>
+                        <li class="col-4"><h2>Aktuelle Route</h2></li>
+                        <li class="col-4"><h2>Offline Routen</h2></li>
+                        <li class="col-4"><h2>Top 7</h2></li>
+                    </ul>
+                </nav>
+            </div>
+            <section id="theatre-stage" class="grid">
+                <ul class="list-big">
+                    <li class="list-big-element">
+                        <div class="list-big-element-frontside">
+                            <div class="list-big-element-head"><h3>Sausalitos</h3></div>
+                            <div class="list-big-element-body">
+                                <div class="list-big-element-body-main"></div>
+                                <div class="list-big-element-body-expand"></div>
+                            </div>
+                            <div class="list-big-element-footer"></div>
+                        </div>
+                        <div class="list-big-element-backside">
+                            <p>Alternative Bar wählen</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
         </div>
-      </div>
-    </nav>
-    <div class="container-fluid">
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
