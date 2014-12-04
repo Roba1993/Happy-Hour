@@ -31,14 +31,23 @@ h3 {
     position: absolute;
     z-index: -1;
     width: 70%;
+    background:#1ea1eb;
 }
 #theatre {
     background: #fff;
     width: 100%;
     float: left;
-    transition: all 2s ease-in-out;
-    #transform: translate3d(70%, 0px, 0);
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
 }
+/**
+ * Sidebar open if checkbox is set
+ */
+#is__sidebar-open[type=checkbox]:checked + #main > #theatre {
+    -webkit-transform: translate3d(70%, 0px, 0);
+    transform: translate3d(70%, 0px, 0);
+}
+
 #theatre-head {
     position: fixed;
     z-index:99;

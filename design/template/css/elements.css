@@ -22,6 +22,7 @@
 .e__navigation-vertical-element > a:focus {
     outline:0;
     cursor:pointer;
+    background:#ccc;
 }
 
 .e__list-big,

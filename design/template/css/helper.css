@@ -6,6 +6,11 @@
 .clearfix:after {
     clear: both;
 }
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 .align-center {
     text-align: center;
 }
