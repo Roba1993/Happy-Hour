@@ -24,18 +24,20 @@
         <div id="theatre">
             <div id="theatre-head" class="grid">
                 <div id="theatre-head-topbar" class="grid">
-                    <div class="col-3">Nav</div>
-                    <div class="col-6"><h1>Go Happy</h1></div>
                     <div class="col-3">
-                        <a href="#refresh" class="i-refresh">Refresh</a>
-                        <a href="#map" class="i-map">Map</a>
+					 <a href="#refresh" class="i-refresh"><img src="images/icon_options.png" alt="Options" style="position: fixed;top: 30px;left:30px;"></a>
+					</div>
+                    <div class="col-6"><h1 style="text-align: center" id="checked">Go Happy</h1></div>
+                    <div class="col-3">
+                        <a href="#refresh" class="i-refresh"><img src="images/icon_reload.png" alt="Reload" style="position: fixed;top: 30px;right:100px;"></a>
+                        <a href="#refresh" class="i-refresh"><img src="images/icon_maps.png" alt="Maps" style="position: fixed;top: 27px;right:30px;"></a>
                     </div>
                 </div>
-                <nav id="theatre-head-subbar" class="col-12">
-                    <ul>
-                        <li class="col-4"><h2>Aktuelle Route</h2></li>
-                        <li class="col-4"><h2>Offline Routen</h2></li>
-                        <li class="col-4"><h2>Top 7</h2></li>
+                <nav id="theatre-head-subbar" class="col-12" style="vertical-align:middle;display:inline-block;">
+                    <ul style="list-style-type: none; text-align:center;vertical-align:middle;">
+                        <li class="col-4"><h2 id="checked"><a href="#refresh">Aktuelle Route</a></h2></li>
+                        <li class="col-4"><h2 id="unchecked"><a href="#refresh">Offline Routen</a></h2></li>
+                        <li class="col-4"><h2 id="unchecked"><a href="#refresh">Top 7</a></h2></li>
                     </ul>
                 </nav>
             </div>

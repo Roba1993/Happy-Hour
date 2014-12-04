@@ -12,9 +12,25 @@ h1 {
 h2 {
     font-size: 24px;
     font-weight: bold;
+	margin-top: 0px;
 }
+
 h3 {
     font-size: 15px;
+}
+
+a { 
+	color: inherit; 
+	text-decoration: none;
+
+} 
+
+#checked {
+	color: #292828;
+}
+
+#unchecked{
+	color: #757574;
 }
 #main {
     width:100%;
@@ -33,4 +49,16 @@ h3 {
 }
 #theatre-head {
     position: sticky;
+	height: 190px;
+}
+
+#theatre-head-topbar {
+	height: 120px;
+	background: #f2f2f2;
+	box-shadow: 0px 1px 15px #afafaf;
+}
+#theatre-head-subbar {
+	height: 70px;
+	background: #f2f2f2;
+	box-shadow: 0px 1px 1px #afafaf;
 }
