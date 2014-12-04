@@ -12,8 +12,10 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 // Definiere den Controller
-.controller('View1Ctrl', ['$scope', function($scope) {
+.controller('View1Ctrl', ['$scope', 'RoutesPersistenceService', function($scope, RoutesPersistenceService) {
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
+
+  RoutesPersistenceService.remove();
   $scope.barSchalter = false;
   $scope.bars = [];
   $scope.i = 0;
