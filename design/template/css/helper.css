@@ -6,4 +6,6 @@
 .clearfix:after {
     clear: both;
 }
-   
+.align-center {
+    text-align: center;
+}

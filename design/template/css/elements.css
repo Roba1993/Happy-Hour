@@ -1,0 +1,50 @@
+.e__navigation-vertical,
+.e__navigation-vertical-element {
+    margin:0;
+    padding:0;
+}
+.e__navigation-vertical {
+    list-style: none;
+}
+.e__navigation-vertical-element {
+    text-align: center;
+}
+.e__navigation-vertical-element > a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 2.5;
+    text-decoration: none;
+    color:#333;
+}
+.e__navigation-vertical-element > a:hover,
+.e__navigation-vertical-element > a:focus {
+    outline:0;
+    cursor:pointer;
+}
+
+.e__list-big,
+.e__list-big-element {
+    margin:0;
+    padding:0;
+}
+.e__list-big {
+    list-style: none;
+}
+.e__list-big-element {
+    display: block;
+    background:#1ea1eb;
+}
+
+.i__hamburger {
+    padding: 9px 10px;
+}
+.i__hamburger >.icon-bar {
+    background-color: #c0c0c0;
+    display: block;
+    width: 31px;
+    height: 3px;
+    border-radius: 1px;
+    margin: 6px 0;
+}

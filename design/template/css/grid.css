@@ -19,7 +19,6 @@
 }
 [class*="col"] {
     *zoom: 1;
-    float:left;
 }
 .col-1 {
     width:8.333%;
