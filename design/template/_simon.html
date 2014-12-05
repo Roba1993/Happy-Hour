@@ -31,12 +31,95 @@
     <link rel="stylesheet" href="css/elements.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/_simon.css">
+	
+	<link rel="stylesheet" href="css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="css/ion.rangeSlider.skinHTML5.css" id="skinCss" />
+	<script src="js/vendor/jquery-1.11.1.min.js"></script>
+	<script src="js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+
+	  
 </head>
 
 <body>
 <input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
 <div id="main" class="clearfix">
-    <aside id="sidebar">aaa</aside>
+    <aside id="sidebar" class="grid">
+		<div id="sidebar-head-topbar">
+			<div class="sidebar-head-topbar-box">
+				<div class="i__options"><img src="images/icon_option.png" width="19px" height="21px"></div>
+				<h1 id="sidebar-head-topbar-title">Optionen</h1>
+			</div>
+		</div>
+		
+		<div id="sidebar-theatre">
+			<div class="sidebar-theatre-box">
+					<h3>Ort / Plz</h3>
+					<input type="form" id="input-form"></input>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Tag</h3>
+					<div class="col-1"><h4><</h4></div><div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div><div class="1"><h4>></h4></div>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Radius</h3>
+					<input id="radius"/>
+					<script>
+                                    $(document).ready(function () {
+                                        $("#radius").ionRangeSlider({
+						grid: false,
+						min: 0.1,
+						max: 10,
+						step: 0.1,
+						from: 1,
+						hide_min_max: true
+					});
+                                    });
+                    </script>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Uhrzeit</h3>
+					<input id="uhrzeit"/>
+					<script>
+					$("#uhrzeit").ionRangeSlider({
+						type: "double",
+						grid: false,
+						values: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
+						"18:00","19:00","20:00","21:00","22:00","23:00","24:00",
+						"01:00","02:00","03:00","04:00","05:00","06:00","07:00",
+						"08:00","09:00","10:00","11:00","12:00"],
+						from: 8,
+						to: 15,
+						hide_min_max: true
+					});
+					</script>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Verweilzeit</h3>
+					<input id="verweilzeit"/>
+					<script>
+                    $(document).ready(function () {
+                        $("#verweilzeit").ionRangeSlider({
+						grid: false,
+						min: 0,
+						max: 6,
+						step: 0.5,
+						from: 1,
+						hide_min_max: true
+					});
+                                    });
+                    </script>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-option">
+					<img src="images/icon_star.png" width="20px" height="19px"><h3>Sharen</h3>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-option">
+					<img src="images/icon_download.png" width="17px" height="17px"><h3>Offline speichern</h3>
+			</div>
+			<div class="seperator"></div>
+		</div>
+	</aside>
     <div id="theatre-head" class="grid">
         <div id="theatre-head-topbar" class="grid">
             <div class="col-1">
@@ -66,84 +149,7 @@
     <div id="theatre">
         <section id="theatre-stage" class="grid">
             <ul class="e__list-big">
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
-                <li class="e__list-big-element">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                        <div class="e__list-big-element-body">
-                            <div class="e__list-big-element-body-main"></div>
-                            <div class="e__list-big-element-body-expand"></div>
-                        </div>
-                        <div class="e__list-big-element-footer"></div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
+              
             </ul>
         </section>
     </div>
