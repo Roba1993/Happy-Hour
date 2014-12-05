@@ -3,7 +3,7 @@ package de.dhbw.hh.utils;
 import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.Testrun;
-import de.dhbw.hh.rest.ReportsGetter;
+//import de.dhbw.hh.rest.ReportsGetter;
 import de.dhbw.hh.rest.TestrunREST;
 
 import java.util.Properties;
