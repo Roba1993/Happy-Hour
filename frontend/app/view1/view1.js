@@ -12,7 +12,8 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 // Definiere den Controller
-.controller('View1Ctrl', ['$scope', 'RoutesPersistenceService', 'AppStatusPersistenceService', 'BackendService', function($scope, RoutesPersistenceService, AppStatusPersistenceService, BackendService) {
+.controller('View1Ctrl', ['$scope', 'RoutesPersistenceService', 'AppStatusPersistenceService', 'BackendService', 'RouteGeneratorService',
+function($scope, RoutesPersistenceService, AppStatusPersistenceService, BackendService, RouteGeneratorService) {
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
 
   $scope.barSchalter = false;
@@ -35,6 +36,7 @@ angular.module('myApp.view1', ['ngRoute'])
   console.log(BackendService);
   console.log(AppStatusPersistenceService);
   console.log(RoutesPersistenceService);
+  console.log(RouteGeneratorService);
   $scope.bars.push(bar1);
   var bar2 = {
 	id: 2,
