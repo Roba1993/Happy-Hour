@@ -26,19 +26,26 @@ h3 {
 
 #main {
     width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
 }
 #sidebar {
     position: absolute;
     z-index: -1;
     width: 70%;
-    background:#1ea1eb;
+    height: 100%;
+    background:#414141;
 }
 #theatre {
     background: #fff;
     width: 100%;
+    height: 100%;
     float: left;
     -webkit-transition: -webkit-transform .8s ease-in-out;
     transition: transform .8s ease-in-out;
+    box-shadow: -1px 0px 15px #000;
 }
 #theatre,
 #theatre-head {
@@ -74,6 +81,7 @@ h3 {
 #theatre-head {
     position: fixed;
     z-index:99;
+    overflow: hidden;
 }
 
 #theatre-head-topbar {
