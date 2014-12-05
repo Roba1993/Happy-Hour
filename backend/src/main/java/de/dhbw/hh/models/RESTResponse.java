@@ -45,8 +45,12 @@ public class RESTResponse {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSuccess() {
+		this.status = "success";
+	}
+	
+	public void setError() {
+		this.status = "error";
 	}
 
 	public ArrayList<Object> getData() {
