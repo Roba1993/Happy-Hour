@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
 body {
     width:100%;
     height:100%;
@@ -43,38 +47,40 @@ h3 {
     width: 100%;
     height: 100%;
     float: left;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
     box-shadow: -1px 0px 15px #000;
 }
 #theatre,
 #theatre-head {
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
 }
 /**
  * Sidebar open if checkbox is set
  */
+
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre,
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
     -webkit-transform: translate3d(70%, 0px, 0);
     transform: translate3d(70%, 0px, 0);
 }
 
-#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar {
-    margin: 4px 0;
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:nth-last-of-type(2) {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type,
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
     width:20px;
-    margin-left: 12px;
+    margin-left: -2px;
 }
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type {
-    transform: rotate(35deg);
+    -webkit-transform: rotate(140deg);
+    transform: rotate(140deg);
     margin-bottom: -1px;
 }
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
-    transform: rotate(-35deg);
+    -webkit-transform: rotate(220deg);
+    transform: rotate(220deg);
     margin-top: -1px;
 }
 
