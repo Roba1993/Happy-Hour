@@ -2,7 +2,7 @@
  * Dieses Modul dient dem Verwalten des App-Statuses.
  */
 angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModule'])
-  .factory('AppStatusService', ['localStorageService', function(localStorageService) {
+  .factory('AppStatusPersistenceService', ['localStorageService', function(localStorageService) {
       var service =  {
         /**
          * Speichert den Anwendungsstatus auf dem Gerät des Nutzers.
@@ -11,8 +11,7 @@ angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModul
          * @param {Status} status Der aktuelle Status der Anwendung
          */
         setStatus: function(status) {
-          console.log(status);
-          console.log(localStorageService);
+			localStorageService.set('appStatus', status);
         },
         /**
          * Gibt den zuletzt gespeicherten Status der Anwendung zurück.
@@ -21,7 +20,7 @@ angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModul
          * @returns {Status} Der Status der Anwendung
          */
         getStatus: function() {
-
+			return localStorageService.get('appStatus');
         }
       };
 
