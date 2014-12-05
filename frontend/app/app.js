@@ -4,6 +4,7 @@ angular.module('myApp', [
   'happyHour.persistence.RoutesPersistence',
   'happyHour.persistence.AppStatusPersistence',
   'happyHour.backend.Backend',
+  'happyHour.algorithm.RouteGenerator',
   'myApp.view1',
   'myApp.view2',
   'myApp.map'
