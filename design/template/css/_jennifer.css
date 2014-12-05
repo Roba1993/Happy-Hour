@@ -1,0 +1,18 @@
+.locationname{
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+.uhrzeit {
+	font-size: 1rem;
+	color:#333;
+	background:gray;
+}
+.preisindex {
+	font-size: 1rem;
+}
+.bewertung {
+	font-size: 1rem;
+}
+.e__list-big-element{
+	background:#c4cdd4;
+}
