@@ -54,7 +54,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * 
 			 * @author Dorothee Nies
 			 * @param  {Integer} routeId Der Identifikator der Route, die zurückgegeben werden soll
-			 * @return {Route} Die angeforderte Route
+			 * @return {[type]} Die angeforderte Route
 			 */
 			get: function(routeId) {
 				var routeToReturn = null;
