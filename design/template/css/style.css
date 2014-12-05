@@ -58,6 +58,9 @@ h3 {
  * Sidebar open if checkbox is set
  */
 
+#is__sidebar-open[type=checkbox]:checked + #main #sidebar {
+    z-index:0;
+}
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre,
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
     -webkit-transform: translate3d(70%, 0px, 0);
