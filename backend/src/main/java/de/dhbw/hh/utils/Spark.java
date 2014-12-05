@@ -3,6 +3,7 @@ package de.dhbw.hh.utils;
 import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.Testrun;
+//import de.dhbw.hh.rest.ReportsGetter;
 import de.dhbw.hh.rest.TestrunREST;
 
 import java.util.Properties;
@@ -36,11 +37,8 @@ public class Spark {
         }
 
         // Binde die Rest-Module ein
-//        new TestrunREST(daoFactory);
-        get("/testrun/:name", "application/json", (request, response) -> {
-            return "Test";
-        });
-        
+        new TestrunREST(daoFactory);  
+//        new ReportsGetter(daoFactory);
     }
 
     /**
