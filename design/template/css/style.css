@@ -54,6 +54,22 @@ h3 {
     transform: translate3d(70%, 0px, 0);
 }
 
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar {
+    margin: 4px 0;
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type,
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
+    width:20px;
+    margin-left: 12px;
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type {
+    transform: rotate(35deg);
+    margin-bottom: -1px;
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
+    transform: rotate(-35deg);
+    margin-top: -1px;
+}
 
 #theatre-head {
     position: fixed;
