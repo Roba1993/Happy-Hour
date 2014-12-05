@@ -79,8 +79,8 @@ h3 {
 #theatre-head-topbar {
     height: 65px;
     padding-top: 5px;
-	background: #f2f2f2;
-	box-shadow: 0px 1px 15px #afafaf;
+    background: #f2f2f2;
+    box-shadow: 0px 1px 15px #afafaf;
 }
 .is__ios-fullscreen #theatre-head-topbar {
     height: 80px;
@@ -92,8 +92,8 @@ h3 {
 }
 #theatre-head-subbar {
     height:40px;
-	background: #f2f2f2;
-	box-shadow: 0px 1px 1px #afafaf;
+    background: #f2f2f2;
+    box-shadow: 0px 1px 1px #afafaf;
 }
 #theatre-head-topbar-title {
     font-size:1.6rem;
@@ -109,8 +109,3 @@ h3 {
 .is__ios-fullscreen #theatre-stage {
     padding-top: 120px;
 }
-
-@import "_patrick.css";
-@import "_jennifer.css";
-@import "_sebastian.css";
-@import "_simon.css";
