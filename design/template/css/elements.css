@@ -59,5 +59,11 @@
     width: 31px;
     height: 3px;
     border-radius: 1px;
-    margin: 6px 0;
+    transition: all 1s ease-in-out;
+}
+.i__hamburger >.icon-bar:first-of-type {
+    margin-bottom:10px;
+}
+.i__hamburger >.icon-bar:last-of-type {
+    margin-top:10px;
 }

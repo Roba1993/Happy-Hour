@@ -54,6 +54,7 @@ h3 {
     transform: translate3d(70%, 0px, 0);
 }
 
+
 #theatre-head {
     position: fixed;
     z-index:99;
@@ -92,3 +93,8 @@ h3 {
 .is__ios-fullscreen #theatre-stage {
     padding-top: 120px;
 }
+
+@import "_patrick.cssy";
+@import "_jennifer.css";
+@import "_sebastian.css";
+@import "_simon.css";
