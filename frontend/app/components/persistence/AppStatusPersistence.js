@@ -1,5 +1,7 @@
 /**
  * Dieses Modul dient dem Verwalten des App-Statuses.
+ *
+ * @author Dorothee Nies, Markus Thömmes
  */
 angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModule'])
 	.factory('AppStatusPersistenceService', ['localStorageService', function(localStorageService) {

@@ -16,6 +16,13 @@ angular.module('myApp.view1', ['ngRoute'])
 function($scope, RoutesPersistenceService, AppStatusPersistenceService, BackendService, RouteGeneratorService) {
   // Setze einen Wert in den Scope (um ihn im view1.html anzuzeigen)
 
+  $scope.mapOptions = {
+    center: {
+      latitude: 48.775556,
+      longitude: 9.182778
+    }
+  };
+
   $scope.barSchalter = false;
   $scope.bars = [];
   $scope.i = 0;

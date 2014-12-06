@@ -1,6 +1,8 @@
 /**
  * Der Backend Service dient als Schnittstelle zwischen Frontend und Backend und liefert vom 
  * Backend bereitgestellte Daten an das Frontend.
+ *
+ * @author Kim Rinderknecht, Daniel Reichert
  */
 angular.module('happyHour.backend.Backend', [])
 	.factory('BackendService', [ function() {

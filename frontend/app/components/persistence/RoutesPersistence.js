@@ -1,5 +1,7 @@
 /**
  * Dieses Modul dient dem Verwalten von offline verfügbaren Routen in "Meine Routen".
+ *
+ * @author Dorothee Nies, Markus Thömmes
  */
 angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule'])
 	.factory('RoutesPersistenceService', ['localStorageService', function(localStorageService) {

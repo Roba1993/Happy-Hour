@@ -2,6 +2,8 @@
  * Der Algorithmus erstellt aus den ihm gelieferten Informationen eine optimale Route durch Bars und Happy-Hours. 
  * Diese Daten werden in einem ersten Schritt zusammengetragen, validiert und aufbereitet um schlussendlich dem 
  * eigentlichen Algorithmus übergeben zu werden.
+ *
+ * @author Felix Rieder
  */
 angular.module('happyHour.algorithm.RouteGenerator', [])
 	.factory('RouteGeneratorService', [ function() {
