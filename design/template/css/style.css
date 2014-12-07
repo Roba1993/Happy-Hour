@@ -10,18 +10,6 @@
     box-sizing: border-box;
 }
 
-/** GoHappy-Font einbinden */
-@font-face
-{
-    font-family: 'gohappy';
-    src: url('../fonts/gohappy.eot');
-    src: url('../fonts/gohappy.woff') format('woff'),
-    url('../fonts/gohappy.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
 html {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
@@ -123,7 +111,6 @@ h3 {
 #theatre-head-subbar {
     height:40px;
     background: #f2f2f2;
-    #box-shadow: 0px 1px 1px #afafaf;
     border-bottom:1px solid #666;
 }
 #theatre-head-subbar .e__navigation-vertical-element:first-of-type > a {
@@ -138,6 +125,7 @@ h3 {
     text-align: center;
     display:block;
     line-height: 55px;
+    height: 55px;
 }
 /* 120px + 0px */
 #theatre-stage {
