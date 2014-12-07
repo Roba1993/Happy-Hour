@@ -1,3 +1,4 @@
+/*** Patrick ***/
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -8,6 +9,18 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+/** GoHappy-Font einbinden */
+@font-face
+{
+    font-family: 'gohappy';
+    src: url('../fonts/gohappy.eot');
+    src: url('../fonts/gohappy.woff') format('woff'),
+    url('../fonts/gohappy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 html {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -38,7 +51,7 @@ h3 {
 #sidebar {
     position: absolute;
     z-index: -1;
-    width: 70%;
+    width: 80%;
     height: 100%;
     background:#414141;
 }
@@ -63,8 +76,8 @@ h3 {
 }
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre,
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
-    -webkit-transform: translate3d(70%, 0px, 0);
-    transform: translate3d(70%, 0px, 0);
+    -webkit-transform: translate3d(80%, 0px, 0);
+    transform: translate3d(80%, 0px, 0);
 }
 
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:nth-last-of-type(2) {
@@ -110,7 +123,14 @@ h3 {
 #theatre-head-subbar {
     height:40px;
     background: #f2f2f2;
-    box-shadow: 0px 1px 1px #afafaf;
+    #box-shadow: 0px 1px 1px #afafaf;
+    border-bottom:1px solid #666;
+}
+#theatre-head-subbar .e__navigation-vertical-element:first-of-type > a {
+    padding:0px 3px;
+}
+#theatre-head-subbar .e__navigation-vertical-element:last-of-type > a {
+    padding-right:3px;
 }
 #theatre-head-topbar-title {
     font-size:1.6rem;
@@ -126,3 +146,6 @@ h3 {
 .is__ios-fullscreen #theatre-stage {
     padding-top: 120px;
 }
+/*** /Patrick ***/
+/*** Sidebar - Simon ***/
+/*** /Sidebar - Simon ***/

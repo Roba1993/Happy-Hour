@@ -1,3 +1,4 @@
+/** Navigationen **/
 .e__navigation-vertical,
 .e__navigation-vertical-element {
     margin:0;
@@ -50,6 +51,8 @@
     left:0;
 }
 
+/** Icons **/
+
 .i__hamburger {
     padding: 14px 10px;
 }
@@ -63,4 +66,38 @@
 }
 .i__hamburger >.icon-bar:nth-of-type(2) {
     margin:4px 0px;
+}
+
+/* Icons with Font */
+[class^="i-f__"] {
+    font-family: 'gohappy';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.i-f__gohappylogo:before {
+    content: "\e600";
+}
+
+
+.i__reload,
+.i__maps {
+    display:inline-block;
+    height:30px;
+    margin:14px 0px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.i__reload {
+    background-image: url('../images/icon_reload.png');
+}
+.i__maps {
+    background-image: url('../images/icon_maps.png');
 }
