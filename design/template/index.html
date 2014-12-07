@@ -33,12 +33,12 @@ Basti:
     <link rel="icon" href="favicon.ico" type="image/x-ico" />
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/grid.css">
-    <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="css/elements.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fonts.css?v=0.1">
+    <link rel="stylesheet" href="css/normalize.css?v=0.1">
+    <link rel="stylesheet" href="css/grid.css?v=0.1">
+    <link rel="stylesheet" href="css/helper.css?v=0.1">
+    <link rel="stylesheet" href="css/elements.css?v=0.1">
+    <link rel="stylesheet" href="css/style.css?v=0.1">
 </head>
 
 <body>
@@ -48,22 +48,24 @@ Basti:
         </aside>
         <div id="theatre-head" class="grid">
             <div id="theatre-head-topbar" class="grid">
-                <div class="col-1">
-                    <label for="is__sidebar-open" class="i__hamburger">
+                <div class="col-2 col-xs-2_5">
+                    <label for="is__sidebar-open" class="i__hamburger e__btn">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </label>
                 </div>
-                <div class="col-1"></div>
                 <div class="col-6">
-                    <h1 id="theatre-head-topbar-title"><span class="i-f__gohappylogo"></span></h1>
+                    <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
                 </div>
-                <div class="col-4 align-center">
-                    <a href="#refresh" class="col-4 i__reload"></a>
-                    <div class="col-3"></div>
-                    <a href="#map" class="col-4 i__maps"></a>
-                    <div class="col-1"></div>
+                <div class="col-3 col-xs_2_5 align-center">
+                    <div class="col-5">
+                        <a href="#refresh" class="e__btn i__reload"></a>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                        <a href="#map" class="e__btn i__maps"></a>
+                    </div>
                 </div>
             </div>
             <nav id="theatre-head-subbar" class="col-12">
@@ -289,8 +291,16 @@ Basti:
             </section>
         </div>
     </div>
+    <script src="lib/fastclick.js"></script>
     <script src="lib/inobounce.min.js"></script>
     <script type='application/javascript' src="js/main.js"></script>
+    <script>
+    if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+    </script>
 </body>
 
 </html>

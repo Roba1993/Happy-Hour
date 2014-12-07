@@ -110,6 +110,8 @@ h3 {
 }
 #theatre-head-topbar .i__hamburger {
     float: left;
+    display:inline-block;
+    width:100%;
 }
 #theatre-head-subbar {
     height:40px;
@@ -137,6 +139,7 @@ h3 {
 .is__ios-fullscreen #theatre-stage {
     padding-top: 120px;
 }
+
 /*** /Patrick ***/
 /*** Sidebar - Simon ***/
 /*** /Sidebar - Simon ***/
