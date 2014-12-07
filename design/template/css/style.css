@@ -47,6 +47,7 @@ h3 {
     position: absolute;
     top:0;
     left:0;
+    overflow: hidden;
 }
 #sidebar {
     position: absolute;
@@ -61,7 +62,6 @@ h3 {
     height: 100%;
     float: left;
     box-shadow: -1px 0px 15px #000;
-}
 #theatre,
 #theatre-head {
     -webkit-transition: -webkit-transform .3s ease-in-out;
