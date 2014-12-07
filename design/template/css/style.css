@@ -50,6 +50,9 @@ h3 {
     height: 100%;
     float: left;
     box-shadow: -1px 0px 15px #000;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
+}
 #theatre,
 #theatre-head {
     -webkit-transition: -webkit-transform .3s ease-in-out;
