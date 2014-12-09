@@ -17,7 +17,6 @@
 
   <div ng-view></div>
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=TRUE"></script>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
   <script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -27,13 +26,16 @@
   <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
 
   <script type="text/javascript" src="components/persistence/RoutesPersistence.js"></script>
+  <script type="text/javascript" src="components/persistence/AppStatusPersistence.js"></script>
+  <script type="text/javascript" src="components/backend/Backend.js"></script>
+  <script type="text/javascript" src="components/algorithm/RouteGenerator.js"></script>
+  <script type="text/javascript" src="components/map/MapLoader.js"></script>
+  <script type="text/javascript" src="components/map/MapDirective.js"></script>
 
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
-  <script src="components/map/map.js"></script>
-  <script src="components/map/directive/mapDir.js"></script>
-  <script src="components/map/gmapsLoader.js"></script>
+  <script src="map/map.js"></script>
 
 </body>
 </html>

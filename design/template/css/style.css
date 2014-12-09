@@ -1,3 +1,4 @@
+/*** Patrick ***/
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -7,6 +8,10 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+html {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 body {
@@ -26,57 +31,98 @@ h3 {
 
 #main {
     width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    overflow: hidden;
 }
 #sidebar {
     position: absolute;
     z-index: -1;
-    width: 70%;
-    background:#1ea1eb;
+    width: 80%;
+    height: 100%;
+    background:#414141;
 }
 #theatre {
     background: #fff;
     width: 100%;
+    height: 100%;
     float: left;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    box-shadow: -1px 0px 15px #000;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
 }
 #theatre,
 #theatre-head {
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
 }
 /**
  * Sidebar open if checkbox is set
  */
+
+#is__sidebar-open[type=checkbox]:checked + #main #sidebar {
+    z-index:0;
+}
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre,
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
-    -webkit-transform: translate3d(70%, 0px, 0);
-    transform: translate3d(70%, 0px, 0);
+    -webkit-transform: translate3d(80%, 0px, 0);
+    transform: translate3d(80%, 0px, 0);
+}
+
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:nth-last-of-type(2) {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type,
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
+    width:20px;
+    margin-left: -2px;
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type {
+    -webkit-transform: rotate(140deg);
+    transform: rotate(140deg);
+    margin-bottom: -1px;
+}
+#is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
+    -webkit-transform: rotate(220deg);
+    transform: rotate(220deg);
+    margin-top: -1px;
 }
 
 #theatre-head {
     position: fixed;
     z-index:99;
+    overflow: hidden;
 }
 
 #theatre-head-topbar {
     height: 65px;
     padding-top: 5px;
-	background: #f2f2f2;
-	box-shadow: 0px 1px 15px #afafaf;
+    background: #f2f2f2;
+    box-shadow: 0px 1px 15px #afafaf;
+    -webkit-overflow-scrolling:touch;
 }
 .is__ios-fullscreen #theatre-head-topbar {
     height: 80px;
     padding-top: 20px;
 }
 #theatre-head-topbar .i__hamburger {
-    margin: 5px;
     float: left;
+    display:inline-block;
+    width:100%;
 }
 #theatre-head-subbar {
     height:40px;
-	background: #f2f2f2;
-	box-shadow: 0px 1px 1px #afafaf;
+    background: #f2f2f2;
+    border-bottom:1px solid #666;
+}
+#theatre-head-subbar .e__navigation-vertical-element:first-of-type > a {
+    padding:0px 3px;
+}
+#theatre-head-subbar .e__navigation-vertical-element:last-of-type > a {
+    padding-right:3px;
 }
 #theatre-head-topbar-title {
     font-size:1.6rem;
@@ -84,6 +130,7 @@ h3 {
     text-align: center;
     display:block;
     line-height: 55px;
+    height: 55px;
 }
 /* 120px + 0px */
 #theatre-stage {
@@ -92,3 +139,7 @@ h3 {
 .is__ios-fullscreen #theatre-stage {
     padding-top: 120px;
 }
+
+/*** /Patrick ***/
+/*** Sidebar - Simon ***/
+/*** /Sidebar - Simon ***/

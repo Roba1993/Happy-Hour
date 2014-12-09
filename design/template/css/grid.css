@@ -56,3 +56,18 @@
 .col-12 {
     width:100%;
 }
+
+@media (max-width: 400px) {
+    .col-xs-2_5 {
+        width:20.8333%;
+    }
+    .col-xs-3 {
+        width:25%;
+    }
+    .col-xs-5 {
+        width:41.666%;
+    }
+    .col-xs-5_5 {
+        width:45.8333%;
+    }
+}
