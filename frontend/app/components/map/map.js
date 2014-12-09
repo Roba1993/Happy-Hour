@@ -15,7 +15,7 @@ angular.module('myApp.map', [
                 myMap: '@'
             },
             template: '<div ui-map="model.myMap" ui-options="model.mapOptions" class="map-canvas"></div>',
-            link: function( scope, iElement, iAttrs, controller ) {
+            link: function( scope, iElement, iAttrs ) {
                 //scope.model.mapOptions = iAttrs.options;
                 scope.model.mapOptions = {
                     center: new google.maps.LatLng(48.775556, 9.182778),
