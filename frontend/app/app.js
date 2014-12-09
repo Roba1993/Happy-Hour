@@ -4,7 +4,8 @@ angular.module('myApp', [
   'happyHour.persistence.RoutesPersistence',
   'myApp.view1',
   'myApp.view2',
-  'myApp.map'
+  'myApp.map',
+  'googleMaps.Loader'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf view1 weiter
