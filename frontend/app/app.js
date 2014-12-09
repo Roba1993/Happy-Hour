@@ -7,9 +7,7 @@ angular.module('myApp', [
   'happyHour.algorithm.RouteGenerator',
   'happyHour.map.MapDirective',
   'myApp.view1',
-  'myApp.view2',
-  'myApp.map',
-  'googleMaps.Loader'
+  'myApp.view2'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf view1 weiter
