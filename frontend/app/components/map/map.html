@@ -1,0 +1,15 @@
+<!--<section id="map" >
+    <div ui-map="model.myMap" ui-options="model.mapOptions" class="map-canvas"></div>
+</section>-->
+<br>
+Ort markieren: <input type="text" ng-model="address" />
+<button ng-click="click()">Setze Markierung</button>
+<button ng-click="deleteMarkers()">Alle Markierungen löschen</button>
+<br>
+<br>
+Route von: <input type="text" ng-model="route.pickupLocation" />
+nach: <input type="text" ng-model="route.dropoffLocation" />
+<button ng-click="calcRoute()">Route berechnen</button>
+<button ng-click="deleteRoute()">Route löschen</button>
+
+<map options="optionsABC" markers="markersABC" route="routeABC"></map>
