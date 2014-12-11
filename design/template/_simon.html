@@ -43,7 +43,7 @@
 <body>
 <input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
 <div id="main" class="clearfix">
-    <aside id="sidebar" class="grid">
+    <aside id="sidebar">
 		<div id="sidebar-head-topbar">
 			<div class="sidebar-head-topbar-box">
 				<div class="i__options"><img src="images/icon_option.png" width="19px" height="21px"></div>
@@ -53,12 +53,15 @@
 		
 		<div id="sidebar-theatre">
 			<div class="sidebar-theatre-box">
+			
 					<h3>Ort / Plz</h3>
-					<input type="form" id="input-form"></input>
+					<input type="form" />
 			</div>
 			<div class="sidebar-theatre-box">
-					<h3>Tag</h3>
-					<div class="col-1"><h4><</h4></div><div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div><div class="1"><h4>></h4></div>
+					<h3>Tag</h3><br>
+					<div class="col-1"><h4>&lt;</h4></div>
+					<div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div>
+					<div class="1" style="text-align:right;"><h4>&gt;</h4></div>
 			</div>
 			<div class="sidebar-theatre-box">
 					<h3>Radius</h3>
@@ -78,9 +81,9 @@
 			</div>
 			<div class="sidebar-theatre-box">
 					<h3>Uhrzeit</h3>
-					<input id="uhrzeit"/>
+					<input id="time"/>
 					<script>
-					$("#uhrzeit").ionRangeSlider({
+					$("#time").ionRangeSlider({
 						type: "double",
 						grid: false,
 						values: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
@@ -95,10 +98,10 @@
 			</div>
 			<div class="sidebar-theatre-box">
 					<h3>Verweilzeit</h3>
-					<input id="verweilzeit"/>
+					<input id="resttime"/>
 					<script>
                     $(document).ready(function () {
-                        $("#verweilzeit").ionRangeSlider({
+                        $("#resttime").ionRangeSlider({
 						grid: false,
 						min: 0,
 						max: 6,
@@ -110,11 +113,11 @@
                     </script>
 			</div>
 			<div class="seperator"></div>
-			<div class="sidebar-theatre-option">
+			<div class="sidebar-theatre-box">
 					<img src="images/icon_star.png" width="20px" height="19px"><h3>Sharen</h3>
 			</div>
 			<div class="seperator"></div>
-			<div class="sidebar-theatre-option">
+			<div class="sidebar-theatre-box">
 					<img src="images/icon_download.png" width="17px" height="17px"><h3>Offline speichern</h3>
 			</div>
 			<div class="seperator"></div>
@@ -146,11 +149,43 @@
             </ul>
         </nav>
     </div>
-    <div id="theatre">
+    <div id="theatre" style="background-image: url(images/myroutes_background.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+	">
         <section id="theatre-stage" class="grid">
-            <ul class="e__list-big">
-              
-            </ul>
+			<div style="width: 100%; padding-left:10px;padding-right:10px;">
+			<div id="theatre-stage-myroutes" >
+				<div class="theatre-stage-myroutes-box">
+					<div class="theatre-stage-myroutes-box-icon">
+						<img src="images/icon_route.png" width="80%" height="80%">
+					</div>
+					<div class="theatre-stage-myroutes-box-content">
+						<h4><b>Erstsemester Tour</b></h4><br />
+						<p>Gespeichert am 05.08.2014 - 16:03<br/>
+						Tour geplant f&uuml;r Montag</p>
+					</div>
+					<div class="theatre-stage-myroutes-box-delete">
+						<img src="images/icon_delete.png" width="15px" height="20px">
+					</div>
+				</div>
+				<div class="theatre-stage-myroutes-box-seperator"></div>
+				<div class="theatre-stage-myroutes-box">
+					<div class="theatre-stage-myroutes-box-icon">
+						<img src="images/icon_route.png" width="80%" height="80%">
+					</div>
+					<div class="theatre-stage-myroutes-box-content">
+						<h4><b>Erstsemester Tour</b></h4><br />
+						<p>Gespeichert am 05.08.2014 - 16:03<br/>
+						Tour geplant f&uuml;r Montag</p>
+					</div>
+					<div class="theatre-stage-myroutes-box-delete">
+						<img src="images/icon_delete.png" width="15px" height="20px">
+					</div>
+				</div>
+			</div>
+			</div>
         </section>
     </div>
 </div>
