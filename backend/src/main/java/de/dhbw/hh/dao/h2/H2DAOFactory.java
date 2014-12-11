@@ -57,6 +57,18 @@ public class H2DAOFactory extends DAOFactory {
                 e.printStackTrace();
             }
         }
+        
+        // Wenn Daten in die Datenbank eingegeben werden, führe es aus
+        if(properties.containsKey("db.h2.dataFile") && properties.getProperty("db.h2.dataFile") != null) {
+            try (Connection connection = cpds.getConnection()) {
+                RunScript.execute(connection, new FileReader(properties.getProperty("db.h2.dataFile")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        
     }
 
     @Override
