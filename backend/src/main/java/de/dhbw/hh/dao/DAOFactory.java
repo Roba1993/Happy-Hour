@@ -13,6 +13,8 @@ public abstract class DAOFactory {
 
     // Funktionen um die DAO-Klassen zu bekommen
     public abstract TestrunDAO getTestrunDAO();
+    
+    public abstract BarReportDAO getBarReportDAO();
 
     /**
      * Gibt eine Datenbank-Factory zurück, mit welcher auf

@@ -1,14 +1,16 @@
 package de.dhbw.hh.models;
 
-public class ReportsMessage {
+/**
+ * Datenklasse für gemeldete Bars
+ * @author Jonas
+ *
+ */
+
+public class BarReport {
 
 	private String barID = "";
 	private String description = "";
-	
-	public ReportsMessage(String barID, String description) {
-		this.barID = barID;
-		this.description = description;
-	}
+	private boolean reported = false;
 
 	public String getBarID() {
 		return barID;
@@ -24,6 +26,14 @@ public class ReportsMessage {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public boolean isReported() {
+		return reported;
+	}
+	
+	public void setReported(boolean reported) {
+		this.reported = reported;
 	}
 
 }

@@ -1,6 +1,8 @@
 package de.dhbw.hh.dao.h2;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import de.dhbw.hh.dao.BarReportDAO;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.TestrunDAO;
 import org.h2.tools.RunScript;
@@ -75,9 +77,15 @@ public class H2DAOFactory extends DAOFactory {
     public TestrunDAO getTestrunDAO() {
         return new H2TestrunDAO(cpds);
     }
+    
+    @Override
+	public BarReportDAO getBarReportDAO() {
+		return new H2BarReportDAO(cpds);
+	}
 
     @Override
     public void close() {	
         cpds.close();
     }
+
 }
