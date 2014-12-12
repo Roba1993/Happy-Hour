@@ -31,17 +31,17 @@ create table happyHour (
 -- Datenbanktabelle für die gespeicherten Routen (Top Routen und Shared Routen)
 
 create table route (
-	routeHash				varchar(255) not null,
-	routeLink				varchar(255) not null,
-	topRoute				boolean not null,
-	constraint pk_route primary key (routeHash)
+	hash				varchar(255) not null,
+	data				varchar(4096) not null,
+	top					boolean not null,
+	constraint pk_route primary key (hash)
 );
 
 -- Datenbanktabelle für die Bar-Meldungen durch einen User
 
 create table barReport (
 	barID					varchar(50),
-	failureDescription		varchar(255),
+	description				varchar(255),
 	reported				boolean not null,
 	constraint pk_barMeldung primary key (barID)
 );
