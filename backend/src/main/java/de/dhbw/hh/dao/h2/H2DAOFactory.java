@@ -1,8 +1,16 @@
 package de.dhbw.hh.dao.h2;
 
+/**
+ * 
+ * @author Robert
+ */
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.dao.TestrunDAO;
+
 import org.h2.tools.RunScript;
 
 import java.beans.PropertyVetoException;
@@ -80,4 +88,9 @@ public class H2DAOFactory extends DAOFactory {
     public void close() {	
         cpds.close();
     }
+
+	@Override
+	public RouteDAO getRouteDAO() {
+		return new H2RouteDAO(cpds);
+	}
 }

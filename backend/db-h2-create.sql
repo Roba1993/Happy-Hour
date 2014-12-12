@@ -1,3 +1,5 @@
+-- @author: Tabea, Maren
+
 --------------------------------
 -- Create the database tables --
 --------------------------------
@@ -31,7 +33,7 @@ create table happyHour (
 -- Datenbanktabelle für die gespeicherten Routen (Top Routen und Shared Routen)
 
 create table route (
-	hash				varchar(255) not null,
+	hash				varchar(255),
 	data				varchar(4096) not null,
 	top					boolean not null,
 	constraint pk_route primary key (hash)

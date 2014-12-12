@@ -1,5 +1,10 @@
 package de.dhbw.hh.dao;
 
+/**
+ * 
+ * @author Robert
+ */
+
 import de.dhbw.hh.dao.h2.H2DAOFactory;
 
 import java.util.Properties;
@@ -13,6 +18,7 @@ public abstract class DAOFactory {
 
     // Funktionen um die DAO-Klassen zu bekommen
     public abstract TestrunDAO getTestrunDAO();
+    public abstract RouteDAO getRouteDAO();
 
     /**
      * Gibt eine Datenbank-Factory zurück, mit welcher auf

@@ -10,7 +10,7 @@ import java.util.Date;
 import static spark.Spark.*;
 
 /**
- * Diese Klasse stellt die Methoden für die REST Schnittstele
+ * Diese Klasse stellt die Methoden für die REST Schnittstelle
  * für den Pfad /testrun bereit
  */
 public class TestrunREST {
