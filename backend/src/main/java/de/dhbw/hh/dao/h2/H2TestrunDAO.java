@@ -19,7 +19,7 @@ import java.util.Collection;
 public class H2TestrunDAO implements TestrunDAO {
 
     // Der Connectionpool
-    ComboPooledDataSource cpds;
+    private ComboPooledDataSource cpds;
 
     /**
      * Diese Funktion erstellt ein Objekt der Klasse H2TestDAO.
