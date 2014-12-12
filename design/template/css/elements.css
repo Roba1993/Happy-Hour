@@ -145,8 +145,8 @@
     background-repeat: no-repeat;
 }
 .i__reload {
-    background-image: url('../images/icon_reload.png');
+    background-image: url('../images/icon_reload.svg');
 }
 .i__maps {
-    background-image: url('../images/icon_maps.png');
+    background-image: url('../images/icon_maps.svg');
 }
