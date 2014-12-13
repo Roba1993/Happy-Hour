@@ -1,5 +1,7 @@
 package de.dhbw.hh.dao;
 
+import java.util.Collection;
+
 import de.dhbw.hh.models.Testrun;
 
 /**
@@ -48,5 +50,5 @@ public interface TestrunDAO {
      * @param name Der Name nach dem gesucht werden soll.
      * @return Testrun-Array mit den gefunenen Tests.
      */
-    public Testrun[] findTestrunsByName(String name);
+    public Collection<Testrun> findTestrunsByName(String name);
 }

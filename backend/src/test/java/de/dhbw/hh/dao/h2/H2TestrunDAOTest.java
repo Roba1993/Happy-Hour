@@ -1,8 +1,10 @@
 package de.dhbw.hh.dao.h2;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import de.dhbw.hh.models.Testrun;
 import junit.framework.TestCase;
+
 import org.h2.tools.RunScript;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -14,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
@@ -238,10 +241,10 @@ public class H2TestrunDAOTest {
         }
 
         // Versuche die beiden Datensaätze zu finden
-        Testrun[] runs = h2TestrunDAO.findTestrunsByName(testrun.getName());
+        Collection<Testrun> runs = h2TestrunDAO.findTestrunsByName(testrun.getName());
 
         // als Ergebniss erwaten wir 2 Datensätze
-        assertEquals(2, runs.length);
+        assertEquals(2, runs.size());
     }
 
     /**

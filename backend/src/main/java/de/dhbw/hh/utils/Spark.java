@@ -43,12 +43,9 @@ public class Spark {
 
 		// Binde die Rest-Module ein
 		new TestrunREST(daoFactory);
-<<<<<<< HEAD
 		new ReportsGet(daoFactory);
 		new ReportsPost(daoFactory);
-=======
 		new TopRouteREST(daoFactory);
->>>>>>> f436062f8b38ddeadf7a35c40912ec537f74fdfa
 	}
 
 	/**

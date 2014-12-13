@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.h2.tools.RunScript;
 import org.junit.Before;
@@ -135,12 +137,13 @@ public class H2RouteDAOTest {
 		
         // Die gefundenen Top Routen werden in ein Array geschrieben
         
-        Route[] routes = h2RouteDAO.findTopRoutes();
+        Collection<Route> routes = h2RouteDAO.findTopRoutes();
         
+        Iterator<Route> iterator = routes.iterator();
         
-        assertEquals(2, routes.length);
-        assertEquals(true, routes[0].isTop());
-        assertEquals(true, routes[1].isTop());
+        assertEquals(2, routes.size());
+        assertEquals(true, iterator.next().isTop());
+        assertEquals(true, iterator.next().isTop());
         
        
 	}

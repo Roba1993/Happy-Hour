@@ -18,7 +18,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.models.Route;
-import de.dhbw.hh.models.Testrun;
 
 public class H2RouteDAO implements RouteDAO {
 
@@ -63,7 +62,7 @@ public class H2RouteDAO implements RouteDAO {
 	 */
 
 	@Override
-	public Route[] findTopRoutes() {
+	public Collection<Route> findTopRoutes() {
 		
 		//Abfrage aus der Datenbank
 		String sql = "SELECT hash, data, top FROM route WHERE top=true";
@@ -87,13 +86,13 @@ public class H2RouteDAO implements RouteDAO {
                 }
 
                 // Gebe alle Datenobjekte als Array zurück
-                return (Route[]) routes.toArray(new Route[routes.size()]);
+                return routes;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new Route[0];
+        return new ArrayList<Route>();
     }
             	
             }

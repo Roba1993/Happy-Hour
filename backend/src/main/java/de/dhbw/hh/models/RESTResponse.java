@@ -15,11 +15,7 @@ public class RESTResponse {
 	private String description = "";
 	private Timestamp timestamp = null;
 	private String status = "";
-<<<<<<< HEAD
 	private Collection<Object> data = null;
-=======
-	private Object[] data = null;
->>>>>>> f436062f8b38ddeadf7a35c40912ec537f74fdfa
 
 	public String getName() {
 		return name;
@@ -57,19 +53,11 @@ public class RESTResponse {
 		this.status = "error";
 	}
 
-<<<<<<< HEAD
 	public Collection<Object> getData() {
 		return data;
 	}
 
 	public void setData(Collection<Object> data) {
-=======
-	public Object[] getData() {
-		return data;
-	}
-
-	public void setData(Object[] data) {
->>>>>>> f436062f8b38ddeadf7a35c40912ec537f74fdfa
 		this.data = data;
 	}
 

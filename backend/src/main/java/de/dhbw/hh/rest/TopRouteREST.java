@@ -1,19 +1,14 @@
 package de.dhbw.hh.rest;
 
 import java.sql.Timestamp;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import com.google.gson.Gson;
 
-
-
-
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.RESTResponse;
-import de.dhbw.hh.models.ReportsMessage;
-import de.dhbw.hh.models.Route;
-import de.dhbw.hh.models.Testrun;
 import static spark.Spark.*;
 
 
@@ -35,7 +30,8 @@ public class TopRouteREST {
 		 * Gibt die TopRouten über die REST Schnittstelle zurück 
 		 */
 		get("/toproutes", "application/json", (request, response) -> {
-			Route[] toproutes = daoFactory.getRouteDAO().findTopRoutes();
+			Collection<Object> toproutes = new ArrayList<Object>(); 
+			toproutes.addAll(daoFactory.getRouteDAO().findTopRoutes());
 			
 			RESTResponse r = new RESTResponse();
 			r.setSuccess();

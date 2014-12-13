@@ -1,11 +1,17 @@
 package de.dhbw.hh.rest;
 
 import com.google.gson.Gson;
+
+
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.Testrun;
 
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
 
 import static spark.Spark.*;
 
@@ -24,9 +30,11 @@ public class TestrunREST {
          * Gibt alle Testrunden des angegbenen Namen zurück.
          */
         get("/testrun/:name", "application/json", (request, response) -> {
-            Testrun[] runs = daoFactory.getTestrunDAO().findTestrunsByName(request.params(":name"));
+        	Collection<Object> runs = new ArrayList<Object>();
+        	
+        	runs.addAll(daoFactory.getTestrunDAO().findTestrunsByName(request.params(":name")));
 
-            return gson.toJson(runs[0]);
+            return gson.toJson(runs);
         });
 
         /**

@@ -12,6 +12,11 @@ import java.util.Properties;
 public class Settings extends Properties {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Erstelle ein Settings Objekt mit dein Default Einstellungen.
      */
     public Settings() {
