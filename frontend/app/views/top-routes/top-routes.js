@@ -8,5 +8,5 @@ angular.module('happyHour.views.topRoutes', ['ngRoute'])
 }])
 
 .controller('topRoutesController', ['$scope', function($scope) {
-	$scope.test = "topRoutesController!!";
+	$scope.test = 'topRoutesController!!';
 }]);

@@ -8,5 +8,5 @@ angular.module('happyHour.views.currentRouteMap', ['ngRoute'])
 }])
 
 .controller('currentRouteMapController', ['$scope', function($scope) {
-	$scope.test = "currentRouteMapController!!";
+	$scope.test = 'currentRouteMapController!!';
 }]);

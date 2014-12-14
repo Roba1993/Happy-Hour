@@ -8,5 +8,5 @@ angular.module('happyHour.views.localRoutes', ['ngRoute'])
 }])
 
 .controller('localRoutesController', ['$scope', function($scope) {
-	$scope.test = "localRoutesController!!";
+	$scope.test = 'localRoutesController!!';
 }]);
