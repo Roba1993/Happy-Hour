@@ -22,6 +22,12 @@ body {
     font-weight: 100;
     font-size:62.5%;
 }
+a,
+a:active,
+a:hover,
+a:focus {
+    text-decoration: none;
+}
 h1,
 h2,
 h3 {
@@ -43,6 +49,8 @@ h3 {
     width: 80%;
     height: 100%;
     background:#414141;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling:touch;
 }
 #theatre {
     background: #fff;
@@ -108,6 +116,9 @@ h3 {
     height: 80px;
     padding-top: 20px;
 }
+#theatre-head-topbar-icons .e__btn {
+    height:55px;
+}
 #theatre-head-topbar .i__hamburger {
     float: left;
     display:inline-block;
@@ -166,12 +177,14 @@ h3 {
     height: 80px;
     padding-top: 20px;
 }
-
+#sidebar [class*="i-f__"] {
+    margin-right:10px;
+}
 #sidebar-head-topbar-title {
     font-size:1.6rem;
     font-weight: 200;
     text-align: left;
-    display:block;
+    display:inline-block;
     line-height: 55px;
 	color: #fff;
 }
@@ -194,7 +207,7 @@ h3 {
 #sidebar-theatre h3{
 	font-size:1rem;
     font-weight: 200;
-	line-height: 45px;
+	line-height: 2;
 	margin:0;
     padding:0;
 }

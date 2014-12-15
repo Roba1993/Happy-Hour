@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" style="pointer-events: none; display: block;"><g id="refresh"><path d="M17.6,6.4C16.2,4.9,14.2,4,12,4c-4.4,0-8,3.6-8,8s3.6,8,8,8c3.7,0,6.8-2.6,7.7-6h-2.1c-0.8,2.3-3,4-5.6,4c-3.3,0-6-2.7-6-6s2.7-6,6-6c1.7,0,3.1,0.7,4.2,1.8L13,11h7V4L17.6,6.4z"></path></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="480px" height="480px" viewBox="220 120 480 480" enable-background="new 220 120 480 480" xml:space="preserve">
+<g id="refresh">
+	<path d="M628,192c-42-45-102-72-168-72c-132,0-240,108-240,240s108,240,240,240c111,0,204-78,231-180h-63c-24,69-90,120-168,120
+		c-99,0-180-81-180-180s81-180,180-180c51,0,93,21,126,54l-96,96h210V120L628,192z"/>
+</g>
+</svg>
