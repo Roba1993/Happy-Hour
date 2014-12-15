@@ -38,14 +38,57 @@ Basti:
     <link rel="stylesheet" href="css/grid.css?v=0.1">
     <link rel="stylesheet" href="css/helper.css?v=0.1">
     <link rel="stylesheet" href="css/elements.css?v=0.1">
+	<link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.css">
+	<link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.skinhtml5.css">
     <link rel="stylesheet" href="css/style.css?v=0.1">
 </head>
 
 <body>
 <input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
     <div id="main" class="clearfix">
-        <aside id="sidebar" class="grid">
-        </aside>
+        <aside id="sidebar">
+		<div id="sidebar-head-topbar">
+			<div class="sidebar-head-topbar-box">
+				<div class="i__options"><img src="images/icon_option.png" width="19px" height="21px"></div>
+				<h1 id="sidebar-head-topbar-title">Optionen</h1>
+			</div>
+		</div>
+		
+		<div id="sidebar-theatre">
+			<div class="sidebar-theatre-box">
+			
+					<h3>Ort / Plz</h3>
+					<input type="form" />
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Tag</h3><br>
+					<div class="col-1"><h4>&lt;</h4></div>
+					<div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div>
+					<div class="1" style="text-align:right;"><h4>&gt;</h4></div>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Radius</h3>
+					<input id="radius"/>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Uhrzeit</h3>
+					<input id="time"/>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Verweilzeit</h3>
+					<input id="resttime"/>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-box">
+					<img src="images/icon_star.png" width="20px" height="19px"><h3>Sharen</h3>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-box">
+					<img src="images/icon_download.png" width="17px" height="17px"><h3>Offline speichern</h3>
+			</div>
+			<div class="seperator"></div>
+		</div>
+	</aside>
         <div id="theatre-head" class="grid">
             <div id="theatre-head-topbar" class="grid">
                 <div class="col-2 col-xs-2_5">
@@ -291,6 +334,8 @@ Basti:
             </section>
         </div>
     </div>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/ion-rangeslider/js/ion.rangeslider.min.js"></script>
     <script src="lib/fastclick.js"></script>
     <script src="lib/inobounce.min.js"></script>
     <script type='application/javascript' src="js/main.js"></script>
