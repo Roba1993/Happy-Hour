@@ -3,7 +3,9 @@
  */
 
 
-/** Navigationen **/
+/**
+ * Navigationen
+ */
 .e__navigation-vertical,
 .e__navigation-vertical-element {
     margin:0;
@@ -30,7 +32,12 @@
     cursor:pointer;
     background:#ccc;
 }
+/** /Navigationen **/
 
+/**
+ * Liste - BIG
+ * Fuer RecentRoute
+ */
 .e__list-big,
 .e__list-big-element {
     margin:0;
@@ -41,11 +48,19 @@
 }
 .e__list-big-element {
     display: block;
-    background:#1ea1eb;
     position:relative;
+    border-bottom:1px solid #c0c0c0;
+}
+.e__list-big-element:last-of-type {
+    border-bottom: 0;
 }
 .e__list-big-element-frontside {
     min-height: 50px;
+    float: left;
+    width:100%;
+    position: relative;
+    background:#452e2e;
+    color:#fafcfe ;
 }
 .e__list-big-element-backside {
     z-index:-1;
@@ -55,9 +70,66 @@
     top:0;
     left:0;
 }
+.e__list-big-element:not(.is__expanded) .when__expanded__show,
+.e__list-big-element.is__expanded .when__expanded__hidden {
+    display:none;
+}
+.e__list-big-element-head,
+.e__list-big-element-body,
+.e__list-big-element-footer {
+    float:left;
+    width:100%;
+}
+.e__list-big-element-head,
+.e__list-big-element-footer {
+    padding:10px;
+}
+.e__list-big-element-head h3 {
+    font-size:1rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    display:inline-block;
+}
+.e__list-big-element-head .i__close {
+    top: 3px;
+    margin-right: 10px;
+}
+.e__list-big-element-head .timeslot {
+    font-size:0.8rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+.e__list-big-element-body {
+    padding: 0px 10px 0px 20px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+.e__list-big-element-body h4 {
+    font-size: 0.84rem;
+    font-weight: 600;
+    margin:0 0 10px;
+}
+.e__list-big-element-body h4:not(:first-of-type) {
+    margin-top:20px;
+}
+.e__list-big-element-body strong {
+    font-weight: 500;
+}
+.e__list-big-element-body .map {
+    width:100%;
+    height:100px;
+    border:2px solid #fff;
+    margin-top:30px;
+}
+.e__list-big-element-footer {
+    padding:20px 10px;
+}
+/** /Liste - BIG **/
 
-
-/** My Routes  **/
+/**
+ * Liste - SMALL
+ * fuer Myroutes 
+ */
 .e__list-small {
     margin: 0 10px;
     border: 1px solid #c0c0c0;
@@ -90,7 +162,7 @@
 .e__list-small-element-options {
     float:  right;
     height: 100%;
-    width:  60px;
+    width:  50px;
 }
 .e__list-small-element-head {
     font-size:1rem;
@@ -103,9 +175,18 @@
     padding: 3px 0px;
     margin:0;
 }
-/** /My Routes **/
+/** /Liste - SMALL **/
 
-
+/**
+ * Andere Styles
+ */
+/* Zitat */
+.e__quote {
+    font-style: italic;
+    font-weight: 100;
+    line-height: 1.2;
+}
+/* Button, inspired by Bootstrap */
 .e__btn {
   display: inline-block;
   padding: 6px 12px;
@@ -151,8 +232,148 @@
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
+/* Table, inspired by Bootstrap */
+.e__table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.e__table th {
+  text-align: left;
+}
+.e__table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.e__table > thead > tr > th,
+.e__table > tbody > tr > th,
+.e__table > tfoot > tr > th,
+.e__table > thead > tr > td,
+.e__table > tbody > tr > td,
+.e__table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+}
+.e__table > thead > tr > th {
+  vertical-align: bottom;
+}
+.e__table > caption + thead > tr:first-child > th,
+.e__table > colgroup + thead > tr:first-child > th,
+.e__table > thead:first-child > tr:first-child > th,
+.e__table > caption + thead > tr:first-child > td,
+.e__table > colgroup + thead > tr:first-child > td,
+.e__table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.e__table col[class*="col-"] {
+    position: static;
+    display: table-column;
+}
+.e__table td[class*="col-"],
+.e__table th[class*="col-"] {
+    position: static;
+    display: table-column;
+}
+/**
+ * Icons
+ */
+.i__close {
+    width:20px;
+    height:20px;
+    background:#e61c1c;
+    display:inline-block;
+    border-radius: 50%;
+    position: relative;
+}
+.i__close::before {
+    width:11px;
+    height:2px;
+    top:9px;
+    left:4px;
+    background: #fff;
+    content:' ';
+    position: absolute;
+}
+.i__euro,
+.i__euro-halfcolored,
+.i__euro-colored {
+    width:15px;
+    height:15px;
+    background:#fff ;
+    display:inline-block;
+    margin:0 2px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20%;
+}
+.i__euro::after,
+.i__euro-colored::after,
+.i__euro-halfcolored::after {
+    position: absolute;
+    content: '€';
+    color:#ccc;
+    font-size: 0.7rem;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+}
+.i__euro-colored::after,
+.i__euro-halfcolored::after {
+    color:#fff;
+}
+.i__euro-colored::before,
+.i__euro-halfcolored::before {
+    content:' ';
+    position: absolute;
+    width:100%;
+    height:100%;
+    background:#1e7111;
+}
+.i__euro-halfcolored::before {
+    width: 60%;
+}
 
-/** Icons **/
+.i__star,
+.i__star-halfcolored,
+.i__star-colored {
+    width:15px;
+    height:15px;
+    background:#fff ;
+    display:inline-block;
+    margin:0 2px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20%;
+    text-align: left;
+}
+.i__star::after,
+.i__star-colored::after,
+.i__star-halfcolored::after {
+    position: absolute;
+    content: '\2605';
+    color:#ccc;
+    font-size: 0.7rem;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+}
+.i__star-colored::after,
+.i__star-halfcolored::after {
+    color:#fff;
+}
+.i__star-colored::before,
+.i__star-halfcolored::before {
+    content:' ';
+    position: absolute;
+    width:100%;
+    height:100%;
+    background:#ddbf5d;
+}
+.i__star-halfcolored::before {
+    width: 60%;
+}
+
 
 .i__hamburger {
     padding: 18px 21px 18px 15px;
@@ -169,7 +390,7 @@
     margin:4px 0px;
 }
 
-/* Icons with Font */
+/** Icons mit Iconfont **/
 [class*="i-f__"] {
     font-family: 'gohappy';
     speak: none;
@@ -189,8 +410,8 @@
     color:#aaa;
 }
 
-
-[class*="i__"] { 
+/** Icons mit Image **/
+[class*="i-i_"] { 
     display:inline-block;
     height:55px;
     width:100%;
@@ -198,19 +419,19 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-.i__trash:active,
-.i__trash.active,
-.i__trash {
+.i-i__trash:active,
+.i-i__trash.active,
+.i-i__trash {
      background-image: url('../images/icon_delete.svg');
 }
 
-.i__reload:active,
-.i__reload.active,
-.i__reload {
+.i-i__reload:active,
+.i-i__reload.active,
+.i-i__reload {
     background-image: url('../images/icon_reload.svg');
 }
-.i__maps:active,
-.i__maps.active,
-.i__maps {
+.i-i__maps:active,
+.i-i__maps.active,
+.i-i__maps {
     background-image: url('../images/icon_maps.svg');
 }

@@ -4,20 +4,20 @@
     position: relative;
     float:left;
 }
-[class*="col"] {
+[class*="col-"] {
     float:left;
     min-height:1px;
 }
 /* Clearfix */
-[class*="col"]:before,
-[class*="col"]:after {
+[class*="col-"]:before,
+[class*="col-"]:after {
     content: " ";
     display: table;
 }
-[class*="col"]:after {
+[class*="col-"]:after {
     clear: both;
 }
-[class*="col"] {
+[class*="col-"] {
     *zoom: 1;
 }
 .col-1 {

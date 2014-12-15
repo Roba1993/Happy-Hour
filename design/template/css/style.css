@@ -146,6 +146,13 @@ h3 {
     background-size: cover;
     background-repeat: no-repeat;
     padding: 20px 0;
+    float:left;
+    width:100%;
+}
+#theatre-recentroute {
+    min-height:100%;
+    float:left;
+    width:100%;
 }
 /*** /Patrick ***/
 /*** Sidebar - Simon ***/
