@@ -1,3 +1,8 @@
+/**
+ * Patrick
+ */
+
+
 /** Navigationen **/
 .e__navigation-vertical,
 .e__navigation-vertical-element {
@@ -50,6 +55,56 @@
     top:0;
     left:0;
 }
+
+
+/** My Routes  **/
+.e__list-small {
+    margin: 0 10px;
+    border: 1px solid #c0c0c0;
+}
+.e__list-small,
+.e__list-small-element {
+    padding:0;   
+    list-style-type: none;
+}
+.e__list-small-element {
+    height:60px;
+    background: #fff;
+    border-bottom:1px solid #c0c0c0;
+}
+.e__list-small-element:last-of-type {
+    border-bottom: 0;
+}
+.e__list-small-element-icon {
+    background:url('../images/icon_route.png') no-repeat #f5f5f5 center;
+    background-size: 68%;
+    width: 60px;
+    height: 100%;
+    float: left;
+}
+.e__list-small-element-content {
+    height:100%;
+    float:left;
+    padding:3px;
+}
+.e__list-small-element-options {
+    float:  right;
+    height: 100%;
+    width:  60px;
+}
+.e__list-small-element-head {
+    font-size:1rem;
+    font-weight: 700;
+}
+.e__list-small-element-body > p {
+    color: #a6a6a6;
+    font-size: 0.6rem;
+    font-weight: 200;
+    padding: 3px 0px;
+    margin:0;
+}
+/** /My Routes **/
+
 
 .e__btn {
   display: inline-block;
@@ -115,7 +170,7 @@
 }
 
 /* Icons with Font */
-[class^="i-f__"] {
+[class*="i-f__"] {
     font-family: 'gohappy';
     speak: none;
     font-style: normal;
@@ -135,8 +190,7 @@
 }
 
 
-.i__reload,
-.i__maps {
+[class*="i__"] { 
     display:inline-block;
     height:55px;
     width:100%;
@@ -144,9 +198,19 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.i__trash:active,
+.i__trash.active,
+.i__trash {
+     background-image: url('../images/icon_delete.svg');
+}
+
+.i__reload:active,
+.i__reload.active,
 .i__reload {
     background-image: url('../images/icon_reload.svg');
 }
+.i__maps:active,
+.i__maps.active,
 .i__maps {
     background-image: url('../images/icon_maps.svg');
 }
