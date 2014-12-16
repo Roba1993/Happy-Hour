@@ -29,7 +29,7 @@ public class ReportsREST {
 		 * Gebe alle gemeldeten Bars zurück
 		 */
 		get("/bars/reports", "application/json", (request, response) -> {
-			LOG.info("HTTP-GET Anfrage eingetroffen: " + request.queryString());
+			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
 
 			// Finde alle gemeldeten Bars in DB
 			Collection<Object> data = new ArrayList<Object>();
@@ -52,7 +52,7 @@ public class ReportsREST {
 		post("/bars/:barID/reports",
 				"application/json",
 				(request, response) -> {
-					LOG.info("HTTP-POST Anfrage eingetroffen: " + request.queryString());
+					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 
 					// Schreibe Anfrageparameter in neues BarReport Objekt
 					BarReport barReport = new BarReport();
