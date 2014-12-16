@@ -1,8 +1,7 @@
 package de.dhbw.hh.utils;
 
 import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.rest.ReportsGet;
-import de.dhbw.hh.rest.ReportsPost;
+import de.dhbw.hh.rest.ReportsREST;
 import de.dhbw.hh.rest.TestrunREST;
 import de.dhbw.hh.rest.TopRouteREST;
 
@@ -43,8 +42,7 @@ public class Spark {
 
 		// Binde die Rest-Module ein
 		new TestrunREST(daoFactory);
-		new ReportsGet(daoFactory);
-		new ReportsPost(daoFactory);
+		new ReportsREST(daoFactory);
 		new TopRouteREST(daoFactory);
 	}
 

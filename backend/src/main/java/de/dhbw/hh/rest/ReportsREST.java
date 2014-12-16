@@ -1,9 +1,12 @@
 package de.dhbw.hh.rest;
 
+import static spark.Spark.get;
 import static spark.Spark.post;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,21 +17,34 @@ import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.BarReport;
 import de.dhbw.hh.models.RESTResponse;
 
-/**
- * Diese Klasse stellt die Methoden für eine HTTP-POST Anfrage auf den Pfad
- * "/bars/:barID/reports" bereit.
- * 
- * @author Jonas
- *
- */
+public class ReportsREST {
 
-public class ReportsPost {
-
-	static final Logger LOG = LoggerFactory.getLogger(ReportsPost.class);
+	static final Logger LOG = LoggerFactory.getLogger(ReportsREST.class);
 
 	private Gson gson = new Gson();
 
-	public ReportsPost(DAOFactory daoFactory) {
+	public ReportsREST(DAOFactory daoFactory) {
+		
+		/**
+		 * Gebe alle gemeldeten Bars zurück
+		 */
+		get("/bars/reports", "application/json", (request, response) -> {
+			LOG.info("HTTP-GET Anfrage eingetroffen: " + request.queryString());
+
+			// Finde alle gemeldeten Bars in DB
+			Collection<Object> data = new ArrayList<Object>();
+			data.addAll(daoFactory.getBarReportDAO().findBarReportsByReported(true));
+
+			// Gebe RESTResponse mit gemeldeten Bars zurück
+			RESTResponse restResponse = new RESTResponse();
+			restResponse.setName(request.queryString());
+			restResponse.setDescription("Dies sind die gemeldeten Bars");
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			restResponse.setSuccess();
+			restResponse.setData(data);
+
+			return gson.toJson(restResponse);
+		});
 		
 		/**
 		 * Trage neuen BarReport in DB ein
@@ -65,5 +81,5 @@ public class ReportsPost {
 				});
 
 	}
-
+	
 }
