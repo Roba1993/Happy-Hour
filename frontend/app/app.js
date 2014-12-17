@@ -6,9 +6,6 @@ angular.module('happyHour', [
   'happyHour.backend.Backend',
   'happyHour.algorithm.RouteGenerator',
   'happyHour.map.MapDirective',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.map',
 
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',
@@ -16,8 +13,8 @@ angular.module('happyHour', [
   'happyHour.views.topRoutes'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
-  // Wenn keine passende Route gefunden wird, leite auf view1 weiter
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  // Wenn keine passende Route gefunden wird, leite auf currentRoute weiter
+  $routeProvider.otherwise({redirectTo: '/currentRoute'});
 
   // LocalStorage-Prefix setzen
   localStorageServiceProvider.setPrefix('happyHour');
