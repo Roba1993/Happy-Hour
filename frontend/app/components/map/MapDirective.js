@@ -26,7 +26,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 				route: '='         
 			},
 			template: '<div class="map-canvas"></div>',
-			link: function ($scope, element, attributes) {
+			link: function ($scope, element) {
 				MapLoaderService.then(function(maps) {
 					var mapOptions = {
 						//center: new maps.LatLng($scope.options.center.latitude, $scope.options.center.longitude),
@@ -35,23 +35,30 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
 					new maps.Map(element.children()[0], mapOptions);
+					//console.log($scope);
+
+					/**
+					 * Markierungen setzen
+					 */
+					$scope.$watch('markers', function(markers) {
+						console.log(markers);
+						var location;
+						location = new maps.LatLng(48.775556, 9.182778);
+						/*var marker = new maps.Marker({
+							map: $scope.model.myMap,
+							position: location
+						});*/
+					}, true);
+
+					/**
+					 * Route setzen
+					 */
+					$scope.$watch('route', function(route) {
+						console.log(route);
+					}, true);
 				});
 
-				console.log(attributes);
-
-				/**
-				 * Markierungen setzen
-				 */
-				attributes.$observe('markers', function (value) {
-					console.log(value);
-				});
-
-				/**
-				 * Route setzen
-				 */
-				attributes.$observe('route', function (value) {
-					console.log(value);
-				});
+				//console.log(attributes);
 			}
 		};
 	}]);
