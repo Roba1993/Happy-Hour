@@ -8,6 +8,7 @@ angular.module('happyHour', [
   'happyHour.map.MapDirective',
   
   'happyHour.filters.DaysFilter',
+  'happyHour.filters.TimeFilter',
   'happyHour.directives.RatingDirective',
 
   'happyHour.views.currentRoute',

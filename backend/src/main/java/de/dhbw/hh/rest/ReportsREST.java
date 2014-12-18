@@ -22,7 +22,6 @@ import de.dhbw.hh.models.RESTResponse;
  * @author Jonas
  *
  */
-
 public class ReportsREST {
 
 	static final Logger LOG = LoggerFactory.getLogger(ReportsREST.class);
