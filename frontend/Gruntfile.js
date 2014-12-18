@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 			options: {
 				jshintrc: '.jshintrc',
 			},
-			all: ['app/**/*.js', 'test/**/*.js', '!app/bower_components/**/*.js']
+			all: ['app/components/**/*.js', 'app/views/**/*.js', 'test/**/*.js', '!app/bower_components/**/*.js']
 		},
 
 		karma: {
