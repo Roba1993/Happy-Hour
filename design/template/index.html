@@ -32,20 +32,63 @@ Basti:
     <!-- Place favicon.ico in the root directory -->
     <link rel="icon" href="favicon.ico" type="image/x-ico" />
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,100italic,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/fonts.css?v=0.1">
     <link rel="stylesheet" href="css/normalize.css?v=0.1">
     <link rel="stylesheet" href="css/grid.css?v=0.1">
     <link rel="stylesheet" href="css/helper.css?v=0.1">
     <link rel="stylesheet" href="css/elements.css?v=0.1">
+	<link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.css">
+	<link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.skinhtml5.css">
     <link rel="stylesheet" href="css/style.css?v=0.1">
 </head>
 
 <body>
 <input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
     <div id="main" class="clearfix">
-        <aside id="sidebar" class="grid">
-        </aside>
+        <aside id="sidebar">
+		<div id="sidebar-head-topbar">
+			<div class="sidebar-head-topbar-box">
+				<span class="i-f__options"></span>
+				<h1 id="sidebar-head-topbar-title">Optionen</h1>
+			</div>
+		</div>
+		
+		<div id="sidebar-theatre">
+			<div class="sidebar-theatre-box">
+			
+					<h3>Ort / Plz</h3>
+					<input type="form" />
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Tag</h3><br>
+					<div class="col-1"><h4>&lt;</h4></div>
+					<div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div>
+					<div class="1" style="text-align:right;"><h4>&gt;</h4></div>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Radius</h3>
+					<input id="radius"/>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Uhrzeit</h3>
+					<input id="time"/>
+			</div>
+			<div class="sidebar-theatre-box">
+					<h3>Verweilzeit</h3>
+					<input id="resttime"/>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-box">
+					<span class="i-f__star"></span><h3>Sharen</h3>
+			</div>
+			<div class="seperator"></div>
+			<div class="sidebar-theatre-box">
+				<span class="i-f__download"></span><h3>Offline speichern</h3>
+			</div>
+			<div class="seperator"></div>
+		</div>
+	</aside>
         <div id="theatre-head" class="grid">
             <div id="theatre-head-topbar" class="grid">
                 <div class="col-2 col-xs-2_5">
@@ -55,16 +98,15 @@ Basti:
                         <span class="icon-bar"></span>
                     </label>
                 </div>
-                <div class="col-6">
+                <div class="col-5 col-xs-5_5">
                     <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
                 </div>
-                <div class="col-3 col-xs_2_5 align-center">
-                    <div class="col-5">
-                        <a href="#refresh" class="e__btn i__reload"></a>
+                <div id="theatre-head-topbar-icons" class="col-4  align-center">
+                    <div class="col-6">
+                        <a href="#refresh" class="e__btn i-f__reload"></a>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
-                        <a href="#map" class="e__btn i__maps"></a>
+                    <div class="col-6">
+                        <a href="#map" class="e__btn i-f__maps"></a>
                     </div>
                 </div>
             </div>
@@ -77,16 +119,53 @@ Basti:
             </nav>
         </div>
         <div id="theatre">
-            <section id="theatre-stage" class="grid">
+			
+			<section id="theatre-recentroute" class="grid">			
                 <ul class="e__list-big">
                     <li class="e__list-big-element clearfix">
                         <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
+                            <div class="e__list-big-element-head grid">
+								<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">1. </span>Hascienda</h3></div>
+								<span class="col-5 align-right timeslot">18:30 - 19:30</span>
+							</div>
+                            <div class="e__list-big-element-body clearfix">
+                                <div class="e__list-big-element-body-main">
+									<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart! 
+Erleben Sie die richtige Mischung aus vielfältigen 
+										mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
+								</div>
+                                <div class="e__list-big-element-body-expand grid when__expanded__show">
+									<div class="col-8">
+									<h4>Öffnungszeigen</h4>
+									<table class="e__table grid">
+										<tbody>
+										<tr>
+											<td class="col-5">Montag bis Freitag</td>
+											<td  class="col-7">ab 09:00 Uhr</td>
+										</tr>
+										<tr>
+											<td class="col-5">Samstag und Sonntag</td>
+											<td class="col-7">ab 12:00 Uhr</td>
+										</tr>
+										</tbody>
+									</table>
+									<h4>Happy Hour</h4>
+										<div class="padding-default">
+									Jeden Tag 00:00 - 24:00<br>
+									<strong>alle Cocktails für 4,99€</strong>
+										</div>
+								</div>
+									<div class="col-4">
+										<div class="map" style="background:url('images/_dummy_map.png')">
+										</div>
+									</div>
+								</div>
                             </div>
-                            <div class="e__list-big-element-footer"></div>
+                            <div class="e__list-big-element-footer">
+								<span class="col-5"><span class="i__euro-colored"></span><span class="i__euro-halfcolored"></span><span class="i__euro"></span><span class="i__euro"></span><span class="i__euro"></span></span>
+								<span class="col-2"></span>
+								<span class="col-5 align-right"><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-halfcolored"></span><span class="i__star"></span></span>
+							</div>
                         </div>
                         <div class="e__list-big-element-backside">
                             <p>Alternative Bar wählen</p>
@@ -94,206 +173,95 @@ Basti:
                     </li>
                     <li class="e__list-big-element clearfix">
                         <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
+                            <div class="e__list-big-element-head grid">
+								<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">2. </span>Mauritius</h3></div>
+								<span class="col-5 align-right timeslot">18:30 - 19:30</span>
+							</div>
+                            <div class="e__list-big-element-body clearfix">
+                                <div class="e__list-big-element-body-main">
+									<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart! 
+Erleben Sie die richtige Mischung aus vielfältigen 
+										mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
+								</div>
+                                <div class="e__list-big-element-body-expand grid when__expanded__show">
+									<div class="col-8">
+									<h4>Öffnungszeigen</h4>
+									<table class="e__table grid">
+										<tbody>
+										<tr>
+											<td class="col-5">Montag bis Freitag</td>
+											<td  class="col-7">ab 09:00 Uhr</td>
+										</tr>
+										<tr>
+											<td class="col-5">Samstag und Sonntag</td>
+											<td class="col-7">ab 12:00 Uhr</td>
+										</tr>
+										</tbody>
+									</table>
+									<h4>Happy Hour</h4>
+										<div class="padding-default">
+									Jeden Tag 00:00 - 24:00<br>
+									<strong>alle Cocktails für 4,99€</strong>
+										</div>
+								</div>
+									<div class="col-4">
+										<div class="map" style="background:url('images/_dummy_map.png')">
+										</div>
+									</div>
+								</div>
                             </div>
-                            <div class="e__list-big-element-footer"></div>
+                            <div class="e__list-big-element-footer">
+								<span class="col-5"><span class="i__euro-colored"></span><span class="i__euro-halfcolored"></span><span class="i__euro"></span><span class="i__euro"></span><span class="i__euro"></span></span>
+								<span class="col-2"></span>
+								<span class="col-5 align-right"><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-halfcolored"></span><span class="i__star"></span></span>
+							</div>
                         </div>
                         <div class="e__list-big-element-backside">
                             <p>Alternative Bar wählen</p>
                         </div>
                     </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                    <li class="e__list-big-element clearfix">
-                        <div class="e__list-big-element-frontside">
-                            <div class="e__list-big-element-head"><h3>Sausalitos</h3></div>
-                            <div class="e__list-big-element-body">
-                                <div class="e__list-big-element-body-main"></div>
-                                <div class="e__list-big-element-body-expand"></div>
-                            </div>
-                            <div class="e__list-big-element-footer"></div>
-                        </div>
-                        <div class="e__list-big-element-backside">
-                            <p>Alternative Bar wählen</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
+					
+				</ul>
+			</section>
+			<section id="theatre-myroutes">
+				<ul class="e__list-small">
+					<li class="e__list-small-element clearfix">
+						<div class="e__list-small-element-icon clearfix"></div>
+						<div class="e__list-small-element-content clearfix">
+							<h3 class="e__list-small-element-head">Erstsemester Tour</h3>
+							<div class="e__list-small-element-body">
+								<p>Gespeichert am 05.08.2014 - 16:03 Uhr<br>
+								Tour geplant für Montag</p>
+							</div>	
+						</div>
+						<div class="e__list-small-element-options clearfix">
+							<span class="e__btn i-f__trash"></span>
+						</div>
+					</li>
+					<li class="e__list-small-element clearfix">
+						<div class="e__list-small-element-icon clearfix"></div>
+						<div class="e__list-small-element-content clearfix">
+							<h3 class="e__list-small-element-head">Erstsemester Tour</h3>
+							<div class="e__list-small-element-body">
+								<p>Gespeichert am 05.08.2014 - 16:03 Uhr<br>
+								Tour geplant für Montag</p>
+							</div>	
+						</div>
+						<div class="e__list-small-element-options clearfix">
+							<span class="e__btn i-f__trash"></span>
+						</div>
+					</li>
+				</ul>	
+			</section>
+	
         </div>
     </div>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/ion-rangeslider/js/ion.rangeslider.min.js"></script>
     <script src="lib/fastclick.js"></script>
     <script src="lib/inobounce.min.js"></script>
     <script type='application/javascript' src="js/main.js"></script>
+    <script type='application/javascript' src="js/demo.js"></script>
     <script>
     if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {

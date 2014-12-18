@@ -1,3 +1,5 @@
+-- @author: Tabea, Maren
+
 --------------------------------
 -- Create the database tables --
 --------------------------------
@@ -31,17 +33,17 @@ create table happyHour (
 -- Datenbanktabelle für die gespeicherten Routen (Top Routen und Shared Routen)
 
 create table route (
-	routeHash				varchar(255) not null,
-	routeLink				varchar(255) not null,
-	topRoute				boolean not null,
-	constraint pk_route primary key (routeHash)
+	hash				varchar(255),
+	data				varchar(4096) not null,
+	top					boolean not null,
+	constraint pk_route primary key (hash)
 );
 
 -- Datenbanktabelle für die Bar-Meldungen durch einen User
 
 create table barReport (
 	barID					varchar(50),
-	failureDescription		varchar(255),
+	description				varchar(255),
 	reported				boolean not null,
 	constraint pk_barMeldung primary key (barID)
 );
@@ -57,4 +59,6 @@ create table barReport (
 -- Default Data --
 ------------------
 INSERT INTO testrun (name, date, rounds) VALUES ('Admin', '2014-01-01 00:00:00', 12), ('User', '2013-02-02 00:00:00', 24);
-INSERT INTO happyHour (barID, description, start, end, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES ('4b540ef4f964a5203db127e3', 'Alle Longdrinks und Cocktails für 4,50€', '22:00:00', '03:00:00', true, true, true, true, false, false, false); 
+INSERT INTO happyHour (barID, description, start, end, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES ('4b540ef4f964a5203db127e3', 'Alle Longdrinks und Cocktails für 4,50€', '22:00:00', '03:00:00', true, true, true, true, false, false, false);
+INSERT INTO barReport (barID, description, reported) VALUES ('4b540ef4f964a5203db127e3', 'Bar existiert nicht mehr', true);
+INSERT INTO barReport (barID, description, reported) VALUES ('lkajsd893kjh128jasljdlka', 'Bar ist out', false);

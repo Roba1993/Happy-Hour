@@ -1,10 +1,10 @@
 package de.dhbw.hh.models;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * Standardantwortklasse für REST Anfragen.
+ * Datenklasse für REST Antwort auf HTTP Anfragen.
  * @author Jonas, Tobias
  *
  */
@@ -15,7 +15,7 @@ public class RESTResponse {
 	private String description = "";
 	private Timestamp timestamp = null;
 	private String status = "";
-	private ArrayList<Object> data = null;
+	private Collection<Object> data = null;
 
 	public String getName() {
 		return name;
@@ -53,11 +53,11 @@ public class RESTResponse {
 		this.status = "error";
 	}
 
-	public ArrayList<Object> getData() {
+	public Collection<Object> getData() {
 		return data;
 	}
 
-	public void setData(ArrayList<Object> data) {
+	public void setData(Collection<Object> data) {
 		this.data = data;
 	}
 
