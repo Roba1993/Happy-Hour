@@ -59,9 +59,9 @@ describe('happyHour.persistence.RoutesPersistence module', function() {
 	it('sollte Routen löschen', inject(function(RoutesPersistenceService) {
       expect(RoutesPersistenceService).toBeDefined();
 
-      RoutesPersistenceService.add({id:1});
+      var id = RoutesPersistenceService.add({id:1});
 	  RoutesPersistenceService.add({id:2});
-	  RoutesPersistenceService.remove(1);
+	  RoutesPersistenceService.remove(id);
       expect(store.routes.length).toBe(1);
 	  
 	}));
@@ -88,9 +88,9 @@ describe('happyHour.persistence.RoutesPersistence module', function() {
 	it('sollte Routen zurückgeben', inject(function(RoutesPersistenceService) {
       expect(RoutesPersistenceService).toBeDefined();
 
-      RoutesPersistenceService.add({id:1});
-	  var test1 = RoutesPersistenceService.get(1);
-      expect(test1.id).toBe(1);
+      var id = RoutesPersistenceService.add({id:1});
+	  var test1 = RoutesPersistenceService.get(id);
+      expect(test1.id).toBe(id);
 
     }));
 	
@@ -106,13 +106,13 @@ describe('happyHour.persistence.RoutesPersistence module', function() {
 	it('sollte alle vorhandenen Routen zurückgeben', inject(function(RoutesPersistenceService) {
       expect(RoutesPersistenceService).toBeDefined();
 
-      RoutesPersistenceService.add({id:1});
-	  RoutesPersistenceService.add({id:3});
-	  RoutesPersistenceService.add({id:8});
-	  RoutesPersistenceService.add({id:7});
-	  RoutesPersistenceService.add({id:2});
+      var id1 = RoutesPersistenceService.add({id:1});
+	  var id2 = RoutesPersistenceService.add({id:3});
+	  var id3 = RoutesPersistenceService.add({id:8});
+	  var id4 = RoutesPersistenceService.add({id:7});
+	  var id5 = RoutesPersistenceService.add({id:2});
 	  var test1 = RoutesPersistenceService.getAll();
-	  var ids = [1, 3, 8, 7, 2];
+	  var ids = [id1, id2, id3, id4, id5];
 	  for(var i = 0; i < test1.length; i++) {
 		expect(test1[i].id).toBe(ids[i]);
 	  }
