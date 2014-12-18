@@ -49,7 +49,7 @@ public class ReportsREST {
 		/**
 		 * Trage neuen BarReport in DB ein
 		 */
-		post("/bars/:barID/reports",
+		post("/bars/:barID/reports", 
 				"application/json",
 				(request, response) -> {
 					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
