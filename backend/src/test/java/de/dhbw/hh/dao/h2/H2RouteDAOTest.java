@@ -30,7 +30,7 @@ public class H2RouteDAOTest {
     // Die zu Testende Klasse
     private static H2RouteDAO h2RouteDAO;
 
-    // Route Klasse zum Wiederverwenden
+    // Route Klasse zum Testen
     private static Route route;
 
     

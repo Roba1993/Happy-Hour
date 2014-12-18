@@ -46,7 +46,7 @@ public class TopRouteREST {
 			if (toproutes.isEmpty() ){
 				// Es wurden keine Top Routen gefunden
 				r.setError();
-				r.setDescription("Eskonnten keine Top Routen aus der Datenbank abgerufen werden");
+				r.setDescription("Es konnten keine Top Routen aus der Datenbank abgerufen werden");
 				r.setData(null);
 			} 
 			else {

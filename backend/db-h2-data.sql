@@ -21,3 +21,7 @@ INSERT INTO barReport (id, barID, description)
 VALUES
 ('100', 'liuhwqefnwqkjefk', 'Mit den Daten dieser Bar stimmt etwas nicht'),
 ('101', 'jskhfleuqrhvlqiu', 'Mit den Daten dieser Bar stimmt auch etwas nicht');
+
+INSERT INTO user (id, password)
+VALUES
+('12180', 'passw=rd');

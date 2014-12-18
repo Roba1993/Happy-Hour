@@ -48,6 +48,15 @@ create table barReport (
 	constraint pk_barMeldung primary key (id)
 );
 
+-- Datenbanktabelle für die Administrator
+
+create table user (
+	id						integer not null,
+	password				varchar(50) not null,
+	constraint pk_user primary key (id)
+);
+
+
 ----------------------------
 -- Foreign Keys and Rules --
 ----------------------------
