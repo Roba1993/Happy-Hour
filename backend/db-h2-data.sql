@@ -16,3 +16,8 @@ VALUES
 ('jakhsfdiuewhfwnvfk', 'JSON Objekt der TopRoute1', true),
 ('swhgkwvkjdsnvksjdh', 'JSON Objekt der TopRoute2', true),
 ('kjshgöeurhgkjeanvn', 'JSON Objekt einer Route', false);
+
+INSERT INTO barReport (id, barID, description)
+VALUES
+('100', 'liuhwqefnwqkjefk', 'Mit den Daten dieser Bar stimmt etwas nicht'),
+('101', 'jskhfleuqrhvlqiu', 'Mit den Daten dieser Bar stimmt auch etwas nicht');

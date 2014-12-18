@@ -1,12 +1,5 @@
 package de.dhbw.hh.dao.h2;
 
-/**
- * Diese Klasse kommuniziert direkt mit der H2-Datenbank
- * und stellt die in dem Interface RouteDAO definierten Funktionen bereit
- * 
- * @author Maren
- */
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,28 +7,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.models.Route;
 
+/**
+ * Diese Klasse kommuniziert direkt mit der H2-Datenbank
+ * und stellt die in dem Interface RouteDAO definierten Funktionen bereit
+ * 
+ * @author Maren
+ */
 public class H2RouteDAO implements RouteDAO {
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger log = LoggerFactory.getLogger(H2RouteDAO.class);
 
-	// Der Connectionpool 
+	// Eine Variable zum Connectionpool der Datenbank wird erstellt
     private ComboPooledDataSource cpds;
+    
 
     /**
-     * Diese Funktion erstellt ein Objekt der Klasse H2RouteDAO.
+     * Diese Konstruktur Funktion erstellt ein Objekt der Klasse H2RouteDAO.
      *
      * @param cpds Der Connectionpool
-     */
-    
+     */    
     public H2RouteDAO(ComboPooledDataSource cpds) {
         this.cpds = cpds;
     }
 
-	
-	
+	// Im Folgenden kommen die einzelnen Datenbankabfragen für die Route Klasse
+    
 	@Override
 	public boolean insertRoute(Route route) {
 		// TODO Auto-generated method stub
@@ -56,27 +61,30 @@ public class H2RouteDAO implements RouteDAO {
 	
 	
 	/**
-	 * Diese Funktion frägt alle Top Routen aus der Datenbank ab und gibt sie in einem Array zurück
+	 * Diese Funktion frägt alle Top Routen aus der H2 Datenbank ab 
+	 * und gibt sie in einer Collection zurück.
 	 * 
 	 * @author Maren
 	 */
-
 	@Override
 	public Collection<Route> findTopRoutes() {
-		
-		//Abfrage aus der Datenbank
+		// Abfrage-String der Top Routen aus der H2 Datenbank
 		String sql = "SELECT hash, data, top FROM route WHERE top=true";
 
+		 // Erstellt eine Collection für die Datenrückgabe
+        Collection<Route> routes = new ArrayList<Route>();
+		
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            connection.setAutoCommit(false);
-
+            // verbietet den automatischen Commit zur Datenbank
+        	connection.setAutoCommit(false);
+            
+        	// Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             	// Daten aus der Datenbank holen
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-                Collection<Route> routes = new ArrayList<Route>();
-
-                // Schreibe die Daten ins Route Objekt
+                // Schreibt die Daten aus der Datenbank in die Collection
                 while(resultSet.next()) {
                     Route route = new Route();
                     route.setHash(resultSet.getString("hash"));
@@ -85,16 +93,17 @@ public class H2RouteDAO implements RouteDAO {
                     routes.add(route);
                 }
 
-                // Gebe alle Datenobjekte als Array zurück
+                // Gibt die Collection zurück
                 return routes;
-            }
+            }  
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
-
-        return new ArrayList<Route>();
+        
+        // Gibt die leere Collection zurück
+        return routes;
     }
-            	
-            }
+          	
+}
         
 
