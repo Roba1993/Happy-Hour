@@ -18,7 +18,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import de.dhbw.hh.models.Route;
 
 /**
- * Diese Klasse testet die Anfrage der Top Routen
+ * Diese Klasse testet die Anfrage der Routen
  * 
  * @author Maren
  */
@@ -74,7 +74,7 @@ public class H2RouteDAOTest {
 		route = new Route();
 		route.setHash("kjasifhuidjfelosamnb");
 		route.setData("Ich bin ein Json String Objekt");
-		route.setTop(true);
+		route.setTop(false);
 		
 		
 		// Löscht alle Einträge aus der Route Tabelle
@@ -94,9 +94,27 @@ public class H2RouteDAOTest {
 	        }
 		}
 	}
+
+    /**
+     * Test, ob die Route gefunden werden konnte
+     *
+     * @author Tabea
+     */
+    @Test
+    public void testFindRoute() throws Exception {
+        // Abfrage der Routen nach einem Hash-Wert
+        Route r = h2RouteDAO.findRoute("kjasifhuidjfelosamnb");
+        // Test: Hash und Data müssen übereinstimmen, der Boolean topRoute muss false sein
+        assertEquals("kjasifhuidjfelosamnb", r.getHash());
+        assertEquals(false, r.isTop());
+        assertEquals("Ich bin ein Json String Objekt", r.getData());
+
+    }
 	
 	/**
 	 * Test, ob die TopRouten gefunden werden können
+     *
+     * @author Maren
 	 */
 	@Test
 	public void testFindTopRoutes() throws Exception {
@@ -110,7 +128,7 @@ public class H2RouteDAOTest {
 		Route route3 = new Route();
 		route3.setHash("sdweuhdrjnkistzhdjwb");
 		route3.setData("Ich bin ein Json String Objekt");
-		route3.setTop(false);
+		route3.setTop(true);
 		
 		// Holt eine Connection zur Datenbank aus dem Connectionpool
         try (Connection connection = cpds.getConnection()) {
