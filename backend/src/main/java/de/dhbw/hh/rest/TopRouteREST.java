@@ -21,7 +21,6 @@ public class TopRouteREST {
 	
 	// Gson Objekt zum umwandeln in json	
 	private Gson gson = new Gson();
-
 	
 	/**
 	 * Diese Funktion ist ein Konstruktor, um REST Schnittstelle für die Top Routen zu definieren

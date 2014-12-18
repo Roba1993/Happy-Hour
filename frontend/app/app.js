@@ -6,11 +6,16 @@ angular.module('happyHour', [
   'happyHour.backend.Backend',
   'happyHour.algorithm.RouteGenerator',
   'happyHour.map.MapDirective',
+  
+  'happyHour.filters.DaysFilter',
+  'happyHour.filters.TimeFilter',
+  'happyHour.directives.RatingDirective',
 
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',
   'happyHour.views.localRoutes',
-  'happyHour.views.topRoutes'
+  'happyHour.views.topRoutes',
+  'happyHour.views.testview'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf currentRoute weiter

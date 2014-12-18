@@ -4,16 +4,12 @@ import java.util.Collection;
 
 import de.dhbw.hh.models.Route;
 
-
-
 /**
  * Interface für die Route Methoden
  * 
  * @author Maren
  *
  */
-
-
 public interface RouteDAO {
 
 	/**
@@ -30,7 +26,6 @@ public interface RouteDAO {
 	 * @param hash Wert anhand dem die zu löschende Route identifiziert werden 
 	 * @return true wenn erfolgreich, ansonsten false
 	 */
-
 	public boolean deleteRoute(String hash);
 	
 	/**
@@ -38,8 +33,7 @@ public interface RouteDAO {
 	 * 
 	 * @param hash Wert nach dem die Route gesucht wird
 	 * @return gesamte Route-Onjekt bei Erfolg. Wenn nichts gefunden wird null
-	 */
-	
+	 */	
 	public Route findRoute(String hash);
 	
 	
@@ -47,10 +41,7 @@ public interface RouteDAO {
 	 * 
 	 * @param es wird nach allen TopRouten gesucht
 	 * @return alle Top Routen bei Erfolg, andernfalls wird null zurückgegeben
-	 */
-	
+	 */	
 	public Collection<Route> findTopRoutes();
-	
-	
-	
+		
 }
