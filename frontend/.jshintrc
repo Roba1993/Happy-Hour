@@ -24,6 +24,8 @@
         "inject": true,
         "google": true,
 		"_": true,
+        "window": true,
+        "document": true,
         "CryptoJS": true,
         "time": true
     }
