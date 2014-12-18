@@ -34,7 +34,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 						zoom: 14,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
-					new maps.Map(element.children()[0], mapOptions);
+					var map = new maps.Map(element.children()[0], mapOptions);
 					//console.log($scope);
 
 					/**
@@ -42,12 +42,19 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 					 */
 					$scope.$watch('markers', function(markers) {
 						console.log(markers);
-						var location;
-						location = new maps.LatLng(48.775556, 9.182778);
-						/*var marker = new maps.Marker({
-							map: $scope.model.myMap,
-							position: location
-						});*/
+
+						// for-Schleife um durch jede Location in markers zu iterieren
+						_.forEach(markers, function(marker) {
+							//console.log(marker);
+							var location;
+							location = new maps.LatLng(marker.location.latitude, marker.location.longitude);
+							//console.log(location);
+
+							var marker = new maps.Marker({
+								map: map,
+								position: location
+							});
+						});
 					}, true);
 
 					/**

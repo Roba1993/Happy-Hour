@@ -30,7 +30,11 @@ angular.module('myApp.view1', ['ngRoute'])
 	id: 1,
   	name: 'Monobar',
   	description: 'Eine tolle Bar',
-  	rating: 4
+  	rating: 4,
+    location: {
+      latitude: 48.773760,
+      longitude: 9.177780
+    }
   };
   console.log(RoutesPersistenceService);
   $scope.bars.push(bar1);
@@ -38,14 +42,22 @@ angular.module('myApp.view1', ['ngRoute'])
 	id: 2,
   	name: 'Tequila Bar',
   	description: 'Eine tolle Bar mit tollen Getränken',
-  	rating: 5
+  	rating: 5,
+    location: {
+      latitude: 48.775846,
+      longitude: 9.182932
+    }
   };
   $scope.bars.push(bar2);
   var bar3 = {
 	id: 3,
   	name: 'Lutscher Bar',
   	description: 'Eine Bar mit hartem Lörres',
-  	rating: 1
+  	rating: 1,
+    location: {
+      latitude: 48.783705,
+      longitude: 9.170343
+    }
   };
   $scope.bars.push(bar3);
 
