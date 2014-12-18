@@ -86,7 +86,7 @@
                             <div class="e__list-big-element-body-main">
 								<h4>Happy Hour</h4>
 									<div ng-repeat="happyHour in bar.happyHours" class="padding-default">
-									{{happyHour.days | formatDays}} 00:00 - 24:00<br>
+									{{happyHour.days | formatDays}} {{happyHour | formatTime}}<br>
 									<strong>{{happyHour.description}}</strong>
 									</div>
 							</div>
@@ -98,7 +98,7 @@
 									<tbody>
 									<tr ng-repeat="openingTime in bar.openingTimes" >
 										<td class="col-5">{{openingTime.days | formatDays}}</td>
-										<td  class="col-7">ab 09:00 Uhr</td>
+										<td  class="col-7">{{openingTime | formatTime}}</td>
 									</tr>
 									</tbody>
 								</table>
