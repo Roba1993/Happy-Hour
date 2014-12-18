@@ -1,11 +1,10 @@
 package de.dhbw.hh.models;
 
 /**
- * Diese Datenklasse stellt die Daten zu den sieben Toprouten bereit
+ * Diese Datenklasse stellt die Daten zu den sieben Top Routen bereit
  * 
  * @author: Maren
  */
-
 public class Route {
 	
 	private String hash = "";
@@ -17,7 +16,6 @@ public class Route {
 	/**
 	 * Der Route Konstruktur zur Erstellung des Routes Objekts
 	 */
-	
 	public Route (String hash, String data, Boolean top){
 		this.setHash(hash);
 		this.setData(data);
@@ -27,7 +25,6 @@ public class Route {
 	/**
 	 * Ein leerer Konstruktur zur Erstellung eines Routes Objekts 
 	 */
-	
 	public Route (){
 		
 	}
