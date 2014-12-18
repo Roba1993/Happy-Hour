@@ -29,12 +29,20 @@ public interface BarReportDAO {
     public boolean updateBarReport(BarReport barReport);
 
     /**
-     * Diese Funktion löscht einen BarReport aus der Datenbank anhand seiner ID.
+     * Diese Funktion löscht alle BarReports zu einer zugehörigen Bar anhand der BarID
      *
-     * @param barID Die BarID anhand der BarReport zugeordnet wird.
+     * @param barID Die BarID anhand der die BarReports zugeordnet werden.
      * @return True bei Erfolg, andernfalls false.
      */
     public boolean deleteBarReport(String barID);
+    
+    /**
+     * Diese Funktion löscht einen BarReport aus der Datenbank anhand seiner ID.
+     *
+     * @param id Die id anhand der BarReport zugeordnet wird.
+     * @return True bei Erfolg, andernfalls false.
+     */
+    public boolean deleteSpecificBarReport(int id);
 
     /**
      * Diese Funktion findet einen bestimmten BarReport anhand seiner BarID.

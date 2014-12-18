@@ -98,6 +98,35 @@ public class H2BarReportDAO implements BarReportDAO {
 	        
 	        return false;
 	}
+	
+	@Override
+	public boolean deleteSpecificBarReport(int id) {
+		 String sql = "DELETE FROM barReport WHERE id=?";
+
+	        try (Connection connection = cpds.getConnection()) {
+	            // Immer ohne Autocommits arbeiten
+	            connection.setAutoCommit(false);
+
+	            // Immer mit PreparedStatements arbeiten
+	            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+	                preparedStatement.setInt(1, id);
+
+	                // Füge das Statement der Ausführungsschlange hinzu
+	                preparedStatement.addBatch();
+
+	                // Führe alle Statements aus
+	                preparedStatement.executeBatch();
+	            }
+
+	            // Schreibe die Änderungen in die Datenbank
+	            connection.commit();
+	            return true;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return false;
+	}
 
 	@Override
 	public Collection<BarReport> findBarReport(String barID) {
