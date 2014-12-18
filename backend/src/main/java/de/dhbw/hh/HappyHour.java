@@ -1,6 +1,7 @@
 package de.dhbw.hh;
 
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.foursquare.FourSquareInterface;
 import de.dhbw.hh.models.Testrun;
 import de.dhbw.hh.utils.LoggingConfiguration;
 import de.dhbw.hh.utils.Settings;
@@ -94,6 +95,5 @@ public class HappyHour {
             }
             System.exit(0);
         }
-
     }
 }
