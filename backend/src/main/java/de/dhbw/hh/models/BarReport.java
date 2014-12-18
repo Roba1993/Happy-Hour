@@ -8,10 +8,18 @@ package de.dhbw.hh.models;
 
 public class BarReport {
 
+	private int id = 0;
 	private String barID = "";
 	private String description = "";
-	private boolean reported = false;
 
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
 	public String getBarID() {
 		return barID;
 	}
@@ -26,14 +34,6 @@ public class BarReport {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
-	public boolean isReported() {
-		return reported;
-	}
-	
-	public void setReported(boolean reported) {
-		this.reported = reported;
 	}
 
 }

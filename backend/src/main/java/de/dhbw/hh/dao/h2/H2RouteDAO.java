@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.models.Route;
 
