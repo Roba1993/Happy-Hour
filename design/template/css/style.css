@@ -118,6 +118,8 @@ h3 {
 }
 #theatre-head-topbar-icons .e__btn {
     height:55px;
+    width:100%;
+    padding:6px 2px;
 }
 #theatre-head-topbar .i__hamburger {
     float: left;
