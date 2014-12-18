@@ -29,7 +29,6 @@ public class H2RouteDAO implements RouteDAO {
 	// Eine Variable zum Connectionpool der Datenbank wird erstellt
     private ComboPooledDataSource cpds;
     
-
     /**
      * Diese Konstruktur Funktion erstellt ein Objekt der Klasse H2RouteDAO.
      *
@@ -58,8 +57,7 @@ public class H2RouteDAO implements RouteDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+		
 	/**
 	 * Diese Funktion frägt alle Top Routen aus der H2 Datenbank ab 
 	 * und gibt sie in einer Collection zurück.
