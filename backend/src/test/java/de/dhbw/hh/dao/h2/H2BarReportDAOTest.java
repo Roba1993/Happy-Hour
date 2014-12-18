@@ -141,9 +141,10 @@ public class H2BarReportDAOTest {
 	@Test
 	public void testFindRoute() throws Exception {
 		
-		BarReport barReport = new BarReport();
-		barReport.setBarID("liasdoinas09kas");
-		barReport.setDescription("Dies ist der vierte Report");
+		// Vierten Datensatz erstellen
+		BarReport barReport4 = new BarReport();
+		barReport4.setBarID("liasdoinas09kas");
+		barReport4.setDescription("Dies ist der vierte Report");
 		
 		// Fügt den vierten Datensatz in die Datenbank ein
         try (Connection connection = cpds.getConnection()) {
@@ -152,22 +153,25 @@ public class H2BarReportDAOTest {
                     "INSERT INTO barReport (barID, description) " +
                             "VALUES (?,?)")) {
 
-                preparedStatement.setString(1, barReport.getBarID());
-                preparedStatement.setString(2, barReport.getDescription());
+                preparedStatement.setString(1, barReport4.getBarID());
+                preparedStatement.setString(2, barReport4.getDescription());
                 preparedStatement.execute();
             }
 		
         }
         
+        // Sucht speziellen Datensatz
 		Collection<BarReport> barReports =  h2BarReportDAO.findBarReport("liasdoinas09kas");
         Iterator<BarReport> iteratorNew = barReports.iterator();
         
+        // Prüft ob genau ein Datensatz zurück gegeben wird
         assertEquals(1, barReports.size());
         
+        // Vergleicht den ersten Datensatz mit barReport4
         if (iteratorNew.hasNext()) {
             BarReport neuBarReport = iteratorNew.next();
-            assertEquals(barReport.getBarID(), neuBarReport.getBarID());
-            assertEquals(barReport.getDescription(), neuBarReport.getDescription());
+            assertEquals(barReport4.getBarID(), neuBarReport.getBarID());
+            assertEquals(barReport4.getDescription(), neuBarReport.getDescription());
         }
         
 	}
