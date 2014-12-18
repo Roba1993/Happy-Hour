@@ -50,7 +50,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 							location = new maps.LatLng(marker.location.latitude, marker.location.longitude);
 							//console.log(location);
 
-							var marker = new maps.Marker({
+							new maps.Marker({
 								map: map,
 								position: location
 							});
