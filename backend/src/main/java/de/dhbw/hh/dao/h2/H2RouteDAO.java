@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.models.Route;
 
@@ -42,7 +41,31 @@ public class H2RouteDAO implements RouteDAO {
     
 	@Override
 	public boolean insertRoute(Route route) {
-		// TODO Auto-generated method stub
+		String sql = "INSERT INTO route (hash, data, top) VALUES (?,?,?)";
+
+        try (Connection connection = cpds.getConnection()) {
+            // Immer ohne Autocommits arbeiten
+            connection.setAutoCommit(false);
+
+            // Immer mit PreparedStatements arbeiten
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, route.getHash());
+                preparedStatement.setString(2, route.getData());
+                preparedStatement.setBoolean(3, route.isTop());
+
+                // Füge das Statement der Ausführungsschlange hinzu
+                preparedStatement.addBatch();
+
+                // Führe alle Statements aus
+                preparedStatement.executeBatch();
+            }
+
+            // Schreibe die Änderungen in die Datenbank
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		return false;
 	}
 
@@ -138,5 +161,3 @@ public class H2RouteDAO implements RouteDAO {
     }
           	
 }
-        
-
