@@ -1,0 +1,10 @@
+* Tausch von Beschreibung und Happy-Hour für den nicht extended view
+* Background für die "Aktuelle Route" - Liste
+* Nur ein Listenelement expandable
+* Go Happy Slogan überdenken
+* zwischen den Seiten linken
+* Aktive Seite in dunkler Farbe in der Navigationsleiste + kleine Bar unter dem Schriftzug (siehe Mockup)
+* Neue Backgrounds für Top 7 und Myroutes
+* Animation beim Wochentag-Change
+* Positionierung der Icons in der TopBar
+* im firefox fehlen die Icons (nicht so wichtig, da Fokus auf Webkit)

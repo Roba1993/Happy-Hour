@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import de.dhbw.hh.HappyHour;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.models.Route;
 
@@ -75,11 +74,46 @@ public class H2RouteDAO implements RouteDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+    /**
+     * Diese Funktion frägt eine gespeicherte Route mit Hilfe eines Hash-Wertes ab.
+     *
+     * @author Tabea
+     */
 	@Override
 	public Route findRoute(String hash) {
-		// TODO Auto-generated method stub
-		return null;
+        //Abfrage aus der Datenbank
+        String sql = "SELECT data, top, hash FROM route WHERE hash=?";
+
+        // Holt eine Connection zur Datenbank aus dem Connectionpool
+        try (Connection connection = cpds.getConnection()) {
+            // verbietet den automatischen Commit zur Datenbank
+            connection.setAutoCommit(false);
+
+            // Erstellt das Prepared Statement für die Datenbankabfrage
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                // Fügt den Hash-Wert in die SQL-Abfrage ein
+                preparedStatement.setString(1, hash);
+
+                // Daten aus der Datenbank holen
+                ResultSet resultSet = preparedStatement.executeQuery();
+                // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
+                if(resultSet.next()){
+                    Route route = new Route();
+                    route.setHash(resultSet.getString("hash"));
+                    route.setData(resultSet.getString("data"));
+                    route.setTop(resultSet.getBoolean("top"));
+                    return route;
+                }
+                // Wenn kein Wert vorhanden ist wird null zurückgegegben
+                return null;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Route();
 	}
 		
 	/**
