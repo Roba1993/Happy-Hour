@@ -16,23 +16,30 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			/**
 			 * Fügt eine Route zu "Meine Routen" hinzu und macht sie damit offline verfügbar.
 			 * 
-			 * @author Dorothee Nies
+			 * @author Dorothee Nies, Markus Thömmes
 			 * @param {Route} route Die Route, die in "Meine Routen" gespeichert werden soll.
-			 * @returns {Boolean} `true` wenn die Route hinzugefügt wurde, `false` wenn das Hinzufügen fehlgeschlagen ist
+			 * @return {String|Boolean} die für das Objekt erzeugte id, false wenn das Einfügen fehlgeschlagen ist
 			 */
 			add: function(route) {
 				if (service.isFull()){
 					return false;
 				}
-				routes.push(route);
+				var object = {
+					timestamp: new Date(),
+					route: route
+				};
+				var id = CryptoJS.MD5(JSON.stringify(object));
+				object.id = id;
+
+				routes.push(object);
 				localStorageService.set('routes', routes);
-				return true;
+				return id;
 			},
 			/**
 			 * Löscht eine Route aus "Meine Routen" und entfernt damit auch die Offlineverfügbarkeit.
 			 * 
 			 * @author Dorothee Nies
-			 * @param  {Integer} routeId Der Identifikator der Route, die gelöscht werden soll
+			 * @param  {String} routeId Der Identifikator der Route, die gelöscht werden soll
 			 * @return {Boolean} Gibt `true` zurück, wenn die Route gelöscht wurde, `false` wenn sie nicht gefunden wurde.
 			 */
 			remove: function(routeId) {
@@ -56,7 +63,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * 
 			 * @author Dorothee Nies
 			 * @param  {Integer} routeId Der Identifikator der Route, die zurückgegeben werden soll
-			 * @return {[type]} Die angeforderte Route
+			 * @return {[LocalRoute]} Die angeforderte Route
 			 */
 			get: function(routeId) {
 				var routeToReturn = null;
@@ -71,7 +78,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * Gibt alle Routen aus "Meine Routen" zurück
 			 * 
 			 * @author Dorothee Nies
-			 * @return {Route[]} Array aus allen Routen in "Meine Routen"
+			 * @return {LocalRoute[]} Array aus allen Routen in "Meine Routen"
 			 */
 			getAll: function() {
 				return routes;

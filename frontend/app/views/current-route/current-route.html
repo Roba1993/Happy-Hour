@@ -76,38 +76,32 @@
 		
 		<section id="theatre-recentroute" class="grid">			
             <ul class="e__list-big">
-                <li class="e__list-big-element clearfix">
-                    <div class="e__list-big-element-frontside">
+                <li ng-repeat="timeframe in route.timeframes" ng-click="frameClicked = !frameClicked" ng-class="{is__expanded : frameClicked}" class="e__list-big-element clearfix">
+					<div ng-init="bar = timeframe.bar" class="e__list-big-element-frontside">
                         <div class="e__list-big-element-head grid">
-							<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">1. </span>Hascienda</h3></div>
-							<span class="col-5 align-right timeslot">18:30 - 19:30</span>
+							<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{bar.name}}</h3></div>
+							<span class="col-5 align-right timeslot">{{timeframe.startTime}} - {{timeframe.endTime}}</span>
 						</div>
                         <div class="e__list-big-element-body clearfix">
                             <div class="e__list-big-element-body-main">
-								<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart! 
-Erleben Sie die richtige Mischung aus vielfältigen 
-									mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
+								<h4>Happy Hour</h4>
+									<div ng-repeat="happyHour in bar.happyHours" class="padding-default">
+									{{happyHour.days | formatDays}} 00:00 - 24:00<br>
+									<strong>{{happyHour.description}}</strong>
+									</div>
 							</div>
                             <div class="e__list-big-element-body-expand grid when__expanded__show">
 								<div class="col-8">
-								<h4>Öffnungszeigen</h4>
+								<p class="e__quote">{{bar.description}}</p>
+								<h4>Öffnungszeiten</h4>
 								<table class="e__table grid">
 									<tbody>
-									<tr>
-										<td class="col-5">Montag bis Freitag</td>
+									<tr ng-repeat="openingTime in bar.openingTimes" >
+										<td class="col-5">{{openingTime.days | formatDays}}</td>
 										<td  class="col-7">ab 09:00 Uhr</td>
-									</tr>
-									<tr>
-										<td class="col-5">Samstag und Sonntag</td>
-										<td class="col-7">ab 12:00 Uhr</td>
 									</tr>
 									</tbody>
 								</table>
-								<h4>Happy Hour</h4>
-									<div class="padding-default">
-								Jeden Tag 00:00 - 24:00<br>
-								<strong>alle Cocktails für 4,99€</strong>
-									</div>
 							</div>
 								<div class="col-4">
 									<div class="map" style="background:url('images/_dummy_map.png')">
@@ -116,64 +110,16 @@ Erleben Sie die richtige Mischung aus vielfältigen
 							</div>
                         </div>
                         <div class="e__list-big-element-footer">
-							<span class="col-5"><span class="i__euro-colored"></span><span class="i__euro-halfcolored"></span><span class="i__euro"></span><span class="i__euro"></span><span class="i__euro"></span></span>
+							<span class="col-5"><rating type="'euro'" value="bar.costs"></span>
 							<span class="col-2"></span>
-							<span class="col-5 align-right"><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-halfcolored"></span><span class="i__star"></span></span>
+							<span class="col-5 align-right"><rating type="'star'" value="bar.rating"></span>
 						</div>
                     </div>
                     <div class="e__list-big-element-backside">
                         <p>Alternative Bar wählen</p>
                     </div>
                 </li>
-                <li class="e__list-big-element clearfix">
-                    <div class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head grid">
-							<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">2. </span>Mauritius</h3></div>
-							<span class="col-5 align-right timeslot">18:30 - 19:30</span>
-						</div>
-                        <div class="e__list-big-element-body clearfix">
-                            <div class="e__list-big-element-body-main">
-								<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart! 
-Erleben Sie die richtige Mischung aus vielfältigen 
-									mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
-							</div>
-                            <div class="e__list-big-element-body-expand grid when__expanded__show">
-								<div class="col-8">
-								<h4>Öffnungszeigen</h4>
-								<table class="e__table grid">
-									<tbody>
-									<tr>
-										<td class="col-5">Montag bis Freitag</td>
-										<td  class="col-7">ab 09:00 Uhr</td>
-									</tr>
-									<tr>
-										<td class="col-5">Samstag und Sonntag</td>
-										<td class="col-7">ab 12:00 Uhr</td>
-									</tr>
-									</tbody>
-								</table>
-								<h4>Happy Hour</h4>
-									<div class="padding-default">
-								Jeden Tag 00:00 - 24:00<br>
-								<strong>alle Cocktails für 4,99€</strong>
-									</div>
-							</div>
-								<div class="col-4">
-									<div class="map" style="background:url('images/_dummy_map.png')">
-									</div>
-								</div>
-							</div>
-                        </div>
-                        <div class="e__list-big-element-footer">
-							<span class="col-5"><span class="i__euro-colored"></span><span class="i__euro-halfcolored"></span><span class="i__euro"></span><span class="i__euro"></span><span class="i__euro"></span></span>
-							<span class="col-2"></span>
-							<span class="col-5 align-right"><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-halfcolored"></span><span class="i__star"></span></span>
-						</div>
-                    </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
-                    </div>
-                </li>
+                
 			</ul>
 		</section>
 
