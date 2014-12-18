@@ -13,7 +13,8 @@ angular.module('happyHour', [
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',
   'happyHour.views.localRoutes',
-  'happyHour.views.topRoutes'
+  'happyHour.views.topRoutes',
+  'happyHour.views.testview'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf currentRoute weiter

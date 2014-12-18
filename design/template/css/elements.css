@@ -25,12 +25,26 @@
     line-height: 2.5;
     text-decoration: none;
     color:#333;
+    position: relative
 }
 .e__navigation-vertical-element > a:hover,
 .e__navigation-vertical-element > a:focus {
     outline:0;
     cursor:pointer;
-    background:#ccc;
+}
+.e__navigation-vertical-element > a.active,
+.e__navigation-vertical-element > a:hover {
+    font-weight: 400;
+}
+.e__navigation-vertical-element > a.active::after,
+.e__navigation-vertical-element > a:hover::after {
+    content:' ';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    left:0;
+    background: #4d4d4d;
 }
 /** /Navigationen **/
 
