@@ -6,6 +6,9 @@ angular.module('happyHour', [
   'happyHour.backend.Backend',
   'happyHour.algorithm.RouteGenerator',
   'happyHour.map.MapDirective',
+  
+  'happyHour.filters.DaysFilter',
+  'happyHour.directives.RatingDirective',
 
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',
