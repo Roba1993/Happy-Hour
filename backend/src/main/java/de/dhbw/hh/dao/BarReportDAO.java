@@ -9,7 +9,6 @@ import de.dhbw.hh.models.BarReport;
  * @author Jonas
  *
  */
-
 public interface BarReportDAO {
 	
 	/**
@@ -22,7 +21,7 @@ public interface BarReportDAO {
 
     /**
      * Diese Funktion aktualisiert einen BarReport in der Datenbank.
-     * Der BarReport wird dabei über die ID zugeordnet.
+     * Der BarReport wird dabei über die barID zugeordnet.
      *
      * @param barReport Der BarReport mit den neuen Werten.
      * @return True bei Erfolg, andernfalls false.
@@ -44,7 +43,7 @@ public interface BarReportDAO {
      * @return Gibt bei Erfolg das gefundene BarReport-Objekt zurück. Wenn nichts
      * gefunden wird, enthält die Rückgabe den Wert null.
      */
-    public BarReport findBarReport(String barID);
+    public Collection<BarReport> findBarReport(String barID);
 
     /**
      * Diese Funktion sucht alle BarReports in der Datenbank mit dem angegebenen Reported-Wahrheitswert.
@@ -52,6 +51,6 @@ public interface BarReportDAO {
      * @param reported Der Reported-Wahrheitswer nach dem gesucht werden soll.
      * @return BarReport-Array mit den gefundenen BarReports.
      */
-    public Collection<BarReport> findBarReportsByReported(boolean reported);
+    public Collection<BarReport> findAllBarReports();
 
 }

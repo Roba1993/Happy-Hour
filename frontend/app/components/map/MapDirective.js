@@ -32,7 +32,9 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             //center: new maps.LatLng($scope.options.center.latitude, $scope.options.center.longitude),
             center: new maps.LatLng(48.775556, 9.182778),
             zoom: 14,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            mapTypeControl: false
           };
           var map = new maps.Map(element.children()[0], mapOptions);
           //console.log($scope);
