@@ -1,7 +1,9 @@
 package de.dhbw.hh.utils;
 
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.rest.ReportsREST;
 import de.dhbw.hh.rest.TestrunREST;
+import de.dhbw.hh.rest.TopRouteREST;
 
 import java.util.Properties;
 
@@ -12,7 +14,10 @@ import static spark.Spark.*;
 
 /**
  * Diese Klasse startet den Spark REST Server.
+ * 
+ * @author Robert
  */
+
 public class Spark {
 
 	static final Logger LOG = LoggerFactory.getLogger(Spark.class);
@@ -37,6 +42,8 @@ public class Spark {
 
 		// Binde die Rest-Module ein
 		new TestrunREST(daoFactory);
+		new ReportsREST(daoFactory);
+		new TopRouteREST(daoFactory);
 	}
 
 	/**

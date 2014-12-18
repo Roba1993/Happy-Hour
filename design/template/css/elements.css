@@ -1,4 +1,11 @@
-/** Navigationen **/
+/**
+ * Patrick
+ */
+
+
+/**
+ * Navigationen
+ */
 .e__navigation-vertical,
 .e__navigation-vertical-element {
     margin:0;
@@ -18,14 +25,33 @@
     line-height: 2.5;
     text-decoration: none;
     color:#333;
+    position: relative
 }
 .e__navigation-vertical-element > a:hover,
 .e__navigation-vertical-element > a:focus {
     outline:0;
     cursor:pointer;
-    background:#ccc;
 }
+.e__navigation-vertical-element > a.active,
+.e__navigation-vertical-element > a:hover {
+    font-weight: 400;
+}
+.e__navigation-vertical-element > a.active::after,
+.e__navigation-vertical-element > a:hover::after {
+    content:' ';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    left:0;
+    background: #4d4d4d;
+}
+/** /Navigationen **/
 
+/**
+ * Liste - BIG
+ * Fuer RecentRoute
+ */
 .e__list-big,
 .e__list-big-element {
     margin:0;
@@ -36,11 +62,20 @@
 }
 .e__list-big-element {
     display: block;
-    background:#1ea1eb;
     position:relative;
+    border-bottom:1px solid #c0c0c0;
+    overflow: hidden;
+}
+.e__list-big-element:last-of-type {
+    border-bottom: 0;
 }
 .e__list-big-element-frontside {
     min-height: 50px;
+    float: left;
+    width:100%;
+    position: relative;
+    background:#452e2e;
+    color:#fafcfe ;
 }
 .e__list-big-element-backside {
     z-index:-1;
@@ -50,7 +85,145 @@
     top:0;
     left:0;
 }
+.e__list-big-element.is__backside .e__list-big-element-frontside {
+    margin-left:-100%;
+    transition: margin-left 2s ease-in-out;
+}
+.e__list-big-element.is__backside .e__list-big-element-backside {
+    z-index:1;
+}
+.e__list-big-element:not(.is__expanded) .when__expanded__show,
+.e__list-big-element.is__expanded .when__expanded__hidden {
+    display:none;
+}
+.e__list-big-element-frontside-head,
+.e__list-big-element-frontside-body,
+.e__list-big-element-frontside-footer {
+    float:left;
+    width:100%;
+}
+.e__list-big-element-frontside-head,
+.e__list-big-element-frontside-footer {
+    padding:10px;
+}
+.e__list-big-element-frontside-head h3 {
+    font-size:1rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    display:inline-block;
+}
+.e__list-big-element-frontside-head .i__close {
+    top: 3px;
+    margin-right: 10px;
+}
+.e__list-big-element-frontside-head .timeslot {
+    font-size:0.8rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+.e__list-big-element-frontside-body {
+    padding: 0px 10px 0px 20px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+.e__list-big-element-frontside-body h4 {
+    font-size: 0.84rem;
+    font-weight: 600;
+    margin:0 0 10px;
+}
+.e__list-big-element-frontside-body h4:not(:first-of-type) {
+    margin-top:20px;
+}
+.e__list-big-element-frontside-body strong {
+    font-weight: 500;
+}
+.e__list-big-element-frontside-body .map {
+    width:100%;
+    height:100px;
+    border:2px solid #fff;
+    margin-top:30px;
+}
+.e__list-big-element-frontside-footer {
+    padding:20px 10px;
+}
+/* Liste Backside */
+.e__list-big-element-backside {
+    background: #eee;
+}
+.e__list-big-element-backside-content {
+    margin-top:40px;
+    font-size:1.2rem;
+    line-height: 2;
+    font-weight: 600;
+    color:#ABABAB;
+}
+.e__list-big-element-backside-content .i-f__reload2:before {
+    font-weight: bold;
+}
+/* /Liste Backside */
+/** /Liste - BIG **/
 
+/**
+ * Liste - SMALL
+ * fuer Myroutes 
+ */
+.e__list-small {
+    margin: 0 10px;
+    border: 1px solid #c0c0c0;
+}
+.e__list-small,
+.e__list-small-element {
+    padding:0;   
+    list-style-type: none;
+}
+.e__list-small-element {
+    height:60px;
+    background: #fff;
+    border-bottom:1px solid #c0c0c0;
+}
+.e__list-small-element:last-of-type {
+    border-bottom: 0;
+}
+.e__list-small-element-icon {
+    background:url('../images/icon_route.svg') no-repeat #f5f5f5 center;
+    background-size: 68%;
+    width: 60px;
+    height: 100%;
+    float: left;
+}
+.e__list-small-element-content {
+    height:100%;
+    float:left;
+    padding:3px;
+}
+.e__list-small-element-options {
+    float:  right;
+    height: 100%;
+    width:  60px;
+}
+.e__list-small-element-head {
+    font-size:1rem;
+    font-weight: 700;
+}
+.e__list-small-element-body > p {
+    color: #a6a6a6;
+    font-size: 0.6rem;
+    font-weight: 200;
+    padding: 3px 0px;
+    margin:0;
+}
+/** /Liste - SMALL **/
+
+/**
+ * Andere Styles
+ */
+/* Zitat */
+.e__quote {
+    font-style: italic;
+    font-weight: 100;
+    line-height: 1.2;
+}
+/* Button, inspired by Bootstrap */
 .e__btn {
   display: inline-block;
   padding: 6px 12px;
@@ -71,6 +244,8 @@
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
+    max-height: 100%;
+    max-width: 100%;
 }
 .e__btn:focus,
 .e__btn:active:focus,
@@ -92,18 +267,160 @@
 .e__btn.active {
   background-image: none;
   outline: 0;
+    /*
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);*/
 }
 
+/* Table, inspired by Bootstrap */
+.e__table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.e__table th {
+  text-align: left;
+}
+.e__table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.e__table > thead > tr > th,
+.e__table > tbody > tr > th,
+.e__table > tfoot > tr > th,
+.e__table > thead > tr > td,
+.e__table > tbody > tr > td,
+.e__table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+}
+.e__table > thead > tr > th {
+  vertical-align: bottom;
+}
+.e__table > caption + thead > tr:first-child > th,
+.e__table > colgroup + thead > tr:first-child > th,
+.e__table > thead:first-child > tr:first-child > th,
+.e__table > caption + thead > tr:first-child > td,
+.e__table > colgroup + thead > tr:first-child > td,
+.e__table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.e__table col[class*="col-"] {
+    position: static;
+    display: table-column;
+}
+.e__table td[class*="col-"],
+.e__table th[class*="col-"] {
+    position: static;
+    display: table-column;
+}
+/**
+ * Icons
+ */
+.i__close {
+    width:20px;
+    height:20px;
+    background:#e61c1c;
+    display:inline-block;
+    border-radius: 50%;
+    position: relative;
+}
+.i__close::before {
+    width:11px;
+    height:2px;
+    top:9px;
+    left:4px;
+    background: #fff;
+    content:' ';
+    position: absolute;
+}
+.i__euro,
+.i__euro-halfcolored,
+.i__euro-colored {
+    width:15px;
+    height:15px;
+    background:#fff ;
+    display:inline-block;
+    margin:0 2px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20%;
+}
+.i__euro::after,
+.i__euro-colored::after,
+.i__euro-halfcolored::after {
+    position: absolute;
+    content: '€';
+    color:#ccc;
+    font-size: 0.7rem;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+}
+.i__euro-colored::after,
+.i__euro-halfcolored::after {
+    color:#fff;
+}
+.i__euro-colored::before,
+.i__euro-halfcolored::before {
+    content:' ';
+    position: absolute;
+    width:100%;
+    height:100%;
+    background:#1e7111;
+}
+.i__euro-halfcolored::before {
+    width: 60%;
+}
 
-/** Icons **/
+.i__star,
+.i__star-halfcolored,
+.i__star-colored {
+    width:15px;
+    height:15px;
+    background:#fff ;
+    display:inline-block;
+    margin:0 2px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20%;
+    text-align: left;
+}
+.i__star::after,
+.i__star-colored::after,
+.i__star-halfcolored::after {
+    position: absolute;
+    content: '\2605';
+    color:#ccc;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+}
+.i__star-colored::after,
+.i__star-halfcolored::after {
+    color:#fff;
+}
+.i__star-colored::before,
+.i__star-halfcolored::before {
+    content:' ';
+    position: absolute;
+    width:100%;
+    height:100%;
+    background:#ddbf5d;
+}
+.i__star-halfcolored::before {
+    width: 60%;
+}
+
 
 .i__hamburger {
     padding: 18px 21px 18px 15px;
 }
 .i__hamburger >.icon-bar {
-    background-color: #c0c0c0;
+    background-color: #ABABAB;
     display: block;
     width: 31px;
     height: 3px;
@@ -114,8 +431,18 @@
     margin:4px 0px;
 }
 
-/* Icons with Font */
-[class^="i-f__"] {
+/** Icons mit Iconfont **/
+/**
+ * Logo: e600
+ * Delete: e601
+ * Download: e602
+ * Maps: e603
+ * Option: e604
+ * Reload: e605
+ * Reload2: e606
+ * Star: e607
+ */
+[class*="i-f__"] {
     font-family: 'gohappy';
     speak: none;
     font-style: normal;
@@ -123,6 +450,7 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
+    height:100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -131,22 +459,72 @@
     content: "\e600";
     font-size: 2rem;
     line-height: 1.9;
-    color:#aaa;
+    color: #4d4d4d;
 }
 
+.i-f__trash:before:active,
+.i-f__trash:before.active,
+.i-f__trash:before {
+    content: "\e601";
+    font-size: 1.3rem;
+    line-height: 2;
+    color:#646363;
+}
 
-.i__reload,
-.i__maps {
+.i-f__reload:before:active,
+.i-f__reload:before.active,
+.i-f__reload:before {
+    content: "\e605";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#ABABAB;
+}
+.i-f__reload2:before:active,
+.i-f__reload2:before.active,
+.i-f__reload2:before {
+    content: "\e606";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#ABABAB;
+}
+.i-f__maps:before:active,
+.i-f__maps:before.active,
+.i-f__maps:before {
+    content: "\e603";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#ABABAB;
+}
+.i-f__star:before:active,
+.i-f__star:before.active,
+.i-f__star:before {
+    content: "\e607";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#c0c0c0;
+}
+.i-f__download:before:active,
+.i-f__download:before.active,
+.i-f__download:before {
+    content: "\e602";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#c0c0c0;
+}
+.i-f__options:before:active,
+.i-f__options:before.active,
+.i-f__options:before {
+    content: "\e604";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#c0c0c0;
+}
+/** Icons mit Image **/
+[class*="i-i_"] { 
     display:inline-block;
     height:55px;
     width:100%;
     background-size: 21px;
     background-position: center;
     background-repeat: no-repeat;
-}
-.i__reload {
-    background-image: url('../images/icon_reload.png');
-}
-.i__maps {
-    background-image: url('../images/icon_maps.png');
 }

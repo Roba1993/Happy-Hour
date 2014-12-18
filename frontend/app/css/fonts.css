@@ -1,0 +1,15 @@
+/**
+ * Patrick
+ * GoHappy-Font einbinden
+ */
+@font-face
+{
+    font-family: 'gohappy';
+	src:url(‘../fonts/gohappy.eot?-80aczz');
+	src:url('../fonts/gohappy.eot?#iefix-80aczz') format('embedded-opentype'),
+		url('../fonts/gohappy.woff?-80aczz') format('woff'),
+		url('../fonts/gohappy.ttf?-80aczz') format('truetype'),
+		url('../fonts/gohappy.svg?-80aczz#gohappy') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -20,3 +20,10 @@
 .align-right {
     text-align: right;
 }
+.padding-default {
+    padding:8px;
+}
+.icon-undertitle {
+    padding:0;
+    margin:0;
+}

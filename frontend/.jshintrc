@@ -23,6 +23,10 @@
         "expect": true,
         "inject": true,
         "google": true,
-		"_": true
+		"_": true,
+        "window": true,
+        "document": true,
+        "CryptoJS": true,
+        "time": true
     }
 }

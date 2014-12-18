@@ -1,41 +1,88 @@
 <!DOCTYPE html>
-<html lang="de" ng-app="myApp">
+<html lang="de" ng-app="happyHour">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="app.css">
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-    <li><a href="#/map">Angular Google Maps UI Example</a></li>
-  </ul>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Go Happy</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-ipad-retina.png">
+
+    <!-- iPhone (Retina) -->
+    <link rel="apple-touch-startup-image"  href="apple-touch-startup-image-640x960.png">
+
+    <!--Android-->
+    <link rel="shortcut icon" href="touch-icon-196x196.png" sizes="196x196">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="icon" href="favicon.ico" type="image/x-ico" />
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,100italic,400italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/fonts.css?v=0.1">
+    <link rel="stylesheet" href="css/normalize.css?v=0.1">
+    <link rel="stylesheet" href="css/grid.css?v=0.1">
+    <link rel="stylesheet" href="css/helper.css?v=0.1">
+    <link rel="stylesheet" href="css/elements.css?v=0.1">
+    <link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.css">
+    <link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.skinhtml5.css">
+    <link rel="stylesheet" href="css/style.css?v=0.1">
+</head>
+
+<body>
   <div ng-view></div>
 
-  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-  <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-  <script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-  <script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-  <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
-  <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
-  <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
+  <!-- Template Abhängigkeiten -->
+  <script src="lib/jquery-1.11.1.min.js"></script>
+  <script src="lib/ion-rangeslider/js/ion.rangeslider.min.js"></script>
+  <script src="lib/fastclick.js"></script>
+  <script src="lib/inobounce.min.js"></script>
+  <script type='application/javascript' src="js/main.js"></script>
+  <script type='application/javascript' src="js/demo.js"></script>
+  <script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+  }
+  </script>
 
-  <script type="text/javascript" src="components/persistence/RoutesPersistence.js"></script>
-  <script type="text/javascript" src="components/persistence/AppStatusPersistence.js"></script>
-  <script type="text/javascript" src="components/backend/Backend.js"></script>
-  <script type="text/javascript" src="components/algorithm/RouteGenerator.js"></script>
-  <script type="text/javascript" src="components/map/MapLoader.js"></script>
-  <script type="text/javascript" src="components/map/MapDirective.js"></script>
+  <!-- Globale Abhängigkeiten -->
+  <script src="bower_components/lodash/dist/lodash.js"></script>
+  <script src="bower_components/cryptojslib/rollups/md5.js"></script>
+  <script src="bower_components/time-js/time.js"></script>
+
+  <!-- Angular und Addons -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+  <!-- Komponenten -->
+  <script src="components/persistence/RoutesPersistence.js"></script>
+  <script src="components/persistence/AppStatusPersistence.js"></script>
+  <script src="components/backend/Backend.js"></script>
+  <script src="components/algorithm/RouteGenerator.js"></script>
+  <script src="components/map/MapLoader.js"></script>
+  <script src="components/map/MapDirective.js"></script>
+  
+  <script src="components/filters/DaysFilter.js"></script>
+  <script src="components/filters/TimeFilter.js"></script>
+  <script src="components/directives/RatingDirective.js"></script>
 
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="map/map.js"></script>
+
+  <!-- Views -->
+  <script src="views/current-route/current-route.js"></script>
+  <script src="views/current-route-map/current-route-map.js"></script>
+  <script src="views/local-routes/local-routes.js"></script>
+  <script src="views/top-routes/top-routes.js"></script>
+  <script src="views/testview/testview.js"></script>
 
 </body>
 </html>

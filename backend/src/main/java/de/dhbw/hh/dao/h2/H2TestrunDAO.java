@@ -1,6 +1,7 @@
 package de.dhbw.hh.dao.h2;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import de.dhbw.hh.dao.TestrunDAO;
 import de.dhbw.hh.models.Testrun;
 
@@ -19,7 +20,7 @@ import java.util.Collection;
 public class H2TestrunDAO implements TestrunDAO {
 
     // Der Connectionpool
-    ComboPooledDataSource cpds;
+    private ComboPooledDataSource cpds;
 
     /**
      * Diese Funktion erstellt ein Objekt der Klasse H2TestDAO.
@@ -156,7 +157,7 @@ public class H2TestrunDAO implements TestrunDAO {
     }
 
     @Override
-    public Testrun[] findTestrunsByName(String name) {
+    public Collection<Testrun> findTestrunsByName(String name) {
         String sql = "SELECT id, name, date, rounds FROM testrun WHERE name=?";
 
         try (Connection connection = cpds.getConnection()) {
@@ -183,12 +184,13 @@ public class H2TestrunDAO implements TestrunDAO {
                 }
 
                 // Gebe alle Datenobjekte als Array zurück
-                return (Testrun[]) runs.toArray(new Testrun[runs.size()]);
+                return runs;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new Testrun[0];
+        return new ArrayList<Testrun>();
     }
+
 }

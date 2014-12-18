@@ -12,6 +12,11 @@ import java.util.Properties;
 public class Settings extends Properties {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Erstelle ein Settings Objekt mit dein Default Einstellungen.
      */
     public Settings() {
@@ -49,6 +54,7 @@ public class Settings extends Properties {
         setProperty("db.h2.maxStatements", "200");
         setProperty("db.h2.maxPoolSize", "10");
         setProperty("db.h2.startFile", "db-h2-create.sql");
+        setProperty("db.h2.dataFile", "db-h2-data.sql");
 
         // server settings
         setProperty("server.port", "8080");

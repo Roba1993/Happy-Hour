@@ -33,7 +33,10 @@
   height: 400px;
 }
 
-.map-canvas { height: 400px; width:100%;}
+.map-canvas {
+  height: 400px;
+  width:80%;
+}
 
 #slider {
   width:100vw;

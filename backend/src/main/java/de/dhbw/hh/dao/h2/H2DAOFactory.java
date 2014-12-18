@@ -1,8 +1,17 @@
 package de.dhbw.hh.dao.h2;
 
+/**
+ * 
+ * @author Robert
+ */
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import de.dhbw.hh.dao.BarReportDAO;
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.dao.TestrunDAO;
+
 import org.h2.tools.RunScript;
 
 import java.beans.PropertyVetoException;
@@ -57,15 +66,38 @@ public class H2DAOFactory extends DAOFactory {
                 e.printStackTrace();
             }
         }
+        
+        // Wenn Daten in die Datenbank eingegeben werden, führe es aus
+        if(properties.containsKey("db.h2.dataFile") && properties.getProperty("db.h2.dataFile") != null) {
+            try (Connection connection = cpds.getConnection()) {
+                RunScript.execute(connection, new FileReader(properties.getProperty("db.h2.dataFile")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        
     }
 
     @Override
     public TestrunDAO getTestrunDAO() {
         return new H2TestrunDAO(cpds);
     }
+    
+    @Override
+	public BarReportDAO getBarReportDAO() {
+		return new H2BarReportDAO(cpds);
+	}
 
     @Override
     public void close() {	
         cpds.close();
     }
+
+	@Override
+	public RouteDAO getRouteDAO() {
+		return new H2RouteDAO(cpds);
+	}
+	
 }
