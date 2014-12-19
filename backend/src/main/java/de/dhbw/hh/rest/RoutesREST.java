@@ -31,39 +31,37 @@ public class RoutesREST {
 	private Gson gson = new Gson();
 
 	public RoutesREST(DAOFactory daoFactory) {
-		post("/routes",
-				"application/json",
-				(request, response) -> {
-
-					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
-
-					Route route = new Route();
-
-					String temp = request.queryParams("route");
-					route.setData(temp);
-
-					// Hashwert bilden
-
-					String hash = "";
-					hash = getHashfromString(temp);
-
-					route.setHash(hash);
-
-					route.setTop(false);
-
-					Collection<Object> data = new ArrayList<Object>();
-					data.add(hash);
-
-					RESTResponse restResponse = new RESTResponse();
-					restResponse.setName("/routes");
-					restResponse.setDescription("Dies ist die Beschreibung");
-					restResponse.setTimestamp(new Timestamp(Calendar
-							.getInstance().getTime().getTime()));
-					restResponse.setData(data);
-
-					return gson.toJson(restResponse);
-
-				});
+		post("/routes", "application/json", (request, response) -> {
+			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
+	
+			Route route = new Route();
+	
+			String temp = request.queryParams("route");
+			route.setData(temp);
+	
+			// Hashwert bilden
+	
+			String hash = "";
+			hash = getHashfromString(temp);
+	
+			route.setHash(hash);
+	
+			route.setTop(false);
+	
+			Collection<Object> data = new ArrayList<Object>();
+			data.add(hash);
+	
+			RESTResponse restResponse = new RESTResponse();
+			restResponse.setName("/routes");
+			restResponse.setDescription("Dies ist die Beschreibung");
+			restResponse.setTimestamp(new Timestamp(Calendar
+					.getInstance().getTime().getTime()));
+			restResponse.setData(data);
+			
+			response.type("application/json");
+			return gson.toJson(restResponse);
+	
+		});
 
 	}
 

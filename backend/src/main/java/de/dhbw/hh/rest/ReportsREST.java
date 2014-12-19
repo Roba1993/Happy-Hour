@@ -63,6 +63,7 @@ public class ReportsREST {
 			}
 			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
+			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
 		
@@ -76,8 +77,8 @@ public class ReportsREST {
 
 			// Schreibe Anfrageparameter in neues BarReport Objekt
 			BarReport barReport = new BarReport();
-			barReport.setBarID(request.params("barID"));
-			barReport.setDescription(request.params("description"));
+			barReport.setBarID(request.params(":barID"));
+			barReport.setDescription(request.queryParams("description"));
 
 			// Schreibe neuen BarReport in DB
 			boolean successfull = daoFactory.getBarReportDAO().insertBarReport(barReport);
@@ -99,6 +100,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 
+			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
 		
@@ -130,6 +132,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
 		
@@ -142,7 +145,7 @@ public class ReportsREST {
 			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
 			
 			// Lösche den BarReport mit der jeweiligen ID
-			boolean successfull = daoFactory.getBarReportDAO().deleteSpecificBarReport(Integer.getInteger(request.params(":id")));
+			boolean successfull = daoFactory.getBarReportDAO().deleteSpecificBarReport(Integer.parseInt(request.params(":id")));
 			
 			// Das Rückgabeobjekt wird erstellt
 			RESTResponse restResponse = new RESTResponse();
@@ -161,8 +164,8 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			response.type("application/json");
 			return gson.toJson(restResponse);
-			
 		});
 
 	}
