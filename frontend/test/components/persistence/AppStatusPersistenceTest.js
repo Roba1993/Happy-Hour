@@ -23,7 +23,6 @@ describe('happyHour.persistence.AppStatusPersistence module', function() {
     });
   });
 
-  describe('AppStatusPersistence', function(){
 
     it('sollte den Status speichern', inject(function(AppStatusPersistenceService) {
       expect(AppStatusPersistenceService).toBeDefined();
@@ -46,5 +45,4 @@ describe('happyHour.persistence.AppStatusPersistence module', function() {
 	
 	
 
-  });
 });
