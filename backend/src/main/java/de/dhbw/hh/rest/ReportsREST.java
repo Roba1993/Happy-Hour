@@ -132,6 +132,38 @@ public class ReportsREST {
 			
 			return gson.toJson(restResponse);
 		});
+		
+		/**
+		 * Löschen eines bestimmten BarReports nach der ID aus der DB
+		 * 
+		 * @author Tabea
+		 */
+		delete("/report/:id", "application/json", (request, response) -> {
+			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
+			
+			// Lösche den BarReport mit der jeweiligen ID
+			boolean successfull = daoFactory.getBarReportDAO().deleteSpecificBarReport(Integer.getInteger(request.params(":id")));
+			
+			// Das Rückgabeobjekt wird erstellt
+			RESTResponse restResponse = new RESTResponse();
+			
+			// Das Rückgabeobjekt wird befüllt
+			restResponse.setName(request.queryString());
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			if (successfull) {
+				// Antwort bei erfolgreichem Löschen
+				restResponse.setDescription("Der BarReport mit der ID " + request.params(":id") + " wurde gelöscht");
+				restResponse.setSuccess();
+			} else {
+				// Antwort bei nicht erfolgreichem Löschen
+				restResponse.setDescription("Fehler beim Löschen des BarReports mit der ID " + request.params(":id"));
+				restResponse.setError();
+			}
+			restResponse.setData(null);
+			
+			return gson.toJson(restResponse);
+			
+		});
 
 	}
 	
