@@ -75,8 +75,8 @@
     <div id="theatre">
 		
 		<section id="theatre-recentroute" class="grid">			
-            <ul class="e__list-big">
-                <li ng-repeat="timeframe in route.timeframes" ng-click="frameClicked = !frameClicked" ng-class="{is__expanded : frameClicked}" class="e__list-big-element clearfix">
+            <ul ng-init="frameClicked" class="e__list-big">
+                <li ng-repeat="timeframe in route.timeframes" ng-click="frameClicked($index)" ng-class="{is__expanded : $parent.openFrameIndex === $index}" class="e__list-big-element clearfix">
 					<div ng-init="bar = timeframe.bar" class="e__list-big-element-frontside">
                         <div class="e__list-big-element-head grid">
 							<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{bar.name}}</h3></div>

@@ -1,4 +1,4 @@
-angular.module('happyHour.views.localRoutes', ['ngRoute'])
+angular.module('happyHour.views.localRoutes', ['ngRoute', 'happyHour.persistence.RoutesPersistence'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/localRoutes', {
@@ -7,8 +7,8 @@ angular.module('happyHour.views.localRoutes', ['ngRoute'])
   });
 }])
 
-.controller('localRoutesController', ['$scope', function($scope) {
-	var localRoutes = [];
+.controller('localRoutesController', ['$scope', 'RoutesPersistenceService', function($scope, RoutesPersistenceService) {
+	/*var localRoutes = [];
 	var localRoute1 = {
 		id: 'abcdefg',
 		timestamp: new Date(),
@@ -20,5 +20,22 @@ angular.module('happyHour.views.localRoutes', ['ngRoute'])
 		}
 	};
 	localRoutes.push(localRoute1);
-	$scope.localRoutes = localRoutes;
+	
+	var localRoute2 = {
+		id: 'abcdefgfg',
+		timestamp: new Date(),
+		route: {
+			name: 'Tour2',
+			options: {
+				weekday: 5
+			}
+		}
+	};
+	localRoutes.push(localRoute2);*/
+	
+	$scope.localRoutes = RoutesPersistenceService.getAll();
+	$scope.removeRoute = function(routeId) {
+		RoutesPersistenceService.remove(routeId);
+		$scope.localRoutes = RoutesPersistenceService.getAll();
+	};
 }]);
