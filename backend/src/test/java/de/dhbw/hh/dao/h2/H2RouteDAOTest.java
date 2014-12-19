@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -20,7 +22,7 @@ import de.dhbw.hh.models.Route;
 /**
  * Diese Klasse testet die Anfrage der Top Routen
  * 
- * @author Maren
+ * @author Maren, Michael
  */
 public class H2RouteDAOTest {
 	
@@ -142,5 +144,22 @@ public class H2RouteDAOTest {
         assertEquals(true, iterator.next().isTop());
         assertEquals(true, iterator.next().isTop());
 	}
+	
+	@Test
+	public void testInsertRoute() throws Exception{
+		Route route = new Route();
+		route.setHash("07e0c07a6c711c4eee99e03e753d4ace");
+		route.setData("Ich bin ein Json String Objekt");
+		route.setTop(false);
+		
+		
+		boolean routes = h2RouteDAO.insertRoute(route);
+				
+		//Methode muss true zurückgegen, dann war das einfügen erfolgreich 
+		assertTrue(routes);
+		
+		
+	}
+	
 
 }
