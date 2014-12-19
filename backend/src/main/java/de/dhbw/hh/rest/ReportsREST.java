@@ -2,6 +2,7 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.delete;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -32,6 +33,8 @@ public class ReportsREST {
 		
 		/**
 		 * Gebe alle gemeldeten Bars zurück
+		 * @author Jonas
+		 * 
 		 */
 		get("/bars/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
@@ -65,6 +68,8 @@ public class ReportsREST {
 		
 		/**
 		 * Trage neuen BarReport in DB ein
+		 * @author Jonas
+		 * 
 		 */
 		post("/bars/:barID/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
@@ -84,14 +89,47 @@ public class ReportsREST {
 			restResponse.setName(request.queryString());
 			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 			if (successfull) {
+				// Antwort bei erfolgreichem Schreiben in DB
 				restResponse.setDescription("BarReport erfolgreich in DB geschrieben");
 				restResponse.setSuccess();
 			} else {
+				// Antwort bei nicht erfolgreichem Schreiben in DB
 				restResponse.setDescription("Es gab einen Fehler beim Schreiben des BarRepors in die DB");
 				restResponse.setError();
 			}
 			restResponse.setData(null);
 
+			return gson.toJson(restResponse);
+		});
+		
+		/**
+		 * Lösche alle BarReports mit zugehöriger BarID aus DB
+		 * @author Jonas
+		 * 
+		 */
+		delete("/bars/:barID/report", "application/json", (request, response) -> {
+			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
+
+			// Lösche alle BarReports mit zugehörigen BarID
+			boolean successfull = daoFactory.getBarReportDAO().deleteBarReport(request.params(":barID"));
+
+			// Das Rückgabeobjekt wird erstellt
+			RESTResponse restResponse = new RESTResponse();
+
+			// Das Rückgabeobjekt wird befüllt
+			restResponse.setName(request.queryString());
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			if (successfull) {
+				// Antwort bei erfolgreichem Löschen
+				restResponse.setDescription("Alle BarReports der Bar " + request.params(":barID") + " gelöscht");
+				restResponse.setSuccess();
+			} else {
+				// Antwort bei nicht erfolgreichem Löschen
+				restResponse.setDescription("Fehler beim Löschen aller BarReports der Bar " + request.params(":barID"));
+				restResponse.setError();
+			}
+			restResponse.setData(null);
+			
 			return gson.toJson(restResponse);
 		});
 
