@@ -74,7 +74,6 @@
     float: left;
     width:100%;
     position: relative;
-    background:#452e2e;
     color:#fafcfe ;
 }
 .e__list-big-element-backside {
@@ -191,9 +190,23 @@
 
 /** Barcard **/
 .e__barcard {
-
-
+    background: #452e2e;
+    color:#fff;
 }
+.e__barcard-head,
+.e__barcard-body,
+.e__barcard-footer {
+    float:left;
+    width:100%;
+}
+.e__barcard-head,
+.e__barcard-footer {
+    padding:10px;
+}
+.e__barcard-footer {
+    padding:20px 10px;
+}
+
 .e__barcard-head h3 {
     font-size:1rem;
     font-weight: 300;
@@ -232,6 +245,43 @@
     margin-top:30px;
 }
 /** /Barcard **/
+/** Slider **/
+.e__slider {
+    position: relative;
+    height:210px;
+    background:#f2f2f2;
+}
+.e__slider-stage,
+.e__slider-stage-element {
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+.e__slider-stage {
+    width:200%;
+    overflow: hidden;
+}
+.e__slider-stage-element {
+    margin:0 25px;
+    float:left;
+}
+.e__slider-stage {
+    position: absolute;
+    top:25px;
+    z-index:5;
+}
+.e__slider-background {
+    position: absolute;
+    width:100%;
+    top:0;
+    left:0;
+    z-index:3;
+}
+.e__slider-background-text {
+    font-weight: 500;
+    font-size:1rem;
+}
+/** /Slider **/
 /**
  * Andere Styles
  */
