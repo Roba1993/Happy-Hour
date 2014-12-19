@@ -36,7 +36,7 @@ public class H2BarReportDAO implements BarReportDAO {
 
 	@Override
 	public boolean insertBarReport(BarReport barReport) {
-		String sql = "INSERT INTO barReport (barID, description, reported) VALUES (?,?,?)";
+		String sql = "INSERT INTO barReport (barID, description) VALUES (?,?)";
 
         try (Connection connection = cpds.getConnection()) {
             // Immer ohne Autocommits arbeiten
@@ -46,7 +46,6 @@ public class H2BarReportDAO implements BarReportDAO {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, barReport.getBarID());
                 preparedStatement.setString(2, barReport.getDescription());
-                preparedStatement.setBoolean(3, barReport.isReported());
 
                 // Füge das Statement der Ausführungsschlange hinzu
                 preparedStatement.addBatch();
@@ -67,33 +66,8 @@ public class H2BarReportDAO implements BarReportDAO {
 
 	@Override
 	public boolean updateBarReport(BarReport barReport) {
-		String sql = "UPDATE barReport SET description=?, reported=? WHERE barID=?";
-
-        try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
-            connection.setAutoCommit(false);
-
-            // Immer mit PreparedStatements arbeiten
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, barReport.getDescription());
-                preparedStatement.setBoolean(2, barReport.isReported());
-                preparedStatement.setString(3, barReport.getBarID());
-
-                // Füge das Statement der Ausführungsschlange hinzu
-                preparedStatement.addBatch();
-
-                // Führe alle Statements aus
-                preparedStatement.executeBatch();
-            }
-
-            // Schreibe die Änderungen in die Datenbank
-            connection.commit();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
+		// ToDo
+		return false;
 	}
 
 	@Override
@@ -124,10 +98,39 @@ public class H2BarReportDAO implements BarReportDAO {
 	        
 	        return false;
 	}
+	
+	@Override
+	public boolean deleteSpecificBarReport(int id) {
+		 String sql = "DELETE FROM barReport WHERE id=?";
+
+	        try (Connection connection = cpds.getConnection()) {
+	            // Immer ohne Autocommits arbeiten
+	            connection.setAutoCommit(false);
+
+	            // Immer mit PreparedStatements arbeiten
+	            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+	                preparedStatement.setInt(1, id);
+
+	                // Füge das Statement der Ausführungsschlange hinzu
+	                preparedStatement.addBatch();
+
+	                // Führe alle Statements aus
+	                preparedStatement.executeBatch();
+	            }
+
+	            // Schreibe die Änderungen in die Datenbank
+	            connection.commit();
+	            return true;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return false;
+	}
 
 	@Override
-	public BarReport findBarReport(String barID) {
-		String sql = "SELECT barID, description, reported FROM barReport WHERE barID=?";
+	public Collection<BarReport> findBarReport(String barID) {
+		String sql = "SELECT id, barID, description FROM barReport WHERE barID=?";
 
         try (Connection connection = cpds.getConnection()) {
             // Immer ohne Autocommits arbeiten
@@ -139,26 +142,31 @@ public class H2BarReportDAO implements BarReportDAO {
 
                 // Hole die Daten von der Datenbank
                 ResultSet resultSet = preparedStatement.executeQuery();
+                
+                Collection<BarReport> runs = new ArrayList<BarReport>();
 
                 // Schreibe die Daten ins Testrun Objekt
-                if(resultSet.next()) {
+                while(resultSet.next()) {
                     BarReport barReport = new BarReport();
+                    barReport.setID(resultSet.getInt("id"));
                     barReport.setBarID(resultSet.getString("barID"));
                     barReport.setDescription(resultSet.getString("description"));
-                    barReport.setReported(resultSet.getBoolean("reported"));
-                    return barReport;
+                    runs.add(barReport);
                 }
+
+                // Gebe alle Datenobjekte als Array zurück
+                return runs;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return new ArrayList<BarReport>();
 	}
 
 	@Override
-	public Collection<BarReport> findBarReportsByReported(boolean reported) {
-		String sql = "SELECT barID, description, reported FROM barReport WHERE reported=?";
+	public Collection<BarReport> findAllBarReports() {
+		String sql = "SELECT id, barID, description FROM barReport";
 
         try (Connection connection = cpds.getConnection()) {
             // Immer ohne Autocommits arbeiten
@@ -166,7 +174,6 @@ public class H2BarReportDAO implements BarReportDAO {
 
             // Immer mit PreparedStatements arbeiten
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setBoolean(1, reported);
 
                 // Hole die Daten von der Datenbank
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -176,9 +183,9 @@ public class H2BarReportDAO implements BarReportDAO {
                 // Schreibe die Daten ins Testrun Objekt
                 while(resultSet.next()) {
                     BarReport barReport = new BarReport();
+                    barReport.setID(resultSet.getInt("id"));
                     barReport.setBarID(resultSet.getString("barID"));
                     barReport.setDescription(resultSet.getString("description"));
-                    barReport.setReported(resultSet.getBoolean("reported"));
                     runs.add(barReport);
                 }
 
