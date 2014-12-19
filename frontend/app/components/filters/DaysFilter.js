@@ -7,10 +7,17 @@
  */
 angular.module('happyHour.filters.DaysFilter', [])
 	.filter('formatDays', function() {
-		return function(input) {
+		return function(input, isLong) {
+			if (!(input instanceof Array)){
+				input = [input];
+			}
 			// Durch das einfügen von "null" an erster Position wird der Index des Arrays
 			// so verschoben, dass er den Wochentagen entspricht
 			var dayNames = [null, 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+			if (isLong){
+				dayNames = [null, 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+			}
+			
 			var translatedDays = [];
 			
 			// Wenn jeder Tag im Array vorhanden ist

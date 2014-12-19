@@ -23,6 +23,15 @@ describe('DaysFilter', function() {
 		expect(formatDaysFilter([1,8,9])).toBe('Mo');
 		expect(formatDaysFilter([0])).toBe('');
     }));
+	
+	it('sollte die Tage in Langform zurueckgeben', inject(function(formatDaysFilter) {
+		expect(formatDaysFilter([1,5],true)).toBe('Montag/Freitag');
+    }));
+	
+	it('sollte die Tage in korrekt zurueckgeben', inject(function(formatDaysFilter) {
+		expect(formatDaysFilter(1,true)).toBe('Montag');
+		expect(formatDaysFilter(3)).toBe('Mi');
+    }));
 
 
   });

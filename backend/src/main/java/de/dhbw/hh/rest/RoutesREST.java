@@ -2,11 +2,12 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.post;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.security.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.models.BarReport;
 import de.dhbw.hh.models.RESTResponse;
 import de.dhbw.hh.models.Route;
 
@@ -39,13 +39,11 @@ public class RoutesREST {
 
 					Route route = new Route();
 
-					String temp = request.params("route");
+					String temp = request.queryParams("route");
 					route.setData(temp);
 
 					// Hashwert bilden
-
-					String hash = "";
-					hash = getHashfromString(temp);
+					String hash = getHashfromString(temp);
 
 					route.setHash(hash);
 
@@ -56,10 +54,22 @@ public class RoutesREST {
 
 					RESTResponse restResponse = new RESTResponse();
 					restResponse.setName("/routes");
-					restResponse.setDescription("Dies ist die Beschreibung");
+					
 					restResponse.setTimestamp(new Timestamp(Calendar
 							.getInstance().getTime().getTime()));
 					restResponse.setData(data);
+					
+					boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
+					
+					if(successfull){
+						restResponse.setDescription("Route erfolgreich hinzugefügt");
+						restResponse.setSuccess();
+					}else{
+						restResponse.setDescription("Fehler beim Hinzufügen der Route");
+						restResponse.setError();
+					}
+					
+					restResponse.setData(null);
 
 					return gson.toJson(restResponse);
 
