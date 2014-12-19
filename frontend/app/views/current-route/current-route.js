@@ -7,7 +7,7 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
   });
 }])
 
-.controller('currentRouteController', ['$scope', 'BackendService', 'RouteGeneratorService', function($scope, BackendService, RouteGeneratorService) {
+.controller('currentRouteController', ['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService) {
 	BackendService.getBars({latitude: 1.1, longitude:1.2}, 1, 6).then(function(bars) {
 		var route = RouteGeneratorService.createRoute(bars, {});
 		$scope.route = route;
@@ -21,5 +21,10 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
 		else {
 			$scope.openFrameIndex = index;
 		}
+	};
+	
+	$scope.saveRoute = function(){
+		console.log('hiiiier');
+		RoutesPersistenceService.add($scope.route);
 	};
 }]);
