@@ -39,7 +39,7 @@ public class RoutesREST {
 
 					Route route = new Route();
 
-					String temp = request.params("route");
+					String temp = request.queryParams("route");
 					route.setData(temp);
 
 					// Hashwert bilden
