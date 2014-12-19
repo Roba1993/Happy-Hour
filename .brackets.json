@@ -1,0 +1,10 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/frontend/app/bower_components/cryptojslib/rollups/rc4.js",
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/frontend/app/bower_components/cryptojslib/rollups/ripemd160.js",
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/frontend/app/bower_components/cryptojslib/rollups/sha1.js",
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/design/template/lib/ion-rangeslider/js/ion.rangeslider.min.js",
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/frontend/app/bower_components/cryptojslib/rollups/sha256.js",
+        "/Users/kimrinderknecht/Documents/Git/Happy-Hour/frontend/app/bower_components/cryptojslib/rollups/sha3.js"
+    ]
+}
