@@ -20,8 +20,10 @@ public abstract class DAOFactory {
     public abstract TestrunDAO getTestrunDAO();
     
     public abstract BarReportDAO getBarReportDAO();
-    
+   
     public abstract RouteDAO getRouteDAO();
+    
+    public abstract HappyHourDAO getHappyHourDAO();
 
     /**
      * Gibt eine Datenbank-Factory zurück, mit welcher auf

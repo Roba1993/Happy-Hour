@@ -9,6 +9,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.BarReportDAO;
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.dao.TestrunDAO;
 
@@ -98,6 +99,11 @@ public class H2DAOFactory extends DAOFactory {
 	@Override
 	public RouteDAO getRouteDAO() {
 		return new H2RouteDAO(cpds);
+	}
+	
+	@Override
+	public HappyHourDAO getHappyHourDAO() {
+		return new H2HappyHourDAO(cpds);
 	}
 	
 }
