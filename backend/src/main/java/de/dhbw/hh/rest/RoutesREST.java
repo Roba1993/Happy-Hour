@@ -31,49 +31,48 @@ public class RoutesREST {
 	private Gson gson = new Gson();
 
 	public RoutesREST(DAOFactory daoFactory) {
-		post("/routes",
-				"application/json",
-				(request, response) -> {
 
-					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
+		post("/routes", "application/json", (request, response) -> {
 
-					Route route = new Route();
+			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 
-					String temp = request.queryParams("route");
-					route.setData(temp);
+			Route route = new Route();
 
-					// Hashwert bilden
-					String hash = getHashfromString(temp);
+			String temp = request.queryParams("route");
+			route.setData(temp);
 
-					route.setHash(hash);
+			// Hashwert bilden
+			String hash = getHashfromString(temp);
 
-					route.setTop(false);
+			route.setHash(hash);
 
-					Collection<Object> data = new ArrayList<Object>();
-					data.add(hash);
+			route.setTop(false);
 
-					RESTResponse restResponse = new RESTResponse();
-					restResponse.setName("/routes");
-					
-					restResponse.setTimestamp(new Timestamp(Calendar
-							.getInstance().getTime().getTime()));
-					restResponse.setData(data);
-					
-					boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
-					
-					if(successfull){
-						restResponse.setDescription("Route erfolgreich hinzugefügt");
-						restResponse.setSuccess();
-					}else{
-						restResponse.setDescription("Fehler beim Hinzufügen der Route");
-						restResponse.setError();
-					}
-					
-					restResponse.setData(null);
+			Collection<Object> data = new ArrayList<Object>();
+			data.add(hash);
 
-					return gson.toJson(restResponse);
+			RESTResponse restResponse = new RESTResponse();
+			restResponse.setName("/routes");
+			
+			restResponse.setTimestamp(new Timestamp(Calendar
+					.getInstance().getTime().getTime()));
+			restResponse.setData(data);
+			
+			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
+			
+			if(successfull){
+				restResponse.setDescription("Route erfolgreich hinzugefügt");
+				restResponse.setSuccess();
+			}else{
+				restResponse.setDescription("Fehler beim Hinzufügen der Route");
+				restResponse.setError();
+			}
+			
+			restResponse.setData(null);
+			response.type("application/json");
+			return gson.toJson(restResponse);
 
-				});
+		});
 
 	}
 

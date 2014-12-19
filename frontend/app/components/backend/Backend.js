@@ -5,7 +5,7 @@
  * @author Kim Rinderknecht, Daniel Reichert
  */
 angular.module('happyHour.backend.Backend', [])
-	.factory('BackendService', [ function() {
+	.factory('BackendService', ['$http', '$q', function($http, $q) {
 		var service = {
 			/**
 			 * Gibt alle Bars zurück, die den übergeben Parametern entsprechen.
@@ -20,6 +20,27 @@ angular.module('happyHour.backend.Backend', [])
 				console.log(location);
 				console.log(radius);
 				console.log(weekday);
+                
+                var latitude = location.data.latitude;
+                var longitude = location.data.longitude;
+                
+                var url = 'http://localhost:8080/bars?lat=' + latitude + '&long=' + longitude + '&radius=' + radius + '&weekday=' + weekday;
+                
+                console.log(url);
+                
+                var promise = $http({method: 'GET', url: url});
+                var deferred = $q.defer();
+                                
+                promise.then(
+                    function(data){ //data wird befüllt mit der Rückgabe
+                    
+                    deferred.resolve(data.data
+                        //Rückgabe an den Serviceanfragenden
+                    );
+                    }   
+                );
+                return deferred.promise;
+                
 			},
 			/**
 			 * Speichert Meldungen von Bars im Backend.
@@ -52,6 +73,22 @@ angular.module('happyHour.backend.Backend', [])
 			 */
 			getRoute: function(hash) {
 				console.log(hash);
+                
+                var url = 'http://localhost:8080/routes/' + hash;
+                
+                var promise = $http({method: 'GET', url: url});
+                var deferred = $q.defer();
+                                
+                promise.then(
+                    function(data){ //data wird befüllt mit der Rückgabe
+                    
+                    deferred.resolve(data.data
+                        //Rückgabe an den Serviceanfragenden
+                    );
+                    }   
+                );
+                return deferred.promise;
+                
 			},
 			/**
 			 * Gibt alle Toprouten zurück.

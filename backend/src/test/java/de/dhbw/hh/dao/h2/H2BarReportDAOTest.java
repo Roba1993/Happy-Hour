@@ -23,7 +23,6 @@ import de.dhbw.hh.models.BarReport;
  * @author Jonas
  *
  */
-
 public class H2BarReportDAOTest {
 	
 	// Der Connectionpool für die Tests
@@ -41,7 +40,6 @@ public class H2BarReportDAOTest {
      * 
      * @throws Exception
      */
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
@@ -71,7 +69,6 @@ public class H2BarReportDAOTest {
      *
      * @throws Exception
      */
-	
 	@Before
 	public void setUp() throws Exception {
 		// Befüllt das Route Objekt zum Wiederverwenden 
@@ -98,11 +95,10 @@ public class H2BarReportDAOTest {
 	}
 	
 	/**
-	 * Test, ob die BarReports gefunden werden können
+	 * Test, ob alle BarReports gefunden werden können
 	 */
-
 	@Test
-	public void testFindAllRoutes() throws Exception {
+	public void testFindAllReports() throws Exception {
 		// Zweiten und Dritten Datensatz werden erstellt
 		BarReport barReport2 = new BarReport();
 		barReport2.setBarID("uuaz972sdkinasd");
@@ -138,8 +134,12 @@ public class H2BarReportDAOTest {
        
 	}
 	
+	/**
+	 * Test ob bestimmter BarReport gefunden werden kann
+	 * @throws Exception
+	 */
 	@Test
-	public void testFindRoute() throws Exception {
+	public void testFindReport() throws Exception {
 		
 		// Vierten Datensatz erstellen
 		BarReport barReport4 = new BarReport();
@@ -170,8 +170,8 @@ public class H2BarReportDAOTest {
         // Vergleicht den ersten Datensatz mit barReport4
         if (iteratorNew.hasNext()) {
             BarReport neuBarReport = iteratorNew.next();
-            assertEquals(barReport4.getBarID(), neuBarReport.getBarID());
-            assertEquals(barReport4.getDescription(), neuBarReport.getDescription());
+            assertEquals("liasdoinas09kas", neuBarReport.getBarID());
+            assertEquals("Dies ist der vierte Report", neuBarReport.getDescription());
         }
         
 	}

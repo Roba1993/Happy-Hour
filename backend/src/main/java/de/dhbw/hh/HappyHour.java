@@ -1,15 +1,15 @@
 package de.dhbw.hh;
 
+import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.utils.LoggingConfiguration;
+import de.dhbw.hh.utils.Settings;
+import de.dhbw.hh.utils.Spark;
+
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.utils.LoggingConfiguration;
-import de.dhbw.hh.utils.Settings;
-import de.dhbw.hh.utils.Spark;
 
 /**
  * Dies ist die Java-Hauptklasse und der Einstiegspunkt
@@ -90,6 +90,5 @@ public class HappyHour {
             }
             System.exit(0);
         }
-
     }
 }
