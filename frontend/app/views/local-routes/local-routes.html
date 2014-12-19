@@ -65,7 +65,7 @@
         </div>
         <nav id="theatre-head-subbar" class="col-12">
             <ul class="e__navigation-vertical clearfix">
-                <li class="e__navigation-vertical-element col-5"><a href="#refresh">Aktuelle Route</a></li>
+                <li class="e__navigation-vertical-element col-5"><a ng-href="#/currentRoute">Aktuelle Route</a></li>
                 <li class="e__navigation-vertical-element col-2"><a href="#refresh">Top 7</a></li>
                 <li class="e__navigation-vertical-element col-5"><a href="#refresh">Offline Routen</a></li>
             </ul>
@@ -75,27 +75,14 @@
 		
 		<section id="theatre-myroutes">
 			<ul class="e__list-small">
-				<li class="e__list-small-element clearfix">
+				<li ng-repeat="localRoute in localRoutes" class="e__list-small-element clearfix">
 					<div class="e__list-small-element-icon clearfix"></div>
 					<div class="e__list-small-element-content clearfix">
-						<h3 class="e__list-small-element-head">Erstsemester Tour</h3>
+						<h3 class="e__list-small-element-head">{{localRoute.route.name}}</h3>
 						<div class="e__list-small-element-body">
-							<p>Gespeichert am 05.08.2014 - 16:03 Uhr<br>
-							Tour geplant für Montag</p>
+							<p>Gespeichert am {{localRoute.timestamp | date:'dd.MM.yyyy - hh:mm'}} Uhr<br>
+							Tour geplant für {{localRoute.route.options.weekday | formatDays:true}}</p>
 						</div>	
-					</div>
-					<div class="e__list-small-element-options clearfix">
-						<span class="e__btn i-f__trash"></span>
-					</div>
-				</li>
-				<li class="e__list-small-element clearfix">
-					<div class="e__list-small-element-icon clearfix"></div>
-					<div class="e__list-small-element-content clearfix">
-						<h3 class="e__list-small-element-head">Erstsemester Tour</h3>
-						<div class="e__list-small-element-body">
-							<p>Gespeichert am 05.08.2014 - 16:03 Uhr<br>
-							Tour geplant für Montag</p>
-						</div>
 					</div>
 					<div class="e__list-small-element-options clearfix">
 						<span class="e__btn i-f__trash"></span>

@@ -8,5 +8,17 @@ angular.module('happyHour.views.localRoutes', ['ngRoute'])
 }])
 
 .controller('localRoutesController', ['$scope', function($scope) {
-	$scope.test = 'localRoutesController!!';
+	var localRoutes = [];
+	var localRoute1 = {
+		id: 'abcdefg',
+		timestamp: new Date(),
+		route: {
+			name: 'Tour1',
+			options: {
+				weekday: 5
+			}
+		}
+	};
+	localRoutes.push(localRoute1);
+	$scope.localRoutes = localRoutes;
 }]);
