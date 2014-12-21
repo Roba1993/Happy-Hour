@@ -10,7 +10,7 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 			scope: {
 				/**
 				 * Die Variable in dem die Auswahl gespeichert wird
-				 * @type {Object}
+				 * @type {Location}
 				 */
 				result: '=',
 				/**
@@ -24,9 +24,10 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 				MapLoaderService.then(function(maps) {
 					var input = element.children()[0];
 
-					// Eine gesetzte Location reverse Geocodieren
+					// Bei jeder Änderung der result Variable die Lokation reverse Geocoden
 					var geocoder = new maps.Geocoder();
 					$scope.$watch('result', function(location) {
+						// Das Location-Objekt in einer google.maps.LatLng-Objekt umwandeln
 						var googleLocation = new maps.LatLng(location.latitude, location.longitude);
 						geocoder.geocode({latLng: googleLocation}, function(result, status) {
 							if (status === maps.GeocoderStatus.OK) {
@@ -35,13 +36,16 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 						});
 					});
 
+					// Google Maps Autocomplete initialisieren
 					var options = {
 						componentRestrictions: {country: 'de'}
 					};
 					var api = new maps.places.Autocomplete(input, options);
 
+					// Wenn der Nutzer einen Platz auswählt
 					maps.event.addListener(api, 'place_changed', function() {
 						var place = api.getPlace();
+						// Ein Location-Objekt in das result setzen und den $scope über die Änderung informieren
 						$scope.$apply(function() {
 							$scope.result = {latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng()};
 						});
