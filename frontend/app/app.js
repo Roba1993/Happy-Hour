@@ -12,6 +12,7 @@ angular.module('happyHour', [
   'happyHour.directives.RatingDirective',
   'happyHour.directives.PlacesAutocompleteDirective',
   'happyHour.directives.DayPickerDirective',
+  'happyHour.directives.SliderDirective',
 
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',

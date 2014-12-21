@@ -12,12 +12,7 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 				 * Die Variable in dem die Auswahl gespeichert wird
 				 * @type {Location}
 				 */
-				result: '=',
-				/**
-				 * Die Optionen des Autocomplete Felds
-				 * @type {Object}
-				 */
-				options: '='
+				result: '='
 			},
 			template: '<input type="text" />',
 			link: function ($scope, element) {

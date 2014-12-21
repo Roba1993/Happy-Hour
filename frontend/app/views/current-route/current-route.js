@@ -41,4 +41,18 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	$scope.saveRoute = function() {
 		RoutesPersistenceService.add($scope.route);
 	};
+
+
+	// start und endTime defaults binden
+	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {
+		$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
+	}
+	else {
+		$scope.routeTime = ['20:00', '03:00'];
+	}
+	// Ausgabe des Sliders in das Options Format umwandeln
+	$scope.$watch('routeTime', function(routeTime) {
+		$scope.route.options.startTime = routeTime[0];
+		$scope.route.options.endTime = routeTime[1];
+	});
 }]);

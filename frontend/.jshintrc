@@ -26,7 +26,10 @@
 		"_": true,
         "window": true,
         "document": true,
+        "navigator": true,
         "CryptoJS": true,
-        "time": true
+        "time": true,
+        "$": true,
+        "FastClick": true
     }
 }
