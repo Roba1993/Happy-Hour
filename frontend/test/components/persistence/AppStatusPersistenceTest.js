@@ -1,6 +1,6 @@
 /**
  * Tests fuer das AppStatusPersistence Objekt
- * @author Dorothee Nies
+ * @author Markus Thömmes
  */
 describe('happyHour.persistence.AppStatusPersistence module', function() {
   var store = {};
@@ -24,22 +24,23 @@ describe('happyHour.persistence.AppStatusPersistence module', function() {
   });
 
 
-    it('sollte den Status speichern', inject(function(AppStatusPersistenceService) {
+    it('sollte eine Route speichern und wieder zurückgeben', inject(function(AppStatusPersistenceService) {
       expect(AppStatusPersistenceService).toBeDefined();
 		
-      AppStatusPersistenceService.setStatus(3);
+      AppStatusPersistenceService.setRoute(3);
 
-      expect(store.appStatus).toBe(3);
+      expect(store.appStatus.currentRoute).toBe(3);
+
+      expect(AppStatusPersistenceService.getRoute()).toBe(3);
 
     }));
 	
-	 it('sollte den Status der Anwendung zurueckgeben', inject(function(AppStatusPersistenceService) {
+	 it('sollte einen Pfad speichern und wieder zurückgeben', inject(function(AppStatusPersistenceService) {
       expect(AppStatusPersistenceService).toBeDefined();
 		
-      AppStatusPersistenceService.setStatus(5);
-	  var test = AppStatusPersistenceService.getStatus();
-	  
-	  expect(test).toBe(5);
+      AppStatusPersistenceService.setPath('test');
+      expect(store.appStatus.appPath).toBe('test');
+      expect(AppStatusPersistenceService.getPath()).toBe('test');
 
     }));
 	

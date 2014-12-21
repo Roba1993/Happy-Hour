@@ -7,7 +7,10 @@ angular.module('happyHour.views.localRoutes', ['ngRoute', 'happyHour.persistence
   });
 }])
 
-.controller('localRoutesController', ['$scope', 'RoutesPersistenceService', function($scope, RoutesPersistenceService) {
+.controller('localRoutesController', 
+['$scope', 'AppStatusPersistenceService', 'RoutesPersistenceService', 
+function($scope, AppStatusPersistenceService, RoutesPersistenceService) {
+	AppStatusPersistenceService.setPath('/localRoutes');
 	/*var localRoutes = [];
 	var localRoute1 = {
 		id: 'abcdefg',

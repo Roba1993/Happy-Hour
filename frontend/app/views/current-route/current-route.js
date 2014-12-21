@@ -7,12 +7,21 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
   });
 }])
 
-.controller('currentRouteController', ['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService) {
-	BackendService.getBars({latitude: 1.1, longitude:1.2}, 1, 6).then(function(bars) {
-		var route = RouteGeneratorService.createRoute(bars, {});
-		$scope.route = route;
-	});
+.controller('currentRouteController', 
+['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService', 
+function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService, AppStatusPersistenceService) {
+	// Aktuellen Pfad persistieren
+	AppStatusPersistenceService.setPath('/currentRoute');
+
+	// Aktuelle Route aus dem AppStatus auslesen
+	$scope.route = AppStatusPersistenceService.getRoute();
+
+	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
+	$scope.$watch('route', function(route) {
+		AppStatusPersistenceService.setRoute(route);
+	}, true);
 	
+	// Es können nur die Details einer einzelnen Bar betrachtet werden
 	$scope.openFrameIndex = -1;
 	$scope.frameClicked = function(index) {
 		if(index === $scope.openFrameIndex) {
@@ -23,8 +32,8 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
 		}
 	};
 	
-	$scope.saveRoute = function(){
-		console.log('hiiiier');
+	// Eine Route auf dem Gerät persistieren
+	$scope.saveRoute = function() {
 		RoutesPersistenceService.add($scope.route);
 	};
 }]);
