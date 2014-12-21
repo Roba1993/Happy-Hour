@@ -15,10 +15,15 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 	// Aktuelle Route aus dem AppStatus auslesen
 	$scope.route = AppStatusPersistenceService.getRoute();
+	if($scope.route === null) {
+		$scope.route = {};
+		$scope.route.options = {};
+	}
 
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
 	$scope.$watch('route', function(route) {
 		AppStatusPersistenceService.setRoute(route);
+		console.log(route);
 	}, true);
 	
 	// Es können nur die Details einer einzelnen Bar betrachtet werden
@@ -36,8 +41,4 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	$scope.saveRoute = function() {
 		RoutesPersistenceService.add($scope.route);
 	};
-
-	$scope.$watch('location', function(location) {
-		console.log(location);
-	}, true);
 }]);
