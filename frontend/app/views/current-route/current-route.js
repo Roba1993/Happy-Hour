@@ -15,6 +15,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 	// Aktuelle Route aus dem AppStatus auslesen
 	$scope.route = AppStatusPersistenceService.getRoute();
+	// TODO eventuell löschen
 	if($scope.route === null) {
 		$scope.route = {};
 		$scope.route.options = {};
@@ -48,6 +49,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
 	}
 	else {
+		// TODO eventuell löschen
 		$scope.routeTime = ['20:00', '03:00'];
 	}
 	// Ausgabe des Sliders in das Options Format umwandeln

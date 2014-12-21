@@ -60,7 +60,6 @@ angular.module('happyHour.directives.SliderDirective', [])
 					if($scope.options.type === 'double') {
 						value = value.split(';');
 					}
-					console.log(value);
 					// Scope über die Werteänderung informieren und Wert in result schreiben
 					$scope.$apply(function() {
 						$scope.result = value;
