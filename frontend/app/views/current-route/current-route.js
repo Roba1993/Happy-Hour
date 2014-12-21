@@ -36,4 +36,8 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	$scope.saveRoute = function() {
 		RoutesPersistenceService.add($scope.route);
 	};
+
+	$scope.$watch('location', function(location) {
+		console.log(location);
+	}, true);
 }]);
