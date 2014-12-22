@@ -25,46 +25,69 @@ angular.module('happyHour.directives.SliderDirective', [])
 				// Slider initialisieren
 				$input.ionRangeSlider($scope.options);
 				var slider = $input.data('ionRangeSlider');
+				var lastValue = null;
 
 				// Wenn result bereits definiert ist den Slider auf den Wert einstellen
-				if($scope.result !== undefined) {
-					// Wenn es sich um einen Doppelslider handelt, from und to Wert setzen
-					if($scope.options.type === 'double') {
-						var from = $scope.result[0];
-						var to = $scope.result[1];
+				$scope.$watch('result', function() {
+					// Wenn result definiert ist, und nicht der letzten Änderung entspricht (vermeidet eine unendliche Schleife)
+					if($scope.result !== undefined && !_.isEqual($scope.result, lastValue)) {
+						// Wenn es sich um einen Doppelslider handelt, from und to Wert setzen
+						if($scope.options.type === 'double') {
+							var from = $scope.result[0];
+							var to = $scope.result[1];
 
-						// Wenn manuelle values gesetzt sind, die Indizes der result-Werte als from und to Wert setzen
-						// (ionRangeSlider arbeitet hier nur mit Indizes)
-						if($scope.options.values) {
-							from = _.indexOf($scope.options.values, from);
-							to = _.indexOf($scope.options.values, to);
+							// Wenn manuelle values gesetzt sind, die Indizes der result-Werte als from und to Wert setzen
+							// (ionRangeSlider arbeitet hier nur mit Indizes)
+							if($scope.options.values) {
+								from = _.indexOf($scope.options.values, from);
+								to = _.indexOf($scope.options.values, to);
+							}
+							slider.update({from: from, to: to});
 						}
-						slider.update({from: from, to: to});
-					}
-					else {
-						var def = $scope.result;
+						else {
+							var def = $scope.result;
 
-						// Wenn manuelle values gesetzt sind, die Indizes der result-Werte als from und to Wert setzen
-						// (ionRangeSlider arbeitet hier nur mit Indizes)
-						if($scope.options.values) {
-							def = _.indexOf($scope.options.values, def);
+							// Wenn manuelle values gesetzt sind, die Indizes der result-Werte als from und to Wert setzen
+							// (ionRangeSlider arbeitet hier nur mit Indizes)
+							if($scope.options.values) {
+								def = _.indexOf($scope.options.values, def);
+							}
+							slider.update({from: def});
 						}
-						slider.update({from: def});
 					}
-				}
+				});
 
 				// Bei einer Werteveränderung
-				$input.on('change', function() {
+				var valueChanged = function() {
 					var value = $input.val();
 					// Wenn es sich um einen Doppelslider handelt, Werte in ein Array schreiben
 					if($scope.options.type === 'double') {
 						value = value.split(';');
 					}
+
+					// Nummernstrings in Nummern konvertieren [(+value) transformiert in Nummer]
+					if(_.isArray(value)) {
+						value = _.map(value, function(val) {
+							if(!_.isNaN(+val)) {
+								return +val;
+							}
+							return val;
+						});
+					}
+					else {
+						if(!_.isNaN(+value)) {
+							value = +value;
+						}
+					}
+					// Wert speichern, um unendlichen $watch-Loop zu vermeiden
+					lastValue = value;
 					// Scope über die Werteänderung informieren und Wert in result schreiben
 					$scope.$apply(function() {
 						$scope.result = value;
 					});
-				});
+				};
+
+				slider.options.onChange = valueChanged;
 			}
 		};
 	}]);

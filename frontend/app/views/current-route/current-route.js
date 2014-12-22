@@ -43,7 +43,6 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		RoutesPersistenceService.add($scope.route);
 	};
 
-
 	// start und endTime defaults binden
 	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {
 		$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
