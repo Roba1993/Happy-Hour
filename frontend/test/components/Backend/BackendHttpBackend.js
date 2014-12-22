@@ -8,9 +8,11 @@ describe('der BackendService', function(){
     beforeEach(function() {
        module('happyHour.backend.Backend'); 
     });
-    
-    it('should call $http.get and deliver JSON Data', inject(function (BackendService, $httpBackend) {
+
+// Test für getBars Service
+    it('should call $http.get and deliver JSON Data when calling getBars', inject(function (BackendService, $httpBackend) {
     $httpBackend.expectGET('http://localhost:8080/bars?lat=35.7348&long=49.0133&radius=2.5&weekday=1').respond([
+        // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
         {'name': 'ergebnisObjekt', 
         'description': 'sdvisiusdkjbgksjbkSDVI o gsi', 
         'timestamp': '2014-12-02 15:00:00', 
@@ -59,6 +61,7 @@ describe('der BackendService', function(){
           ]}
     ]);
     
+// Hier wird der Service getBars aufgerufen und somit der Test gestartet. Ein Locationobjekt sowie der Radius und Wochentag wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
     BackendService.getBars( 
             {'name': 'ergebnisObjekt', 
             'description': 'sdvisiusdkjbgksjbkSDVI o gsi', 
@@ -69,8 +72,11 @@ describe('der BackendService', function(){
     $httpBackend.flush();
     }));
 
+    
+// Test für getRoute Service
     it('should call $http.get and deliver JSON Data when calling getRoute', inject(function (BackendService, $httpBackend) {
     $httpBackend.expectGET('http://localhost:8080/routes/dk390nv303ijrv').respond([
+        // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
         {'name': 'RouteStgt', 
          'description': 'Super Route in Stuttgart', 
          'timestamp': '2014-12-02 15:00:00', 
@@ -82,7 +88,8 @@ describe('der BackendService', function(){
         }
         }
     ]);
-    
+
+// Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Hashwert einer gespeicherten Route wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
     BackendService.getRoute('dk390nv303ijrv');
     $httpBackend.flush();
     }));
