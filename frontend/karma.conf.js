@@ -5,6 +5,7 @@ module.exports = function(config){
 
     files : [
       'app/bower_components/jquery/dist/jquery.min.js',
+      'app/bower_components/ionrangeslider/js/ion.rangeSlider.min.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-mocks/angular-mocks.js',

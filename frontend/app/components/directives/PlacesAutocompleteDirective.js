@@ -22,13 +22,15 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 					// Bei jeder Änderung der result Variable die Lokation reverse Geocoden
 					var geocoder = new maps.Geocoder();
 					$scope.$watch('result', function(location) {
-						// Das Location-Objekt in einer google.maps.LatLng-Objekt umwandeln
-						var googleLocation = new maps.LatLng(location.latitude, location.longitude);
-						geocoder.geocode({latLng: googleLocation}, function(result, status) {
-							if (status === maps.GeocoderStatus.OK) {
-								input.value = result[1].formatted_address;
-							}
-						});
+						if($scope.result) {
+							// Das Location-Objekt in einer google.maps.LatLng-Objekt umwandeln
+							var googleLocation = new maps.LatLng(location.latitude, location.longitude);
+							geocoder.geocode({latLng: googleLocation}, function(result, status) {
+								if (status === maps.GeocoderStatus.OK) {
+									input.value = result[1].formatted_address;
+								}
+							});
+						}
 					});
 
 					// Google Maps Autocomplete initialisieren

@@ -30,6 +30,8 @@
         "CryptoJS": true,
         "time": true,
         "$": true,
-        "FastClick": true
+        "FastClick": true,
+        "jasmine": true,
+        "spyOn": true
     }
 }
