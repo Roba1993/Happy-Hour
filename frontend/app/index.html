@@ -41,14 +41,8 @@
   <!-- Template Abhängigkeiten -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/ionrangeslider/js/ion.rangeSlider.min.js"></script>
-  <script src="bower_components/fastclick/lib/fastclick.js"></script>
   <script src="bower_components/iNoBounce/inobounce.min.js"></script>
   <script>
-  // Fastclick einbinden
-  $(document).ready(function() {
-    FastClick.attach(document.body);
-  });
-
   // Für iOS Geräte, die die App auf dem Homescreen gespeichert haben eine Klasse einfügen
   if ((window.navigator.standalone !== false ) && (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) !== null )) {
     var elm_html = document.documentElement;
@@ -64,6 +58,7 @@
   <!-- Angular und Addons -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
   <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
   <!-- Komponenten -->
