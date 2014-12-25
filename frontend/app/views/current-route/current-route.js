@@ -13,102 +13,8 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	// Aktuellen Pfad persistieren
 	AppStatusPersistenceService.setPath('/currentRoute');
 
-	// TODO delete
-	AppStatusPersistenceService.setRoute(null);
-
 	// Aktuelle Route aus dem AppStatus auslesen
 	$scope.route = AppStatusPersistenceService.getRoute();
-
-	// TODO wenn keine route vohanden auf startseite weiterleiten
-	if($scope.route === null) {
-		$scope.route = {
-  'link': 'e98723958987325',
-  'name': 'Top Route',
-  'options': {
-    'startTime': '12:00',
-    'endTime': '14:00',
-    'stayTime': 1,
-    'location': {
-      'latitude': 48.7758459,
-      'longitude': 9.182932100000016
-    },
-    'weekday': 3
-  },
-  'timeframes': [
-    {
-      'startTime': '12:00',
-      'endTime': '13:00',
-      'bar': {
-        'name': 'Beste Bar',
-        'rating': 4,
-        'costs': 3,
-        'description': 'Die beste Bar in Stuttgart',
-        'imageUrl': '',
-        'openingTimes': [
-          {
-            'startTime': '08:00', 
-            'endTime': '22:00', 
-            'days': [1,2,3,4,5]
-          }, 
-          {
-            'startTime': '08:00', 
-            'endTime': '24:00', 
-            'days': [6,7]
-          }
-        ],
-        'location': {},
-        'adress': 'Coole Straße 49 Stuttgart',
-        'happyHours': [
-          {
-            'startTime': '20:00', 
-            'endTime': '22:00', 
-            'description': 'Bier halber Preis', 
-            'days': [3,7]
-          }
-        ]
-      }
-    },
-    {
-      'startTime': '13:00',
-      'endTime': '14:00',
-      'bar': {
-        'name': 'Lutscher Bar',
-        'rating': 1,
-        'costs': 5,
-        'description': 'Die schlechteste Bar in Stuttgart',
-        'imageUrl': '',
-        'openingTimes': [
-          {
-            'startTime': '08:00', 
-            'endTime': '20:00', 
-            'days': [1,2,3,4,5]
-          }, 
-          {
-            'startTime': '08:00', 
-            'endTime': '02:00', 
-            'days': [6,7]
-          }
-        ],
-        'location': {},
-        'adress': 'Coole Straße 49 Stuttgart',
-        'happyHours': [
-          {
-            'startTime': '17:00', 
-            'endTime': '17:30', 
-            'description': 'Pommes 50ct günstiger', 
-            'days': [3,7]
-          }
-        ]
-      }
-    },
-    {
-    	'startTime': '14:00',
-    	'endTime': '15:00',
-    	'bar': null
-    }
-  ]
-};
-	}
 
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
 	$scope.$watch('route', function(route) {
@@ -135,7 +41,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 					});
 				}
 
-				// Bars aus alten Timeframes übertragen
+				// Neue Timeframes mit alten Timeframes abgleichen und wenn passend übertragen
 				_.forEach(newTimeframes, function(timeframe) {
 					var newStartTime = time(timeframe.startTime);
 					var newEndTime = time(timeframe.endTime);
@@ -156,9 +62,71 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 				$scope.route.timeframes = newTimeframes;
 			}
-
-			// neue Bars abfragen
 		}
+
+		$scope.bars = [];
+		_.forEach($scope.route.timeframes, function() {
+			// TODO Bars korrekt abfragen
+			$scope.bars.push([{
+				'name': 'Lutscher Bar',
+				'rating': 1,
+				'costs': 5,
+				'description': 'Die schlechteste Bar in Stuttgart',
+				'imageUrl': '',
+				'openingTimes': [
+					{
+						'startTime': '08:00', 
+						'endTime': '20:00', 
+						'days': [1,2,3,4,5]
+					}, 
+					{
+						'startTime': '08:00', 
+						'endTime': '02:00', 
+						'days': [6,7]
+					}
+				],
+				'location': {},
+				'adress': 'Coole Straße 49 Stuttgart',
+				'happyHours': [
+					{
+						'startTime': '17:00', 
+						'endTime': '17:30', 
+						'description': 'Pommes 50ct günstiger', 
+						'days': [3,7]
+					}
+				]
+				},
+			    {
+					'name': 'Beste Bar',
+					'rating': 4,
+					'costs': 3,
+					'description': 'Die beste Bar in Stuttgart',
+					'imageUrl': '',
+					'openingTimes': [
+						{
+							'startTime': '08:00', 
+							'endTime': '22:00', 
+							'days': [1,2,3,4,5]
+						}, 
+						{
+							'startTime': '08:00', 
+							'endTime': '24:00', 
+							'days': [6,7]
+						}
+					],
+					'location': {},
+					'adress': 'Coole Straße 49 Stuttgart',
+					'happyHours': [
+					{
+						'startTime': '20:00', 
+						'endTime': '22:00', 
+						'description': 'Bier halber Preis', 
+						'days': [3,7]
+					}
+					]
+				}
+			]);
+		});
 	});
 	
 	// Es können nur die Details einer einzelnen Bar betrachtet werden
@@ -180,6 +148,18 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	$scope.removeBar = function(index) {
 		$scope.route.timeframes[index].bar = null;
 	};
+
+	$scope.$watch('barChosen', function() {
+		// Herausfinden welcher Slot befüllt ist --> passenden Timeframe mit der Bar befüllen
+		_.forEach($scope.barChosen, function(bar, index) {
+			if(bar !== undefined) {
+				$scope.route.timeframes[index].bar = bar;
+			}
+		});
+
+		// Array leeren um das Erkennen des Indizes jederzeit zu ermöglichen
+		$scope.barChosen = [];
+	}, true);
 
 	// SIDEBAR
 

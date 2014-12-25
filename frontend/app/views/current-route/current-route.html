@@ -114,7 +114,7 @@
 							<span class="col-5 align-right"><rating type="'star'" value="timeframe.bar.rating"></span>
 						</div>
                     </div>
-                    <div ng-click="timeframe.bar = null" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">
+                    <div ng-click="timeframe.bar = null; toDelete = false" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">
 						<div class="col-12 align-center e__list-big-element-backside-content">
 							<span class="i-f__reload2"></span>
 							<p class="icon-undertitle">Bar austauschen</p>
@@ -128,46 +128,8 @@
 
 								<span class="e__slider-background-footer align-center">Wählen Sie eine alternative Bar aus</span>
 							</div>
-							<ul ng-init="choosenBar = 0" ng-swipe-left="choosenBar = choosenBar + 1" ng-swipe-right="choosenBar = choosenBar - 1" class="e__slider-stage" style="width:200%;left:calc(-{{90*choosenBar}}vw - {{30*choosenBar}}px);">
-								<li class="e__slider-stage-element" style="width:90vw">
-									<div class="e__barcard clearfix">
-										<div class="e__barcard-head grid">
-											<div class="col-7">
-												<h3>Hascienda</h3>
-											</div>
-										</div>
-									<div class=" e__barcard-body clearfix">
-											<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart!
-												Erleben Sie die richtige Mischung aus vielfältigen
-												mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
-									</div>
-									<div class="e__barcard-footer">
-										<span class="col-5"><span class="i__euro-colored"></span><span class="i__euro-halfcolored"></span><span class="i__euro"></span><span class="i__euro"></span><span class="i__euro"></span></span>
-										<span class="col-2"></span>
-										<span class="col-5 align-right"><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-colored"></span><span class="i__star-halfcolored"></span><span class="i__star"></span></span>
-									</div>
-									</div>
-								</li>
-								<li class="e__slider-stage-element" style="width:90vw">
-									<div class="e__barcard clearfix">
-										<div class="e__barcard-head grid">
-											<div class="col-7">
-												<h3>Mauritius</h3>
-											</div>
-										</div>
-									<div class=" e__barcard-body clearfix">
-											<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart!
-												Erleben Sie die richtige Mischung aus vielfältigen
-												mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
-									</div>
-									<div class="e__barcard-footer">
-										<span class="col-5"><rating type="'euro'" value="bar.costs"></span>
-										<span class="col-2"></span>
-										<span class="col-5 align-right"><rating type="'star'" value="bar.rating"></span>
-									</div>
-									</div>
-								</li>
-							</ul>
+
+							<bar-slider bars="bars[$index]" result="barChosen[$index]">
 						</div>
 					</div>
                 </li>

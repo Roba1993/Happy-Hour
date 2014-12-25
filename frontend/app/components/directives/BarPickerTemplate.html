@@ -1,0 +1,19 @@
+<ul ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()" ng-click="slideChosen()" class="e__slider-stage" style="width:{{100*bars.length}}%;left:calc(-{{90*chosenSlide}}vw - {{30*chosenSlide}}px);">
+	<li ng-repeat="bar in bars" class="e__slider-stage-element" style="width:90vw">
+		<div class="e__barcard clearfix">
+			<div class="e__barcard-head grid">
+				<div class="col-7">
+					<h3>{{bar.name}}</h3>
+				</div>
+			</div>
+		<div class=" e__barcard-body clearfix">
+				<p class="e__quote">{{bar.description}}</p>
+		</div>
+		<div class="e__barcard-footer">
+			<span class="col-5"><rating type="'euro'" value="bar.costs"></span>
+			<span class="col-2"></span>
+			<span class="col-5 align-right"><rating type="'star'" value="bar.rating"></span>
+		</div>
+		</div>
+	</li>
+</ul>
