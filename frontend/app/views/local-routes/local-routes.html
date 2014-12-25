@@ -1,60 +1,13 @@
 <div id="main" class="clearfix">
-    <aside id="sidebar">
-		<div id="sidebar-head-topbar">
-			<div class="sidebar-head-topbar-box">
-				<span class="i-f__options"></span>
-				<h1 id="sidebar-head-topbar-title">Optionen</h1>
-			</div>
-		</div>
-		
-		<div id="sidebar-theatre">
-			<div class="sidebar-theatre-box">
-			
-					<h3>Ort / Plz</h3>
-					<input type="form" />
-			</div>
-			<div class="sidebar-theatre-box">
-					<h3>Tag</h3><br>
-					<div class="col-1"><h4>&lt;</h4></div>
-					<div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div>
-					<div class="1" style="text-align:right;"><h4>&gt;</h4></div>
-			</div>
-			<div class="sidebar-theatre-box">
-					<h3>Radius</h3>
-					<input id="radius"/>
-			</div>
-			<div class="sidebar-theatre-box">
-					<h3>Uhrzeit</h3>
-					<input id="time"/>
-			</div>
-			<div class="sidebar-theatre-box">
-					<h3>Verweilzeit</h3>
-					<input id="resttime"/>
-			</div>
-			<div class="seperator"></div>
-			<div class="sidebar-theatre-box">
-					<span class="i-f__star"></span><h3>Sharen</h3>
-			</div>
-			<div class="seperator"></div>
-			<div class="sidebar-theatre-box">
-				<span class="i-f__download"></span><h3>Offline speichern</h3>
-			</div>
-			<div class="seperator"></div>
-		</div>
-	</aside>
     <div id="theatre-head" class="grid">
         <div id="theatre-head-topbar" class="grid">
-            <div class="col-2 col-xs-2_5">
-                <label for="is__sidebar-open" class="i__hamburger e__btn">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </label>
+            <div class="col-3 col-xs-2_5">
             </div>
-            <div class="col-5 col-xs-5_5">
+            <div class="col-6">
                 <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
             </div>
-            <div id="theatre-head-topbar-icons" class="col-4  align-center">
+            <div class="col-0_5 col-xs-0"></div>
+            <div id="theatre-head-topbar-icons" class="col-3 col-xs-3_5 align-center">
                 <div class="col-6">
                     <a href="#refresh" class="e__btn i-f__reload"></a>
                 </div>
@@ -65,9 +18,9 @@
         </div>
         <nav id="theatre-head-subbar" class="col-12">
             <ul class="e__navigation-vertical clearfix">
-                <li class="e__navigation-vertical-element col-5"><a ng-href="#/currentRoute">Aktuelle Route</a></li>
-                <li class="e__navigation-vertical-element col-2"><a href="#refresh">Top 7</a></li>
-                <li class="e__navigation-vertical-element col-5"><a href="#refresh">Offline Routen</a></li>
+                <li class="e__navigation-vertical-element col-5"><a href="#/currentRoute">Aktuelle Route</a></li>
+                <li class="e__navigation-vertical-element col-2"><a href="#/topRoutes">Top 7</a></li>
+                <li class="e__navigation-vertical-element col-5"><a ng-href="#/localRoutes">Offline Routen</a></li>
             </ul>
         </nav>
     </div>

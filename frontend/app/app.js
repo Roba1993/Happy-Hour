@@ -1,6 +1,7 @@
 // Definiere anwendungsweite Abhängigkeiten
 angular.module('happyHour', [
   'ngRoute',
+  'ngTouch',
   'happyHour.persistence.RoutesPersistence',
   'happyHour.persistence.AppStatusPersistence',
   'happyHour.backend.Backend',
