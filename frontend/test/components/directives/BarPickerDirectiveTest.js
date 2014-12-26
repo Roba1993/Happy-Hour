@@ -27,14 +27,64 @@ describe('BarPickerDirective', function() {
     });
 
     it('slidet per swipe die Liste durch', function() {
-    	$rootScope.bars = [{name: 1}, {name: 2}];
-    	$rootScope.result = null;
-		var element = $compile('<bar-slider bars="bars" result="result" />')($rootScope);
+    	$rootScope.bars = [{name: 1}, {name: 2}, {name: 3}];
+    	$rootScope.test = null;
 
+		var element = $compile('<bar-slider bars="bars" result="test" />')($rootScope);
 		$rootScope.$digest();
-		element.children().eq(0).trigger('swipeleft');
+		var $isoScope = element.isolateScope();
+		
 		$rootScope.$digest();
-		console.log($rootScope.result);
+		expect($isoScope.chosenSlide).toBe(0);
+
+		$isoScope.nextSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(1);
+
+		$isoScope.nextSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(2);
+
+		$isoScope.nextSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(2);
+
+		$isoScope.previousSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(1);
+
+		$isoScope.previousSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(0);
+
+		$isoScope.previousSlide();
+		$rootScope.$digest();
+		expect($isoScope.chosenSlide).toBe(0);
+    });
+
+    it('befuellt die result Variable bei einer Auswahl', function() {
+    	$rootScope.bars = [{name: 1}, {name: 2}, {name: 3}];
+    	$rootScope.test = null;
+
+		var element = $compile('<bar-slider bars="bars" result="test" />')($rootScope);
+		$rootScope.$digest();
+		var $isoScope = element.isolateScope();
+		
+		$rootScope.$digest();
+		expect($rootScope.test).toBe(null);
+
+		$isoScope.slideChosen();
+		$rootScope.$digest();
+		expect($rootScope.test.name).toBe(1);
+
+		$isoScope.nextSlide();
+		$rootScope.$digest();
+		expect($rootScope.test.name).toBe(1);
+
+		$isoScope.nextSlide();
+		$isoScope.slideChosen();
+		$rootScope.$digest();
+		expect($rootScope.test.name).toBe(3);
     });
 
   });
