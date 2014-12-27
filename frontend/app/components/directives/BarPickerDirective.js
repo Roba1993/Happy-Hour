@@ -1,5 +1,5 @@
 /**
- * Ermöglicht das Auswählen einer Bar
+ * Ermöglicht das Auswählen einer Bar mithilfe von Swipes nach links und rechts.
  *
  * @author Markus Thömmes
  */
@@ -14,7 +14,7 @@ angular.module('happyHour.directives.BarPickerDirective', [])
 				 */
 				bars: '=',
 				/**
-				 * Die Variable in dem die Auswahl gespeichert wird
+				 * Die Variable in der die Auswahl gespeichert wird
 				 * @type {Bar}
 				 */
 				result: '='
