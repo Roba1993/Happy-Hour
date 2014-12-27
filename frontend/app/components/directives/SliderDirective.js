@@ -10,12 +10,12 @@ angular.module('happyHour.directives.SliderDirective', [])
 			scope: {
 				/**
 				 * Die Variable in dem die Auswahl gespeichert wird
-				 * @type {*|*[]}
+				 * @type {String|String[]|Number|Number[]}
 				 */
 				result: '=',
 				/**
 				 * Enthält die Optionen für den Slider
-				 * @type {Object}
+				 * @type {ionRangeSliderOptions}
 				 */
 				options: '='
 			},
