@@ -67,7 +67,9 @@ angular.module('happyHour.directives.SliderDirective', [])
 
 					// Nummernstrings in Nummern konvertieren [(+value) transformiert in Nummer]
 					if(_.isArray(value)) {
+						// Die nachfolgende Funktion wird auf jedes Arrayelement angewendet
 						value = _.map(value, function(val) {
+							// Wenn das Ergebnis des casts eine valide Zahl ist in diese umwandeln
 							if(!_.isNaN(+val)) {
 								return +val;
 							}
@@ -75,6 +77,7 @@ angular.module('happyHour.directives.SliderDirective', [])
 						});
 					}
 					else {
+						// Wenn das Ergebnis des casts eine valide Zahl ist in diese umwandeln
 						if(!_.isNaN(+value)) {
 							value = +value;
 						}
