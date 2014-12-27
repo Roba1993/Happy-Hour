@@ -24,12 +24,14 @@ angular.module('happyHour.directives.BarPickerDirective', [])
 				$scope.chosenSlide = 0;
 
 				$scope.previousSlide = function() {
+					// chosenSlide im Rahmen des Arrays (0 - array.length) halten
 					if($scope.chosenSlide > 0) {
 						$scope.chosenSlide--;
 					}
 				};
 
 				$scope.nextSlide = function() {
+					// chosenSlide im Rahmen des Arrays (0 - array.length) halten
 					if($scope.chosenSlide < $scope.bars.length-1) {
 						$scope.chosenSlide++;
 					}
