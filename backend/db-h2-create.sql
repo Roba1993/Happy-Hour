@@ -51,9 +51,9 @@ create table barReport (
 -- Datenbanktabelle für die Administrator
 
 create table user (
-	id						integer not null,
-	password				varchar(50) not null,
-	constraint pk_user primary key (id)
+	name					varchar(50) not null,
+	hashPw					varchar(50) not null,
+	constraint pk_user primary key (name)
 );
 
 

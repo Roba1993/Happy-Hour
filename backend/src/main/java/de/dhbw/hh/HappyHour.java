@@ -52,7 +52,7 @@ public class HappyHour {
 
         LOG.info("Happy-Hour startet...");
 
-        // Lade die Standart-Einstellungen
+        // Lade die Standard-Einstellungen
         settings = new Settings();
         settings.loadDefault();
 

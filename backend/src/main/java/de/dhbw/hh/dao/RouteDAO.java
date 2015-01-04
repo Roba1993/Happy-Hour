@@ -32,7 +32,7 @@ public interface RouteDAO {
 	 * Diese Funktion findet eine bestimmte Route anhand ihres Hashwerts
 	 * 
 	 * @param hash Wert nach dem die Route gesucht wird
-	 * @return gesamte Route-Onjekt bei Erfolg. Wenn nichts gefunden wird null
+	 * @return gesamte Route-Objekt bei Erfolg. Wenn nichts gefunden wird null
 	 */	
 	public Route findRoute(String hash);
 	

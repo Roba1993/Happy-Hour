@@ -29,7 +29,7 @@ public class H2RouteDAO implements RouteDAO {
     private ComboPooledDataSource cpds;
     
     /**
-     * Diese Konstruktur Funktion erstellt ein Objekt der Klasse H2RouteDAO.
+     * Diese Konstruktor Funktion erstellt ein Objekt der Klasse H2RouteDAO.
      *
      * @param cpds Der Connectionpool
      */    
@@ -39,6 +39,9 @@ public class H2RouteDAO implements RouteDAO {
 
 	// Im Folgenden kommen die einzelnen Datenbankabfragen für die Route Klasse
     
+    /**
+     * @author Michael
+     */
 	@Override
 	public boolean insertRoute(Route route) {
 		String sql = "INSERT INTO route (hash, data, top) VALUES (?,?,?)";
@@ -127,7 +130,7 @@ public class H2RouteDAO implements RouteDAO {
 		// Abfrage-String der Top Routen aus der H2 Datenbank
 		String sql = "SELECT hash, data, top FROM route WHERE top=true";
 
-		 // Erstellt eine Collection für die Datenrückgabe
+		// Erstellt eine Collection für die Datenrückgabe
         Collection<Route> routes = new ArrayList<Route>();
 		
 		// Holt eine Connection zur Datenbank aus dem Connectionpool 

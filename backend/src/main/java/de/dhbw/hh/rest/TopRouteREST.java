@@ -23,7 +23,7 @@ public class TopRouteREST {
 	private Gson gson = new Gson();
 	
 	/**
-	 * Diese Funktion ist ein Konstruktor, um REST Schnittstelle für die Top Routen zu definieren
+	 * Diese Funktion ist ein Konstruktor, um REST Schnittstellen für die Top Routen zu definieren
 	 * @param daoFactory
 	 */
 	public TopRouteREST (DAOFactory daoFactory){

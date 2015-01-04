@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Diese Klasse stellt alle Funktionen zur verwaltung der Eigenschaften bereit.
+ * Diese Klasse stellt alle Funktionen zur Verwaltung der Eigenschaften bereit.
  */
 public class Settings extends Properties {
 

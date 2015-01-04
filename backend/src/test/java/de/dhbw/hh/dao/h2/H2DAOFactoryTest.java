@@ -12,6 +12,11 @@ import java.util.Properties;
 
 import static org.junit.Assert.*;
 
+/**
+ * 
+ * @author Robert
+ *
+ */
 public class H2DAOFactoryTest {
 
     private static Properties properties;

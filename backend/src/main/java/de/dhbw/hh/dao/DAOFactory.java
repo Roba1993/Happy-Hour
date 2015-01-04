@@ -22,6 +22,8 @@ public abstract class DAOFactory {
     public abstract BarReportDAO getBarReportDAO();
     
     public abstract RouteDAO getRouteDAO();
+    
+    public abstract UserDAO getUserDAO();
 
     /**
      * Gibt eine Datenbank-Factory zurück, mit welcher auf

@@ -24,6 +24,13 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.2</version>
         </dependency>
+        
+        <!-- Cookie Verschlüsselung -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.2</version>
+        </dependency>
 
         <!-- REST Server Sparkjava -->
         <dependency>
