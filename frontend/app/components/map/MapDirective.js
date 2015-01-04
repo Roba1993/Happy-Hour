@@ -28,16 +28,62 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
       template: '<div class="map-canvas" style="height:400px; width:80%;"></div>',
       link: function ($scope, element) {
         MapLoaderService.then(function (maps) {
-          var mapOptions = {
-            //center: new maps.LatLng($scope.options.center.latitude, $scope.options.center.longitude),
-            center: new maps.LatLng(48.775556, 9.182778),
-            zoom: 14,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            streetViewControl: false,
-            mapTypeControl: false
-          };
-          var map = new maps.Map(element.children()[0], mapOptions);
-          //console.log($scope);
+          var map;
+
+          /**
+           * mapOptions setzen
+           */
+          $scope.$watch('options', function (options) {
+            var centerLocation;
+            var zoomLevel;
+            var alterable;
+
+            // Defaults setzen
+            centerLocation = new maps.LatLng(48.775556, 9.182778);
+            zoomLevel = 14;
+            alterable = true;
+
+            // Optionen aus Attribut auslesen
+            if (options != null) {
+              if (options.centerLocation) {
+                centerLocation = new maps.LatLng(
+                  options.centerLocation.latitude,
+                  options.centerLocation.longitude
+                );
+              }
+              if (options.zoomLevel) {
+                zoomLevel = options.zoomLevel;
+              }
+              if (options.alterable != null) {
+                alterable = options.alterable;
+              }
+            }
+
+            // mapOptions setzen
+            var mapOptions = {};
+            mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
+            mapOptions.mapTypeControl = false;
+            mapOptions.streetViewControl = false;
+
+            //centerLocation setzen
+            console.log('center: ' + centerLocation);
+            mapOptions.center = centerLocation;
+
+            // zoomLevel setzen
+            console.log('zoom ' + zoomLevel);
+            mapOptions.zoom = zoomLevel;
+
+            // Veränderungen an der Karte zulassen/blockieren
+            console.log('alterable: ' + alterable);
+            mapOptions.draggable = alterable;
+            mapOptions.panControl = alterable;
+            mapOptions.rotateControl = alterable;
+            mapOptions.scaleControl = alterable;
+            mapOptions.scrollwheel = alterable;
+            mapOptions.zoomControl = alterable;
+
+            map = new maps.Map(element.children()[0], mapOptions);
+          });
 
           /**
            * Markierungen setzen
@@ -63,58 +109,60 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            * Route setzen
            */
           $scope.$watch('route', function (route) {
-            var directionsDisplay;
-            var directionsService = new maps.DirectionsService();
-            //console.log(route);
+            if (route != null) {
+              var directionsDisplay;
+              var directionsService = new maps.DirectionsService();
+              //console.log(route);
 
-            // initialisieren
-            directionsDisplay = new maps.DirectionsRenderer();
-            directionsDisplay.setMap(map);
+              // initialisieren
+              directionsDisplay = new maps.DirectionsRenderer();
+              directionsDisplay.setMap(map);
 
-            // Wegpunkte definieren
-            var startLocation = new maps.LatLng(
-              route.timeframes[0].bar.location.latitude,
-              route.timeframes[0].bar.location.longitude
-            );
-            var endLocation = new maps.LatLng(
-              route.timeframes[route.timeframes.length - 1].bar.location.latitude,
-              route.timeframes[route.timeframes.length - 1].bar.location.longitude
-            );
+              // Wegpunkte definieren
+              var startLocation = new maps.LatLng(
+                route.timeframes[0].bar.location.latitude,
+                route.timeframes[0].bar.location.longitude
+              );
+              var endLocation = new maps.LatLng(
+                route.timeframes[route.timeframes.length - 1].bar.location.latitude,
+                route.timeframes[route.timeframes.length - 1].bar.location.longitude
+              );
 
-            //console.log("Routenlänge: " + route.timeframes.length + " Ziele");
-            var waypoints = [];
-            if (route.timeframes.length > 2) {
-              //console.log("Route größer als 2 Bars, speichere Zwischenziele");
-              for (var i = 1; i < route.timeframes.length - 1; i++) {
-                //console.log(i);
-                var waypointLocation = new maps.LatLng(
-                  route.timeframes[i].bar.location.latitude,
-                  route.timeframes[i].bar.location.longitude
-                );
-                waypoints.push({
-                  location: waypointLocation,
-                  stopover: true
-                });
+              //console.log("Routenlänge: " + route.timeframes.length + " Ziele");
+              var waypoints = [];
+              if (route.timeframes.length > 2) {
+                //console.log("Route größer als 2 Bars, speichere Zwischenziele");
+                for (var i = 1; i < route.timeframes.length - 1; i++) {
+                  //console.log(i);
+                  var waypointLocation = new maps.LatLng(
+                    route.timeframes[i].bar.location.latitude,
+                    route.timeframes[i].bar.location.longitude
+                  );
+                  waypoints.push({
+                    location: waypointLocation,
+                    stopover: true
+                  });
+                }
+                console.log(waypoints);
               }
-              console.log(waypoints);
+
+              var request = {
+                origin: startLocation,
+                destination: endLocation,
+                waypoints: waypoints,
+                optimizeWaypoints: false,
+                travelMode: maps.DirectionsTravelMode.WALKING
+              };
+
+              directionsService.route(request, function (response, status) {
+                if (status === maps.DirectionsStatus.OK) {
+                  //console.log(response);
+                  directionsDisplay.setDirections(response);
+                  //console.log(response.routes.length);
+                  //$scope.trip.distance = response.routes[0].legs[0].distance.value / 1000;
+                }
+              });
             }
-
-            var request = {
-              origin: startLocation,
-              destination: endLocation,
-              waypoints: waypoints,
-              optimizeWaypoints: false,
-              travelMode: maps.DirectionsTravelMode.WALKING
-            };
-
-            directionsService.route(request, function (response, status) {
-              if (status === maps.DirectionsStatus.OK) {
-                //console.log(response);
-                directionsDisplay.setDirections(response);
-                //console.log(response.routes.length);
-                //$scope.trip.distance = response.routes[0].legs[0].distance.value / 1000;
-              }
-            });
           }, true);
         });
       }
