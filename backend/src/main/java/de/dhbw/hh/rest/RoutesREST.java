@@ -2,11 +2,12 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.post;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.security.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.models.BarReport;
 import de.dhbw.hh.models.RESTResponse;
 import de.dhbw.hh.models.Route;
 
@@ -31,39 +31,48 @@ public class RoutesREST {
 	private Gson gson = new Gson();
 
 	public RoutesREST(DAOFactory daoFactory) {
-		post("/routes",
-				"application/json",
-				(request, response) -> {
 
-					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
+		post("/routes", "application/json", (request, response) -> {
 
-					Route route = new Route();
+			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 
-					String temp = request.params("route");
-					route.setData(temp);
+			Route route = new Route();
 
-					// Hashwert bilden
+			String temp = request.queryParams("route");
+			route.setData(temp);
 
-					String hash = "";
-					hash = getHashfromString(temp);
+			// Hashwert bilden
+			String hash = getHashfromString(temp);
 
-					route.setHash(hash);
+			route.setHash(hash);
 
-					route.setTop(false);
+			route.setTop(false);
 
-					Collection<Object> data = new ArrayList<Object>();
-					data.add(hash);
+			Collection<Object> data = new ArrayList<Object>();
+			data.add(hash);
 
-					RESTResponse restResponse = new RESTResponse();
-					restResponse.setName("/routes");
-					restResponse.setDescription("Dies ist die Beschreibung");
-					restResponse.setTimestamp(new Timestamp(Calendar
-							.getInstance().getTime().getTime()));
-					restResponse.setData(data);
+			RESTResponse restResponse = new RESTResponse();
+			restResponse.setName("/routes");
+			
+			restResponse.setTimestamp(new Timestamp(Calendar
+					.getInstance().getTime().getTime()));
+			restResponse.setData(data);
+			
+			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
+			
+			if(successfull){
+				restResponse.setDescription("Route erfolgreich hinzugefügt");
+				restResponse.setSuccess();
+			}else{
+				restResponse.setDescription("Fehler beim Hinzufügen der Route");
+				restResponse.setError();
+			}
+			
+			restResponse.setData(null);
+			response.type("application/json");
+			return gson.toJson(restResponse);
 
-					return gson.toJson(restResponse);
-
-				});
+		});
 
 	}
 

@@ -2,6 +2,7 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.delete;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -32,6 +33,8 @@ public class ReportsREST {
 		
 		/**
 		 * Gebe alle gemeldeten Bars zurück
+		 * @author Jonas
+		 * 
 		 */
 		get("/bars/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
@@ -60,19 +63,22 @@ public class ReportsREST {
 			}
 			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
+			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
 		
 		/**
 		 * Trage neuen BarReport in DB ein
+		 * @author Jonas
+		 * 
 		 */
 		post("/bars/:barID/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 
 			// Schreibe Anfrageparameter in neues BarReport Objekt
 			BarReport barReport = new BarReport();
-			barReport.setBarID(request.params("barID"));
-			barReport.setDescription(request.params("description"));
+			barReport.setBarID(request.params(":barID"));
+			barReport.setDescription(request.queryParams("description"));
 
 			// Schreibe neuen BarReport in DB
 			boolean successfull = daoFactory.getBarReportDAO().insertBarReport(barReport);
@@ -84,14 +90,81 @@ public class ReportsREST {
 			restResponse.setName(request.queryString());
 			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 			if (successfull) {
+				// Antwort bei erfolgreichem Schreiben in DB
 				restResponse.setDescription("BarReport erfolgreich in DB geschrieben");
 				restResponse.setSuccess();
 			} else {
+				// Antwort bei nicht erfolgreichem Schreiben in DB
 				restResponse.setDescription("Es gab einen Fehler beim Schreiben des BarRepors in die DB");
 				restResponse.setError();
 			}
 			restResponse.setData(null);
 
+			response.type("application/json");
+			return gson.toJson(restResponse);
+		});
+		
+		/**
+		 * Lösche alle BarReports mit zugehöriger BarID aus DB
+		 * @author Jonas
+		 * 
+		 */
+		delete("/bars/:barID/report", "application/json", (request, response) -> {
+			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
+
+			// Lösche alle BarReports mit zugehörigen BarID
+			boolean successfull = daoFactory.getBarReportDAO().deleteBarReport(request.params(":barID"));
+
+			// Das Rückgabeobjekt wird erstellt
+			RESTResponse restResponse = new RESTResponse();
+
+			// Das Rückgabeobjekt wird befüllt
+			restResponse.setName(request.queryString());
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			if (successfull) {
+				// Antwort bei erfolgreichem Löschen
+				restResponse.setDescription("Alle BarReports der Bar " + request.params(":barID") + " gelöscht");
+				restResponse.setSuccess();
+			} else {
+				// Antwort bei nicht erfolgreichem Löschen
+				restResponse.setDescription("Fehler beim Löschen aller BarReports der Bar " + request.params(":barID"));
+				restResponse.setError();
+			}
+			restResponse.setData(null);
+			
+			response.type("application/json");
+			return gson.toJson(restResponse);
+		});
+		
+		/**
+		 * Löschen eines bestimmten BarReports nach der ID aus der DB
+		 * 
+		 * @author Tabea
+		 */
+		delete("/report/:id", "application/json", (request, response) -> {
+			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
+			
+			// Lösche den BarReport mit der jeweiligen ID
+			boolean successfull = daoFactory.getBarReportDAO().deleteSpecificBarReport(Integer.parseInt(request.params(":id")));
+			
+			// Das Rückgabeobjekt wird erstellt
+			RESTResponse restResponse = new RESTResponse();
+			
+			// Das Rückgabeobjekt wird befüllt
+			restResponse.setName(request.queryString());
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			if (successfull) {
+				// Antwort bei erfolgreichem Löschen
+				restResponse.setDescription("Der BarReport mit der ID " + request.params(":id") + " wurde gelöscht");
+				restResponse.setSuccess();
+			} else {
+				// Antwort bei nicht erfolgreichem Löschen
+				restResponse.setDescription("Fehler beim Löschen des BarReports mit der ID " + request.params(":id"));
+				restResponse.setError();
+			}
+			restResponse.setData(null);
+			
+			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
 

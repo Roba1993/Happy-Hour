@@ -1,4 +1,4 @@
-<input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
+<input type="checkbox" id="is__sidebar-open" class="hidden" ng-model="isSidebarOpen" aria-hidden="true"/>
 <div id="main" class="clearfix">
     <aside id="sidebar">
 		<div id="sidebar-head-topbar">
@@ -11,33 +11,31 @@
 		<div id="sidebar-theatre">
 			<div class="sidebar-theatre-box">
 			
-					<h3>Ort / Plz</h3>
-					<input type="form" />
+				<h3>Ort / Plz</h3>
+				<input-places options="" result="route.options.location" />
 			</div>
 			<div class="sidebar-theatre-box">
-					<h3>Tag</h3><br>
-					<div class="col-1"><h4>&lt;</h4></div>
-					<div class="col-10" style="text-align:center;"><h4 style="color: #fff">Montag</h4></div>
-					<div class="1" style="text-align:right;"><h4>&gt;</h4></div>
+				<h3>Tag</h3><br>
+				<input-day result="route.options.weekday" />
 			</div>
 			<div class="sidebar-theatre-box">
-					<h3>Radius</h3>
-					<input id="radius"/>
+				<h3>Radius</h3>
+				<input-slider options="{min:0.1, max:10, step:0.1, from:1, hide_min_max:true}" result="route.options.radius" />
 			</div>
 			<div class="sidebar-theatre-box">
-					<h3>Uhrzeit</h3>
-					<input id="time"/>
+				<h3>Uhrzeit</h3>
+				<input-slider options="{type:'double', values: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00', '08:00','09:00','10:00','11:00'], from:8, to:15, hide_min_max:true}" result="routeTime" />
 			</div>
 			<div class="sidebar-theatre-box">
-					<h3>Verweilzeit</h3>
-					<input id="resttime"/>
+				<h3>Verweilzeit</h3>
+				<input-slider options="{min:0, max:6, step:0.5, from:1, hide_min_max:true}" result="route.options.stayTime" />
 			</div>
 			<div class="seperator"></div>
 			<div class="sidebar-theatre-box">
 					<span class="i-f__star"></span><h3>Sharen</h3>
 			</div>
 			<div class="seperator"></div>
-			<div class="sidebar-theatre-box">
+			<div ng-click="saveRoute()" class="sidebar-theatre-box">
 				<span class="i-f__download"></span><h3>Offline speichern</h3>
 			</div>
 			<div class="seperator"></div>
@@ -45,17 +43,18 @@
 	</aside>
     <div id="theatre-head" class="grid">
         <div id="theatre-head-topbar" class="grid">
-            <div class="col-2 col-xs-2_5">
+            <div class="col-3 col-xs-2_5">
                 <label for="is__sidebar-open" class="i__hamburger e__btn">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </label>
             </div>
-            <div class="col-5 col-xs-5_5">
+            <div class="col-6">
                 <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
             </div>
-            <div id="theatre-head-topbar-icons" class="col-4  align-center">
+            <div class="col-0_5 col-xs-0"></div>
+            <div id="theatre-head-topbar-icons" class="col-3 col-xs-3_5 align-center">
                 <div class="col-6">
                     <a href="#refresh" class="e__btn i-f__reload"></a>
                 </div>
@@ -66,37 +65,37 @@
         </div>
         <nav id="theatre-head-subbar" class="col-12">
             <ul class="e__navigation-vertical clearfix">
-                <li class="e__navigation-vertical-element col-5"><a href="#refresh">Aktuelle Route</a></li>
-                <li class="e__navigation-vertical-element col-2"><a href="#refresh">Top 7</a></li>
-                <li class="e__navigation-vertical-element col-5"><a href="#refresh">Offline Routen</a></li>
+                <li class="e__navigation-vertical-element col-5"><a class="active" ng-href="#/currentRoute">Aktuelle Route</a></li>
+                <li class="e__navigation-vertical-element col-2"><a ng-href="#/topRoutes">Top 7</a></li>
+                <li class="e__navigation-vertical-element col-5"><a ng-href="#/localRoutes">Offline Routen</a></li>
             </ul>
         </nav>
     </div>
     <div id="theatre">
 		
 		<section id="theatre-recentroute" class="grid">			
-            <ul class="e__list-big">
-                <li ng-repeat="timeframe in route.timeframes" ng-click="frameClicked = !frameClicked" ng-class="{is__expanded : frameClicked}" class="e__list-big-element clearfix">
-					<div ng-init="bar = timeframe.bar" class="e__list-big-element-frontside">
-                        <div class="e__list-big-element-head grid">
-							<div class="col-7"><a class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{bar.name}}</h3></div>
+            <ul ng-init="frameClicked" class="e__list-big">
+            	<li ng-repeat="timeframe in route.timeframes" ng-class="{is__expanded : $parent.openFrameIndex === $index, is__backside : toDelete, is__switchside : timeframe.bar === null}" class="e__list-big-element clearfix">
+                    <div class="e__list-big-element-frontside e__barcard" ng-click="frameClicked($index)" ng-swipe-left="toDelete = true; frameClicked(-1)" style="background-image: url('images/bars/1.jpg')">
+                        <div class="e__list-big-element-frontside-head e__barcard-head grid">
+							<div class="col-7"><a ng-click="toDelete = true" class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{timeframe.bar.name}}</h3></div>
 							<span class="col-5 align-right timeslot">{{timeframe.startTime}} - {{timeframe.endTime}}</span>
 						</div>
-                        <div class="e__list-big-element-body clearfix">
-                            <div class="e__list-big-element-body-main">
+                        <div class="e__list-big-element-frontside-body e__barcard-body clearfix">
+                            <div class="e__list-big-element-frontside-body-main">
 								<h4>Happy Hour</h4>
-									<div ng-repeat="happyHour in bar.happyHours" class="padding-default">
+								<div ng-repeat="happyHour in timeframe.bar.happyHours" class="padding-default">
 									{{happyHour.days | formatDays}} {{happyHour | formatTime}}<br>
 									<strong>{{happyHour.description}}</strong>
-									</div>
+								</div>
 							</div>
-                            <div class="e__list-big-element-body-expand grid when__expanded__show">
+                            <div class="e__list-big-element-frontside-body-expand grid when__expanded__show">
+                            	<p class="e__quote">{{timeframe.bar.description}}</p>
 								<div class="col-8">
-								<p class="e__quote">{{bar.description}}</p>
 								<h4>Öffnungszeiten</h4>
 								<table class="e__table grid">
 									<tbody>
-									<tr ng-repeat="openingTime in bar.openingTimes" >
+									<tr ng-repeat="openingTime in timeframe.bar.openingTimes" >
 										<td class="col-5">{{openingTime.days | formatDays}}</td>
 										<td  class="col-7">{{openingTime | formatTime}}</td>
 									</tr>
@@ -109,15 +108,30 @@
 								</div>
 							</div>
                         </div>
-                        <div class="e__list-big-element-footer">
-							<span class="col-5"><rating type="'euro'" value="bar.costs"></span>
+                        <div class="e__list-big-element-frontside-footer e__barcard-footer">
+							<span class="col-5"><rating type="'euro'" value="timeframe.bar.costs"></span>
 							<span class="col-2"></span>
-							<span class="col-5 align-right"><rating type="'star'" value="bar.rating"></span>
+							<span class="col-5 align-right"><rating type="'star'" value="timeframe.bar.rating"></span>
 						</div>
                     </div>
-                    <div class="e__list-big-element-backside">
-                        <p>Alternative Bar wählen</p>
+                    <div ng-click="timeframe.bar = null; toDelete = false" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">
+						<div class="col-12 align-center e__list-big-element-backside-content">
+							<span class="i-f__reload2"></span>
+							<p class="icon-undertitle">Bar austauschen</p>
+						</div>
                     </div>
+					<div class="e__list-big-element-switchside">
+						<div class="e__slider grid">
+							<div class="e__slider-background padding-default">
+								<div class="col-7"></div>
+								<span class="col-5 align-right e__slider-background-text">{{timeframe.startTime}} - {{timeframe.endTime}}</span>
+
+								<span class="e__slider-background-footer align-center">Wählen Sie eine alternative Bar aus</span>
+							</div>
+
+							<bar-slider bars="bars[$index]" result="barChosen[$index]">
+						</div>
+					</div>
                 </li>
                 
 			</ul>

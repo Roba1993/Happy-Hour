@@ -1,6 +1,7 @@
 // Definiere anwendungsweite Abhängigkeiten
 angular.module('happyHour', [
   'ngRoute',
+  'ngTouch',
   'happyHour.persistence.RoutesPersistence',
   'happyHour.persistence.AppStatusPersistence',
   'happyHour.backend.Backend',
@@ -10,6 +11,10 @@ angular.module('happyHour', [
   'happyHour.filters.DaysFilter',
   'happyHour.filters.TimeFilter',
   'happyHour.directives.RatingDirective',
+  'happyHour.directives.PlacesAutocompleteDirective',
+  'happyHour.directives.DayPickerDirective',
+  'happyHour.directives.SliderDirective',
+  'happyHour.directives.BarPickerDirective',
 
   'happyHour.views.currentRoute',
   'happyHour.views.currentRouteMap',
@@ -23,4 +28,10 @@ angular.module('happyHour', [
 
   // LocalStorage-Prefix setzen
   localStorageServiceProvider.setPrefix('happyHour');
+}])
+.run(['AppStatusPersistenceService', '$location', function(AppStatusPersistenceService, $location) {
+  var path = AppStatusPersistenceService.getPath();
+  if(path !== null) {
+    $location.path(path);
+  }
 }]);

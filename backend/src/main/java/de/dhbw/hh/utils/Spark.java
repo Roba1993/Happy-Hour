@@ -1,7 +1,9 @@
 package de.dhbw.hh.utils;
 
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.rest.BarsREST;
 import de.dhbw.hh.rest.ReportsREST;
+import de.dhbw.hh.rest.RoutesREST;
 import de.dhbw.hh.rest.TestrunREST;
 import de.dhbw.hh.rest.TopRouteREST;
 
@@ -44,6 +46,8 @@ public class Spark {
 		new TestrunREST(daoFactory);
 		new ReportsREST(daoFactory);
 		new TopRouteREST(daoFactory);
+		new RoutesREST(daoFactory);
+		new BarsREST(daoFactory);
 	}
 
 	/**

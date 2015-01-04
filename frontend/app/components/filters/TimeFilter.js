@@ -8,8 +8,12 @@
 angular.module('happyHour.filters.TimeFilter', [])
 	.filter('formatTime', function() {
 		return function(input) {
+			if(input.startTime === null) {
+				return '';
+			}
+			
 			// Open-End wenn endTime = null
-			if (input.endTime === null) {
+			if (input.endTime === null) {	
 				return 'ab ' + input.startTime;
 			}
 			else {

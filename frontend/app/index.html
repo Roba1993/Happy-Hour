@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="css/grid.css?v=0.1">
     <link rel="stylesheet" href="css/helper.css?v=0.1">
     <link rel="stylesheet" href="css/elements.css?v=0.1">
-    <link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.css">
-    <link rel="stylesheet" href="lib/ion-rangeslider/css/ion.rangeslider.skinhtml5.css">
+    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeslider.css">
+    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeslider.skinhtml5.css">
     <link rel="stylesheet" href="css/style.css?v=0.1">
 </head>
 
@@ -39,17 +39,14 @@
   <div ng-view></div>
 
   <!-- Template Abhängigkeiten -->
-  <script src="lib/jquery-1.11.1.min.js"></script>
-  <script src="lib/ion-rangeslider/js/ion.rangeslider.min.js"></script>
-  <script src="lib/fastclick.js"></script>
-  <script src="lib/inobounce.min.js"></script>
-  <script type='application/javascript' src="js/main.js"></script>
-  <script type='application/javascript' src="js/demo.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/ionrangeslider/js/ion.rangeSlider.min.js"></script>
+  <script src="bower_components/iNoBounce/inobounce.min.js"></script>
   <script>
-  if ('addEventListener' in document) {
-    document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-    }, false);
+  // Für iOS Geräte, die die App auf dem Homescreen gespeichert haben eine Klasse einfügen
+  if ((window.navigator.standalone !== false ) && (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) !== null )) {
+    var elm_html = document.documentElement;
+    elm_html.classList.add('is__ios-fullscreen');
   }
   </script>
 
@@ -61,6 +58,7 @@
   <!-- Angular und Addons -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
   <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
   <!-- Komponenten -->
@@ -74,6 +72,10 @@
   <script src="components/filters/DaysFilter.js"></script>
   <script src="components/filters/TimeFilter.js"></script>
   <script src="components/directives/RatingDirective.js"></script>
+  <script src="components/directives/PlacesAutocompleteDirective.js"></script>
+  <script src="components/directives/DayPickerDirective.js"></script>
+  <script src="components/directives/SliderDirective.js"></script>
+  <script src="components/directives/BarPickerDirective.js"></script>
 
   <script src="app.js"></script>
 

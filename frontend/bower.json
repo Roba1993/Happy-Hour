@@ -13,6 +13,9 @@
     "angular-local-storage": "~0.1.5",
     "cryptojslib": "~3.1.2",
     "time-js": "markusthoemmes/timejs",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "ionrangeslider": "~2.0.2",
+    "iNoBounce": "lazd/iNoBounce",
+    "angular-touch": "~1.2.x"
   }
 }

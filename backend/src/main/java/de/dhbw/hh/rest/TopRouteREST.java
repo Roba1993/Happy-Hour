@@ -57,6 +57,7 @@ public class TopRouteREST {
 			}	
 					
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
+			response.type("application/json");
 			return gson.toJson(r);
 		});
 		

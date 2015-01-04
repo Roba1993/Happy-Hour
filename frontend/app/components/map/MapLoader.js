@@ -24,7 +24,7 @@ angular.module('happyHour.map.MapLoader', [])
  
 		// Script-Element erstellen und das Laden des Scripts anstoßen (ins Dokument setzen)
 		var script = angular.element('<script></script>');
-		script.attr('src', 'https://maps.googleapis.com/maps/api/js?callback='+callbackName);
+		script.attr('src', 'https://maps.googleapis.com/maps/api/js?libraries=places&callback='+callbackName);
 		$document.find('body').append(script);
  
 		// Promise zurückgeben
