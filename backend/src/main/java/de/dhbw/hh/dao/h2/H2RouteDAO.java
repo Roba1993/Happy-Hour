@@ -68,12 +68,6 @@ public class H2RouteDAO implements RouteDAO {
         }
 		return false;
 	}
-
-	@Override
-	public boolean deleteRoute(String hash) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
     /**
      * Diese Funktion frägt eine gespeicherte Route mit Hilfe eines Hash-Wertes ab.

@@ -65,12 +65,6 @@ public class H2BarReportDAO implements BarReportDAO {
 	}
 
 	@Override
-	public boolean updateBarReport(BarReport barReport) {
-		// ToDo
-		return false;
-	}
-
-	@Override
 	public boolean deleteBarReport(String barID) {
 		 String sql = "DELETE FROM barReport WHERE barID=?";
 

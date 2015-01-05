@@ -20,15 +20,6 @@ public interface HappyHourDAO {
 	public boolean insertHappyHour(HappyHour HappyHour);
 	
 	/**
-     * Diese Funktion aktualisiert eine HappyHour in der Datenbank.
-     * Die HappyHour wird dabei über die barID zugeordnet.
-     *
-     * @param happyHour Der HappyHour mit den neuen Werten.
-     * @return True bei Erfolg, andernfalls false.
-     */	
-	public boolean updateHappyHour(HappyHour HappyHour);
-	
-	/**
      * Diese Funktion löscht eine HappyHour aus der Datenbank anhand seiner ID.
      *
      * @param barID Die BarID anhand die HappyHour zugeordnet wird.

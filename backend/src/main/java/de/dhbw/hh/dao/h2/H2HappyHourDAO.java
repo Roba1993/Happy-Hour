@@ -75,12 +75,6 @@ public class H2HappyHourDAO implements HappyHourDAO {
 	}
 
 	@Override
-	public boolean updateHappyHour(HappyHour newHappyHour) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean deleteHappyHour(int id) {
 		String sql = "DELETE FROM happyHour WHERE id=?";
 

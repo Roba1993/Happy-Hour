@@ -20,15 +20,6 @@ public interface BarReportDAO {
     public boolean insertBarReport(BarReport barReport);
 
     /**
-     * Diese Funktion aktualisiert einen BarReport in der Datenbank.
-     * Der BarReport wird dabei über die barID zugeordnet.
-     *
-     * @param barReport Der BarReport mit den neuen Werten.
-     * @return True bei Erfolg, andernfalls false.
-     */
-    public boolean updateBarReport(BarReport barReport);
-
-    /**
      * Diese Funktion löscht alle BarReports zu einer zugehörigen Bar anhand der BarID
      *
      * @param barID Die BarID anhand der die BarReports zugeordnet werden.
