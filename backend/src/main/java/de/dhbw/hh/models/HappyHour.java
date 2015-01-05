@@ -10,19 +10,28 @@ import java.sql.Time;
 
 public class HappyHour {
 	
+	private int id;
 	private String barID = "";
-	private Time start;
-	private Time end;
-	private String description;
-	private boolean monday;				
-	private boolean tuesday;				
-	private boolean wednesday;			
-	private boolean thursday;				
-	private boolean friday;					
-	private boolean saturday;				
-	private boolean sunday;					
+	private String description = "";
+	private Time start = new Time(0);
+	private Time end = new Time(0);
+	private boolean monday = false;				
+	private boolean tuesday = false;				
+	private boolean wednesday = false;			
+	private boolean thursday = false;				
+	private boolean friday = false;					
+	private boolean saturday = false;				
+	private boolean sunday = false;					
 		
 	// Getters and Setters
+	
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
 		
 	public String getDescription() {
 		return description;

@@ -18,7 +18,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import de.dhbw.hh.models.BarReport;
 
 /**
- * Diese Klasse testet die Anfrage der gemeldeten Bars
+ * Diese Klasse testet alle Methoden der h2BarReportDAO-Klasse
  * @author Jonas
  *
  */
@@ -34,7 +34,6 @@ public class H2BarReportDAOTest {
     private static BarReport barReport1;
     private static BarReport barReport2;
     private static BarReport barReport3;
-
     
     /**
      * Diese Klasse wird als erste aufgerufen und dient zur Testkonfiguration

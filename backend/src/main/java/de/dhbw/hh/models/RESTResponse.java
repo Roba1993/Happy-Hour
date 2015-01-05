@@ -58,8 +58,7 @@ public class RESTResponse {
 		return data;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public void setData(Collection data) {
+	public void setData(@SuppressWarnings("rawtypes") Collection data) {
 		this.data = data;
 	}
 

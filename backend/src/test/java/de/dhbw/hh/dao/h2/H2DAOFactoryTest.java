@@ -1,13 +1,9 @@
 package de.dhbw.hh.dao.h2;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import de.dhbw.hh.dao.DAOFactory;
-import org.h2.tools.RunScript;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.FileReader;
-import java.sql.Connection;
 import java.util.Properties;
 
 import static org.junit.Assert.*;
