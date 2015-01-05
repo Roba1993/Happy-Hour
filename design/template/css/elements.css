@@ -627,3 +627,52 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/*** Popup - Simon ***/
+#e__popup-overlay {
+    background: rgba(40,41,41,.6);
+    width: 100%;
+    height: 100%;
+    z-index:999;
+    position: absolute;
+    top:-100%;
+}
+#e__popup-overlay.is__open {
+    top:0;
+}
+#e__popup-overlay.is__open .e__popup-window {
+    top:40%;
+    transition: top 1s ease-out;
+}
+.e__popup-window {
+    box-shadow: -1px 0px 15px #000;
+    width:250px;
+    background: #fff;
+    height:150px;
+    margin: 0px auto;
+    top: 0;
+    position:relative;
+}
+
+.e__popup-window-button {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    border-top:1px solid #c0c0c0;
+    height:35%;
+    padding-top:5px;
+}
+
+.e__popup-window-content {
+    width:100%;
+    height:650%;
+    padding:20px;
+    line-height: 25px;
+
+}
+
+#popup-window-content h1 {
+    font-size:1.1rem;
+    font-weight: 500;
+}
+/*** /Popup - Simon ***/
