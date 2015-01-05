@@ -34,7 +34,7 @@ public interface HappyHourDAO {
      * @param barID Die BarID anhand die HappyHour zugeordnet wird.
      * @return True bei Erfolg, andernfalls false.
      */
-	public boolean deleteHappyHour(String barID);
+	public boolean deleteHappyHour(int id);
 	  /**
      * Diese Funktion findet einen bestimmte HappyHour anhand ihrer BarID.
      *

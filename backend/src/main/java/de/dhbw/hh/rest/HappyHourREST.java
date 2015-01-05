@@ -112,6 +112,39 @@ public class HappyHourREST {
 					response.type("application/json");
 					return gson.toJson(restResponse);
 				});
+		
+		
+	    	/**
+	    	 * Lösche Happy Hour anhand Happy Hour ID aus der Datenbank
+	    	 * @author Jonas
+	    	 */
+			delete("/delHour/:hourID", "application/json", (request, response) -> {
+				LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
+
+				
+				// Lösche HappyHour aus DB
+				int hourID = Integer.parseInt(request.params("hourID"));
+				boolean successfull = daoFactory.getHappyHourDAO().deleteHappyHour(hourID);
+
+				// Das Rückgabeobjekt wird erstellt
+				RESTResponse restResponse = new RESTResponse();
+
+				// Das Rückgabeobjekt wird befüllt
+				restResponse.setName(request.queryString());
+				restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+				if (successfull) {
+					restResponse.setDescription("HapyHour erfolgreich aus DB gelöscht");
+					restResponse.setSuccess();
+				} else {
+					restResponse.setDescription("Es gab einen Fehler beim Löschen der HappyHour aus der DB");
+					restResponse.setError();
+				}
+				restResponse.setData(null);
+
+				response.type("application/json");
+				return gson.toJson(restResponse);
+				
+			});
 	    }
 
 }
