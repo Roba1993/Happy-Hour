@@ -1,0 +1,7 @@
+#e__popup-overlay .e__popup-window {
+	display:none;
+}
+
+#e__popup-overlay.is__open .e__popup-window {
+	display:block;
+}

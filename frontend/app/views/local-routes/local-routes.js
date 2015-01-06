@@ -8,8 +8,8 @@ angular.module('happyHour.views.localRoutes', ['ngRoute', 'happyHour.persistence
 }])
 
 .controller('localRoutesController', 
-['$scope', 'AppStatusPersistenceService', 'RoutesPersistenceService', 
-function($scope, AppStatusPersistenceService, RoutesPersistenceService) {
+['$scope', 'AppStatusPersistenceService', 'RoutesPersistenceService', '$location',
+function($scope, AppStatusPersistenceService, RoutesPersistenceService, $location) {
 	AppStatusPersistenceService.setPath('/localRoutes');
 	/*var localRoutes = [];
 	var localRoute1 = {
@@ -40,5 +40,10 @@ function($scope, AppStatusPersistenceService, RoutesPersistenceService) {
 	$scope.removeRoute = function(routeId) {
 		RoutesPersistenceService.remove(routeId);
 		$scope.localRoutes = RoutesPersistenceService.getAll();
+	};
+	$scope.openRoute = function(routeId){
+		var localRouteToOpen = RoutesPersistenceService.get(routeId);
+		AppStatusPersistenceService.setRoute(localRouteToOpen.route);
+		$location.path('/currentRoute');
 	};
 }]);
