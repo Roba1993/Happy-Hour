@@ -28,7 +28,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 					timestamp: new Date(),
 					route: route
 				};
-				var id = CryptoJS.MD5(JSON.stringify(object));
+				var id = CryptoJS.MD5(JSON.stringify(object)).toString(CryptoJS.enc.Hex);
 				object.id = id;
 
 				routes.push(object);
@@ -63,7 +63,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * 
 			 * @author Dorothee Nies
 			 * @param  {Integer} routeId Der Identifikator der Route, die zurückgegeben werden soll
-			 * @return {[LocalRoute]} Die angeforderte Route
+			 * @return {LocalRoute} Die angeforderte Route
 			 */
 			get: function(routeId) {
 				var routeToReturn = null;
@@ -72,7 +72,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 						routeToReturn = routes[i];
 					}
 				}
-				return routeToReturn;
+				return _.cloneDeep(routeToReturn);
 			},
 			/**
 			 * Gibt alle Routen aus "Meine Routen" zurück
@@ -81,7 +81,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * @return {LocalRoute[]} Array aus allen Routen in "Meine Routen"
 			 */
 			getAll: function() {
-				return routes;
+				return _.cloneDeep(routes);
 			},
 			/**
 			 * Gibt zurück ob der Speicher für "Meine Routen" bereits voll ist

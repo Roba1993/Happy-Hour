@@ -1,2 +1,53 @@
-<h1>TopRoutesView</h1>
-<h2>{{test}}</h2>
+<div id="e__popup-overlay" ng-class="{is__open: popupOpen}">
+    <div class="e__popup-window">
+        <div class="e__popup-window-content">
+            <h1>Route entfernen</h1>
+            <p>Wollen sie die Route wirklich entfernen?</p>
+        </div>
+        <div class="e__popup-window-button">
+            <div class="e__btn col-6" ng-click="popupOpen = false">Abbrechen</div>
+            <div class="e__btn col-6" ng-click="removeRoute(routeToDelete); popupOpen = false">Entfernen</div>
+        </div>
+    </div>
+</div>
+<div id="main" class="clearfix">
+    <div id="theatre-head" class="grid">
+        <div id="theatre-head-topbar" class="grid">
+            <div class="col-3 col-xs-2_5">
+            </div>
+            <div class="col-6">
+                <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
+            </div>
+            <div class="col-0_5 col-xs-0"></div>
+            <div id="theatre-head-topbar-icons" class="col-3 col-xs-3_5 align-center">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                </div>
+            </div>
+        </div>
+        <nav id="theatre-head-subbar" class="col-12">
+            <ul class="e__navigation-vertical clearfix">
+                <li class="e__navigation-vertical-element col-5"><a ng-href="#/currentRoute">Aktuelle Route</a></li>
+                <li class="e__navigation-vertical-element col-2"><a class="active" ng-href="#/topRoutes">Top 7</a></li>
+                <li class="e__navigation-vertical-element col-5"><a ng-href="#/localRoutes">Offline Routen</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="theatre">
+		
+		<section id="theatre-myroutes">
+			<ul class="e__list-small">
+				<li ng-repeat="route in routes" class="e__list-small-element clearfix" ng-click="openRoute($index)">
+					<div class="e__list-small-element-icon clearfix"></div>
+					<div class="e__list-small-element-content clearfix">
+						<h3 class="e__list-small-element-head">{{route.name}}</h3>
+					</div>
+					<div class="e__list-small-element-options clearfix">
+					</div>
+				</li>
+			</ul>	
+		</section>
+
+    </div>
+</div>

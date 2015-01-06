@@ -7,6 +7,12 @@ angular.module('happyHour.views.topRoutes', ['ngRoute'])
   });
 }])
 
-.controller('topRoutesController', ['$scope', function($scope) {
-	$scope.test = 'topRoutesController!!';
+.controller('topRoutesController', ['$scope', 'AppStatusPersistenceService', '$location', function($scope, AppStatusPersistenceService, $location) {
+	AppStatusPersistenceService.setPath('/topRoutes');
+
+	$scope.routes = [];
+	$scope.openRoute = function(index){
+		AppStatusPersistenceService.setRoute($scope.routes[index]);
+		$location.path('/currentRoute');
+	};
 }]);

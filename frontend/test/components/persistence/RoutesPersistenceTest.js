@@ -61,12 +61,18 @@ describe('happyHour.persistence.RoutesPersistence module', function() {
     	expect(RoutesPersistenceService.get(id).timestamp instanceof Date).toBe(true);
     }));
 
-    it('sollte zweimal die selbe Route mit unterschiedlichen Hashes speichern', inject(function(RoutesPersistenceService) {
-    	var id = RoutesPersistenceService.add({id:1});
-    	var id2 = RoutesPersistenceService.add({id:1});
+    it('sollte zweimal die selbe Route mit unterschiedlichen Hashes speichern', function(done) {
+      inject(function(RoutesPersistenceService) {
+      	var id = RoutesPersistenceService.add({id:1});
 
-    	expect(id).not.toBe(id2);
-    }));
+        window.setTimeout(function() {
+          var id2 = RoutesPersistenceService.add({id:1});
+
+          expect(id).not.toBe(id2);
+          done();
+        }, 1);
+      });
+    });
 	
 	it('sollte Routen löschen', inject(function(RoutesPersistenceService) {
       expect(RoutesPersistenceService).toBeDefined();
