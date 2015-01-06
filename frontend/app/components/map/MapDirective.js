@@ -25,7 +25,8 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
          */
         route: '='
       },
-      template: '<div class="map-canvas" style="height:400px; width:80%;"></div>',
+      //template: '<div class="map-canvas" style="height:400px; width:80%;"></div>',
+      template: '<div class="map-canvas"></div>',
       link: function ($scope, element) {
         MapLoaderService.then(function (maps) {
           var map;
