@@ -54,5 +54,10 @@ public class Route {
 	public void setTop(boolean top) {
 		this.top = top;
 	}
+
+	public boolean isHashEmpty() {
+		// TODO Auto-generated method stub
+		return hash.isEmpty();
+	}
 	
 }
