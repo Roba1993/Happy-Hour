@@ -66,15 +66,15 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.streetViewControl = false;
 
             //centerLocation setzen
-            console.log('center: ' + centerLocation);
+            //console.log('center: ' + centerLocation);
             mapOptions.center = centerLocation;
 
             // zoomLevel setzen
-            console.log('zoom ' + zoomLevel);
+            //console.log('zoom ' + zoomLevel);
             mapOptions.zoom = zoomLevel;
 
             // Veränderungen an der Karte zulassen/blockieren
-            console.log('alterable: ' + alterable);
+            //console.log('alterable: ' + alterable);
             mapOptions.draggable = alterable;
             mapOptions.panControl = alterable;
             mapOptions.rotateControl = alterable;
@@ -114,6 +114,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
               var directionsService = new maps.DirectionsService();
               //console.log(route);
 
+
               // initialisieren
               directionsDisplay = new maps.DirectionsRenderer();
               directionsDisplay.setMap(map);
@@ -143,7 +144,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                     stopover: true
                   });
                 }
-                console.log(waypoints);
+                //console.log(waypoints);
               }
 
               var request = {
@@ -157,9 +158,31 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
               directionsService.route(request, function (response, status) {
                 if (status === maps.DirectionsStatus.OK) {
                   //console.log(response);
+                  _.forEach(response.routes, function (r) {
+                    //console.log(r);
+                    for (var i = 0; i < r.legs.length; i++) {
+                      //console.log(i);
+                      //console.log(r.legs[i]);
+                      //console.log(route.timeframes[i].bar.name);
+                      r.legs[i].start_address =
+                        '<b>' + route.timeframes[i].bar.name + '</b><br>' +
+                        route.timeframes[i].bar.address + '<br>' +
+                        route.timeframes[i].startTime + ' - ' +
+                        route.timeframes[i].endTime;
+                      r.legs[i].end_address =
+                        '<b>' + route.timeframes[i + 1].bar.name + '</b><br>' +
+                        route.timeframes[i + 1].bar.address + '<br>' +
+                        route.timeframes[i + 1].startTime + ' - ' +
+                        route.timeframes[i + 1].endTime;
+                      //console.log(r.legs[i]);
+                    }
+
+                    // Routenwarnungen loggen
+                    _.forEach(r.warnings, function (warning) {
+                      console.warn(warning);
+                    });
+                  });
                   directionsDisplay.setDirections(response);
-                  //console.log(response.routes.length);
-                  //$scope.trip.distance = response.routes[0].legs[0].distance.value / 1000;
                 }
               });
             }
