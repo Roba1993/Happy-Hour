@@ -121,21 +121,28 @@ public class H2BarReportDAOTest {
 	public void testInsertBarReport() throws Exception {
 		// Erzeuge neuen BarReport
 		BarReport barReport = new BarReport();
+		barReport.setID(4);
 		barReport.setBarID("kasd32mma87h9n");
 		barReport.setDescription("Der Bar hat den Besitzer gewechselt");
 		
 		// Führe zu testende Methode zum Einfügen eines BarReports aus
-		h2BarReportDAO.insertBarReport(barReport2);
+		h2BarReportDAO.insertBarReport(barReport);
 		
-		// Frage alle Einträge aus Datenbank ab
+		// Frage den eingefügten BarReport aus Datenbank ab
 		ResultSet resultSet;
 		try (Connection connection = cpds.getConnection()) {
-			try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM barReport")) {
+			try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM barReport WHERE id=?")) {
+				preparedStatement.setInt(1, barReport.getID());
 				resultSet = preparedStatement.executeQuery();
 				
-				// Prüfe ob vier BarReports in Datenbank gespeichert sind
+				// Prüfe ob genau ein BarReport ausgelesen wurde
 				resultSet.last();
-				assertEquals(4, resultSet.getRow());
+				assertEquals(1, resultSet.getRow());
+				
+				// Prüfe ob die einzelnen Variablen des BarReports richtig gespeichert wurden
+				assertEquals(barReport.getID(), resultSet.getInt("id"));
+				assertEquals(barReport.getBarID(), resultSet.getString("barID"));
+				assertEquals(barReport.getDescription(), resultSet.getString("description"));
             }
         }
 	}
