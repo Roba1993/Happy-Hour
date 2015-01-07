@@ -176,7 +176,7 @@ h3 {
     background-size: cover;
 }
 #startscreen-icon {
-    margin-top:10%;
+    margin-top:40%;
     padding:0 50px;
     max-height: 80%;
 }
@@ -185,13 +185,6 @@ h3 {
     max-height: 100%;
     width: auto;
     height: auto;
-}
-#startscreen-footer {
-    position: fixed;
-    bottom:10px;
-    width:100%;
-    color:#fff;
-    font-size: 1rem
 }
 /** /Startscreen **/
 /*** /Patrick ***/
