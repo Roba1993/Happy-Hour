@@ -40,40 +40,44 @@ public class RoutesREST {
 		post("/routes", "application/json", (request, response) -> {
 
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
-
+			// Neue Route erstellen
 			Route route = new Route();
 
+			// Route mit Daten aus POST Anfrage befüllen
 			String temp = request.queryParams("route");
 			route.setData(temp);
 
 			// Hashwert bilden
 			String hash = getHashfromString(temp);
-
 			route.setHash(hash);
 
+			// Route ist keine Top Route
 			route.setTop(false);
 
+			// Hash in Rückgabeobjekt einfügen
 			Collection<Object> data = new ArrayList<Object>();
 			data.add(hash);
 
+			// RESTRespone mit Rückgabedaten befüllen
 			RESTResponse restResponse = new RESTResponse();
 			restResponse.setName("/routes");
-			
 			restResponse.setTimestamp(new Timestamp(Calendar
 					.getInstance().getTime().getTime()));
 			restResponse.setData(data);
 			
+			// Route in Datenbank speichern
 			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
 			
 			if(successfull){
+				// Wenn erfolgreich gespeichert
 				restResponse.setDescription("Route erfolgreich hinzugefügt");
 				restResponse.setSuccess();
 			}else{
+				// Wenn nicht erfolgreich gespeichert
 				restResponse.setDescription("Fehler beim Hinzufügen der Route");
 				restResponse.setError();
 			}
 			
-			restResponse.setData(null);
 			response.type("application/json");
 			return gson.toJson(restResponse);
 
@@ -87,7 +91,7 @@ public class RoutesREST {
 		
 		get("/routes/:hash", "application/json", (request, response) -> {
 			// Routen aus der Datenbank holen
-			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.queryString());
+			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
 			
 			// Es wird ein Rückgabe Objekt erstellt
 			RESTResponse r = new RESTResponse();
