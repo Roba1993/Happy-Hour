@@ -167,6 +167,21 @@ h3 {
     float:left;
     width:100%;
 }
+/** Startscreen **/
+#startscreen-icon {
+    position: absolute;
+    top:10%;
+    padding:0 50px;
+}
+#startscreen-icon > * {
+    width:100%;
+}
+#startscreen-footer {
+    position: fixed;
+    bottom:10px;
+    width:100%;
+}
+/** /Startscreen **/
 /*** /Patrick ***/
 /*** Sidebar - Simon ***/
 #sidebar-head-topbar {
