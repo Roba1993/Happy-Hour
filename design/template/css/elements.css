@@ -654,6 +654,10 @@
     position:relative;
 }
 
+.e__popup-window input{
+	width:100%;
+}
+
 .e__popup-window-button {
     position: absolute;
     bottom: 0;
