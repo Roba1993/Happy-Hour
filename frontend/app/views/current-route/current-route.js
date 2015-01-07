@@ -50,7 +50,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 							'days': [6,7]
 						}
 					],
-					'location': {},
+					'location': {longitude:9.18293, latitude:48.77585},
 					'adress': 'Coole Straße 49 Stuttgart',
 					'happyHours': [
 						{
@@ -135,7 +135,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 						'days': [6,7]
 					}
 				],
-				'location': {},
+				'location': {longitude:9.18293, latitude:48.77585},
 				'adress': 'Coole Straße 49 Stuttgart',
 				'happyHours': [
 					{
@@ -164,7 +164,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 							'days': [6,7]
 						}
 					],
-					'location': {},
+					'location': {longitude:9.17589, latitude:48.77975},
 					'adress': 'Coole Straße 49 Stuttgart',
 					'happyHours': [
 					{

@@ -59,7 +59,7 @@
                     <a href="#refresh" class="e__btn i-f__reload"></a>
                 </div>
                 <div class="col-6">
-                    <a href="#map" class="e__btn i-f__maps"></a>
+                    <a ng-href="#/currentRouteMap" class="e__btn i-f__maps"></a>
                 </div>
             </div>
         </div>
@@ -103,8 +103,7 @@
 								</table>
 							</div>
 								<div class="col-4">
-									<div class="map" style="background:url('images/_dummy_map.png')">
-									</div>
+									<map markers="[timeframe.bar]" options="{alterable: false, centerLocation: timeframe.bar.location}">
 								</div>
 							</div>
                         </div>

@@ -5,3 +5,15 @@
 #e__popup-overlay.is__open .e__popup-window {
 	display:block;
 }
+
+.e__barcard-body .map-canvas {
+    width:100%;
+    height:100px;
+    border:2px solid #fff;
+    margin-top:30px;
+}
+
+#theatre-map .map-canvas {
+	width:100%;
+	height:100vh;
+}
