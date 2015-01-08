@@ -78,17 +78,7 @@ public class H2DAOFactory extends DAOFactory {
                 e.printStackTrace();
             }
         }
-        
-        // Wenn HappyHour Daten in die Datenbank eingegeben werden, führe es aus
-        if(properties.containsKey("db.h2.hhDataFile") && properties.getProperty("db.h2.hhDataFile") != null) {
-            try (Connection connection = cpds.getConnection()) {
-                RunScript.execute(connection, new FileReader(properties.getProperty("db.h2.hhDataFile")));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     @Override

@@ -55,7 +55,6 @@ public class Settings extends Properties {
         setProperty("db.h2.maxPoolSize", "10");
         setProperty("db.h2.startFile", "db-h2-create.sql");
         setProperty("db.h2.dataFile", "db-h2-data.sql");
-        setProperty("db.h2.hhDataFile", "db-h2-hhData.sql");
 
         // server settings
         setProperty("server.port", "8080");
