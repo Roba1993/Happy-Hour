@@ -1,45 +1,24 @@
 package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
-
-
-
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
-
 import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-
-
-import spark.Request;
-
-
-
-
 import com.google.gson.Gson;
-
-
-
-
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.FourSquareConnection;
 import de.dhbw.hh.dao.HappyHourDAO;
-import de.dhbw.hh.dao.h2.H2HappyHourDAO;
-import de.dhbw.hh.foursquare.FourSquareInterface;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.HappyHour;import de.dhbw.hh.models.RESTResponse;
 
-
 /**
  * Diese Klasse stellt die Methoden für die REST Schnittstelle für 
- * eine GET Anfrage auf den Pfad /bars bereit.
+ * eine GET Anfrage auf den Pfad /bars bereit. 
+ * 
  * @author Tobias Häußermann
- *
+ * @version 0.8
  */
 public class BarsREST {
 	
@@ -49,7 +28,7 @@ public class BarsREST {
 	
 	public BarsREST(DAOFactory daoFactory) {
 		
-		FourSquareInterface foursquare = new FourSquareInterface();
+		FourSquareConnection foursquareConnection = new FourSquareConnection();
 		HappyHourDAO happyHours = daoFactory.getHappyHourDAO();
 		
 		/**
@@ -64,35 +43,35 @@ public class BarsREST {
 		 * X-----------------X----------------------------------X
 		 */
 		get("/bars", "application/json", (request, response) -> {
-			LOG.debug("HTTP-GET Anfrage eingetroffe: "+request.queryString());
-//			Log.debug(request.queryParams(""));
-//			Log.debug(request.queryParams(""));
-//			Log.debug(request.queryParams(""));
-//			Log.debug(request.queryParams(""));
-//			
+			LOG.debug("HTTP-GET Anfrage eingetroffen: "+request.queryString());
+			
 			float lng = Float.parseFloat(request.queryParams("longitude"));	//			float lng = 48.957848f;
 			float lat = Float.parseFloat(request.queryParams("latitude"));	//			float lat = 9.422454f;
 			int rad = Integer.parseInt(request.queryParams("radius"));		//			int rad = 2000;
 			int day = Integer.parseInt(request.queryParams("weekday"));
 			
 			ArrayList<Bar> rawBars = new ArrayList<Bar>();
+			// Überprüfung ob die Abfrage oder eine Ähnliche schon einmal abgesetzt wurde
 			boolean alreadyCached = isAlreadyInCache(lng, lat, rad);
 			
 			if(alreadyCached){
-				
+				// do nothing
 			}
 			else{
-				rawBars = foursquare.getBarsInArea(lng, lat, rad);
+				rawBars = foursquareConnection.getBarsInArea(lng, lat, rad);
 				int count = rawBars.size();
 				for(int i=0;i<count;i++){
-					Bar currentBar = rawBars.get(i);
-					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHours.findHappyHour(currentBar.getId());
-					currentBar.setHappyHours(hh);
+					String id = rawBars.get(i).getId();
+					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHours.findHappyHour(id);
+					
+					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
+					rawBars.get(i).setHappyHours(hh);
 				}
 				//TODO activate filter as soon as happy-hour data is available
-//				rawBars = filterBars(rawBars, day);
+				// rawBars = filterBars(rawBars, day);
 			}
 			
+			// REST-Response erstellen
 			RESTResponse restResponse = new RESTResponse();
 			restResponse.setName(request.queryString());
 			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
@@ -102,6 +81,8 @@ public class BarsREST {
 			
 			response.type("application/json");
 			
+			// In diesem Schritt wird die vorgefertigte REST-Response in das JSON-Format umgewandelt
+			// und zurückgegeben.
 			return gson.toJson(restResponse);
 		});
 		
@@ -111,13 +92,20 @@ public class BarsREST {
 	 * Sortiert alle Bars aus, die am verlangten Tag keine Happy-Hour haben.
 	 * @param rawBars
 	 * @param day
+	 * @return Gibt die Liste in aktualisierter Form zurück
 	 */
 	private ArrayList<Bar> filterBars(ArrayList<Bar> rawBars, int day) {
+		
+		// Schleife durch alle Bars in der übergebenen Liste
 		for(int i=0;i<rawBars.size();i++){
-			int size = rawBars.get(i).getHappyHours().size();
+			ArrayList<HappyHour> hhList = rawBars.get(i).getHappyHours();
+			int size = hhList.size();
 			boolean b = false;
+			
+			//Schleife durch alle Einträge in der Happy-Hour-Liste
 			for(int j=0;j<size;j++){
-				HappyHour hh = rawBars.get(i).getHappyHours().get(j);
+				HappyHour hh = hhList.get(j);
+				// Abgleich des aktuellen Wochentags mit den Einträgen aus der Happy-Hour-Liste
 				switch(day){
 					case 1: if(hh.isMonday()) b = true; break;
 					case 2: if(hh.isTuesday()) b = true; break;
@@ -130,7 +118,9 @@ public class BarsREST {
 				if(b)
 					continue;
 			}
-			if(!b){
+			if(!b){		
+				// Falls kein Happy-Hour-Eintrag mit dem aktuellen Wochentag übereingestimmt
+				// hat, so wird die Bar aus der Liste entfernt. 
 				rawBars.remove(i);
 				i--;
 			}
@@ -146,7 +136,7 @@ public class BarsREST {
 	 * @return
 	 */
 	private boolean isAlreadyInCache(float lng, float lat, int rad){
-		
+		// Wird zu einem späteren Zeitpunkt umgesetzt
 		return false;
 	}
 	

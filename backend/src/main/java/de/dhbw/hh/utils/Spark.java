@@ -3,6 +3,7 @@ package de.dhbw.hh.utils;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.rest.BarsREST;
 import de.dhbw.hh.rest.LoginFILTER;
+import de.dhbw.hh.rest.HappyHourREST;
 import de.dhbw.hh.rest.ReportsREST;
 import de.dhbw.hh.rest.RoutesREST;
 import de.dhbw.hh.rest.TestrunREST;
@@ -52,6 +53,7 @@ public class Spark {
 		new TopRouteREST(daoFactory);
 		new RoutesREST(daoFactory);
 		new BarsREST(daoFactory);
+		new HappyHourREST(daoFactory);
 	}
 
 	/**

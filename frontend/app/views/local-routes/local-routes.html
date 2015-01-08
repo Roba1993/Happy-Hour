@@ -1,3 +1,15 @@
+<div id="e__popup-overlay" ng-class="{is__open: popupOpen}">
+    <div class="e__popup-window">
+        <div class="e__popup-window-content">
+            <h1>Route entfernen</h1>
+            <p>Wollen sie die Route wirklich entfernen?</p>
+        </div>
+        <div class="e__popup-window-button">
+            <div class="e__btn col-6" ng-click="popupOpen = false">Abbrechen</div>
+            <div class="e__btn col-6" ng-click="removeRoute(routeToDelete); popupOpen = false">Entfernen</div>
+        </div>
+    </div>
+</div>
 <div id="main" class="clearfix">
     <div id="theatre-head" class="grid">
         <div id="theatre-head-topbar" class="grid">
@@ -26,7 +38,7 @@
 		
 		<section id="theatre-myroutes">
 			<ul class="e__list-small">
-				<li ng-repeat="localRoute in localRoutes" class="e__list-small-element clearfix">
+				<li ng-repeat="localRoute in localRoutes" class="e__list-small-element clearfix" ng-click="openRoute(localRoute.id)">
 					<div class="e__list-small-element-icon clearfix"></div>
 					<div class="e__list-small-element-content clearfix">
 						<h3 class="e__list-small-element-head">{{localRoute.route.name}}</h3>
@@ -36,7 +48,7 @@
 						</div>	
 					</div>
 					<div class="e__list-small-element-options clearfix">
-						<span ng-click="removeRoute(localRoute.id)" class="e__btn i-f__trash"></span>
+						<span ng-click="$parent.popupOpen = true; $parent.routeToDelete = localRoute.id; $event.stopPropagation()" class="e__btn i-f__trash"></span>
 					</div>
 				</li>
 			</ul>	

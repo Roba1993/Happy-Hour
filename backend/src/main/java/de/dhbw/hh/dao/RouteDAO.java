@@ -21,14 +21,6 @@ public interface RouteDAO {
 	public boolean insertRoute(Route route);
 	
 	/**
-	 * Diese Funktion löscht eine Route aus der Datenbank
-	 * 
-	 * @param hash Wert anhand dem die zu löschende Route identifiziert werden 
-	 * @return true wenn erfolgreich, ansonsten false
-	 */
-	public boolean deleteRoute(String hash);
-	
-	/**
 	 * Diese Funktion findet eine bestimmte Route anhand ihres Hashwerts
 	 * 
 	 * @param hash Wert nach dem die Route gesucht wird

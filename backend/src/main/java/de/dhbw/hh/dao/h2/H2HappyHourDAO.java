@@ -75,13 +75,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
 	}
 
 	@Override
-	public boolean updateHappyHour(HappyHour newHappyHour) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteHappyHour(String id) {
+	public boolean deleteHappyHour(int id) {
 		String sql = "DELETE FROM happyHour WHERE id=?";
 
         try (Connection connection = cpds.getConnection()) {
@@ -90,7 +84,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
 
             // Immer mit PreparedStatements arbeiten
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, id);
+                preparedStatement.setInt(1, id);
 
                 // Füge das Statement der Ausführungsschlange hinzu
                 preparedStatement.addBatch();

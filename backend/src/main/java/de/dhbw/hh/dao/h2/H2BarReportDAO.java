@@ -65,15 +65,9 @@ public class H2BarReportDAO implements BarReportDAO {
 	}
 
 	@Override
-	public boolean updateBarReport(BarReport barReport) {
-		// ToDo
-		return false;
-	}
-
-	@Override
 	public boolean deleteBarReport(String barID) {
 		 String sql = "DELETE FROM barReport WHERE barID=?";
-
+		 
 	        try (Connection connection = cpds.getConnection()) {
 	            // Immer ohne Autocommits arbeiten
 	            connection.setAutoCommit(false);
@@ -91,7 +85,9 @@ public class H2BarReportDAO implements BarReportDAO {
 
 	            // Schreibe die Änderungen in die Datenbank
 	            connection.commit();
+
 	            return true;
+	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

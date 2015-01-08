@@ -7,6 +7,6 @@ angular.module('happyHour.views.currentRouteMap', ['ngRoute'])
   });
 }])
 
-.controller('currentRouteMapController', ['$scope', function($scope) {
-	$scope.test = 'currentRouteMapController!!';
+.controller('currentRouteMapController', ['$scope', 'AppStatusPersistenceService', function($scope, AppStatusPersistenceService) {
+	$scope.route = AppStatusPersistenceService.getRoute();
 }]);
