@@ -28,6 +28,6 @@ VALUES
 ('104', 'kkks881k2jn', 'Ich mag diese Bar nicht');
 
 -- Fügt Test-Datensätze in die user Datenbanktabelle ein
-INSERT INTO user (id, password)
+INSERT INTO user (name, hashPw)
 VALUES
 ('12180', 'passw=rd');

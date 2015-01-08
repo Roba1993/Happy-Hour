@@ -2,6 +2,7 @@ package de.dhbw.hh.utils;
 
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.rest.BarsREST;
+import de.dhbw.hh.rest.LoginFILTER;
 import de.dhbw.hh.rest.ReportsREST;
 import de.dhbw.hh.rest.RoutesREST;
 import de.dhbw.hh.rest.TestrunREST;
@@ -42,6 +43,9 @@ public class Spark {
 			externalStaticFileLocation(properties.getProperty("server.web"));
 		}
 
+		// Filter einbinden
+		new LoginFILTER(daoFactory);		
+		
 		// Binde die Rest-Module ein
 		new TestrunREST(daoFactory);
 		new ReportsREST(daoFactory);

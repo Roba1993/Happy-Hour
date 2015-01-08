@@ -14,5 +14,5 @@ public interface UserDAO {
 	 * @param name Name nach dem das Password gesucht wird
 	 * @return gesamte Route-Objekt bei Erfolg. Wenn nichts gefunden wird null
 	 */	
-	public boolean checkLogin(String name, String hashPw);
+	public boolean checkLogin(String name, String password);
 }

@@ -3,10 +3,11 @@ package de.dhbw.hh.dao.h2;
 import static org.junit.Assert.*;
 
 import java.io.FileReader;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.h2.tools.RunScript;
 import org.junit.Before;
@@ -68,25 +69,25 @@ public class H2UserDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		// Befüllt das User Objekt zum Testen 
-				user = new User();
-				user.setName("Admin");
-				// user.setHashPw("password");
+		user = new User();
+		user.setName("Admin");
+		String hashPw = md5("Passwort");
+										
+		// Löscht alle Einträge aus der User Tabelle
+		try (Connection connection = cpds.getConnection()) {
+			try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user")) {
+				preparedStatement.execute();
+			}
 				
-				// Löscht alle Einträge aus der User Tabelle
-				try (Connection connection = cpds.getConnection()) {
-		            try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user")) {
-		                preparedStatement.execute();
-		            }
-				
-					// Fügt das neue User Objekt in die Datenbank ein
-			        try (PreparedStatement preparedStatement = connection.prepareStatement(
-			                "INSERT INTO user (name) " +
-			                        "VALUES (?)")) {
-			            preparedStatement.setString(1, user.getName());
-			            // preparedStatement.setString(2, user.getHashPw());
-			            preparedStatement.execute();
-			        }
-				}
+			// Fügt das neue User Objekt in die Datenbank ein
+			try (PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO user (name, hashPw) " +
+			                        "VALUES (?,?)")) {
+				preparedStatement.setString(1, user.getName());
+				preparedStatement.setString(2, hashPw);
+				preparedStatement.execute();
+			}
+		}
 	}
 
 	/**
@@ -96,29 +97,35 @@ public class H2UserDAOTest {
 	 */
 	@Test
 	public void testCheckLogin() {
-		try (Connection connection = cpds.getConnection()) {
-			
-			try (PreparedStatement preparedStatement = connection.prepareStatement
-					("SELECT name FROM user WHERE name=? and hashPw=?")) {
-				
-					// Führt die SQL-Abfrage durch und speichert die zurückgegebenen Daten in eine Collection
-					ResultSet resultSet = preparedStatement.executeQuery();
-
-					// Überprüft die Rückgabe der SQL-Abfrage
-					if(resultSet.wasNull()) {
-						// Gibt false zurück, wenn die Rückgabe-Collection aus der Datenbank leer ist
-						System.out.println("Das eingegebene Passwort stimmt NICHT mit dem aus der Datenbank überein.");
-					} else {
-						// Wenn ein Wert vorhanden ist, wird true zurückgegegben
-						System.out.println("Das eingegebene Passwort stimmt mit dem aus der Datenbank überein.");
-					}
-			} catch (Exception e){
-					e.printStackTrace();
-					}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		// Übergabe des Namens und des Passworts an die checkLogin Funktion
+		boolean user = h2UserDAO.checkLogin("Admin", "Passwort");
+					
+		// Methode muss true zurückgegen, dann war die Überprüfung des Passworts erfolgreich 
+		assertTrue(user);
+	}
+	
+	private static String md5(String input) {
+		// Erzeugt einen hash-String, in den der Hash für die Rückgabe eingefügt wird
+        String hash = null;
+        
+        // Wenn der übergebene Wert null ist, wird auch null zurückgegeben
+        if(null == input) return null;
+         
+        try {  
+        // Erstellt ein Message Digest Objekt für MD5
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+         
+        // Updatet den Input-String in das Message Digest Objekt
+        digest.update(input.getBytes(), 0, input.length());
+ 
+        // Konvertiert Message Digest Wert in einen Basis 16 (hex) Hash
+        hash = new BigInteger(1, digest.digest()).toString(16);
+ 
+        } catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 		}
+        // Rückgabe des MD5 Hash-Werts
+        return hash;
 	}
 		
 }

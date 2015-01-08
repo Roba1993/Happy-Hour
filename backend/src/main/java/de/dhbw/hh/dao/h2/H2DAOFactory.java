@@ -12,6 +12,7 @@ import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.dao.TestrunDAO;
+import de.dhbw.hh.dao.UserDAO;
 
 import org.h2.tools.RunScript;
 
@@ -104,6 +105,12 @@ public class H2DAOFactory extends DAOFactory {
 	@Override
 	public HappyHourDAO getHappyHourDAO() {
 		return new H2HappyHourDAO(cpds);
+	}
+
+	@Override
+	public UserDAO getUserDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
