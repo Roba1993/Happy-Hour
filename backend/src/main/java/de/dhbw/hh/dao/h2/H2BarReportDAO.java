@@ -80,7 +80,7 @@ public class H2BarReportDAO implements BarReportDAO {
 	                preparedStatement.addBatch();
 
 	                // Führe alle Statements aus
-	                preparedStatement.executeUpdate();
+	                preparedStatement.executeBatch();
 	            }
 
 	            // Schreibe die Änderungen in die Datenbank
