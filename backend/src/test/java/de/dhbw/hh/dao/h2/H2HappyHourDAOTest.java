@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
+import java.util.Collection;
 
 import org.h2.tools.RunScript;
 import org.junit.Before;
@@ -189,5 +190,74 @@ public class H2HappyHourDAOTest {
             }
         }
 	}
+	
+	
+	/**
+	 * Teste, ob HappyHour in Datenbank eingefügt werden kann
+	 * @author Marcus
+	 * @throws Exception 
+	 */
+	@Test
+	public void testInsertHappyHour() throws Exception {
+		// Erzeuge neue HappyHour
+		HappyHour happyHour = new HappyHour();
+		happyHour.setID(4);
+		happyHour.setBarID("kasd32mma87h9n");
+		happyHour.setDescription("Geile Happy-Hour mit Tour-de-sauf");
+		happyHour.setStart(new Time(1900));;
+		happyHour.setEnd(new Time(2100));
+		happyHour.setMonday(false);
+		happyHour.setTuesday(false);
+		happyHour.setWednesday(true);
+		happyHour.setThursday(true);
+		happyHour.setFriday(false);
+		happyHour.setSaturday(true);
+		happyHour.setSunday(false);
+		
+		// Führe zu testende Methode zum Einfügen einer Happy Hour aus
+		h2HappyHourDAO.insertHappyHour(happyHour);
+		
+		// Frage die eingefügte HappyHour aus der Datenbank ab
+		ResultSet resultSet;
+		try (Connection connection = cpds.getConnection()) {
+			try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM happyHour WHERE id=?")) {
+				preparedStatement.setInt(1, happyHour.getID());
+				resultSet = preparedStatement.executeQuery();
+				
+				// Prüfe ob genau eine HappyHour ausgelesen wurde
+				resultSet.last();
+				assertEquals(1, resultSet.getRow());
+				
+				// Prüfe ob die einzelnen Variablen der HappyHour richtig gespeichert wurden
+				assertEquals(happyHour.getID(), resultSet.getInt("id"));
+				assertEquals(happyHour.getBarID(), resultSet.getString("barID"));
+				assertEquals(happyHour.getDescription(), resultSet.getString("description"));
+				assertEquals(happyHour.getStart(), resultSet.getTime("start"));
+				assertEquals(happyHour.getEnd(), resultSet.getTime("end"));
+				assertEquals(happyHour.isMonday(), resultSet.getBoolean("monday"));
+				assertEquals(happyHour.isTuesday(), resultSet.getBoolean("tuesday"));
+				assertEquals(happyHour.isWednesday(), resultSet.getBoolean("wednesday"));
+				assertEquals(happyHour.isThursday(), resultSet.getBoolean("thursday"));
+				assertEquals(happyHour.isFriday(), resultSet.getBoolean("friday"));
+				assertEquals(happyHour.isSaturday(), resultSet.getBoolean("saturday"));
+				assertEquals(happyHour.isSunday(), resultSet.getBoolean("sunday"));
+				
+            }
+        }
+	}
 
+	/**
+	 * Teste ob alle HappyHour zu einer zugehörigen BarID gefunden werden
+	 * @author Marcus
+	 * @throws Exception
+	 */
+	@Test
+	public void testFindHappyHour() {
+        // Führe zu testende Methode zum Suchen der BarReports aus
+		Collection<HappyHour> happyHours =  h2HappyHourDAO.findHappyHour(happyHour1.getBarID());
+        
+        // Prüft ob zwei HappyHours gefunden wurden
+        assertEquals(2, happyHours.size());        
+	}
+	
 }

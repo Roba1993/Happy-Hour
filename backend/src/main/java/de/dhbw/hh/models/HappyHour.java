@@ -10,7 +10,7 @@ import java.sql.Time;
 
 public class HappyHour {
 	
-	private int id;
+	private int id = 0;
 	private String barID = "";
 	private String description = "";
 	private Time start = new Time(0);

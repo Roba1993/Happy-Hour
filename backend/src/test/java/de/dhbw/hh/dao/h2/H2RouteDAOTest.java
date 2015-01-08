@@ -21,7 +21,7 @@ import de.dhbw.hh.models.Route;
 /**
  * Diese Klasse testet die Anfrage der Routen
  * 
- * @author Maren
+ * @author Marcus
  */
 public class H2RouteDAOTest {
 
