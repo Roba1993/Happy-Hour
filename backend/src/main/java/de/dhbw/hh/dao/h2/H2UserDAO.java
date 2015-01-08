@@ -78,6 +78,11 @@ public class H2UserDAO implements UserDAO {
 		return false;
 	}
 	
+	/**
+	 * Diese Methode wandelt einen String, der übergeben wird, in einen MD5 Hash um
+	 * @param input
+	 * @return hash
+	 */
 	private static String md5(String input) {
 		// Erzeugt einen hash-String, in den der Hash für die Rückgabe eingefügt wird
         String hash = null;
