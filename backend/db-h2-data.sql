@@ -67,7 +67,7 @@ VALUES
 ('103', 'hhasd82njasu', 'Die Bar ist langweilig'),
 ('104', 'kkks881k2jn', 'Ich mag diese Bar nicht');
 
--- Fügt Test-Datensätze in die user Datenbanktabelle ein
+-- Fügt Datensätze in die Admin-user Datenbanktabelle ein
 INSERT INTO user (name, hashPw)
 VALUES
-('Admin', 'passw=rd');
+('Admin', '4396cb8f54513b144667f5b6bab2fb95');
