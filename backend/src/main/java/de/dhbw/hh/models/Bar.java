@@ -4,16 +4,32 @@ import java.util.ArrayList;
 
 import de.dhbw.hh.models.HappyHour;
 
+/**
+ * Diese Klasse repräsentiert eine Bar mit folgenden Eigenschaften:
+ * Bar-ID, 
+ * Bar-Name, 
+ * Rating, 
+ * Kosten, 
+ * Beschreibung, 
+ * URL für eine Bar-Bild, 
+ * Geo-Position, 
+ * Adresse, 
+ * Öffnungszeiten, 
+ * Happy-Hour-Zeiten
+ * 
+ * @author Tobias Häußermann
+ * @version 1.0
+ */
 public class Bar {
 
-	private String id;
-	private String name;
-	private int rating;
-	private int costs;
-	private String description;
-	private String imageUrl;
+	private String 	id;
+	private String 	name;
+	private int 	rating;
+	private int 	costs;
+	private String 	description;
+	private String 	imageUrl;
 	private Location location;
-	private String adress;
+	private String 	adress;
 	private Object[] openingTimes;
 	private ArrayList<HappyHour> happyHours;
 	
