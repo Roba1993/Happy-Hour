@@ -622,16 +622,16 @@
 .i-f__star:before.active,
 .i-f__star:before {
     content: "\e607";
-    font-size: 1.4rem;
-    line-height: 2;
+    font-size: 1rem;
+    line-height: 1;
     color:#c0c0c0;
 }
 .i-f__download:before:active,
 .i-f__download:before.active,
 .i-f__download:before {
     content: "\e602";
-    font-size: 1.4rem;
-    line-height: 2;
+    font-size: 1rem;
+line-height: 1;
     color:#c0c0c0;
 }
 .i-f__options:before:active,
@@ -642,13 +642,12 @@
     line-height: 2;
     color:#c0c0c0;
 }
-}
 .i-f__impressum:before:active,
 .i-f__impressum:before.active,
 .i-f__impressum:before {
     content: "\e608";
-    font-size: 1.4rem;
-    line-height: 2;
+    font-size: 1rem;
+line-height: 1;
     color:#c0c0c0;
 }
 /** Icons mit Image **/
