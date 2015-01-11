@@ -682,6 +682,9 @@ line-height: 1;
 #e__impressum-header h1{
 	display: inline;
 }
+#e__impressum-header a{
+	float: right;
+}
 #e__impressum-content{
 	padding:15px;
 	padding-top:5%;
