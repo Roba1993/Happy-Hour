@@ -530,6 +530,31 @@
     margin:4px 0px;
 }
 
+//** Back Icon - Simon **//
+.i__back {
+	padding: 18px 21px 18px 15px;
+}
+.i__back >.icon-bar {
+	background-color: #ABABAB;
+    display: block;
+    height: 3px;
+    border-radius: 1px;
+}
+.i__back >.icon-bar:first-of-type {
+	transform: rotate(140deg);	
+	width: 20px;
+}
+.i__back >.icon-bar:last-of-type {
+	transform: rotate(220deg);	
+	width: 20px;
+}
+.i__back >.icon-bar:nth-of-type(2) {
+	width: 31px;
+	margin:4px 0px;
+}
+//** /Back Icon - Simon **//
+
+
 /** Icons mit Iconfont **/
 /**
  * Logo: e600
