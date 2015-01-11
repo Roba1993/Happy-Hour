@@ -60,4 +60,12 @@ public class Route {
 		return hash.isEmpty();
 	}
 	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
+	public String toString(){
+		return ("hash: " + hash + " Data: " + data + " TopRoute true/false?: " + top);
+	}
+	
 }

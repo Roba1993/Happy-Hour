@@ -1,6 +1,7 @@
 package de.dhbw.hh.models;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -15,12 +16,16 @@ public class RouteTest {
 	 */
 	@Test
 	public void testConstructor() {
+		// Erstellt ein Route Objekt
 		Route r = new Route("Hashwerttest", "Dies ist ein Json Test Objekt", true);
 		
-		 assertEquals("Hashwerttest", r.getHash());
-		 assertEquals("Dies ist ein Json Test Objekt", r.getData());
-		 assertEquals(true, r.isTop());
+		// Testet, ob die Werte übereinstimmen
+		assertEquals("Hashwerttest", r.getHash());
+		assertEquals("Dies ist ein Json Test Objekt", r.getData());
+		assertEquals(true, r.isTop());
 		
+		// Gibt die Daten in einem String aus
+		System.out.println(r.toString());		
 	}
 
 }
