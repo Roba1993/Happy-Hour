@@ -563,6 +563,7 @@
  * Reload: e605
  * Reload2: e606
  * Star: e607
+ * Impressum: e608
  */
 [class*="i-f__"] {
     font-family: 'gohappy';
@@ -637,6 +638,15 @@
 .i-f__options:before.active,
 .i-f__options:before {
     content: "\e604";
+    font-size: 1.4rem;
+    line-height: 2;
+    color:#c0c0c0;
+}
+}
+.i-f__impressum:before:active,
+.i-f__impressum:before.active,
+.i-f__impressum:before {
+    content: "\e608";
     font-size: 1.4rem;
     line-height: 2;
     color:#c0c0c0;
