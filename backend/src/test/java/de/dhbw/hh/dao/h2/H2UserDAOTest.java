@@ -3,9 +3,6 @@ package de.dhbw.hh.dao.h2;
 import static org.junit.Assert.*;
 
 import java.io.FileReader;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -13,8 +10,6 @@ import org.h2.tools.RunScript;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -27,8 +22,6 @@ import de.dhbw.hh.utils.HashConverter;
  * @author Maren
  */
 public class H2UserDAOTest {
-	// Initialisiert einen Logger für die Fehlerausgabe
-    static final Logger log = LoggerFactory.getLogger(HashConverter.class);
 	
 	// Der Connectionpool für die Tests
     private static ComboPooledDataSource cpds;

@@ -6,7 +6,7 @@ package de.dhbw.hh.models;
  * @author Maren
  */
 public class Route {
-	
+	// Erstellen der Variablen
 	private String hash = "";
 	
 	private String data = "";
@@ -29,7 +29,6 @@ public class Route {
 		
 	}
 	
-
 	// Nun folgen alle Getter und Setter Methoden
 	public String getHash() {
 		return hash;
