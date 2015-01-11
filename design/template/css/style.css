@@ -240,6 +240,10 @@ h3 {
 	padding-right: 20px;
 }
 
+.sidebar-theatre-box #location {
+	margin-top: -15px;
+}
+
 .sidebar-theatre-box h3{
 	color:#fff;
 	display: inline;
