@@ -4,8 +4,8 @@ import java.sql.Time;
 
 /**
  * Datenklasse für Happy Hour Zeiten
- * @author Marcus
  *
+ * @author Marcus
  */
 
 public class HappyHour {

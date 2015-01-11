@@ -1,19 +1,7 @@
 package de.dhbw.hh.dao.h2;
 
-/**
- * 
- * @author Robert
- */
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-
-import de.dhbw.hh.dao.BarReportDAO;
-import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.dao.HappyHourDAO;
-import de.dhbw.hh.dao.RouteDAO;
-import de.dhbw.hh.dao.TestrunDAO;
-import de.dhbw.hh.dao.UserDAO;
-
+import de.dhbw.hh.dao.*;
 import org.h2.tools.RunScript;
 
 import java.beans.PropertyVetoException;
@@ -25,6 +13,8 @@ import java.util.Properties;
 
 /**
  * H2Factory zum erstellen der H2DAO Objekte.
+ *
+ * @author Robert
  */
 public class H2DAOFactory extends DAOFactory {
 
@@ -82,11 +72,7 @@ public class H2DAOFactory extends DAOFactory {
 
     }
 
-    @Override
-    public TestrunDAO getTestrunDAO() {
-        return new H2TestrunDAO(cpds);
-    }
-    
+    //******* Folgend die Zugriffsfunktionen auf die DAO Klassen
     @Override
 	public BarReportDAO getBarReportDAO() {
 		return new H2BarReportDAO(cpds);
@@ -109,8 +95,7 @@ public class H2DAOFactory extends DAOFactory {
 
 	@Override
 	public UserDAO getUserDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new H2UserDAO(cpds);
 	}
 	
 }

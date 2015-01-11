@@ -162,7 +162,8 @@ public class H2RouteDAOTest {
 	}
 
 	/**
-	 * 
+	 * Test der Insert Route Funktion
+	 *
 	 * @author Michael
 	 */
 	@Test

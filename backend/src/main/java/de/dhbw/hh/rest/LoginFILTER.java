@@ -10,8 +10,8 @@ import de.dhbw.hh.dao.h2.H2UserDAO;
 
 /**
  * Diese Klasse filtert die Zugriffe auf die Funktionen
- * @author Maren
  *
+ * @author Maren
  */
 public class LoginFILTER {
 
@@ -20,7 +20,8 @@ public class LoginFILTER {
     
 	/**
 	 * Diese Funktion ist ein Konstruktor, um Anfragen über die REST Schnittstelle zu filtern
-	 * @param daoFactory
+	 *
+	 * @param daoFactory Ein object des Types daoFactory wird benötigt
 	 */
 	public LoginFILTER(DAOFactory daoFactory) {	
 		

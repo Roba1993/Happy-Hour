@@ -5,8 +5,8 @@ import de.dhbw.hh.models.HappyHour;
 
 /**
  * Dieses Interface definiert, welche Methoden die jeweiligen DAOs implementieren müssen.
- * @author Marcus
  *
+ * @author Marcus
  */
 public interface HappyHourDAO {
 	
@@ -17,22 +17,22 @@ public interface HappyHourDAO {
      * @return True bei Erfolg, andernfalls false.
      * 
      */
-	public boolean insertHappyHour(HappyHour HappyHour);
+	public boolean insertHappyHour(HappyHour happyHour);
 	
 	/**
      * Diese Funktion löscht eine HappyHour aus der Datenbank anhand seiner ID.
      *
-     * @param barID Die BarID anhand die HappyHour zugeordnet wird.
+     * @param id Die BarID anhand die HappyHour zugeordnet wird.
      * @return True bei Erfolg, andernfalls false.
      */
 	public boolean deleteHappyHour(int id);
 	  /**
      * Diese Funktion findet einen bestimmte HappyHour anhand ihrer BarID.
      *
-     * @param barID Die BarID nach der gesucht werden soll.
+     * @param id Die BarID nach der gesucht werden soll.
      * @return Gibt bei Erfolg das gefundene HappyHour-Objekt zurück. Wenn nichts
      * gefunden wird, enthält die Rückgabe den Wert null.
      */
-    public Collection<HappyHour> findHappyHour(String barID);
+    public Collection<HappyHour> findHappyHour(String id);
 	
 }

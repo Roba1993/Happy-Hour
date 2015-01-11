@@ -1,5 +1,10 @@
 package de.dhbw.hh.models;
 
+/**
+ * Location Datenklasse
+ *
+ * @author Tobias
+ */
 public class Location {
 
 	public float longitude, latitude;

@@ -15,7 +15,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.UserDAO;
 
-
+/**
+ * Mit dieser Klasse können die User auf der H2 Datenbank verwaltet werden
+ *
+ * @author Maren
+ */
 public class H2UserDAO implements UserDAO {
 		
 	// Initialisiert einen Logger für die Fehlerausgabe

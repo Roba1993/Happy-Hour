@@ -4,16 +4,8 @@
 -- Create the database tables --
 --------------------------------
 
--- testrun
-create table testrun (
-  id                        identity not null,
-  name                      varchar(255),
-  date                      timestamp,
-  rounds                    bigint,
-  constraint pk_testrun primary key (id)
-);
--- Datenbanktabelle für die HappyHour Daten
 
+-- Datenbanktabelle für die HappyHour Daten
 create table happyHour (
 	id						identity not null,
 	barID					varchar(50),
@@ -31,7 +23,6 @@ create table happyHour (
 );
 
 -- Datenbanktabelle für die gespeicherten Routen (Top Routen und Shared Routen)
-
 create table route (
 	hash				varchar(255),
 	data				varchar(4096) not null,
@@ -40,14 +31,12 @@ create table route (
 );
 
 -- Datenbanktabelle für die Bar-Meldungen durch einen User
-
 create table barReport (
 	id						identity not null,
 	barID					varchar(50),
 	description				varchar(255),
 	constraint pk_barMeldung primary key (id)
 );
-
 -- Datenbanktabelle für die Administrator
 
 create table user (
@@ -60,8 +49,5 @@ create table user (
 ----------------------------
 -- Foreign Keys and Rules --
 ----------------------------
-
--- alter table notification add constraint fk_notification foreign key (barID) references barMeldung (barID) on delete cascade on update cascade;
-
 
 

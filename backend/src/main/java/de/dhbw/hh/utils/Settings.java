@@ -8,12 +8,12 @@ import java.util.Properties;
 
 /**
  * Diese Klasse stellt alle Funktionen zur Verwaltung der Eigenschaften bereit.
+ *
+ * @author Robert
  */
 public class Settings extends Properties {
 
-    /**
-	 * 
-	 */
+    // einmalige ID
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -87,8 +87,8 @@ public class Settings extends Properties {
      * Gebe eine Eigenschaft für einen Key zurück. Es existieren keine Case-Sensitve
      * Keys. Somit spielt die Groß- und Kleinschreibung bei den Keys keine Rolle.
      *
-     * @param key
-     * @return
+     * @param key Der eindeutige Key zur Value
+     * @return Die Angeforderte Value passend zum Key
      */
     @Override
     public String getProperty(String key) {

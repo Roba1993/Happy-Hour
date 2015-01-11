@@ -6,8 +6,8 @@ import org.junit.Test;
 
 /**
  * Dies Klasse testet die Datenklasse User
- * @author Maren
  *
+ * @author Maren
  */
 public class UserTest {
 

@@ -6,6 +6,8 @@ import java.util.Properties;
 
 /**
  * In dieser Klasse werden Logging Einstellungen vorgenommen
+ *
+ * @author Robert
  */
 public class LoggingConfiguration {
 

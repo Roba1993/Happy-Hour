@@ -2,8 +2,8 @@ package de.dhbw.hh.models;
 
 /**
  * Datenklasse für gemeldete Bars
- * @author Jonas
  *
+ * @author Jonas
  */
 
 public class BarReport {

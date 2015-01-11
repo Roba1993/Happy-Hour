@@ -18,7 +18,8 @@ import de.dhbw.hh.models.Location;
 /**
  * Diese Klasse kann dazu verwendet werden, alle Bars innerhalb eines bestimmten 
  * Radius von Foursquare abzufragen. Alle Suchergebnisse werden als Liste von Bars 
- * zurückgegeben.  
+ * zurückgegeben.
+ *
  * @author Tobias Häußermann
  * @version 0.9
  */
@@ -29,10 +30,12 @@ public class FourSquareConnection {
 	 * zurück. Die Methode nutzt ihrerseits die private Methode {@code explore(String query)}
 	 * um Ergebnisse zu bekommen. Die Suchergebnisse können durch folgende Parameter 
 	 * eingegrenzt werden:
+	 *
 	 * @param longitude GPS-Location Longitude als float
 	 * @param latitude GPS-Location Latitude als float
 	 * @param radius Radius in Metern
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
+	 *
 	 * @author Tobias Häußermann
 	 */
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, int radius){
@@ -79,6 +82,7 @@ public class FourSquareConnection {
 	 * 
 	 * @param query Der fertige Html-Request als String
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
+	 *
 	 * @author Tobias Häußermann
 	 */
 	private ArrayList<Bar> explore(String query){
@@ -135,7 +139,8 @@ public class FourSquareConnection {
 	
 	/**
 	 * Bisher noch nicht implementiert, da keine Notwendigkeit für diese Funktionalität
-	 * besteht. 
+	 * besteht.
+	 *
 	 * @return Diese Methode gibt nichts zurück.
 	 */
 	public Bar getBarByID(String id){

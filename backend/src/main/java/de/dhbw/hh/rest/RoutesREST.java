@@ -27,9 +27,7 @@ import static spark.Spark.get;
  */
 public class RoutesREST {
 
-/**
- * @author Michael	
- */
+
 	
 	static final Logger LOG = LoggerFactory.getLogger(RoutesREST.class);
 
@@ -37,8 +35,10 @@ public class RoutesREST {
 
 	public RoutesREST(DAOFactory daoFactory) {
 
+		/**
+		 * @author Michael
+		 */
 		post("/routes", "application/json", (request, response) -> {
-
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 			// Neue Route erstellen
 			Route route = new Route();
@@ -83,12 +83,11 @@ public class RoutesREST {
 
 		});
 
-/**
- * Gibt die Route über die REST Schnitstelle zurück
- * 
- * @author Tabea		
- */
-		
+		/**
+ 		* Gibt die Route über die REST Schnitstelle zurück
+ 		*
+ 		* @author Tabea
+ 		*/
 		get("/routes/:hash", "application/json", (request, response) -> {
 			// Routen aus der Datenbank holen
 			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));

@@ -16,10 +16,9 @@ import de.dhbw.hh.models.HappyHour;
  * Diese Klasse kommuniziert direkt mit der H2-Datenbank
  * und stellt die in dem Interface HappyHourDAO definierten
  * Funktionen bereit.
- * @author Marcus
  *
+ * @author Marcus
  */
-
 public class H2HappyHourDAO implements HappyHourDAO {
 	
 	 // Der Connectionpool

@@ -20,8 +20,8 @@ import de.dhbw.hh.models.HappyHour;
 
 /**
  * Diese Klasse testet alle Methoden der h2HappyHourDAO-Klasse
- * @author Jonas
  *
+ * @author Jonas
  */
 public class H2HappyHourDAOTest {
 
@@ -65,6 +65,7 @@ public class H2HappyHourDAOTest {
 	 /**
      * Diese Funktion wird vor jedem Testrun aufgerufen und setzt die
      * vorherigen Änderungen an der Datenbank zurück.
+	  *
 	 * @throws Exception
      */
 	@Before
@@ -171,6 +172,7 @@ public class H2HappyHourDAOTest {
 	
 	/**
 	 * Teste, ob eine HappyHours anhand seiner ID aus der Datenbank gelöscht wird
+	 *
 	 * @throws Exception 
 	 */
 	@Test
@@ -194,8 +196,10 @@ public class H2HappyHourDAOTest {
 	
 	/**
 	 * Teste, ob HappyHour in Datenbank eingefügt werden kann
+	 *
+	 * @throws Exception
+	 *
 	 * @author Marcus
-	 * @throws Exception 
 	 */
 	@Test
 	public void testInsertHappyHour() throws Exception {
@@ -248,8 +252,10 @@ public class H2HappyHourDAOTest {
 
 	/**
 	 * Teste ob alle HappyHour zu einer zugehörigen BarID gefunden werden
-	 * @author Marcus
+	 *
 	 * @throws Exception
+	 *
+	 * @author Marcus
 	 */
 	@Test
 	public void testFindHappyHour() {

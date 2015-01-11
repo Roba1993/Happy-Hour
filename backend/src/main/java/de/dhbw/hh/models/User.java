@@ -2,8 +2,8 @@ package de.dhbw.hh.models;
 
 /**
  * Dies ist die Datenklasse für die User Daten der Administratoren
- * @author Maren
  *
+ * @author Maren
  */
 public class User {
 	

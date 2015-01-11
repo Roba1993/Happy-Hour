@@ -30,8 +30,7 @@ public interface RouteDAO {
 	
 	
 	/**Diese Funktion gibt alle Top Routen zurück 
-	 * 
-	 * @param es wird nach allen TopRouten gesucht
+	 *
 	 * @return alle Top Routen bei Erfolg, andernfalls wird null zurückgegeben
 	 */	
 	public Collection<Route> findTopRoutes();

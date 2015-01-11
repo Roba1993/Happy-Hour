@@ -3,7 +3,7 @@ package de.dhbw.hh.models;
 /**
  * Diese Datenklasse stellt die Daten zu den sieben Top Routen bereit
  * 
- * @author: Maren
+ * @author Maren
  */
 public class Route {
 	

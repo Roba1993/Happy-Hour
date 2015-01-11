@@ -1,30 +1,22 @@
 package de.dhbw.hh.dao;
 
-/**
- * 
- * @author Robert
- */
-
 import de.dhbw.hh.dao.h2.H2DAOFactory;
 
 import java.util.Properties;
 
 /**
  * Mit dieser Klasse kann eine Datenbank-Factory erstellt werden.
+ *
+ * @author Robert
  */
 public abstract class DAOFactory {
     // Liste der unterstützen Datenbanken
     public static final int H2 = 1;
 
     // Funktionen um die DAO-Klassen zu bekommen
-    public abstract TestrunDAO getTestrunDAO();
-    
     public abstract BarReportDAO getBarReportDAO();
-   
     public abstract RouteDAO getRouteDAO();
-    
     public abstract UserDAO getUserDAO();
-
     public abstract HappyHourDAO getHappyHourDAO();
 
 

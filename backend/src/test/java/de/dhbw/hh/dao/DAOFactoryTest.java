@@ -8,6 +8,11 @@ import java.util.Properties;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test der DaoFactory Klasse
+ *
+ * @author Robert
+ */
 public class DAOFactoryTest {
 
     // Die benötigten Eigenschaften
@@ -30,15 +35,6 @@ public class DAOFactoryTest {
         properties.setProperty("db.h2.password", "toor");
         properties.setProperty("db.h2.maxStatements", "200");
         properties.setProperty("db.h2.maxPoolSize", "10");
-    }
-
-    /**
-     * Teste ob ein DAO erzeugt wird.
-     * @throws Exception
-     */
-    @Test
-    public void testGetTestrunDAO() throws Exception {
-        assertNotNull(H2DAOFactory.getDaoFactory(DAOFactory.H2, properties).getTestrunDAO());
     }
 
     /**
