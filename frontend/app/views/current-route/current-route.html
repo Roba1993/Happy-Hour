@@ -1,3 +1,14 @@
+<div id="e__impressum" ng-class="{is__open: showImpressum}">
+	<div id="e__impressum-header">
+		<h1>Impressum</h1>
+		<h1><a ng-click="showImpressum = false">Schließen</a></h1>
+	</div>
+	<div id="e__impressum-content">
+		<p>Lorem Ipsum asd asdkj</p>
+	</div>
+	</div>
+</div>
+
 <input type="checkbox" id="is__sidebar-open" class="hidden" ng-model="isSidebarOpen" aria-hidden="true"/>
 <div id="main" class="clearfix">
     <aside id="sidebar">
@@ -12,22 +23,28 @@
 			<div class="sidebar-theatre-box">
 			
 				<h3>Ort / Plz</h3>
-				<input-places options="" result="route.options.location" />
+				<br>
+				<div class="col-11">
+					<input-places options="" result="route.options.location" />
+				</div>
+				<div class="col-1 align-right">
+					<a ng-click="setLocationToDevice()" class="e__btn i-f__maps" id="location"></a>
+				</div>
 			</div>
 			<div class="sidebar-theatre-box">
 				<h3>Tag</h3><br>
 				<input-day result="route.options.weekday" />
 			</div>
 			<div class="sidebar-theatre-box">
-				<h3>Radius</h3>
+				<h3>Radius (km)</h3>
 				<input-slider options="{min:0.1, max:10, step:0.1, from:1, hide_min_max:true}" result="route.options.radius" />
 			</div>
 			<div class="sidebar-theatre-box">
-				<h3>Uhrzeit</h3>
+				<h3>Uhrzeit (h)</h3>
 				<input-slider options="{type:'double', values: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00', '08:00','09:00','10:00','11:00'], from:8, to:15, hide_min_max:true}" result="routeTime" />
 			</div>
 			<div class="sidebar-theatre-box">
-				<h3>Verweilzeit</h3>
+				<h3>Verweilzeit (h)</h3>
 				<input-slider options="{min:0, max:6, step:0.5, from:1, hide_min_max:true}" result="route.options.stayTime" />
 			</div>
 			<div class="seperator"></div>
@@ -37,6 +54,10 @@
 			<div class="seperator"></div>
 			<div ng-click="saveRoute()" class="sidebar-theatre-box">
 				<span class="i-f__download"></span><h3>Offline speichern</h3>
+			</div>
+			<div class="seperator"></div>
+			<div ng-click="showImpressum = true" class="sidebar-theatre-box">
+				<span class="i-f__impressum"></span><h3>Impressum</h3>
 			</div>
 			<div class="seperator"></div>
 		</div>

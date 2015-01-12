@@ -178,26 +178,6 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 			]);
 		});
 	});
-	
-	// Es können nur die Details einer einzelnen Bar betrachtet werden
-	$scope.openFrameIndex = -1;
-	$scope.frameClicked = function(index) {
-		if(index === $scope.openFrameIndex) {
-			$scope.openFrameIndex = -1;
-		}
-		else {
-			$scope.openFrameIndex = index;
-		}
-	};
-	
-	// Eine Route auf dem Gerät persistieren
-	$scope.saveRoute = function() {
-		RoutesPersistenceService.add($scope.route);
-	};
-
-	$scope.removeBar = function(index) {
-		$scope.route.timeframes[index].bar = null;
-	};
 
 	$scope.$watch('barChosen', function() {
 		// Herausfinden welcher Slot befüllt ist --> passenden Timeframe mit der Bar befüllen
@@ -211,7 +191,38 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		$scope.barChosen = [];
 	}, true);
 
-	// SIDEBAR
+	/**
+	 * BARS
+	 */
+	
+	// Es können nur die Details einer einzelnen Bar betrachtet werden
+	$scope.openFrameIndex = -1;
+	$scope.frameClicked = function(index) {
+		if(index === $scope.openFrameIndex) {
+			$scope.openFrameIndex = -1;
+		}
+		else {
+			$scope.openFrameIndex = index;
+		}
+	};
+
+	$scope.removeBar = function(index) {
+		$scope.route.timeframes[index].bar = null;
+	};
+
+	/**
+	 * SIDEBAR
+	 */
+	
+	// Die Startposition auf die Geräteposition setzen
+	$scope.setLocationToDevice = function() {
+
+	};
+
+	// Die Route auf dem Gerät persistieren
+	$scope.saveRoute = function() {
+		RoutesPersistenceService.add($scope.route);
+	};
 
 	// start und endTime defaults binden
 	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {
