@@ -19,8 +19,8 @@ public class UserTest {
 		// Testet, ob der eingegebene Wert übereinstimmt
 		assertEquals("Max Mustermann", u.getName());
 		
-		// Gibt die Daten in einem String aus
-		System.out.println(u.toString());
+		// Testet die korrekte Ausgabe der Daten der Funktion toString()
+		assertEquals("Name: Max Mustermann", u.toString());
 	}
 
 }

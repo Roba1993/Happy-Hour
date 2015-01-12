@@ -108,7 +108,6 @@ public class H2RouteDAOTest {
 		assertEquals("kjasifhuidjfelosamnb", r.getHash());
 		assertEquals(false, r.isTop());
 		assertEquals("Ich bin ein Json String Objekt", r.getData());
-
 	}
 
 	/**
@@ -150,7 +149,7 @@ public class H2RouteDAOTest {
 		// Abfrage der Top Routen
 		Collection<Route> routes = h2RouteDAO.findTopRoutes();
 
-		// Erstellt einen Irator zum Testen
+		// Erstellt einen Iterator zum Testen
 		Iterator<Route> iterator = routes.iterator();
 
 		// Test: Es müssen zwei Datensätze vorhanden sein

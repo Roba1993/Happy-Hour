@@ -24,8 +24,8 @@ public class RouteTest {
 		assertEquals("Dies ist ein Json Test Objekt", r.getData());
 		assertEquals(true, r.isTop());
 		
-		// Gibt die Daten in einem String aus
-		System.out.println(r.toString());		
+		// Testet die korrekte Ausgabe der Daten der Funktion toString()
+		assertEquals("hash: Hashwerttest Data: Dies ist ein Json Test Objekt TopRoute true/false?: true", r.toString());	
 	}
 
 }
