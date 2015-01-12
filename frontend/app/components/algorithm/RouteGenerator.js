@@ -69,7 +69,7 @@ var distances = {
  * Hilfsfunktion um aus einem String ein time-Objekt zu erstellen
  * @author Felix Rieder
  * @param {string} txt Text der in ein time-Objekt konvertiert werden soll; Format: 'hh:mm'; keine Validierung des Inputs!!
- * @return {time} t Gibt das Objekt von time zurueck
+ * @return {time} Gibt das Objekt von time zurueck
  */
 function getTime(txt) {
     var t = time();
@@ -82,7 +82,7 @@ function getTime(txt) {
  * Hilfsfunktion um einen string in einen integer - Wert umzuwandeln
  * @author Felix Rieder
  * @param {string} txt Stirng der die zu konvertierende Zeit enthaelt im Format 'hh:mm'
- * @return {integer} time Gibt die integer Repraesentation des strings zurueck
+ * @return {integer} Gibt die integer Repraesentation des strings zurueck
  */
 function retIntTime(txt) {
     txt = txt.slice(0, 1) + txt.slice(3, 4);
@@ -95,7 +95,7 @@ function retIntTime(txt) {
  * @author Felix Rieder
  * @param {array} arr Das zu bereinigende Array
  *
- * @return {array} newarr Gibt das bereinigte Array aus
+ * @return {array} Gibt das bereinigte Array aus
  */
 function cleanArray(arr) {
     var newarr = [];
@@ -110,6 +110,9 @@ function cleanArray(arr) {
 /* 
  * @author Felix Rieder
  * Hilfsfunktion um einen dezimalen Wert in eine Bewertung/Rating zu konvertieren
+ * @author Felix Rieder
+ * @param {decimal} Dezimalwert der zo einem Rating (Bereich 0-5, schlecht - gut) konvertiert werden soll. Keine Validierung ob der gewuenschte Dateityp vorliegt!
+ * @return {decimal} Gibt das erstellte Rating zurueck. 
  */
 function convertDecimal(val) {
     val *= 100;
@@ -119,9 +122,11 @@ function convertDecimal(val) {
 }
 
 /*
- * Wandle die Distanzen in ein vergleichbares Rating um
- * distances: definiertes distances Array mit allen Distanzen von Google
- * base: index fuer array (int) um zu bestimmen welches Array der zweiten Dimension, sprich, welche Bar als Ausganspunkt fuer Distanzmessung zu nehmen
+ * Wandle die Distanzen in ein vergleichbares Rating um. Je kuerzer die Distanz desto besser faellt das Rating aus.
+ * @author Felix Rieder
+ * @param {array} distances definiertes distances Array mit allen Distanzen von Google. Wird bei der Abfrage der Google Api erzeugt.
+ * @param {int} base Index fuer das array um zu bestimmen welches Array der zweiten Dimension, sprich, welche Bar als Ausgangspunkt fuer Distanzmessung zu nehmen ist
+ * @return {array} rating Gibt ein rating fuer die einzelnen Distanzen zurueck.
  */
 function rateDistance(distances, base) {
     var n = distances[base].length;
@@ -140,11 +145,11 @@ function rateDistance(distances, base) {
  *
  * @author Felix Rieder
  * @param {array} distances Array mit allen Distanzen
- * @param {array} bars Array mit allen Bars; wird intern erzeugt
+ * @param {bars[]} bars Array mit allen Bars; wird intern erzeugt
  * @param {string} startTime Startzeit zu der die naechste Bar gesucht wird; Format hh:mm
  * @param {int} count Gibt an die wievielte bar gesucht ist
  * @param {string} stayTime Gibt an wie lange der User in der Bar bleiben will; Format hh:mm
- * @returns {bar} bar Gibt die gesuchte Bar zurueck
+ * @return {bar} Gibt die gesuchte Bar zurueck
  */
 function chooseNext(distances, bars, startTime, count, stayTime) {
     startTime = retIntTime(startTime);
@@ -228,9 +233,9 @@ function chooseNext(distances, bars, startTime, count, stayTime) {
  * @author Felix Rieder
  *
  * @param {array} distances Array das alle Distanzen enthaelt
- * @param {array} bars  internes, vorbereitetes Array mit allen bars
+ * @param {bars[]} bars  internes, vorbereitetes Array mit allen bars
  * @param {string} startTime Startzeit zu der eine HappyHour gesucht wird
- * @return {Bar} bar Gibt die ausgewaehlte Bar zurueck
+ * @return {Bar} Gibt die ausgewaehlte Bar zurueck
  */
 function chooseFirst(distances, bars, startTime) {
     // Zuerst: Waehle Bars anhand Beginn der Happy Hour
@@ -302,6 +307,7 @@ function chooseFirst(distances, bars, startTime) {
  *
  * @param {string} origins Startpunkte fuer Route, Adressen oder Laengen- und Breitengrade moeglich. Mehrere Startpunkte durch | getrennt.
  * @param {string} destinations Zielpunkte fuer Route, Adressen oder Laengen- und Breitengrade moeglich. Mehrere Zielpunkte durch | getrennt.
+ * @return {array} Gibt ein Array zurueck das fuer jede Bar die Distanzen sowohl untereinander als auch vom User aus enthaelt.
  */
 function googleApiDist(origins, destinations) {
     var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=';
@@ -332,15 +338,17 @@ function googleApiDist(origins, destinations) {
         }
         return distances;
     } else {
-        console.log('Fehler bei der Abfrage der Google API. Anfrage nicht beendet oder erfolgreich.');
+        console.log('Fehler bei der Abfrage der Google API. Anfrage nicht beendet oder erfolglos.');
         return 0;
     }
 }
 
 /*
  * Hilfsfunktion um die Existenz eines Wertes in einem Array zu ueberpruefen.
- * Funktioniert ebenfalls in IE8
- * @author Felix Rieder
+ * Funktioniert ebenfalls in IE8, aus: http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
+ * @author http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
+ * @param {element} needle Das zu suchende Element des Arrays. Kann alles moegliche sein. 
+ * @return {integer} Gibt die Position des zu suchenden Elements zurueck. Enthaelt das Array den gesuchten Wert nicht ist der Ruckgabewert -1.
  */
 var indexOf = function(needle) {
     if (typeof Array.prototype.indexOf === 'function') {
@@ -363,6 +371,13 @@ var indexOf = function(needle) {
     return indexOf.call(this, needle);
 };
 
+/*
+ * Erstellt anhand des Arrays mit den verschiedenen Bars und dem Tag aus options ein abgespecktes Array fuer die Bar-Informationen zur internen Verwendung.
+ * @author Felix Rieder
+ * @param {Bar[]} rawbars Array mit den zur Auswahl stehenden Bars als Bar-Objekte
+ * @param {integer} day Nummer des Wochentages um die benoetigte Happy Hour aus dem Bar Objekt auszulesen.
+ * @return {array} Gibt ein zweidimensionales Array zurueck. Definition siehe Comment.
+ */
 function createBarObject(rawbars, day) {
     var bars = [];
     for (var i = 0; i <= rawbars.length; i++) {
@@ -395,14 +410,18 @@ function createBarObject(rawbars, day) {
 
 
 /*
- * Hilfswerkzeug um die Bewertung der Bars anzupassen
+ * Hilfswerkzeug um die Bewertung der Bars anzupassen, hinsichtlich der Dauer der Happy-Hour im Vergleich der gewuenschten Verweildauer
+ * @author Felix Rieder
+ * @param {array} bars Das array mit den benoetigten Informationen ueber die Bars
+ * @param {object} options Das options Objekt
+ * @return {array} Gibt das modifizierte bars Array zurueck mit den angepassten ratings.
  */
 function adjustRating(bars, options) {
     for (var i = 0; i < bars.length; i++) {
         if (bars[i][2] - options.stayTime < 0) {
             bars[i][3] = 0;
         }
-        // Wenn die HappyHour laenger als die Staytime ist erfolgt eine Abwertung, evtl. nicht sinnvoll!
+        // Wenn die HappyHour laenger als die Staytime ist erfolgt eine Abwertung, evtl. nicht sinnvoll!!
         if (bars[i][2] - options.stayTime > 0) {
             (bars[i][3] - 1.5 < 0) ? bars[i][3] = 0: bars[i][3] - 1.5;
         }
@@ -412,9 +431,11 @@ function adjustRating(bars, options) {
 
 
 /*
- * Gibt ein Routen Objekt zurueck
- * bars: ist ein array bestehend aus mehreren 'bar'-json-objekten
- * options: ist ein array bestehend aus mehreren 'options' objekten
+ * Gibt ein Routen Objekt zurueck mit der moeglichst logischen Route durch verschiedene Bars.
+ * @author Felix Rieder
+ * @param {Bar[]} jsonbars ist ein array bestehend aus mehreren 'bar'-json-objekten
+ * @param {Options} options Definiertes Objekt mit allen benoetigten Rahmeninformationen.
+ * @return {Route} Gibt ein Routenobjekt zurueck. Bei einem Fehler ist der Rueckgabewert 'null'.
  */
 function createRoute(jsonbars, options) {
 
