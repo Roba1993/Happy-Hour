@@ -20,18 +20,23 @@ angular.module('happyHour', [
   'happyHour.views.currentRouteMap',
   'happyHour.views.localRoutes',
   'happyHour.views.topRoutes',
+  'happyHour.views.startScreen',
   'happyHour.views.testview'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf currentRoute weiter
-  $routeProvider.otherwise({redirectTo: '/currentRoute'});
+  $routeProvider.otherwise({redirectTo: '/startScreen'});
 
   // LocalStorage-Prefix setzen
   localStorageServiceProvider.setPrefix('happyHour');
 }])
 .run(['AppStatusPersistenceService', '$location', function(AppStatusPersistenceService, $location) {
   var path = AppStatusPersistenceService.getPath();
-  if(path !== null) {
+  var route = AppStatusPersistenceService.getRoute();
+  if(path !== null && route !== null) {
     $location.path(path);
+  }
+  else {
+    $location.path('/startScreen');
   }
 }]);
