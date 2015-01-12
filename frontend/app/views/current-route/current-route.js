@@ -221,7 +221,11 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 	// Die Route auf dem Gerät persistieren
 	$scope.saveRoute = function() {
-		RoutesPersistenceService.add($scope.route);
+		if($scope.routeName !== '') {
+			$scope.route.name = $scope.routeName;
+			RoutesPersistenceService.add($scope.route);
+			$scope.namePopupOpen = false;
+		}
 	};
 
 	// start und endTime defaults binden

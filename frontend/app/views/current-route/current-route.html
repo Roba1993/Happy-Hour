@@ -9,6 +9,21 @@
 	</div>
 </div>
 
+<div id="e__popup-overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
+    <div class="e__popup-window">
+        <div class="e__popup-window-content">
+            <h1>Bitte Routennamen eingeben</h1>
+			<p>
+				<form><input type="text" ng-model="routeName"></form>
+			</p>
+        </div>
+        <div class="e__popup-window-button">
+            <div class="e__btn col-6" ng-click="namePopupOpen = false">Abbrechen</div>
+            <div class="e__btn col-6" ng-click="saveRoute()">Speichern</div>
+        </div>
+    </div>
+</div>
+
 <input type="checkbox" id="is__sidebar-open" class="hidden" ng-model="isSidebarOpen" aria-hidden="true"/>
 <div id="main" class="clearfix">
     <aside id="sidebar">
@@ -52,7 +67,7 @@
 					<span class="i-f__star"></span><h3>Sharen</h3>
 			</div>
 			<div class="seperator"></div>
-			<div ng-click="saveRoute()" class="sidebar-theatre-box">
+			<div ng-click="namePopupOpen = true" class="sidebar-theatre-box">
 				<span class="i-f__download"></span><h3>Offline speichern</h3>
 			</div>
 			<div class="seperator"></div>
