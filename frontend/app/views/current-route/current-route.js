@@ -167,12 +167,18 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	
 	// Die Startposition auf die Geräteposition setzen
 	$scope.setLocationToDevice = function() {
-
+		navigator.geolocation.getCurrentPosition(function(position) {
+			$scope.$apply(function() {
+				$scope.route.options.location.longitude = position.coords.longitude;
+				$scope.route.options.location.latitude = position.coords.latitude;
+			});
+		});
 	};
 
 	// Die Route auf dem Gerät persistieren
 	$scope.saveRoute = function() {
-		if($scope.routeName !== '') {
+		// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
+		if($scope.routeName !== '' && $scope.routeName.length <= 50) {
 			$scope.route.name = $scope.routeName;
 			RoutesPersistenceService.add($scope.route);
 			$scope.namePopupOpen = false;
