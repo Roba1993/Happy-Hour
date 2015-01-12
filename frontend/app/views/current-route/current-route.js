@@ -16,55 +16,6 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	// Aktuelle Route aus dem AppStatus auslesen
 	$scope.route = AppStatusPersistenceService.getRoute();
 
-	// TODO: evtl löschen
-	if($scope.route === null) {
-		$scope.route = {
-			options: {
-				startTime: '18:00',
-				endTime: '19:00',
-				stayTime: 1,
-				radius: 2.5,
-				location: {
-					longitude: 1,
-					latitude: 1
-				}
-			},
-			timeframes: [{
-				startTime: '18:00',
-				endTime: '19:00',
-				bar: {
-					'name': 'Lutscher Bar',
-					'rating': 1,
-					'costs': 5,
-					'description': 'Die schlechteste Bar in Stuttgart',
-					'imageUrl': '',
-					'openingTimes': [
-						{
-							'startTime': '08:00', 
-							'endTime': '20:00', 
-							'days': [1,2,3,4,5]
-						}, 
-						{
-							'startTime': '08:00', 
-							'endTime': '02:00', 
-							'days': [6,7]
-						}
-					],
-					'location': {longitude:9.18293, latitude:48.77585},
-					'adress': 'Coole Straße 49 Stuttgart',
-					'happyHours': [
-						{
-							'startTime': '17:00', 
-							'endTime': '17:30', 
-							'description': 'Pommes 50ct günstiger', 
-							'days': [3,7]
-						}
-					]
-				}
-			}]
-		};
-	}
-
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
 	$scope.$watch('route', function(route) {
 		AppStatusPersistenceService.setRoute(route);
