@@ -8,7 +8,7 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
 }])
 
 .controller('currentRouteController', 
-['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService', 
+['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService',
 function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService, AppStatusPersistenceService) {
 	// Aktuellen Pfad persistieren
 	AppStatusPersistenceService.setPath('/currentRoute');
@@ -21,6 +21,10 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		AppStatusPersistenceService.setRoute(route);
 		console.log(route);
 	}, true);
+
+	BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
+		console.log(bars);
+	});
 
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {

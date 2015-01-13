@@ -1,15 +1,19 @@
 package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
+
 import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.dao.FourSquareConnection;
 import de.dhbw.hh.dao.HappyHourDAO;
+import de.dhbw.hh.dao.h2.H2FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.HappyHour;import de.dhbw.hh.models.RESTResponse;
 
@@ -28,7 +32,7 @@ public class BarsREST {
 	
 	public BarsREST(DAOFactory daoFactory) {
 		
-		FourSquareConnection foursquareConnection = new FourSquareConnection();
+		H2FoursquareDAO foursquareConnection = new H2FoursquareDAO();
 		HappyHourDAO happyHours = daoFactory.getHappyHourDAO();
 		
 		/**

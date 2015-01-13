@@ -67,7 +67,7 @@ public class H2RouteDAO implements RouteDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+        	log.error(e.getMessage());
         }
 		return false;
 	}

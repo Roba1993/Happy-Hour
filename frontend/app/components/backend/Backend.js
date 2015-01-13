@@ -6,6 +6,7 @@
  */
 angular.module('happyHour.backend.Backend', [])
 	.factory('BackendService', ['$http', '$q', function($http, $q) {
+		var baseUrl = 'http://localhost:8080';
 		var service = {
 			/**
 			 * Gibt alle Bars zurück, die den übergeben Parametern entsprechen.
@@ -21,25 +22,21 @@ angular.module('happyHour.backend.Backend', [])
 				console.log(radius);
 				console.log(weekday);
 
-                var latitude = location.data.latitude;
-                var longitude = location.data.longitude;
+				var latitude = location.latitude;
+				var longitude = location.longitude;
 
-                var url = 'http://localhost:8080/bars?lat=' + latitude + '&long=' + longitude + '&radius=' + radius + '&weekday=' + weekday;
+				var url = baseUrl+'/bars?latitude=' + latitude + '&longitude=' + longitude + '&radius=' + radius + '&weekday=' + weekday;
 
-                console.log(url);
+				console.log(url);
 
-                var promise = $http({method: 'GET', url: url});
-                var deferred = $q.defer();
+				var promise = $http({method: 'GET', url: url});
+				var deferred = $q.defer();
 
-                promise.then(
-                    function(data){ //data wird befüllt mit der Rückgabe
-
-                    deferred.resolve(data.data
-                        //Rückgabe an den Serviceanfragenden
-                    );
-                    }
-                );
-                return deferred.promise;
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
 
 			},
 			/**
@@ -54,20 +51,17 @@ angular.module('happyHour.backend.Backend', [])
 				console.log(barId);
 				console.log(description);
 
-				var url = 'http://localhost:8080/bars/' + barId.data.barId + '/reports/';
+				var url = baseUrl+'/bars/' + barId + '/reports/';
 
 				console.log(url);
 
 				var promise = $http({method: 'POST', url: url, data: description});
 				var deferred = $q.defer();
 
-				promise.then(
-								function(data) { //data wird befüllt mit der Rückgabe
-									deferred.resolve(data.data
-												//Rückgabe an den Serviceanfragenden, ob das Melden erfolgreich war oder nicht.
-									);
-								}
-				);
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
 				return deferred. promise;
 
 			},
@@ -86,13 +80,10 @@ angular.module('happyHour.backend.Backend', [])
 				var promise = $http({method: 'POST', url: url, data: route});
 				var deferred = $q.defer();
 
-				promise.then(
-					function(data) { //data wird befüllt mit der Rückgabe
-						deferred.resolve(data.data
-										//Rückgabe an den Serviceanfragenden in Form eines Hashes der gespeicherten Route
-						);
-					}
-				);
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
 				return deferred.promise;
 			},
 			/**
@@ -105,20 +96,16 @@ angular.module('happyHour.backend.Backend', [])
 			getRoute: function(hash) {
 				console.log(hash);
 
-                var url = 'http://localhost:8080/routes/' + hash;
+				var url = baseUrl+'/routes/' + hash;
 
-                var promise = $http({method: 'GET', url: url});
-                var deferred = $q.defer();
+				var promise = $http({method: 'GET', url: url});
+				var deferred = $q.defer();
 
-                promise.then(
-                    function(data){ //data wird befüllt mit der Rückgabe
-
-                    deferred.resolve(data.data
-                        //Rückgabe an den Serviceanfragenden
-                    );
-                    }
-                );
-                return deferred.promise;
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
 
 			},
 			/**
@@ -129,19 +116,15 @@ angular.module('happyHour.backend.Backend', [])
 			 */
 			getToproutes: function() {
 
-				var url = 'http://localhost:8080/toproutes/';
+				var url = baseUrl+'/toproutes/';
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
 
-				promise.then(
-					function(data){ //data wird befüllt mit der Rückgabe
-
-						deferred.resolve(data.data
-							//Rückgabe an den Serviceanfragenden in Form eines Arrays mit den Top Routen.
-						);
-					}
-				);
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
 				return deferred.promise;
 
 			}

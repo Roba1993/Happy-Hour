@@ -11,7 +11,7 @@ describe('der BackendService', function(){
 
 // Test für getBars Service
     it('should call $http.get and deliver JSON Data when calling getBars', inject(function (BackendService, $httpBackend) {
-    $httpBackend.expectGET('http://localhost:8080/bars?lat=35.7348&long=49.0133&radius=2.5&weekday=1').respond([
+    $httpBackend.expectGET('http://localhost:8080/bars?latitude=35.7348&longitude=49.0133&radius=2.5&weekday=1').respond([
         // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
         {'name': 'ergebnisObjekt',
         'description': 'sdvisiusdkjbgksjbkSDVI o gsi',
@@ -62,12 +62,7 @@ describe('der BackendService', function(){
     ]);
 
 // Hier wird der Service getBars aufgerufen und somit der Test gestartet. Ein Locationobjekt sowie der Radius und Wochentag wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
-    BackendService.getBars(
-            {'name': 'ergebnisObjekt',
-            'description': 'sdvisiusdkjbgksjbkSDVI o gsi',
-            'timestamp': '2014-12-02 15:00:00',
-            'status': 'success ',
-            'data': {'latitude': 35.7348, 'longitude': 49.0133}}, 2.5, 1);
+    BackendService.getBars({'latitude': 35.7348, 'longitude': 49.0133}, 2.5, 1);
 
     $httpBackend.flush();
     }));
@@ -109,16 +104,7 @@ it('should call $http.post and save JSON Data when calling reportData', inject(f
 
 // Hier wird der Service reportData aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Melden erfolgreich war oder nicht.
 //Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
-  BackendService.reportData(
-    {
-      'name': 'ergebnisObjekt',
-      'description': 'Fehlerhafte Daten gemeldet',
-      'timestamp': '2014-12-02 15:00:00',
-      'status': 'success ',
-      'data': {
-          'barId': 1241,
-      }
-    }, 'Uhrzeit für die Happy Hour falsch'
+  BackendService.reportData(1241, 'Uhrzeit für die Happy Hour falsch'
   );
   $httpBackend.flush();
 }));
