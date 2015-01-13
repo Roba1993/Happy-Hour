@@ -105,10 +105,10 @@ public class H2RouteDAO implements RouteDAO {
                 // Wenn kein Wert vorhanden ist wird null zurückgegegben
                 return null;
             }catch(Exception e){
-                e.printStackTrace();
+            	log.error(e.getMessage());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	log.error(e.getMessage());
         }
 
         return new Route();

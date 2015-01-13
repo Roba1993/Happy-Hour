@@ -38,7 +38,7 @@ public class TopRouteREST {
 		 */
 		get("/toproutes", "application/json", (request, response) -> {
 			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /toproutes
-			LOG.debug(request.requestMethod() + ":" + request.pathInfo());
+			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
 			
 			// Holt die Top Routen aus der Datenbank
 			Collection<Route> toproutes = daoFactory.getRouteDAO().findTopRoutes();
