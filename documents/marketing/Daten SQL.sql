@@ -51,7 +51,11 @@ VALUES
 ('4b7d87fcf964a520d9c42fe3' , 'Alle Cocktails zum halben Preis' , '19:00:00' , '01:00:00' , true , true , true , true , true , true , true),
 ('4c153503a9c220a1f1c5589d' , 'Auswahl an Happy Hour Cocktails für 4,90€' , '20:00:00' , '03:00:00' , true , true , true , true , false , false , true),
 ('4c153503a9c220a1f1c5589d' , 'Auswahl an Happy Hour Cocktails für 4,90€' , '20:00:00' , '05:00:00' , false , false , false , false , true , true , false),
-('4b59578af964a5209e8528e3' , 'Alle Cocktails für 4,90€' , '19:00:00' , '21:00:00' , true , true , true , true , true , true , true);
+('4b59578af964a5209e8528e3' , 'Alle Cocktails für 4,90€' , '19:00:00' , '21:00:00' , true , true , true , true , true , true , true),
+('4d02887137036dcb3eef03fb' , 'Alle Kaffeegetränke für 1,50€' , '15:00:00' , '06:00:00' , true , false , false , false , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Alle Cocktails für 4,50€' , '15:00:00' , '06:00:00' , false , false , true , false , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Krug Bier für 2,50€' , '15:00:00' , '06:00:00' , false , false , false , true , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Ein halber Krug Bier für 2,50€' , '15:00:00' , '06:00:00' , false , false , false , false , true , false , false);
 
 
 
