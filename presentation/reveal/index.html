@@ -108,6 +108,12 @@
 							<tr>
 						</tbody>
 					</table>
+
+					<!-- Speaker Notes -->
+					<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+
 				</section>	
 
 				<!-- SLIDE 3 -->
@@ -228,24 +234,18 @@
 				</section>
 
 				<section>
-					<h2>Pretty Code</h2>
+					<h2>Code Example</h2>
 					<pre><code data-trim contenteditable>
-						function linkify( selector ) {
-						  if( supports3DTransforms ) {
-
-						    var nodes = document.querySelectorAll( selector );
-
-						    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-						      var node = nodes[i];
-
-						      if( !node.className ) {
-						        node.className += ' roll';
-						      }
-						    }
-						  }
-						}
+<script type='text/javascript'>
+// Say hello world until the user starts questioning
+// the meaningfulness of their existence.
+	function helloWorld(world) {
+		for (var i = 42; --i >= 0;) {
+			alert('Hello ' + String(world));
+		}
+	}
+</script>
 					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
 				<section>
@@ -317,15 +317,6 @@
 					</p>
 				</section>
 
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
 
 				<section>
 					<h2>Global State</h2>

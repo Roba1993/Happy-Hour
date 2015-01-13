@@ -7,8 +7,8 @@ based on dark.css by Ivan Sagalaev
 
 .hljs {
   display: block; padding: 0.5em;
-  background: #3F3F3F;
-  color: #DCDCDC;
+  background: #e6e6e6;
+  color: #515151;
 }
 
 .hljs-keyword,
@@ -20,7 +20,7 @@ based on dark.css by Ivan Sagalaev
 .hljs-request,
 .hljs-status,
 .clojure .hljs-attribute {
-  color: #E3CEAB;
+  color: #0066cc;
 }
 
 .django .hljs-template_tag,
@@ -31,7 +31,7 @@ based on dark.css by Ivan Sagalaev
 
 .hljs-number,
 .hljs-date {
-  color: #8CD0D3;
+  color: #7f0000;
 }
 
 .dos .hljs-envvar,
@@ -57,7 +57,7 @@ based on dark.css by Ivan Sagalaev
 
 .dos .hljs-keyword,
 .python .hljs-decorator,
-.hljs-title,
+
 .haskell .hljs-type,
 .diff .hljs-header,
 .ruby .hljs-class .hljs-parent,
@@ -65,7 +65,7 @@ based on dark.css by Ivan Sagalaev
 .nginx .hljs-built_in,
 .tex .hljs-command,
 .hljs-prompt {
-    color: #efef8f;
+    color: #0066cc;
 }
 
 .dos .hljs-winutils,
@@ -77,10 +77,10 @@ based on dark.css by Ivan Sagalaev
 
 .diff .hljs-deletion,
 .hljs-string,
-.hljs-tag .hljs-value,
+ .hljs-value,
+
 .hljs-preprocessor,
 .hljs-pragma,
-.hljs-built_in,
 .sql .hljs-aggregate,
 .hljs-javadoc,
 .smalltalk .hljs-class,
@@ -92,8 +92,14 @@ based on dark.css by Ivan Sagalaev
 .apache .hljs-cbracket,
 .tex .hljs-formula,
 .coffeescript .hljs-attribute {
-  color: #CC9393;
+  color: #009f5d;
 }
+
+
+.hljs-built_in {
+ color: #d94d3a
+}
+
 
 .hljs-shebang,
 .diff .hljs-addition,
@@ -102,7 +108,8 @@ based on dark.css by Ivan Sagalaev
 .hljs-template_comment,
 .hljs-pi,
 .hljs-doctype {
-  color: #7F9F7F;
+  color: #797979;
+  font-style: italic;
 }
 
 .coffeescript .javascript,
@@ -112,6 +119,6 @@ based on dark.css by Ivan Sagalaev
 .xml .vbscript,
 .xml .css,
 .xml .hljs-cdata {
-  opacity: 0.5;
+  
 }
 
