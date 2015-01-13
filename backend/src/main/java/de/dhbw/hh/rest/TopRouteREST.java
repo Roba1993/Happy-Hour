@@ -11,7 +11,6 @@ import de.dhbw.hh.models.RESTResponse;
 import de.dhbw.hh.models.Route;
 import static spark.Spark.*;
 
-
 /**Diese Klasse stellt die Methoden für die REST Schnittstelle 
  * für den Pfad /toproutes bereit
  * 
@@ -19,11 +18,11 @@ import static spark.Spark.*;
  */
 public class TopRouteREST {
 	
-	// Gson Objekt zum umwandeln in json	
+	// Erstellt ein Gson Objekt für die Rückgabe	
 	private Gson gson = new Gson();
 	
 	/**
-	 * Diese Funktion ist ein Konstruktor, um REST Schnittstelle für die Top Routen zu definieren
+	 * Diese Funktion ist ein Konstruktor, um REST Schnittstellen für die Top Routen zu definieren
 	 * @param daoFactory
 	 */
 	public TopRouteREST (DAOFactory daoFactory){
@@ -59,9 +58,7 @@ public class TopRouteREST {
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
 			response.type("application/json");
 			return gson.toJson(r);
-		});
-		
+		});		
 	}
-
 	
 }

@@ -24,14 +24,13 @@ public interface RouteDAO {
 	 * Diese Funktion findet eine bestimmte Route anhand ihres Hashwerts
 	 * 
 	 * @param hash Wert nach dem die Route gesucht wird
-	 * @return gesamte Route-Onjekt bei Erfolg. Wenn nichts gefunden wird null
+	 * @return gesamte Route-Objekt bei Erfolg. Wenn nichts gefunden wird null
 	 */	
 	public Route findRoute(String hash);
 	
 	
 	/**Diese Funktion gibt alle Top Routen zurück 
-	 * 
-	 * @param es wird nach allen TopRouten gesucht
+	 *
 	 * @return alle Top Routen bei Erfolg, andernfalls wird null zurückgegeben
 	 */	
 	public Collection<Route> findTopRoutes();

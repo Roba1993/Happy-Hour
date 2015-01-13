@@ -6,14 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.dhbw.hh.HappyHour;
+
 /**
- * Diese Klasse stellt alle Funktionen zur verwaltung der Eigenschaften bereit.
+ * Diese Klasse stellt alle Funktionen zur Verwaltung der Eigenschaften bereit.
+ *
+ * @author Robert
  */
 public class Settings extends Properties {
+	
+	// Initialisiert den Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(HappyHour.class);
 
-    /**
-	 * 
-	 */
+    // einmalige ID
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -83,9 +91,9 @@ public class Settings extends Properties {
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filename))) {
             load(bis);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
     }
 
@@ -93,8 +101,8 @@ public class Settings extends Properties {
      * Gebe eine Eigenschaft für einen Key zurück. Es existieren keine Case-Sensitve
      * Keys. Somit spielt die Groß- und Kleinschreibung bei den Keys keine Rolle.
      *
-     * @param key
-     * @return
+     * @param key Der eindeutige Key zur Value
+     * @return Die Angeforderte Value passend zum Key
      */
     @Override
     public String getProperty(String key) {

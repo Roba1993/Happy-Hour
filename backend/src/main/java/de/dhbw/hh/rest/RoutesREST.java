@@ -2,8 +2,6 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.post;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,27 +16,29 @@ import com.google.gson.Gson;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.models.RESTResponse;
 import de.dhbw.hh.models.Route;
+import de.dhbw.hh.utils.HashConverter;
 import static spark.Spark.get;
 
 /**
  * Diese Klasse stellt eine POST-Methode zur Verfügung, mit der eine Route in
- * die Datenbank eingepflegt werden kann, sowie eine GET-Methode, mit der eine Route mit dem Hash-Wert aus der Datenbank 
+ * die Datenbank eingepflegt werden kann, sowie eine GET-Methode,
+ * mit der eine Route mit dem Hash-Wert aus der Datenbank 
  * abgerufen werden kann
  */
 public class RoutesREST {
-
-/**
- * @author Michael	
- */
 	
+	// Initialisiert einen Logger für die Fehlerausgabe
 	static final Logger LOG = LoggerFactory.getLogger(RoutesREST.class);
 
+	// Erstellt ein Gson-Objekt für die Rückgabe
 	private Gson gson = new Gson();
 
 	public RoutesREST(DAOFactory daoFactory) {
 
+		/**
+		 * @author Michael
+		 */
 		post("/routes", "application/json", (request, response) -> {
-
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 			// Neue Route erstellen
 			Route route = new Route();
@@ -48,7 +48,7 @@ public class RoutesREST {
 			route.setData(temp);
 
 			// Hashwert bilden
-			String hash = getHashfromString(temp);
+			String hash = HashConverter.md5(temp);
 			route.setHash(hash);
 
 			// Route ist keine Top Route
@@ -83,12 +83,11 @@ public class RoutesREST {
 
 		});
 
-/**
- * Gibt die Route über die REST Schnitstelle zurück
- * 
- * @author Tabea		
- */
-		
+		/**
+ 		* Gibt die Route über die REST Schnitstelle zurück
+ 		*
+ 		* @author Tabea
+ 		*/
 		get("/routes/:hash", "application/json", (request, response) -> {
 			// Routen aus der Datenbank holen
 			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
@@ -120,32 +119,6 @@ public class RoutesREST {
 			response.type("application/json");
 			return gson.toJson(r);
 		});
-
 	}
-
-	public String getHashfromString(String s) {
-		StringBuffer sb = null;
-
-		try {
-			String original = s;
-			MessageDigest md;
-
-			md = MessageDigest.getInstance("MD5");
-
-			md.update(original.getBytes());
-			byte[] digest = md.digest();
-			sb = new StringBuffer();
-			for (byte b : digest) {
-				sb.append(String.format("%02x", b & 0xff));
-			}
-
-			// System.out.println("original:" + original);
-			// System.out.println("digested(hex):" + sb.toString());
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return sb.toString();
-	}
-
+	
 }

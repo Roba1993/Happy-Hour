@@ -16,10 +16,9 @@ import de.dhbw.hh.models.BarReport;
  * Diese Klasse kommuniziert direkt mit der H2-Datenbank
  * und stellt die in dem Interface BarReportDAO definierten
  * Funktionen bereit.
- * @author Jonas
  *
+ * @author Jonas
  */
-
 public class H2BarReportDAO implements BarReportDAO {
 	
 	 // Der Connectionpool
@@ -80,7 +79,7 @@ public class H2BarReportDAO implements BarReportDAO {
 	                preparedStatement.addBatch();
 
 	                // Führe alle Statements aus
-	                preparedStatement.executeUpdate();
+	                preparedStatement.executeBatch();
 	            }
 
 	            // Schreibe die Änderungen in die Datenbank

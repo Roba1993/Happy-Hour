@@ -16,10 +16,9 @@ import de.dhbw.hh.models.HappyHour;
  * Diese Klasse kommuniziert direkt mit der H2-Datenbank
  * und stellt die in dem Interface HappyHourDAO definierten
  * Funktionen bereit.
- * @author Marcus
  *
+ * @author Marcus
  */
-
 public class H2HappyHourDAO implements HappyHourDAO {
 	
 	 // Der Connectionpool
@@ -38,7 +37,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
 	public boolean insertHappyHour(HappyHour happyHour) {
 		String sql = "INSERT INTO happyHour "
 				+ "(barID, description, start, end, monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
-				+ " VALUES (?,?,?,?,?,?,?,?,?,?)";
+				+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = cpds.getConnection()) {
             // Immer ohne Autocommits arbeiten
@@ -50,12 +49,13 @@ public class H2HappyHourDAO implements HappyHourDAO {
                 preparedStatement.setString(2, happyHour.getDescription());
                 preparedStatement.setTime(3, happyHour.getStart());
                 preparedStatement.setTime(4, happyHour.getEnd());
-                preparedStatement.setBoolean(5, happyHour.isTuesday());
-                preparedStatement.setBoolean(6, happyHour.isWednesday());
-                preparedStatement.setBoolean(7, happyHour.isThursday());
-                preparedStatement.setBoolean(8, happyHour.isFriday());
-                preparedStatement.setBoolean(9, happyHour.isSaturday());
-                preparedStatement.setBoolean(10, happyHour.isSunday());
+                preparedStatement.setBoolean(5, happyHour.isMonday());
+                preparedStatement.setBoolean(6, happyHour.isTuesday());
+                preparedStatement.setBoolean(7, happyHour.isWednesday());
+                preparedStatement.setBoolean(8, happyHour.isThursday());
+                preparedStatement.setBoolean(9, happyHour.isFriday());
+                preparedStatement.setBoolean(10, happyHour.isSaturday());
+                preparedStatement.setBoolean(11, happyHour.isSunday());
 
                 // Füge das Statement der Ausführungsschlange hinzu
                 preparedStatement.addBatch();

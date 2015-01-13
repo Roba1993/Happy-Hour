@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Dies ist die Java-Hauptklasse und der Einstiegspunkt
  * für die Backend-Programmierung.
+ *
+ * @auhor Robert
  */
 public class HappyHour {
 
@@ -40,8 +42,12 @@ public class HappyHour {
         new HappyHour(args);
     }
 
+    /**
+     * Constructor der Klasse und Start der Anwedung
+     *
+     * @param args
+     */
     public HappyHour(String[] args) {
-
         // Parse Argumente aus Kommandozeile
         CmdLineParser parser = new CmdLineParser(this);
         try {
@@ -52,7 +58,7 @@ public class HappyHour {
 
         LOG.info("Happy-Hour startet...");
 
-        // Lade die Standart-Einstellungen
+        // Lade die Standard-Einstellungen
         settings = new Settings();
         settings.loadDefault();
 

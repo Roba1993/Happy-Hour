@@ -8,6 +8,11 @@ import java.util.Properties;
 
 import static org.junit.Assert.*;
 
+/**
+ * 
+ * @author Robert
+ *
+ */
 public class H2DAOFactoryTest {
 
     private static Properties properties;
@@ -38,6 +43,6 @@ public class H2DAOFactoryTest {
      */
     @Test
     public void testGetTestrunDAO() throws Exception {
-        assertNotNull(H2DAOFactory.getDaoFactory(DAOFactory.H2, properties).getTestrunDAO());
+        assertNotNull(H2DAOFactory.getDaoFactory(DAOFactory.H2, properties).getBarReportDAO());
     }
 }

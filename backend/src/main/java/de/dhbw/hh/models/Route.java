@@ -3,10 +3,10 @@ package de.dhbw.hh.models;
 /**
  * Diese Datenklasse stellt die Daten zu den sieben Top Routen bereit
  * 
- * @author: Maren
+ * @author Maren
  */
 public class Route {
-	
+	// Erstellen der Variablen
 	private String hash = "";
 	
 	private String data = "";
@@ -29,7 +29,6 @@ public class Route {
 		
 	}
 	
-
 	// Nun folgen alle Getter und Setter Methoden
 	public String getHash() {
 		return hash;
@@ -58,6 +57,14 @@ public class Route {
 	public boolean isHashEmpty() {
 		// TODO Auto-generated method stub
 		return hash.isEmpty();
+	}
+	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
+	public String toString(){
+		return ("hash: " + hash + " Data: " + data + " TopRoute true/false?: " + top);
 	}
 	
 }

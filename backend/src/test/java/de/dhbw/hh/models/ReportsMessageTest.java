@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+/**
+ * @author Jonas
+ */
 public class ReportsMessageTest {
 
 	@Test

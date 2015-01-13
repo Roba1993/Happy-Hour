@@ -19,9 +19,9 @@ import de.dhbw.hh.models.RESTResponse;
 
 /**
  * Diese Klasse stellt die Methoden für die REST Schnittstelle
- * zum hinzufügen und anschauen von reporteten Bars bereit 
- * @author Jonas
+ * zum hinzufügen und anschauen von reporteten Bars bereit
  *
+ * @author Jonas
  */
 public class ReportsREST {
 
@@ -33,8 +33,8 @@ public class ReportsREST {
 		
 		/**
 		 * Gebe alle gemeldeten Bars zurück
+		 *
 		 * @author Jonas
-		 * 
 		 */
 		get("/bars/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
@@ -69,8 +69,8 @@ public class ReportsREST {
 		
 		/**
 		 * Trage neuen BarReport in DB ein
+		 *
 		 * @author Jonas
-		 * 
 		 */
 		post("/bars/:barID/reports", "application/json", (request, response) -> {
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
@@ -106,8 +106,8 @@ public class ReportsREST {
 		
 		/**
 		 * Lösche alle BarReports mit zugehöriger BarID aus DB
+		 *
 		 * @author Jonas
-		 * 
 		 */
 		delete("/bars/:barID/report", "application/json", (request, response) -> {
 			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());

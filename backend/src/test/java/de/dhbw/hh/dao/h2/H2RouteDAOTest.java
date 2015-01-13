@@ -21,7 +21,7 @@ import de.dhbw.hh.models.Route;
 /**
  * Diese Klasse testet die Anfrage der Routen
  * 
- * @author Maren, Michael
+ * @author Marcus
  */
 public class H2RouteDAOTest {
 
@@ -108,7 +108,6 @@ public class H2RouteDAOTest {
 		assertEquals("kjasifhuidjfelosamnb", r.getHash());
 		assertEquals(false, r.isTop());
 		assertEquals("Ich bin ein Json String Objekt", r.getData());
-
 	}
 
 	/**
@@ -150,7 +149,7 @@ public class H2RouteDAOTest {
 		// Abfrage der Top Routen
 		Collection<Route> routes = h2RouteDAO.findTopRoutes();
 
-		// Erstellt einen Irator zum Testen
+		// Erstellt einen Iterator zum Testen
 		Iterator<Route> iterator = routes.iterator();
 
 		// Test: Es müssen zwei Datensätze vorhanden sein
@@ -161,6 +160,11 @@ public class H2RouteDAOTest {
 		assertEquals(true, iterator.next().isTop());
 	}
 
+	/**
+	 * Test der Insert Route Funktion
+	 *
+	 * @author Michael
+	 */
 	@Test
 	public void testInsertRoute() throws Exception {
 		// Löscht alle Einträge aus der Route Tabelle

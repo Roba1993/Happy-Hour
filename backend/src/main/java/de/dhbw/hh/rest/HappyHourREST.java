@@ -18,9 +18,9 @@ import static spark.Spark.*;
 
 /**
  * Diese Klasse stellt die Methoden für die REST Schnittstelle
- * zum hinzufügen und ändern von Happy Hour Zeiten bereit 
- * @author Marcus
+ * zum hinzufügen und ändern von Happy Hour Zeiten bereit
  *
+ * @author Marcus
  */
 public class HappyHourREST {
 	
@@ -32,6 +32,8 @@ public class HappyHourREST {
 	    {
     	/**
 		 * Trage neuen HappyHour in DB ein
+		 *
+		 * @author Marcus
 		 */
 		post("/bars/:barID/hour",
 				"application/json",
@@ -116,6 +118,7 @@ public class HappyHourREST {
 		
 	    	/**
 	    	 * Lösche Happy Hour anhand Happy Hour ID aus der Datenbank
+			 *
 	    	 * @author Jonas
 	    	 */
 			delete("/delHour/:hourID", "application/json", (request, response) -> {
