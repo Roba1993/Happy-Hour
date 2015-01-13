@@ -60,6 +60,12 @@ public class Settings extends Properties {
         setProperty("server.port", "8080");
         setProperty("server.web", "../frontend/app");
 
+        //foursquare settings
+        setProperty("foursquare.clientID", "ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV");
+        setProperty("foursquare.clientSecret", "E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX");
+        setProperty("foursquare.defaultLng", "48.949034");
+        setProperty("foursquare.defaultLat", "9.431656");
+        setProperty("foursquare.defaultRad", "100");
     }
 
     /**

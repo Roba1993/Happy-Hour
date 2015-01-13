@@ -9,12 +9,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.BarReportDAO;
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.RouteDAO;
 import de.dhbw.hh.dao.TestrunDAO;
-
 import org.h2.tools.RunScript;
-
 import java.beans.PropertyVetoException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -104,6 +103,11 @@ public class H2DAOFactory extends DAOFactory {
 	@Override
 	public HappyHourDAO getHappyHourDAO() {
 		return new H2HappyHourDAO(cpds);
+	}
+
+	@Override
+	public FoursquareDAO getFoursquareDAO() {
+		return new H2FoursquareDAO();
 	}
 	
 }

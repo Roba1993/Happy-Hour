@@ -1,4 +1,4 @@
-package de.dhbw.hh.dao;
+package de.dhbw.hh.dao.h2;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.Location;
 
@@ -22,7 +23,7 @@ import de.dhbw.hh.models.Location;
  * @author Tobias Häußermann
  * @version 0.9
  */
-public class FourSquareConnection {
+public class H2FoursquareDAO implements FoursquareDAO{
 	
 	/**
 	 * Diese Methode liefert gegen eine Liste von Parametern einen Array aus Bar-Objekten
@@ -35,6 +36,7 @@ public class FourSquareConnection {
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
 	 * @author Tobias Häußermann
 	 */
+	@Override
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, int radius){
 		
 		String CLIENT_ID			= "";			//Zu finden auf GitHub (zur Authentifizierung)
@@ -52,9 +54,7 @@ public class FourSquareConnection {
 		LATITUDE 	= 9.431656f;
 		CATEGORY 	= "bar";
 		RADIUS 		= 100;
-		
-//		https://api.foursquare.com/v2/venues/explore?client_id=ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV
-//		&client_secret=E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX&v=20150107&ll=48.949034,9.431656&query=bar&radius=150
+		//TODO Auslagerung in Settings-Datei
 		
 		LONGITUDE = longitude;
 		LATITUDE = latitude;
@@ -138,6 +138,7 @@ public class FourSquareConnection {
 	 * besteht. 
 	 * @return Diese Methode gibt nichts zurück.
 	 */
+	@Override
 	public Bar getBarByID(String id){
 		return null;
 	}	

@@ -25,6 +25,8 @@ public abstract class DAOFactory {
     
     public abstract HappyHourDAO getHappyHourDAO();
 
+    public abstract FoursquareDAO getFoursquareDAO();
+    
     /**
      * Gibt eine Datenbank-Factory zurück, mit welcher auf
      * eine Datenbank zugegriffen werden kann.
