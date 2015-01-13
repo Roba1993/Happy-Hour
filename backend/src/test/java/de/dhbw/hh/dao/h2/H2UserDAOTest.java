@@ -3,9 +3,6 @@ package de.dhbw.hh.dao.h2;
 import static org.junit.Assert.*;
 
 import java.io.FileReader;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -17,6 +14,7 @@ import org.junit.Test;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.models.User;
+import de.dhbw.hh.utils.HashConverter;
 
 /**
  * Diese Klasse testet die Anfrage der User
@@ -71,7 +69,7 @@ public class H2UserDAOTest {
 		// Befüllt das User Objekt zum Testen 
 		user = new User();
 		user.setName("Admin");
-		String hashPw = md5("Passwort");
+		String hashPw = HashConverter.md5("Passwort");
 										
 		// Löscht alle Einträge aus der User Tabelle
 		try (Connection connection = cpds.getConnection()) {
@@ -102,30 +100,6 @@ public class H2UserDAOTest {
 					
 		// Methode muss true zurückgegen, dann war die Überprüfung des Passworts erfolgreich 
 		assertTrue(user);
-	}
-	
-	private static String md5(String input) {
-		// Erzeugt einen hash-String, in den der Hash für die Rückgabe eingefügt wird
-        String hash = null;
-        
-        // Wenn der übergebene Wert null ist, wird auch null zurückgegeben
-        if(null == input) return null;
-         
-        try {  
-        // Erstellt ein Message Digest Objekt für MD5
-        MessageDigest digest = MessageDigest.getInstance("MD5");
-         
-        // Updatet den Input-String in das Message Digest Objekt
-        digest.update(input.getBytes(), 0, input.length());
- 
-        // Konvertiert Message Digest Wert in einen Basis 16 (hex) Hash
-        hash = new BigInteger(1, digest.digest()).toString(16);
- 
-        } catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-        // Rückgabe des MD5 Hash-Werts
-        return hash;
 	}
 		
 }

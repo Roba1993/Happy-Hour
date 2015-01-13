@@ -1,4 +1,4 @@
-package de.dhbw.hh.dao;
+package de.dhbw.hh.dao.h2;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.Location;
 
@@ -23,7 +24,7 @@ import de.dhbw.hh.models.Location;
  * @author Tobias Häußermann
  * @version 0.9
  */
-public class FourSquareConnection {
+public class H2FoursquareDAO implements FoursquareDAO{
 	
 	/**
 	 * Diese Methode liefert gegen eine Liste von Parametern einen Array aus Bar-Objekten
@@ -38,6 +39,7 @@ public class FourSquareConnection {
 	 *
 	 * @author Tobias Häußermann
 	 */
+	@Override
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, int radius){
 		
 		String CLIENT_ID			= "";			//Zu finden auf GitHub (zur Authentifizierung)
@@ -55,24 +57,25 @@ public class FourSquareConnection {
 		LATITUDE 	= 9.431656f;
 		CATEGORY 	= "bar";
 		RADIUS 		= 100;
-		
-//		https://api.foursquare.com/v2/venues/explore?client_id=ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV
-//		&client_secret=E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX&v=20150107&ll=48.949034,9.431656&query=bar&radius=150
+		//TODO Auslagerung in Settings-Datei
 		
 		LONGITUDE = longitude;
 		LATITUDE = latitude;
 		if(radius >= RADIUS)			//Minimalwert von 100 Metern!
 			RADIUS = radius;
 		
+		System.out.println("###\n"+LONGITUDE+", "+LATITUDE+"\n###");
 		//Fertiger Query-String für eine Foursquare-Abfrage
 		String query = "https://api.foursquare.com/v2/venues/explore"+
 				"?client_id="		+CLIENT_ID+
 				"&client_secret="	+CLIENT_SECRET+
 				"&v="				+VERSION+
-				"&ll="				+LONGITUDE+","+LATITUDE+
+				"&ll="				+LATITUDE+","+LONGITUDE+
 				"&query="			+CATEGORY+
 				"&radius="			+RADIUS;
 	
+		System.out.println(query);
+		
 		return explore(query);
 	}
 	
@@ -91,7 +94,15 @@ public class FourSquareConnection {
 		try{
 			// Absenden eines Html-Requests mittels der Java-Funktionalität HttpURLConnection
 			URL foursquare = new URL(query);
-			HttpURLConnection connection	= (HttpURLConnection) foursquare.openConnection();
+			HttpURLConnection connection = null;
+			int counter = 0;
+			while(connection == null || connection.getResponseCode() >= 500){
+				connection	= (HttpURLConnection) foursquare.openConnection();
+				counter++;
+				if(counter > 3)
+					continue;
+			}
+			
 			InputStream is = connection.getInputStream();
 			
 			// Konvertierung der Html-Response in einen String
@@ -116,8 +127,10 @@ public class FourSquareConnection {
 				bar.setId((String) venue.get("id"));
 				bar.setName((String) venue.get("name"));
 				bar.setRating(-1);	//TODO
-				bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
-				bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
+				if(venue.get("price") != null)
+					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
+				if(venue.get("categories") != null && ((JSONArray)venue.get("categories")).get(0) != null)
+					bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
 				bar.setImageUrl("");	//TODO
 				
 				float lng = (float) (double) ((JSONObject) venue.get("location")).get("lng");
@@ -143,6 +156,7 @@ public class FourSquareConnection {
 	 *
 	 * @return Diese Methode gibt nichts zurück.
 	 */
+	@Override
 	public Bar getBarByID(String id){
 		return null;
 	}	

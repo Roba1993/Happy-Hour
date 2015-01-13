@@ -71,7 +71,7 @@ public class H2UserDAO implements UserDAO {
 					return true;
 				}
 			}catch(Exception e){
-				e.printStackTrace();
+				log.error(e.getMessage());
 	            }
 		} catch (SQLException e) {
 			log.error(e.getMessage());

@@ -12,7 +12,7 @@ angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModul
 					appPath: null
 				};
 			}
-			var service =  {
+			var service = {
 				/**
 				 * Speichert die aktuelle Route auf dem Gerät des Nutzers
 				 * 
@@ -30,7 +30,7 @@ angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModul
 				 * @returns {Route} Die zuletzt gespeicherte Route
 				 */
 				getRoute: function() {
-					return status.currentRoute;
+					return _.cloneDeep(status.currentRoute);
 				},
 				/**
 				 * Speichert den aktuellen Pfad der Anwendung

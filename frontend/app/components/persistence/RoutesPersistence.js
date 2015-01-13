@@ -24,13 +24,16 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 				if (service.isFull()){
 					return false;
 				}
+				// LocalRoute Objekt erstellen
 				var object = {
 					timestamp: new Date(),
 					route: route
 				};
+				// Objekt hashen und Hash als ID setzen
 				var id = CryptoJS.MD5(JSON.stringify(object)).toString(CryptoJS.enc.Hex);
 				object.id = id;
 
+				// Route hinzufügen und persistieren
 				routes.push(object);
 				localStorageService.set('routes', routes);
 				return id;
@@ -44,15 +47,18 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 */
 			remove: function(routeId) {
 				var routeToDelete = null;
+				// zu löschende Route suchen
 				for (var i = 0; i < routes.length; i++){
 					if (routes[i].id === routeId){
 						routeToDelete = routes[i];
 					}
 				}
+				// Wenn keine Route gefunden wurde, false zurückgeben
 				if (routeToDelete === null){
 					return false;
 				}
 				else {
+					// Route aus Array entfernen und persistieren
 					routes = _.without(routes, routeToDelete);
 					localStorageService.set('routes', routes);
 					return true;
@@ -67,11 +73,13 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 */
 			get: function(routeId) {
 				var routeToReturn = null;
+				// Zurückzugebende Route suchen
 				for (var i = 0; i < routes.length; i++){
 					if (routes[i].id === routeId){
 						routeToReturn = routes[i];
 					}
 				}
+				// Klon der Route zurückgeben
 				return _.cloneDeep(routeToReturn);
 			},
 			/**
@@ -91,7 +99,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 */
 			isFull: function() {
 				var maxRoutes = 10;
-				if (routes.length === maxRoutes){
+				if (routes.length >= maxRoutes){
 					return true;
 				}
 				else {

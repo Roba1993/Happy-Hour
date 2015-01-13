@@ -6,7 +6,7 @@ package de.dhbw.hh.models;
  * @author Maren
  */
 public class User {
-	
+	// Erstellen der Variablen
 	private String name = "";
 	
 	/**
@@ -30,6 +30,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
+	public String toString(){
+		return ("Name: "+name);
 	}
 	
 }

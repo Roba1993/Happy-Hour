@@ -1,4 +1,4 @@
-package de.dhbw.hh.dao;
+package de.dhbw.hh.dao.h2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,26 +7,27 @@ import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.dhbw.hh.dao.h2.H2FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.Location;
 
 /**
- * Diese Klasse testet alle relevanten Methoden der FoursquareConnection-Klasse
+ * Diese Klasse testet alle relevanten Methoden der H2FoursquareDAO-Klasse
  * @author Tobias Häußermann
  */
-public class FoursquareConnectionTest {
+public class FoursquareTest {
 
 	// Die zu testende Klasse
-	private static FourSquareConnection fsc;
+	private static H2FoursquareDAO fsc;
 	
 	/**
-	 * Diese Funktion initialisiert die Klasse FoursquareConnection für 
+	 * Diese Funktion initialisiert die Klasse H2FoursquareDAO für 
 	 * ausführliche Tests.
 	 * @throws Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		fsc = new FourSquareConnection();
+		fsc = new H2FoursquareDAO();
 	}
 	
 	/**
@@ -37,8 +38,8 @@ public class FoursquareConnectionTest {
 	@Test
 	public void testGetBarsInArea() throws Exception {
 		// Übergabeparameter für Test definieren und festlegen.
-		float longitude = 48.949034f;
-		float latitude 	= 9.431656f;
+		float latitude = 48.949034f;
+		float longitude 	= 9.431656f;
 		int radius		= 150;
 		
 		// Setze die Anfrage an Foursquare ab und speichere die Ergebnisse in 'results'

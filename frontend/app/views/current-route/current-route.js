@@ -8,7 +8,7 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
 }])
 
 .controller('currentRouteController', 
-['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService', 
+['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService',
 function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService, AppStatusPersistenceService) {
 	// Aktuellen Pfad persistieren
 	AppStatusPersistenceService.setPath('/currentRoute');
@@ -16,60 +16,15 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 	// Aktuelle Route aus dem AppStatus auslesen
 	$scope.route = AppStatusPersistenceService.getRoute();
 
-	// TODO: evtl löschen
-	if($scope.route === null) {
-		$scope.route = {
-			options: {
-				startTime: '18:00',
-				endTime: '19:00',
-				stayTime: 1,
-				radius: 2.5,
-				location: {
-					longitude: 1,
-					latitude: 1
-				}
-			},
-			timeframes: [{
-				startTime: '18:00',
-				endTime: '19:00',
-				bar: {
-					'name': 'Lutscher Bar',
-					'rating': 1,
-					'costs': 5,
-					'description': 'Die schlechteste Bar in Stuttgart',
-					'imageUrl': '',
-					'openingTimes': [
-						{
-							'startTime': '08:00', 
-							'endTime': '20:00', 
-							'days': [1,2,3,4,5]
-						}, 
-						{
-							'startTime': '08:00', 
-							'endTime': '02:00', 
-							'days': [6,7]
-						}
-					],
-					'location': {longitude:9.18293, latitude:48.77585},
-					'adress': 'Coole Straße 49 Stuttgart',
-					'happyHours': [
-						{
-							'startTime': '17:00', 
-							'endTime': '17:30', 
-							'description': 'Pommes 50ct günstiger', 
-							'days': [3,7]
-						}
-					]
-				}
-			}]
-		};
-	}
-
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
 	$scope.$watch('route', function(route) {
 		AppStatusPersistenceService.setRoute(route);
 		console.log(route);
 	}, true);
+
+	BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
+		console.log(bars);
+	});
 
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {
@@ -178,26 +133,6 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 			]);
 		});
 	});
-	
-	// Es können nur die Details einer einzelnen Bar betrachtet werden
-	$scope.openFrameIndex = -1;
-	$scope.frameClicked = function(index) {
-		if(index === $scope.openFrameIndex) {
-			$scope.openFrameIndex = -1;
-		}
-		else {
-			$scope.openFrameIndex = index;
-		}
-	};
-	
-	// Eine Route auf dem Gerät persistieren
-	$scope.saveRoute = function() {
-		RoutesPersistenceService.add($scope.route);
-	};
-
-	$scope.removeBar = function(index) {
-		$scope.route.timeframes[index].bar = null;
-	};
 
 	$scope.$watch('barChosen', function() {
 		// Herausfinden welcher Slot befüllt ist --> passenden Timeframe mit der Bar befüllen
@@ -211,7 +146,48 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		$scope.barChosen = [];
 	}, true);
 
-	// SIDEBAR
+	/**
+	 * BARS
+	 */
+	
+	// Es können nur die Details einer einzelnen Bar betrachtet werden
+	$scope.openFrameIndex = -1;
+	$scope.frameClicked = function(index) {
+		if(index === $scope.openFrameIndex) {
+			$scope.openFrameIndex = -1;
+		}
+		else {
+			$scope.openFrameIndex = index;
+		}
+	};
+
+	$scope.removeBar = function(index) {
+		$scope.route.timeframes[index].bar = null;
+	};
+
+	/**
+	 * SIDEBAR
+	 */
+	
+	// Die Startposition auf die Geräteposition setzen
+	$scope.setLocationToDevice = function() {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			$scope.$apply(function() {
+				$scope.route.options.location.longitude = position.coords.longitude;
+				$scope.route.options.location.latitude = position.coords.latitude;
+			});
+		});
+	};
+
+	// Die Route auf dem Gerät persistieren
+	$scope.saveRoute = function() {
+		// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
+		if($scope.routeName !== '' && $scope.routeName.length <= 50) {
+			$scope.route.name = $scope.routeName;
+			RoutesPersistenceService.add($scope.route);
+			$scope.namePopupOpen = false;
+		}
+	};
 
 	// start und endTime defaults binden
 	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HashConverter {
 	// Initialisiert einen Logger für die Fehlerausgabe
-    static final Logger log = LoggerFactory.getLogger(HashConverter.class);
+    static final Logger LOG = LoggerFactory.getLogger(HashConverter.class);
 
     /**
 	 * Diese Methode wandelt einen String, der übergeben wird, in einen MD5 Hash um
@@ -39,7 +39,7 @@ public class HashConverter {
 			hash = new BigInteger(1, digest.digest()).toString(16);
 	 
 		}catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage());
+			LOG.error(e.getMessage());
 			}
 		// Rückgabe des MD5 Hash-Werts
 		return hash;

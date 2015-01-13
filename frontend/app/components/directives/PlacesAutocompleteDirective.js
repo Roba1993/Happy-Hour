@@ -31,7 +31,7 @@ angular.module('happyHour.directives.PlacesAutocompleteDirective', [])
 								}
 							});
 						}
-					});
+					}, true);
 
 					// Google Maps Autocomplete initialisieren
 					var options = {

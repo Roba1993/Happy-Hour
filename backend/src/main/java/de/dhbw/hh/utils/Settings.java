@@ -6,12 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.dhbw.hh.HappyHour;
+
 /**
  * Diese Klasse stellt alle Funktionen zur Verwaltung der Eigenschaften bereit.
  *
  * @author Robert
  */
 public class Settings extends Properties {
+	
+	// Initialisiert den Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(HappyHour.class);
 
     // einmalige ID
 	private static final long serialVersionUID = 1L;
@@ -60,6 +68,12 @@ public class Settings extends Properties {
         setProperty("server.port", "8080");
         setProperty("server.web", "../frontend/app");
 
+        //foursquare settings
+        setProperty("foursquare.clientID", "ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV");
+        setProperty("foursquare.clientSecret", "E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX");
+        setProperty("foursquare.defaultLng", "48.949034");
+        setProperty("foursquare.defaultLat", "9.431656");
+        setProperty("foursquare.defaultRad", "100");
     }
 
     /**
@@ -77,9 +91,9 @@ public class Settings extends Properties {
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filename))) {
             load(bis);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
     }
 
