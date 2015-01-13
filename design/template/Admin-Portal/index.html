@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Go Happy - Adminportal</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/style.css?v=0.1">
+	<link rel="stylesheet" href="css/fonts.css?v=0.1">
+	<link rel="stylesheet" href="css/elements.css?v=0.1">
+	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+</head>
+<body>
+<div id="main">
+	<div id="e__popup-overlay"></div>
+<!--
+		<div id="logo"><h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1></div>
+		<div id="login-window">
+			<table>
+				<tr>
+					<td width="40%" >Name: </td>
+					<td>
+						<input type="text" name="name" />
+					</td>
+				</tr>
+				<tr>
+					<td>Password: </td>
+					<td>
+						<input type="password" name="password" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><br /><br /><input class="login-button" type="submit" value="Login"></td>
+				</tr>
+			</table>
+		</div>
+-->
+	<div id="logo-content"><h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1></div>
+	<div id="table-window">
+	<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>Barname</th>
+			<th>Meldungen</th>
+            <th>Beschreibung</th>
+			<th>Happy-Hour</th>
+			<th>Öffnungszeiten</th>
+			<th>Adresse</th>
+			
+        </tr>
+    </thead>
+    <tbody>
+	<tr>
+            <td>Hacienda</td>
+			<td>Hacienda</td>
+            <td>Mexikanische Bar in ...</td>
+			<td>13:00 - 14:00 Alle Cocktails halber Preis</td>
+            <td>8:00 - 24:00</td>
+			<td>Neue Straße 12</td>
+        </tr>
+        <tr>
+            <td>Mauritius</td>
+			<td>Hacienda</td>
+            <td>Zweimal in Stuttgart und ...</td>
+			<td>00:00 - 24:00 alle Cocktails 4,99€</td>
+            <td>14:00 - 03:00</td>
+			<td>Marienstraße 4</td>
+        </tr>
+
+    </tbody>
+</table>
+	
+	</div>
+</div>
+</body>
+	<!-- jQuery -->
+	<script type="text/javascript" charset="utf8" src="js/jquery-1.11.1.min.js"></script>
+	<!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready( function () {
+			$('#table_id').DataTable();
+		} );
+	</script>
+
+
+
+</html>
