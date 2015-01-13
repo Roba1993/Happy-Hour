@@ -91,7 +91,15 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		try{
 			// Absenden eines Html-Requests mittels der Java-Funktionalität HttpURLConnection
 			URL foursquare = new URL(query);
-			HttpURLConnection connection	= (HttpURLConnection) foursquare.openConnection();
+			HttpURLConnection connection = null;
+			int counter = 0;
+			while(connection == null || connection.getResponseCode() >= 500){
+				connection	= (HttpURLConnection) foursquare.openConnection();
+				counter++;
+				if(counter > 3)
+					continue;
+			}
+			
 			InputStream is = connection.getInputStream();
 			
 			// Konvertierung der Html-Response in einen String
@@ -116,10 +124,10 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				bar.setId((String) venue.get("id"));
 				bar.setName((String) venue.get("name"));
 				bar.setRating(-1);	//TODO
-				try{
+				if(venue.get("price") != null)
 					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
-				}catch(Exception e){}
-				bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
+				if(venue.get("categories") != null && ((JSONArray)venue.get("categories")).get(0) != null)
+					bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
 				bar.setImageUrl("");	//TODO
 				
 				float lng = (float) (double) ((JSONObject) venue.get("location")).get("lng");
