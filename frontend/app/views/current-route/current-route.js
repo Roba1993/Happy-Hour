@@ -22,7 +22,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 		console.log(route);
 	}, true);
 
-	BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
+	BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
 		console.log(bars);
 	});
 

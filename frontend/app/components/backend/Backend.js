@@ -34,7 +34,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				promise.then(function(data){ //data wird befüllt mit der Rückgabe
 					//Rückgabe an den Serviceanfragenden
-					deferred.resolve(data.data);
+					deferred.resolve(data.data.data);
 				});
 				return deferred.promise;
 
@@ -60,7 +60,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				promise.then(function(data){ //data wird befüllt mit der Rückgabe
 					//Rückgabe an den Serviceanfragenden
-					deferred.resolve(data.data);
+					deferred.resolve(data.data.data);
 				});
 				return deferred. promise;
 
@@ -82,7 +82,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				promise.then(function(data){ //data wird befüllt mit der Rückgabe
 					//Rückgabe an den Serviceanfragenden
-					deferred.resolve(data.data);
+					deferred.resolve(data.data.data);
 				});
 				return deferred.promise;
 			},
@@ -103,7 +103,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				promise.then(function(data){ //data wird befüllt mit der Rückgabe
 					//Rückgabe an den Serviceanfragenden
-					deferred.resolve(data.data);
+					deferred.resolve(data.data.data);
 				});
 				return deferred.promise;
 
@@ -123,7 +123,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				promise.then(function(data){ //data wird befüllt mit der Rückgabe
 					//Rückgabe an den Serviceanfragenden
-					deferred.resolve(data.data);
+					deferred.resolve(data.data.data);
 				});
 				return deferred.promise;
 
