@@ -116,7 +116,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				bar.setId((String) venue.get("id"));
 				bar.setName((String) venue.get("name"));
 				bar.setRating(-1);	//TODO
-				bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
+				try{
+					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
+				}catch(Exception e){}
 				bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
 				bar.setImageUrl("");	//TODO
 				
