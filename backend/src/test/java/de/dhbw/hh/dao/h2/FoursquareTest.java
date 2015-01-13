@@ -38,8 +38,8 @@ public class FoursquareTest {
 	@Test
 	public void testGetBarsInArea() throws Exception {
 		// Übergabeparameter für Test definieren und festlegen.
-		float longitude = 48.949034f;
-		float latitude 	= 9.431656f;
+		float latitude = 48.949034f;
+		float longitude 	= 9.431656f;
 		int radius		= 150;
 		
 		// Setze die Anfrage an Foursquare ab und speichere die Ergebnisse in 'results'

@@ -70,7 +70,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				"?client_id="		+CLIENT_ID+
 				"&client_secret="	+CLIENT_SECRET+
 				"&v="				+VERSION+
-				"&ll="				+LONGITUDE+","+LATITUDE+
+				"&ll="				+LATITUDE+","+LONGITUDE+
 				"&query="			+CATEGORY+
 				"&radius="			+RADIUS;
 	
