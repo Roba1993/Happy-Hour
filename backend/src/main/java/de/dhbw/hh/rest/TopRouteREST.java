@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 
 import de.dhbw.hh.dao.DAOFactory;
@@ -18,6 +21,9 @@ import static spark.Spark.*;
  */
 public class TopRouteREST {
 	
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(TopRouteREST.class);
+	
 	// Erstellt ein Gson Objekt für die Rückgabe	
 	private Gson gson = new Gson();
 	
@@ -31,6 +37,9 @@ public class TopRouteREST {
 		 * Gibt die TopRouten über die REST Schnittstelle zurück 
 		 */
 		get("/toproutes", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /toproutes
+			LOG.debug(request.requestMethod() + ":" + request.pathInfo());
+			
 			// Holt die Top Routen aus der Datenbank
 			Collection<Route> toproutes = daoFactory.getRouteDAO().findTopRoutes();
 			
@@ -54,6 +63,9 @@ public class TopRouteREST {
 				r.setDescription("Rückgabe der top Routes als Array");
 				r.setData(toproutes);
 			}	
+			
+			// Log-Eintrag bei Rückgabe
+			LOG.debug(r.getStatus() + r.getDescription() + r.getData());
 					
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
 			response.type("application/json");
