@@ -253,7 +253,7 @@
     margin-bottom: 5px;
 }
 .e__barcard-body .e__barcard-body-btn-melden {
-    margin-top:30px;
+    margin-top:20px;
 }
 .e__barcard-small .e__barcard-head {
     padding: 2px 10px;
@@ -379,7 +379,7 @@
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);*/
 }
 .e__btn.e__btn-danger {
-    background:red;
+    background:#e61c1c;
 }
 
 /* Table, inspired by Bootstrap */
