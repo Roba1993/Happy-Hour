@@ -64,6 +64,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		if(radius >= RADIUS)			//Minimalwert von 100 Metern!
 			RADIUS = radius;
 		
+		System.out.println("###\n"+LONGITUDE+", "+LATITUDE+"\n###");
 		//Fertiger Query-String für eine Foursquare-Abfrage
 		String query = "https://api.foursquare.com/v2/venues/explore"+
 				"?client_id="		+CLIENT_ID+
@@ -73,6 +74,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				"&query="			+CATEGORY+
 				"&radius="			+RADIUS;
 	
+		System.out.println(query);
+		
 		return explore(query);
 	}
 	
