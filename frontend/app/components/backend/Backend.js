@@ -51,7 +51,7 @@ angular.module('happyHour.backend.Backend', [])
 					//Rückgabe an den Serviceanfragenden
 					deferred.resolve(data.data.data);
 				});
-				return deferred. promise;
+				return deferred.promise;
 
 			},
 			/**
