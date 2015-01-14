@@ -78,8 +78,8 @@ describe('happyHour.persistence.RoutesPersistence module', function() {
       expect(RoutesPersistenceService).toBeDefined();
 
       var id = RoutesPersistenceService.add({id:1});
-	  RoutesPersistenceService.add({id:2});
-	  RoutesPersistenceService.remove(id);
+	    RoutesPersistenceService.add({id:2});
+	    RoutesPersistenceService.remove(id);
       expect(store.routes.length).toBe(1);
 	  
 	}));
