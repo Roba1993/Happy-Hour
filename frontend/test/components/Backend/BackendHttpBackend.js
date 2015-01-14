@@ -136,4 +136,27 @@ it('should call $http.post and save JSON Data when calling reportData', inject(f
   $httpBackend.flush();
 }));
 
+    
+// Test für saveHappy Service
+it('should call $http.post and save JSON Data when calling saveHappy', inject(function (BackendService, $httpBackend) {
+  $httpBackend.expectPOST('http://localhost:8080/123456789/hour').respond([true]);
+
+// Hier wird der Service saveHappy aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Speichern erfolgreich war oder nicht.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und einen Boolean zurück geben.
+  BackendService.saveHappy(
+      {
+        'name': 'HappyHour',
+        'description': 'Spiegelt eine HappyHour wider',
+        'timestamp': '2014-12-02 15:00:00',
+        'status': 'success',
+        'data': {
+            "startTime": "09:00", 
+            "endTime": "11:00", 
+            "description": "Nice 2 Happy-Hour", 
+            "days": [3,7]
+            }
+        }, 123456789);
+  $httpBackend.flush();
+}));
+
 });

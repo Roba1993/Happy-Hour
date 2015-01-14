@@ -75,6 +75,26 @@ angular.module('happyHour.backend.Backend', [])
 				});
 				return deferred.promise;
 			},
+            /**
+			 * Speichert Happy-Hours im Backend und übergibt einen Boolean ob das Schreiben erfolgreich war oder nicht.
+			 *
+			 * @author Daniel Reichert, Kim Rinderknecht
+			 * @param  {Happy-Hour} happy - JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
+             * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
+			 * @return {Promise(Boolean)} Boolean, ob das Schreiben erfolgreich war
+			 */
+			saveHappy: function(happy, barId) {
+				var url = baseUrl+'/'+barId+'/hour';
+
+				var promise = $http({method: 'POST', url: url, data: happy});
+				var deferred = $q.defer();
+
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
+			},
 			/**
 			 * Gibt eine Route mit dem angeforderten hashzurück.
 			 *
