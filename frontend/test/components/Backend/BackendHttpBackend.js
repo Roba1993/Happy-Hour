@@ -63,7 +63,6 @@ describe('der BackendService', function(){
 
 // Hier wird der Service getBars aufgerufen und somit der Test gestartet. Ein Locationobjekt sowie der Radius und Wochentag wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
     BackendService.getBars({'latitude': 35.7348, 'longitude': 49.0133}, 2.5, 1);
-
     $httpBackend.flush();
     }));
 
@@ -88,6 +87,34 @@ describe('der BackendService', function(){
     BackendService.getRoute('dk390nv303ijrv');
     $httpBackend.flush();
     }));
+    
+// Test für getReports Service
+    it('should call $http.get and deliver JSON Data when calling getReports', inject(function (BackendService, $httpBackend) {
+    $httpBackend.expectGET('http://localhost:8080/bars/reports').respond([
+        // Beispielhaftes JSON Objekt, das zukünftigen Objekt entspricht, und zu Testzwecken ausreicht.
+        {'name': 'Reported Bars',
+         'description': 'Alle gemeldeten Bars',
+         'timestamp': '2014-12-02 15:00:00',
+         'status': 'success',
+         'data': [
+        {'id': '19237f4f8200',
+         'description': 'Happy Hour falsch'
+        },
+        {'id': '28736482rxh9x8',
+         'description': 'Öffnungszeite'
+        },
+        {'id': '82379rx8923jx8',
+         'description': 'Top Route'
+        }
+        ]}
+    ]);
+
+// Hier wird der Service getReports aufgerufen und somit der Test gestartet. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+    BackendService.getReports();
+    $httpBackend.flush();
+    }));
+    
+    
 
 // Test für reportData Service
 it('should call $http.post and save JSON Data when calling reportData', inject(function (BackendService, $httpBackend) {

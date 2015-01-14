@@ -18,16 +18,10 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(Bar[])} Array mit allen passenden Bars
 			 */
 			getBars: function(location, radius, weekday) {
-				console.log(location);
-				console.log(radius);
-				console.log(weekday);
-
 				var latitude = location.latitude;
 				var longitude = location.longitude;
 
 				var url = baseUrl+'/bars?latitude=' + latitude + '&longitude=' + longitude + '&radius=' + radius + '&weekday=' + weekday;
-
-				console.log(url);
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
@@ -48,12 +42,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(Boolean)} Gibt `true` zurück wenn die Meldung erfolgreich gespeichert wurde und `false` wenn nicht.
 			 */
 			reportData: function(barId, description) {
-				console.log(barId);
-				console.log(description);
-
 				var url = baseUrl+'/bars/' + barId + '/reports/';
-
-				console.log(url);
 
 				var promise = $http({method: 'POST', url: url, data: description});
 				var deferred = $q.defer();
@@ -117,6 +106,26 @@ angular.module('happyHour.backend.Backend', [])
 			getToproutes: function() {
 
 				var url = baseUrl+'/toproutes/';
+
+				var promise = $http({method: 'GET', url: url});
+				var deferred = $q.defer();
+
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
+
+			},
+            /**
+			 * Gibt alle Meldungen zurück.
+			 *
+			 * @author Daniel Reichert, Kim Rinderknecht
+			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			 */
+            getReports: function() {
+
+				var url = baseUrl+'/bars/reports';
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
