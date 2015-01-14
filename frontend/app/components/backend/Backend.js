@@ -64,7 +64,7 @@ angular.module('happyHour.backend.Backend', [])
 			saveRoute: function(route) {
 				console.log(route);
 
-				var url = 'http://localhost:8080/routes/';
+				var url = baseUrl+'/routes/';
 
 				var promise = $http({method: 'POST', url: url, data: route});
 				var deferred = $q.defer();
