@@ -150,10 +150,10 @@ it('should call $http.post and save JSON Data when calling saveHappy', inject(fu
         'timestamp': '2014-12-02 15:00:00',
         'status': 'success',
         'data': {
-            "startTime": "09:00", 
-            "endTime": "11:00", 
-            "description": "Nice 2 Happy-Hour", 
-            "days": [3,7]
+            'startTime': '09:00', 
+            'endTime': '11:00', 
+            'description': 'Nice 2 Happy-Hour', 
+            'days': [3,7]
             }
         }, 123456789);
   $httpBackend.flush();
