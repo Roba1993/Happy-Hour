@@ -62,7 +62,6 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(String)} Übergibt einen Hash zu der erstellten Route
 			 */
 			saveRoute: function(route) {
-				console.log(route);
 
 				var url = baseUrl+'/routes/';
 
@@ -103,7 +102,6 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(Route)} Route mit allen darin enthaltenen Bars.
 			 */
 			getRoute: function(hash) {
-				console.log(hash);
 
 				var url = baseUrl+'/routes/' + hash;
 
