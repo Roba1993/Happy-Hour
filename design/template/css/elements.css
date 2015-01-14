@@ -730,7 +730,7 @@ line-height: 1;
 /*** /Impressum - Simon ***/
 
 /*** Popup - Simon ***/
-#e__popup-overlay {
+.e__popup-overlay {
     background: rgba(40,41,41,.6);
     width: 100%;
     height: 100%;
@@ -738,10 +738,10 @@ line-height: 1;
     position: absolute;
     top:-100%;
 }
-#e__popup-overlay.is__open {
+.e__popup-overlay.is__open {
     top:0;
 }
-#e__popup-overlay.is__open .e__popup-window {
+.e__popup-overlay.is__open .e__popup-window {
     top:40%;
     transition: top 1s ease-out;
 }
