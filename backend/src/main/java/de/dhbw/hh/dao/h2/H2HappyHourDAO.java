@@ -129,6 +129,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
                 // Schreibe die Daten ins Testrun Objekt
                 while(resultSet.next()) {
                     HappyHour happyHour = new HappyHour();
+                    System.out.println("vor dem Befüllen" +happyHour.toString());
                     happyHour.setBarID(resultSet.getString("barID"));
                     happyHour.setDescription(resultSet.getString("description"));
                     happyHour.setStart(resultSet.getTime("start"));
@@ -139,7 +140,9 @@ public class H2HappyHourDAO implements HappyHourDAO {
                     happyHour.setThursday(resultSet.getBoolean("thursday"));
                     happyHour.setSaturday(resultSet.getBoolean("saturday"));
                     happyHour.setSunday(resultSet.getBoolean("sunday"));
+                    System.out.println("nach dem Befüllen" +happyHour.toString());
                     happyHourArray.add(happyHour);
+                    System.out.println(happyHourArray);
                 }
 
                 // Gebe alle Datenobjekte als Array zurück
