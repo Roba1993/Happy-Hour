@@ -67,19 +67,40 @@ describe('der BackendService', function(){
     }));
 
 
+// Test für saveRoute Service
+it('should call $http.post and save JSON Data when calling saveRoute', inject(function (BackendService, $httpBackend) {
+  $httpBackend.expectPOST('http://localhost:8080/routes/').respond(['e98723958987325md5']);
+
+// Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Routenobjekt wird übergeben. Wenn der Service korrekt geschrieben wurde,
+// wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Hashwert, welches nach respond steht, zurückgeliefert.
+BackendService.saveRoute(
+// Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
+  {
+    'name': 'RouteStgt',
+    'description': 'Super Route in Stuttgart',
+    'timestamp': '2014-12-02 15:00:00',
+    'status': 'success',
+    'data':
+      { 'id': 1,
+      }
+    });
+$httpBackend.flush();
+}));
+
+
 // Test für getRoute Service
-    it('should call $http.get and deliver JSON Data when calling getRoute', inject(function (BackendService, $httpBackend) {
-    $httpBackend.expectGET('http://localhost:8080/routes/dk390nv303ijrv').respond([
-        // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
-        {'name': 'RouteStgt',
-         'description': 'Super Route in Stuttgart',
-         'timestamp': '2014-12-02 15:00:00',
-         'status': 'success',
-         'data':
-        {'id': 1,
-         'link': 'e98723958987325md5',
-         'name': 'Top Route'
-        }
+it('should call $http.get and deliver JSON Data when calling getRoute', inject(function (BackendService, $httpBackend) {
+  $httpBackend.expectGET('http://localhost:8080/routes/dk390nv303ijrv').respond([
+      // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
+        { 'name': 'RouteStgt',
+          'description': 'Super Route in Stuttgart',
+          'timestamp': '2014-12-02 15:00:00',
+          'status': 'success',
+          'data':
+            { 'id': 1,
+              'link': 'e98723958987325md5',
+              'name': 'Top Route'
+            }
         }
     ]);
 
@@ -88,24 +109,48 @@ describe('der BackendService', function(){
     $httpBackend.flush();
     }));
 
+
+// Test für getToproutes Service
+    it('should call $http.get and deliver JSON Data when calling getToproutes', inject(function (BackendService, $httpBackend) {
+      $httpBackend.expectGET('http://localhost:8080/toproutes/').respond([
+        // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
+        { 'name': 'RouteStgt',
+          'description': 'Super Route in Stuttgart',
+          'timestamp': '2014-12-02 15:00:00',
+          'status': 'success',
+          'data':
+            { 'id': 1,
+              'link': 'e98723958987325md5',
+              'name': 'Top Route'
+            }
+        }
+      ]);
+
+// Hier wird der Service getToproutes aufgerufen und somit der Test gestartet.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+BackendService.getToproutes();
+$httpBackend.flush();
+}));
+
+
 // Test für getReports Service
     it('should call $http.get and deliver JSON Data when calling getReports', inject(function (BackendService, $httpBackend) {
     $httpBackend.expectGET('http://localhost:8080/bars/reports').respond([
-        // Beispielhaftes JSON Objekt, das zukünftigen Objekt entspricht, und zu Testzwecken ausreicht.
-        {'name': 'Reported Bars',
-         'description': 'Alle gemeldeten Bars',
-         'timestamp': '2014-12-02 15:00:00',
-         'status': 'success',
-         'data': [
-        {'id': '19237f4f8200',
-         'description': 'Happy Hour falsch'
-        },
-        {'id': '28736482rxh9x8',
-         'description': 'Öffnungszeite'
-        },
-        {'id': '82379rx8923jx8',
-         'description': 'Top Route'
-        }
+      // Beispielhaftes JSON Objekt, das zukünftigen Objekt entspricht, und zu Testzwecken ausreicht.
+        { 'name': 'Reported Bars',
+          'description': 'Alle gemeldeten Bars',
+          'timestamp': '2014-12-02 15:00:00',
+          'status': 'success',
+          'data': [
+          { 'id': '19237f4f8200',
+            'description': 'Happy Hour falsch'
+          },
+          { 'id': '28736482rxh9x8',
+            'description': 'Öffnungszeite'
+          },
+          { 'id': '82379rx8923jx8',
+            'description': 'Top Route'
+          }
         ]}
     ]);
 
@@ -113,7 +158,6 @@ describe('der BackendService', function(){
     BackendService.getReports();
     $httpBackend.flush();
     }));
-
 
 
 // Test für reportData Service
@@ -158,6 +202,7 @@ it('should call $http.post and save JSON Data when calling saveHappy', inject(fu
         }, 123456789);
   $httpBackend.flush();
 }));
+
 
 // Test für deleteHappy Service
 it('should call $http.delete and delete a HappyHour when calling deleteHappy', inject(function (BackendService, $httpBackend) {
