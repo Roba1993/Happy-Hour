@@ -43,6 +43,16 @@ describe('happyHour.persistence.AppStatusPersistence module', function() {
       expect(AppStatusPersistenceService.getPath()).toBe('test');
 
     }));
+
+   it('sollte einen Pfad speichern und wieder zurückgeben', inject(function(AppStatusPersistenceService) {
+      expect(AppStatusPersistenceService).toBeDefined();
+    
+      var now = new Date().getTime();
+      AppStatusPersistenceService.setTime(now);
+      expect(store.appStatus.time).toBe(now);
+      expect(AppStatusPersistenceService.getTime()).toBe(now);
+
+    }));
 	
 	
 

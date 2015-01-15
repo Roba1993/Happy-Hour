@@ -89,6 +89,8 @@ public class RoutesREST {
  		* @author Tabea
  		*/
 		get("/routes/:hash", "application/json", (request, response) -> {
+			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());			
+			
 			// Routen aus der Datenbank holen
 			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
 			
@@ -115,6 +117,10 @@ public class RoutesREST {
 				
 				r.setData(data);
 			}
+			
+			// Log-Eintrag bei Rückgabe
+			LOG.debug(r.getStatus() + r.getDescription() + r.getData());
+			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");
 			return gson.toJson(r);
