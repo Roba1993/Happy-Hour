@@ -85,16 +85,19 @@ public class H2RouteDAO implements RouteDAO {
 
         // Holt eine Connection zur Datenbank aus dem Connectionpool
         try (Connection connection = cpds.getConnection()) {
+        	System.out.println("connection got");
             // verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
             // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                // Fügt den Hash-Wert in die SQL-Abfrage ein
+                System.out.println("statement here");
+            	// Fügt den Hash-Wert in die SQL-Abfrage ein
                 preparedStatement.setString(1, hash);
 
                 // Daten aus der Datenbank holen
                 ResultSet resultSet = preparedStatement.executeQuery();
+                System.out.println(resultSet.toString());
                 // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
                 if(resultSet.next()){
                     Route route = new Route();
