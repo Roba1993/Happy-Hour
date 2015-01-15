@@ -100,6 +100,7 @@ public class H2RouteDAO implements RouteDAO {
                     route.setHash(resultSet.getString("hash"));
                     route.setData(resultSet.getString("data"));
                     route.setTop(resultSet.getBoolean("top"));
+                    System.out.println("Die Route lautet: "+route);
                     return route;
                 }
                 // Wenn kein Wert vorhanden ist wird null zurückgegegben
