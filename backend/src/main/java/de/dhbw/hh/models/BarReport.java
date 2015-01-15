@@ -35,5 +35,10 @@ public class BarReport {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + getID() + "; BarID: " + getBarID() + "; Description: " + getDescription();
+	}
 
 }
