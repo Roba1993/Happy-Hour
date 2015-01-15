@@ -95,7 +95,7 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 			},
 			/**
-			 * Gibt eine Route mit dem angeforderten hashzurück.
+			 * Gibt eine Route mit dem angeforderten hash zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {String} hash Ein Hashwert, der zuvor beim Speichern einer Route zurückgegeben wurde.
@@ -135,13 +135,13 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 
 			},
-            /**
+       /**
 			 * Gibt alle Meldungen zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			 */
-            getReports: function() {
+      getReports: function() {
 
 				var url = baseUrl+'/bars/reports';
 
@@ -154,6 +154,26 @@ angular.module('happyHour.backend.Backend', [])
 				});
 				return deferred.promise;
 
+			},
+			/**
+			* Löscht die HappyHour mit der übergebenen ID
+			*
+			* @author Daniel Reichert, Kim Rinderknecht
+			* @param {Integer} hourId Die ID der zu löschenden HappyHour
+			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			*/
+			deleteHappy: function(hourId) {
+
+				var url = baseUrl+'/delHour/'+hourId;
+
+				var promise = $http({method: 'DELETE', url: url})
+				var deferred = $q.defer();
+
+				promise.then(function(data) { //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
 			}
 		};
 
