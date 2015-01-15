@@ -39,6 +39,12 @@ public class H2BarReportDAO implements BarReportDAO {
         this.cpds = cpds;
     }
 
+    /**
+     * Diese Funktion fügt ein BarReport in die Datenbank ein.
+     *
+     * @param barReport Der einzufügende BarReport.
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean insertBarReport(BarReport barReport) {
 		String sql = "INSERT INTO barReport (barID, description) VALUES (?,?)";
@@ -69,6 +75,12 @@ public class H2BarReportDAO implements BarReportDAO {
         return false;
 	}
 
+	/**
+     * Diese Funktion löscht alle BarReports zu einer zugehörigen Bar anhand der BarID
+     *
+     * @param barID Die BarID anhand der die BarReports zugeordnet werden.
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean deleteBarReport(String barID) {
 		 String sql = "DELETE FROM barReport WHERE barID=?";
@@ -100,6 +112,12 @@ public class H2BarReportDAO implements BarReportDAO {
 	        return false;
 	}
 	
+	/**
+     * Diese Funktion löscht einen BarReport aus der Datenbank anhand seiner ID.
+     *
+     * @param id Die id anhand der BarReport zugeordnet wird.
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean deleteSpecificBarReport(int id) {
 		 String sql = "DELETE FROM barReport WHERE id=?";
@@ -129,6 +147,13 @@ public class H2BarReportDAO implements BarReportDAO {
 	        return false;
 	}
 
+	/**
+     * Diese Funktion findet einen bestimmten BarReport anhand seiner BarID.
+     *
+     * @param barID Die BarID nach der gesucht werden soll.
+     * @return Gibt bei Erfolg das gefundene BarReport-Objekt zurück. Wenn nichts
+     * gefunden wird, enthält die Rückgabe den Wert null.
+     */
 	@Override
 	public Collection<BarReport> findBarReport(String barID) {
 		String sql = "SELECT id, barID, description FROM barReport WHERE barID=?";
@@ -165,6 +190,12 @@ public class H2BarReportDAO implements BarReportDAO {
         return new ArrayList<BarReport>();
 	}
 
+	/**
+     * Diese Funktion sucht alle BarReports in der Datenbank mit dem angegebenen Reported-Wahrheitswert.
+     *
+     * @param reported Der Reported-Wahrheitswer nach dem gesucht werden soll.
+     * @return BarReport-Array mit den gefundenen BarReports.
+     */
 	@Override
 	public Collection<BarReport> findAllBarReports() {
 		String sql = "SELECT id, barID, description FROM barReport";
