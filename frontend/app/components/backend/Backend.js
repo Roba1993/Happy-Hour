@@ -82,8 +82,8 @@ angular.module('happyHour.backend.Backend', [])
              * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
 			 * @return {Promise(Boolean)} Boolean, ob das Schreiben erfolgreich war
 			 */
-			saveHappy: function(happy, barId) {
-				var url = baseUrl+'/'+barId+'/hour';
+			saveHappy: function(happy, barId, admin, adminpw) {
+				var url = baseUrl+'/'+barId+'/hour?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'POST', url: url, data: happy});
 				var deferred = $q.defer();
@@ -141,9 +141,9 @@ angular.module('happyHour.backend.Backend', [])
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			 */
-      getReports: function() {
+      getReports: function(admin, adminpw) {
 
-				var url = baseUrl+'/bars/reports';
+				var url = baseUrl+'/bars/reports?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
@@ -162,9 +162,9 @@ angular.module('happyHour.backend.Backend', [])
 			* @param {Integer} hourId Die ID der zu löschenden HappyHour
 			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			*/
-			deleteHappy: function(hourId) {
+			deleteHappy: function(hourId, admin, adminpw) {
 
-				var url = baseUrl+'/delHour/'+hourId;
+				var url = baseUrl+'/delHour/'+hourId+'?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'DELETE', url: url});
 				var deferred = $q.defer();

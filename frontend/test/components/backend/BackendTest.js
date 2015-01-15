@@ -143,7 +143,7 @@ $httpBackend.flush();
 
 // Test für getReports Service
     it('should call $http.get and deliver JSON Data when calling getReports', inject(function (BackendService, $httpBackend) {
-    $httpBackend.expectGET('http://localhost:8080/bars/reports').respond([
+    $httpBackend.expectGET('http://localhost:8080/bars/reports?admin=boss&adminpw=bosspw').respond([
       // Beispielhaftes JSON Objekt, das zukünftigen Objekt entspricht, und zu Testzwecken ausreicht.
         { 'name': 'Reported Bars',
           'description': 'Alle gemeldeten Bars',
@@ -163,7 +163,7 @@ $httpBackend.flush();
     ]);
 
 // Hier wird der Service getReports aufgerufen und somit der Test gestartet. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurückgeliefert.
-    BackendService.getReports();
+    BackendService.getReports('boss', 'bosspw');
     $httpBackend.flush();
     }));
 
@@ -191,7 +191,7 @@ it('should call $http.post and save JSON Data when calling reportData', inject(f
 
 // Test für saveHappy Service
 it('should call $http.post and save JSON Data when calling saveHappy', inject(function (BackendService, $httpBackend) {
-  $httpBackend.expectPOST('http://localhost:8080/123456789/hour').respond([true]);
+  $httpBackend.expectPOST('http://localhost:8080/123456789/hour?admin=boss&adminpw=bosspw').respond([true]);
 
 // Hier wird der Service saveHappy aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Speichern erfolgreich war oder nicht.
 //Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Booleanwert zurückgegeben.
@@ -207,18 +207,18 @@ it('should call $http.post and save JSON Data when calling saveHappy', inject(fu
             'description': 'Nice 2 Happy-Hour',
             'days': [3,7]
             }
-        }, 123456789);
+        }, 123456789, 'boss', 'bosspw');
   $httpBackend.flush();
 }));
 
 
 // Test für deleteHappy Service
 it('should call $http.delete and delete a HappyHour when calling deleteHappy', inject(function (BackendService, $httpBackend) {
-  $httpBackend.expectDELETE('http://localhost:8080/delHour/3225212').respond([true]);
+  $httpBackend.expectDELETE('http://localhost:8080/delHour/3225212?admin=boss&adminpw=bosspw').respond([true]);
 
 // Hier wird der Service deleteHappy aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Löschen erfolgreich war oder nicht.
 //Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Booleanwert zurückgegeben.
-  BackendService.deleteHappy(3225212);
+  BackendService.deleteHappy(3225212, 'boss', 'bosspw');
   $httpBackend.flush();
 }));
 
