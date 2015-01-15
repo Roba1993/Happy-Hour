@@ -166,7 +166,7 @@ angular.module('happyHour.backend.Backend', [])
 
 				var url = baseUrl+'/delHour/'+hourId;
 
-				var promise = $http({method: 'DELETE', url: url})
+				var promise = $http({method: 'DELETE', url: url});
 				var deferred = $q.defer();
 
 				promise.then(function(data) { //data wird befüllt mit der Rückgabe
