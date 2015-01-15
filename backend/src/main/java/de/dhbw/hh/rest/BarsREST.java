@@ -66,6 +66,7 @@ public class BarsREST {
 				int count = rawBars.size();
 				for(int i=0;i<count;i++){
 					String id = rawBars.get(i).getId();
+//					id = "4b540ef4f964a5203db127e3";	TEST-DATEN
 					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHours.findHappyHour(id);
 					System.out.println("Die komplette Happy-Hour Liste: "+hh+" für die ID: "+id);
 					

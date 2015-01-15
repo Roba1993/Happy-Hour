@@ -111,6 +111,8 @@ public class H2HappyHourDAO implements HappyHourDAO {
 
 	@Override
 	public Collection<HappyHour> findHappyHour(String barID) {
+//		System.out.println("Start findhappyhour");
+		
 		String sql = "SELECT * FROM happyHour WHERE barID=?";
 
         try (Connection connection = cpds.getConnection()) {
@@ -129,20 +131,22 @@ public class H2HappyHourDAO implements HappyHourDAO {
                 // Schreibe die Daten ins Testrun Objekt
                 while(resultSet.next()) {
                     HappyHour happyHour = new HappyHour();
-                    System.out.println("vor dem Befüllen" +happyHour.toString());
+//                    System.out.println("vor dem Befüllen" +happyHour.toString());
                     happyHour.setBarID(resultSet.getString("barID"));
                     happyHour.setDescription(resultSet.getString("description"));
                     happyHour.setStart(resultSet.getTime("start"));
+//                    System.out.println(resultSet.getTime("start"));
                     happyHour.setEnd(resultSet.getTime("end"));
+//                    System.out.println(resultSet.getTime("end"));
                     happyHour.setMonday(resultSet.getBoolean("monday"));
                     happyHour.setTuesday(resultSet.getBoolean("tuesday"));
                     happyHour.setWednesday(resultSet.getBoolean("wednesday"));
                     happyHour.setThursday(resultSet.getBoolean("thursday"));
                     happyHour.setSaturday(resultSet.getBoolean("saturday"));
                     happyHour.setSunday(resultSet.getBoolean("sunday"));
-                    System.out.println("nach dem Befüllen" +happyHour.toString());
+//                  System.out.println("nach dem Befüllen" +happyHour.toString());
                     happyHourArray.add(happyHour);
-                    System.out.println(happyHourArray);
+//                    System.out.println(happyHourArray);
                 }
 
                 // Gebe alle Datenobjekte als Array zurück
