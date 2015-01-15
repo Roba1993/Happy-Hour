@@ -144,6 +144,7 @@ public class HappyHourREST {
 				}
 				restResponse.setData(null);
 
+				
 				response.type("application/json");
 				return gson.toJson(restResponse);
 				

@@ -80,6 +80,12 @@ public class H2HappyHourDAO implements HappyHourDAO {
         return false;
 	}
 
+	/**
+     * Diese Funktion löscht eine HappyHour aus der Datenbank anhand seiner ID.
+     *
+     * @param id Die BarID anhand die HappyHour zugeordnet wird.
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean deleteHappyHour(int id) {
 		String sql = "DELETE FROM happyHour WHERE id=?";
