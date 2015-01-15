@@ -40,7 +40,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @author Tobias Häußermann
 	 */
 	@Override
-	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, int radius){
+	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius){
 		
 		String CLIENT_ID			= "";			//Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_SECRET		= "";			//Zu finden auf GitHub (zur Authentifizierung)
@@ -61,8 +61,11 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		
 		LONGITUDE = longitude;
 		LATITUDE = latitude;
-		if(radius >= RADIUS)			//Minimalwert von 100 Metern!
-			RADIUS = radius;
+		if((int)(radius*1000) >= RADIUS)			//Minimalwert von 100 Metern!
+			RADIUS = (int)(radius*1000);
+		
+		System.out.println("Radius in Metern (1): "+radius*1000);
+		System.out.println("Radius in Metern: "+RADIUS);
 		
 		System.out.println("###\n"+LONGITUDE+", "+LATITUDE+"\n###");
 		//Fertiger Query-String für eine Foursquare-Abfrage
@@ -126,7 +129,10 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				Bar bar = new Bar();
 				bar.setId((String) venue.get("id"));
 				bar.setName((String) venue.get("name"));
-				bar.setRating(-1);	//TODO
+				if(venue.get("rating") != null)
+					bar.setRating((float)((double)venue.get("rating")));
+				else 
+					bar.setRating(-1f);
 				if(venue.get("price") != null)
 					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
 				if(venue.get("categories") != null && ((JSONArray)venue.get("categories")).get(0) != null)
@@ -140,6 +146,16 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				bar.setAdress((String) ((JSONObject) venue.get("location")).get("address"));
 								
 				bars.add(bar);
+				
+//				https://api.foursquare.com/v2/venues/explore
+//					?client_id=ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV
+//					&client_secret=E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX
+//					&client_secret=
+//					&v=20150115
+//					&ll=48.77376,9.17778
+//					&query=bar
+//					&radius=500
+				
 			}
 			is.close();
 			connection.disconnect();

@@ -101,7 +101,6 @@ public class RoutesREST {
 			r.setTimestamp(new Timestamp(new Date().getTime()));
 			
 			//Überprüfen, ob die Route abgerufen werden kann
-			System.out.println(HashRoute.getData());
 			if(HashRoute.isHashEmpty()) {
 				//Es wurde keine Route gefunden
 				r.setDescription("Keine Route gefunden");

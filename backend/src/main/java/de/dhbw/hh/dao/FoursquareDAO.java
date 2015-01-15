@@ -20,7 +20,7 @@ public interface FoursquareDAO {
 	 * @param radius Umkreis in Metern
 	 * @return Eine Liste aller gefundener Bars, wenn nichts gefunden wurde, einen leeren Array
 	 */
-	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, int radius);
+	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius);
 	
 	/**
 	 * Funktion um eine einzelne Bar über ihre ID von Foursquare abzurufen

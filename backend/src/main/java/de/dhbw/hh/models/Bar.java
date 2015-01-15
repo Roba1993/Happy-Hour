@@ -24,7 +24,7 @@ public class Bar {
 
 	private String 	id;
 	private String 	name;
-	private int 	rating;
+	private float 	rating;
 	private int 	costs;
 	private String 	description;
 	private String 	imageUrl;
@@ -49,11 +49,11 @@ public class Bar {
 		this.name = name;
 	}
 	
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
 	
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 	

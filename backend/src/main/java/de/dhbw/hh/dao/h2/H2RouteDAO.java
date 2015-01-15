@@ -79,51 +79,35 @@ public class H2RouteDAO implements RouteDAO {
      */
 	@Override
 	public Route findRoute(String hash) {
-		System.out.println("Test?");
         //Abfrage aus der Datenbank
         String sql = "SELECT data, top, hash FROM route WHERE hash=?";
 
         // Holt eine Connection zur Datenbank aus dem Connectionpool
         try (Connection connection = cpds.getConnection()) {
-        	System.out.println("connection got");
             // verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
             // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                System.out.println("statement here");
             	// Fügt den Hash-Wert in die SQL-Abfrage ein
                 preparedStatement.setString(1, hash);
 
                 // Daten aus der Datenbank holen
                 ResultSet resultSet = preparedStatement.executeQuery();
-                System.out.println(resultSet.toString());
                 // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
                 
-                System.out.println("Ausgabe des Resultsets:");
-                int i=0;
-                while(resultSet.next()){
-                	System.out.println(i++);
-                	try{
-                		System.out.println(resultSet.getString("hash"));
-                	}catch(Exception e){}
-                }
+            	resultSet.next();
+            	System.out.println("resultset step in");
+            	
+            	
+                Route route = new Route();
+                route.setHash(resultSet.getString("hash"));
+                route.setData(resultSet.getString("data"));
+                route.setTop(resultSet.getBoolean("top"));
+                return route;
                 
-                
-                if(resultSet.next()){
-                	System.out.println("resultset step in");
-                    Route route = new Route();
-                    route.setHash(resultSet.getString("hash"));
-                    route.setData(resultSet.getString("data"));
-                    route.setTop(resultSet.getBoolean("top"));
-                    System.out.println("Die Route lautet: "+route);
-                    return route;
-                }
-                else{
-                	System.out.println("no furhter steps");
-                }
                 // Wenn kein Wert vorhanden ist wird null zurückgegegben
-                return null;
+//                return null;
             }catch(Exception e){
             	log.error(e.getMessage());
             }
