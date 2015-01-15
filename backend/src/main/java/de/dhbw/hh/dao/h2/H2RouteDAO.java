@@ -100,12 +100,16 @@ public class H2RouteDAO implements RouteDAO {
                 System.out.println(resultSet.toString());
                 // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
                 if(resultSet.next()){
+                	System.out.println("resultset step in");
                     Route route = new Route();
                     route.setHash(resultSet.getString("hash"));
                     route.setData(resultSet.getString("data"));
                     route.setTop(resultSet.getBoolean("top"));
                     System.out.println("Die Route lautet: "+route);
                     return route;
+                }
+                else{
+                	System.out.println("no furhter steps");
                 }
                 // Wenn kein Wert vorhanden ist wird null zurückgegegben
                 return null;
