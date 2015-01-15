@@ -16,10 +16,10 @@ describe('RatingDirective', function() {
 	it('sollte die Icons korrekt generieren', function() {
 		var element = $compile('<rating type="\'star\'" value="test">')($rootScope);
 
-		$rootScope.test = 3;
+		$rootScope.test = 6;
 		$rootScope.$digest();
 
-		expect(element.children().length).toBe(5);
+		expect(element.children().length).toBe(6);
 		expect(element.children().eq(0).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(1).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(2).hasClass('i__star-colored')).toBe(true);
@@ -34,7 +34,7 @@ describe('RatingDirective', function() {
 		expect(element.children().eq(3).hasClass('i__star')).toBe(true);
 		expect(element.children().eq(4).hasClass('i__star')).toBe(true);
 		
-		$rootScope.test = 5;
+		$rootScope.test = 10;
 		$rootScope.$digest();
 		expect(element.children().eq(0).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(1).hasClass('i__star-colored')).toBe(true);
@@ -42,7 +42,7 @@ describe('RatingDirective', function() {
 		expect(element.children().eq(3).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(4).hasClass('i__star-colored')).toBe(true);
 		
-		$rootScope.test = 1.5;
+		$rootScope.test = 3;
 		$rootScope.$digest();
 		expect(element.children().eq(0).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(1).hasClass('i__star-halfcolored')).toBe(true);
@@ -50,7 +50,7 @@ describe('RatingDirective', function() {
 		expect(element.children().eq(3).hasClass('i__star')).toBe(true);
 		expect(element.children().eq(4).hasClass('i__star')).toBe(true);
 		
-		$rootScope.test = 3.7;
+		$rootScope.test = 7.1;
 		$rootScope.$digest();
 		expect(element.children().eq(0).hasClass('i__star-colored')).toBe(true);
 		expect(element.children().eq(1).hasClass('i__star-colored')).toBe(true);
@@ -58,5 +58,41 @@ describe('RatingDirective', function() {
 		expect(element.children().eq(3).hasClass('i__star-halfcolored')).toBe(true);
 		expect(element.children().eq(4).hasClass('i__star')).toBe(true);
     });
+
+	it('sollte die Geld-Icons korrekt generieren', function() {
+		var element = $compile('<rating type="\'euro\'" value="test">')($rootScope);
+
+		$rootScope.test = 4;
+		$rootScope.$digest();
+
+		expect(element.children().length).toBe(4);
+		expect(element.children().eq(0).hasClass('i__euro-colored')).toBe(true);
+		expect(element.children().eq(1).hasClass('i__euro-colored')).toBe(true);
+		expect(element.children().eq(2).hasClass('i__euro-colored')).toBe(true);
+		expect(element.children().eq(3).hasClass('i__euro-colored')).toBe(true);
+
+		$rootScope.test = 2;
+		$rootScope.$digest();
+		expect(element.children().eq(0).hasClass('i__euro-colored')).toBe(true);
+		expect(element.children().eq(1).hasClass('i__euro-colored')).toBe(true);
+		expect(element.children().eq(2).hasClass('i__euro')).toBe(true);
+		expect(element.children().eq(3).hasClass('i__euro')).toBe(true);
+	});
+
+	it('sollte nicht vorhandenes Rating ordentlich handeln', function() {
+		var element = $compile('<rating type="\'star\'" value="test">')($rootScope);
+
+		$rootScope.test = -1;
+		$rootScope.$digest();
+
+		expect(element.children().eq(0).text()).toBe('Keine Bewertung');
+
+		element = $compile('<rating type="\'euro\'" value="test">')($rootScope);
+
+		$rootScope.test = -1;
+		$rootScope.$digest();
+
+		expect(element.children().eq(0).text()).toBe('Keine Bewertung');
+	});
 	
 });

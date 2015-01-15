@@ -70,67 +70,10 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 		// Alternative Bars für alle Slots abfragen
 		$scope.bars = [];
-		_.forEach($scope.route.timeframes, function() {
-			// TODO Bars korrekt abfragen
-			$scope.bars.push([{
-				'name': 'Lutscher Bar',
-				'rating': 1,
-				'costs': 5,
-				'description': 'Die schlechteste Bar in Stuttgart',
-				'imageUrl': '',
-				'openingTimes': [
-					{
-						'startTime': '08:00', 
-						'endTime': '20:00', 
-						'days': [1,2,3,4,5]
-					}, 
-					{
-						'startTime': '08:00', 
-						'endTime': '02:00', 
-						'days': [6,7]
-					}
-				],
-				'location': {longitude:9.18293, latitude:48.77585},
-				'adress': 'Coole Straße 49 Stuttgart',
-				'happyHours': [
-					{
-						'startTime': '17:00', 
-						'endTime': '17:30', 
-						'description': 'Pommes 50ct günstiger', 
-						'days': [3,7]
-					}
-				]
-				},
-			    {
-					'name': 'Beste Bar',
-					'rating': 4,
-					'costs': 3,
-					'description': 'Die beste Bar in Stuttgart',
-					'imageUrl': '',
-					'openingTimes': [
-						{
-							'startTime': '08:00', 
-							'endTime': '22:00', 
-							'days': [1,2,3,4,5]
-						}, 
-						{
-							'startTime': '08:00', 
-							'endTime': '24:00', 
-							'days': [6,7]
-						}
-					],
-					'location': {longitude:9.17589, latitude:48.77975},
-					'adress': 'Coole Straße 49 Stuttgart',
-					'happyHours': [
-					{
-						'startTime': '20:00', 
-						'endTime': '22:00', 
-						'description': 'Bier halber Preis', 
-						'days': [3,7]
-					}
-					]
-				}
-			]);
+		BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
+			_.forEach($scope.route.timeframes, function() {
+				$scope.bars.push(bars);
+			});
 		});
 	});
 
