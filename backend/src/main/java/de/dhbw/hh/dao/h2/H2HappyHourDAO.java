@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.HappyHourDAO;
@@ -20,6 +23,9 @@ import de.dhbw.hh.models.HappyHour;
  * @author Marcus
  */
 public class H2HappyHourDAO implements HappyHourDAO {
+	
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(H2HappyHourDAO.class);
 	
 	 // Der Connectionpool
     ComboPooledDataSource cpds;
@@ -68,7 +74,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return false;
@@ -97,7 +103,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
         
         return false;
@@ -140,7 +146,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
                 return happyHourArray;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return new ArrayList<HappyHour>();
