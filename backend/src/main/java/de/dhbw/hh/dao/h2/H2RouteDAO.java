@@ -79,6 +79,7 @@ public class H2RouteDAO implements RouteDAO {
      */
 	@Override
 	public Route findRoute(String hash) {
+		System.out.println("Test?");
         //Abfrage aus der Datenbank
         String sql = "SELECT data, top, hash FROM route WHERE hash=?";
 
