@@ -61,7 +61,8 @@ describe('der BackendService', function(){
           ]}
     ]);
 
-// Hier wird der Service getBars aufgerufen und somit der Test gestartet. Ein Locationobjekt sowie der Radius und Wochentag wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+// Hier wird der Service getBars aufgerufen und somit der Test gestartet. Ein Locationobjekt sowie der Radius und Wochentag wird übergeben.
+// Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
     BackendService.getBars({'latitude': 35.7348, 'longitude': 49.0133}, 2.5, 1);
     $httpBackend.flush();
     }));
@@ -74,7 +75,7 @@ it('should call $http.post and save JSON Data when calling saveRoute', inject(fu
 // Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Routenobjekt wird übergeben. Wenn der Service korrekt geschrieben wurde,
 // wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Hashwert, welches nach respond steht, zurückgeliefert.
 BackendService.saveRoute(
-// Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
+// Beispielhaftes verkleinertes JSON Objekt, das NICHT dem zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
   {
     'name': 'RouteStgt',
     'description': 'Super Route in Stuttgart',
@@ -104,7 +105,8 @@ it('should call $http.get and deliver JSON Data when calling getRoute', inject(f
         }
     ]);
 
-// Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Hashwert einer gespeicherten Route wird übergeben. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+// Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Hashwert einer gespeicherten Route wird übergeben.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurückgeliefert.
     BackendService.getRoute('dk390nv303ijrv');
     $httpBackend.flush();
     }));
@@ -113,21 +115,27 @@ it('should call $http.get and deliver JSON Data when calling getRoute', inject(f
 // Test für getToproutes Service
     it('should call $http.get and deliver JSON Data when calling getToproutes', inject(function (BackendService, $httpBackend) {
       $httpBackend.expectGET('http://localhost:8080/toproutes/').respond([
-        // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
+        // Beispielhaftes verkleinertes JSON Objekt, das NICHT dem zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
         { 'name': 'RouteStgt',
           'description': 'Super Route in Stuttgart',
           'timestamp': '2014-12-02 15:00:00',
           'status': 'success',
-          'data':
-            { 'id': 1,
-              'link': 'e98723958987325md5',
-              'name': 'Top Route'
+          'data': [
+            { 'id': '1',
+              'name': 'Top Route 1'
+            },
+            { 'id': '2',
+              'name': 'Top Route 2'
+            },
+            { 'id': '3',
+              'name': 'Top Route 3'
             }
+          ]
         }
       ]);
 
 // Hier wird der Service getToproutes aufgerufen und somit der Test gestartet.
-//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurückgeliefert.
 BackendService.getToproutes();
 $httpBackend.flush();
 }));
@@ -146,7 +154,7 @@ $httpBackend.flush();
             'description': 'Happy Hour falsch'
           },
           { 'id': '28736482rxh9x8',
-            'description': 'Öffnungszeite'
+            'description': 'Öffnungszeiten'
           },
           { 'id': '82379rx8923jx8',
             'description': 'Top Route'
@@ -154,7 +162,7 @@ $httpBackend.flush();
         ]}
     ]);
 
-// Hier wird der Service getReports aufgerufen und somit der Test gestartet. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurück geliefert.
+// Hier wird der Service getReports aufgerufen und somit der Test gestartet. Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und das JSON Objekt, welches nach respond steht, zurückgeliefert.
     BackendService.getReports();
     $httpBackend.flush();
     }));
