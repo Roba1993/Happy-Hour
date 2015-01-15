@@ -99,6 +99,17 @@ public class H2RouteDAO implements RouteDAO {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 System.out.println(resultSet.toString());
                 // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
+                
+                System.out.println("Ausgabe des Resultsets:");
+                int i=0;
+                while(resultSet.next()){
+                	System.out.println(i++);
+                	try{
+                		System.out.println(resultSet.getString("hash"));
+                	}catch(Exception e){}
+                }
+                
+                
                 if(resultSet.next()){
                 	System.out.println("resultset step in");
                     Route route = new Route();
