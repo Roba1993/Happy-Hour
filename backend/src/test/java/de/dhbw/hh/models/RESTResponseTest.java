@@ -43,7 +43,7 @@ public class RESTResponseTest {
 		assertEquals("HTTP-GET Antwort", restResponse.getName());
 		assertEquals("success", restResponse.getStatus());
 		assertEquals("Die Daten wurden erfolgreich gespeichert", restResponse.getDescription());
-		assertEquals("1970-01-01 01:00:04.5", restResponse.getTimestamp().toString());
+		assertEquals(4500, restResponse.getTimestamp().getTime());
 		assertEquals(null, restResponse.getData());
 	}
 	
@@ -53,7 +53,7 @@ public class RESTResponseTest {
 	@Test
 	public void testToString() {
 		assertEquals("Name: HTTP-GET Antwort; Description: Die Daten wurden erfolgreich gespeichert; Timestamp: "
-				+ "1970-01-01 01:00:04.5; Status: success; Data null", restResponse.toString());
+				+ "4500; Status: success; Data null", restResponse.toString());
 	}
 	
 }

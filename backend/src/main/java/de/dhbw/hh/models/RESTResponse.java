@@ -65,7 +65,7 @@ public class RESTResponse {
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "; Description: " + getDescription() + "; Timestamp: "
-				+ getTimestamp() + "; Status: " + getStatus() + "; Data " + getData();
+				+ getTimestamp().getTime() + "; Status: " + getStatus() + "; Data " + getData();
 	}
 
 }
