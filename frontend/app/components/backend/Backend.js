@@ -167,7 +167,7 @@ angular.module('happyHour.backend.Backend', [])
 			* @param {Integer} reportId Die ID der zu löschenden Meldung
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
 			*/
 			delReport: function(barId, reportId, admin, adminpw) {
 
@@ -190,7 +190,7 @@ angular.module('happyHour.backend.Backend', [])
 			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
 			*/
 			delReports: function(barId, admin, adminpw) {
 

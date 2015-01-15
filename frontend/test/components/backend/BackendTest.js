@@ -221,6 +221,28 @@ it('should call $http.delete and delete a HappyHour when calling deleteHappy', i
   BackendService.deleteHappy(3225212, 'boss', 'bosspw');
   $httpBackend.flush();
 }));
+    
+    
+// Test für delReport Service
+it('should call $http.delete and delete a Report when calling delReport', inject(function (BackendService, $httpBackend) {
+  $httpBackend.expectDELETE('http://localhost:8080/bars/1234/report?reportid=6789&admin=boss&adminpw=bosspw').respond([true]);
+
+// Hier wird der Service delReport aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Löschen erfolgreich war oder nicht.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Booleanwert zurückgegeben.
+  BackendService.delReport(1234, 6789, 'boss', 'bosspw');
+  $httpBackend.flush();
+}));
+    
+    
+// Test für delReports Service
+it('should call $http.delete and delete a Report when calling delReport', inject(function (BackendService, $httpBackend) {
+  $httpBackend.expectDELETE('http://localhost:8080/reports/1234?admin=boss&adminpw=bosspw').respond([true]);
+
+// Hier wird der Service delReports aufgerufen und somit der Test gestartet. Ein Boolean Wert wird zurückgegeben, ob das Löschen erfolgreich war oder nicht.
+//Wenn der Service korrekt geschrieben wurde, wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Booleanwert zurückgegeben.
+  BackendService.delReports(1234, 'boss', 'bosspw');
+  $httpBackend.flush();
+}));
 
 
 });
