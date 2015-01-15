@@ -104,7 +104,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     duration -= options.stayTime;
                 }
                 return Route;
-            }
+            },
             
             /*
              * Hilfswerkzeug um die Bewertung der Bars anzupassen, hinsichtlich der Dauer der Happy-Hour im Vergleich der gewuenschten Verweildauer
@@ -113,7 +113,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {object} options Das options Objekt
              * @return {array} Gibt das modifizierte bars Array zurueck mit den angepassten ratings.
              */
-            function adjustRating(bars, options) {
+            adjustRating: function(bars, options) {
                 for (var i = 0; i < bars.length; i++) {
                     if (bars[i][2] - options.stayTime < 0) {
                         bars[i][3] = 0;
@@ -124,7 +124,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     }
                 }
                 return bars;
-            }
+            },
             
             /*
              * Erstellt anhand Bars[] und dem Tag aus Options ein abgespecktes Array fuer die Bar-Informationen zur internen Verwendung.
@@ -133,7 +133,35 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {integer} day Nummer des Wochentages um die benoetigte Happy Hour aus dem Bar Objekt auszulesen.
              * @return {array} Gibt ein zweidimensionales Array zurueck. Definition siehe Comment.
              */
-            function createBarObject(rawbars, day) {
+            createBarObject: function(rawbars, day) {
+                /*
+                 * Hilfsfunktion um die Existenz eines Wertes in einem Array zu ueberpruefen.
+                 * Funktioniert ebenfalls in IE8, aus: http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
+                 * @author http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
+                 * @param {element} needle Das zu suchende Element des Arrays. Kann alles moegliche sein. 
+                 * @return {integer} Gibt die Position des zu suchenden Elements zurueck. Enthaelt das Array den gesuchten Wert nicht ist der Ruckgabewert -1.
+                 */
+                var indexOf = function(needle) {
+                    if (typeof Array.prototype.indexOf === 'function') {
+                        indexOf = Array.prototype.indexOf;
+                    } else {
+                        indexOf = function(needle) {
+                            var i = -1,
+                                index = -1;
+                
+                            for (i = 0; i < this.length; i++) {
+                                if (this[i] === needle) {
+                                    index = i;
+                                    break;
+                                }
+                            }
+                
+                            return index;
+                        };
+                    }
+                    return indexOf.call(this, needle);
+                };
+                
                 var bars = [];
                 for (var i = 0; i <= rawbars.length; i++) {
                     bars[i][0] = rawbars[i].id;
@@ -161,35 +189,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     }
                 }
                 return bars;
-            }
-            
-            /*
-             * Hilfsfunktion um die Existenz eines Wertes in einem Array zu ueberpruefen.
-             * Funktioniert ebenfalls in IE8, aus: http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
-             * @author http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
-             * @param {element} needle Das zu suchende Element des Arrays. Kann alles moegliche sein. 
-             * @return {integer} Gibt die Position des zu suchenden Elements zurueck. Enthaelt das Array den gesuchten Wert nicht ist der Ruckgabewert -1.
-             */
-            var indexOf = function(needle) {
-                if (typeof Array.prototype.indexOf === 'function') {
-                    indexOf = Array.prototype.indexOf;
-                } else {
-                    indexOf = function(needle) {
-                        var i = -1,
-                            index = -1;
-            
-                        for (i = 0; i < this.length; i++) {
-                            if (this[i] === needle) {
-                                index = i;
-                                break;
-                            }
-                        }
-            
-                        return index;
-                    };
-                }
-                return indexOf.call(this, needle);
-            };
+            },
             
             /*
              * API Abruf an Google um Distanzen zu messen.
@@ -199,7 +199,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} destinations Zielpunkte fuer Route, Adressen oder Laengen- und Breitengrade moeglich. Mehrere Zielpunkte durch | getrennt.
              * @return {array} Gibt ein Array zurueck das fuer jede Bar die Distanzen sowohl untereinander als auch vom User aus enthaelt.
              */
-            function googleApiDist(origins, destinations) {
+            googleApiDist: function(origins, destinations) {
                 var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=';
                 if (origins.length > 1) {
                     origins = origins.join('|');
@@ -231,7 +231,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     console.log('Fehler bei der Abfrage der Google API. Anfrage nicht beendet oder erfolglos.');
                     return 0;
                 }
-            }
+            },
             
             /*
              * Waehle die erste Bar aus, basierend auf der Bewertung und der Distanz
@@ -242,7 +242,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} startTime Startzeit zu der eine HappyHour gesucht wird
              * @return {Bar} Gibt die ausgewaehlte Bar zurueck
              */
-            function chooseFirst(distances, bars, startTime) {
+            chooseFirst: function(distances, bars, startTime) {
                 // Zuerst: Waehle Bars anhand Beginn der Happy Hour
                 startTime = retIntTime(startTime);
                 // Erstelle Rating fuer die Distanzen, waehle 0 als Base um Distanzen vom Standort des Users aus zu bewerten
@@ -304,7 +304,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     // wir haben exakt eine Bar die in Frage kommt.
                     return possibles[0];
                 }
-            }
+            },
             
             /* Waehle die naechste Bar aus unter Beruecksichtigung der Dauer der HappyHour sowie aller Ratings
              *
@@ -316,7 +316,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} stayTime Gibt an wie lange der User in der Bar bleiben will; Format hh:mm
              * @return {bar} Gibt die gesuchte Bar zurueck
              */
-            function chooseNext(distances, bars, startTime, count, stayTime) {
+            chooseNext: function(distances, bars, startTime, count, stayTime) {
                 startTime = retIntTime(startTime);
                 stayTime = retIntTime(stayTime);
                 var distanceRating = rateDistance(distances, count);
@@ -390,7 +390,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                         }
                     }
                 }
-            }
+            },
             
             /*
              * Wandle die Distanzen in ein vergleichbares Rating um. Je kuerzer die Distanz desto besser faellt das Rating aus.
@@ -399,7 +399,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {int} base Index fuer das array um zu bestimmen welches Array der zweiten Dimension, sprich, welche Bar als Ausgangspunkt fuer Distanzmessung zu nehmen ist
              * @return {array} rating Gibt ein rating fuer die einzelnen Distanzen zurueck.
              */
-            function rateDistance(distances, base) {
+            rateDistance: function(distances, base) {
                 var n = distances[base].length;
                 var total = 0;
                 for (var i = 0; i < n; i++) {
@@ -410,7 +410,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     rating[i] = convertDecimal(distances[i] / total);
                 }
                 return rating;
-            }
+            },
             
             /* 
              * @author Felix Rieder
@@ -419,12 +419,12 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {decimal} Dezimalwert der zu einem Rating (Bereich 0-5, schlecht - gut) konvertiert werden soll. Keine Input-Validierung!!
              * @return {decimal} Gibt das erstellte Rating zurueck. 
              */
-            function convertDecimal(val) {
+            convertDecimal: function(val) {
                 val *= 100;
                 Math.round(val);
                 val = (50 - val) / 10;
                 return val;
-            }
+            },
             
             /*
              * Hilfsfunktion um leere Elemente aus einem Array zu entfernen. Bedient sich der Eigenschafft das leere Elemente, undefined etc. 'false' returnen
@@ -433,7 +433,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              *
              * @return {array} Gibt das bereinigte Array aus
              */
-            function cleanArray(arr) {
+            cleanArray: function(arr) {
                 var newarr = [];
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i]) {
@@ -441,7 +441,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     }
                 }
                 return newarr;
-            }
+            },
             
             /*
              * Hilfsfunktion um einen string in einen integer - Wert umzuwandeln
@@ -449,11 +449,11 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} txt Stirng der die zu konvertierende Zeit enthaelt im Format 'hh:mm'
              * @return {integer} Gibt die integer Repraesentation des strings zurueck
              */
-            function retIntTime(txt) {
+            retIntTime: function(txt) {
                 txt = txt.slice(0, 1) + txt.slice(3, 4);
                 var time = parseInt(txt);
                 return time;
-            }
+            },
             
             /*
              * Hilfsfunktion um aus einem String ein time-Objekt zu erstellen
@@ -461,7 +461,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} txt Text der in ein time-Objekt konvertiert werden soll; Format: 'hh:mm'; keine Validierung des Inputs!!
              * @return {time} Gibt das Objekt von time zurueck
              */
-            function getTime(txt) {
+            getTime: function(txt) {
                 var t = time();
                 t.hours(txt.slice(0, 1));
                 t.minutes(txt.slice(3, 4));
