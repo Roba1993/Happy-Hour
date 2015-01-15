@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.BarReportDAO;
@@ -20,6 +23,9 @@ import de.dhbw.hh.models.BarReport;
  * @author Jonas
  */
 public class H2BarReportDAO implements BarReportDAO {
+	
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(H2BarReportDAO.class);
 	
 	 // Der Connectionpool
     ComboPooledDataSource cpds;
@@ -57,7 +63,7 @@ public class H2BarReportDAO implements BarReportDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage());
         }
 
         return false;
@@ -88,7 +94,7 @@ public class H2BarReportDAO implements BarReportDAO {
 	            return true;
 	            
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	LOG.error(e.getMessage());
 	        }
 	        
 	        return false;
@@ -117,7 +123,7 @@ public class H2BarReportDAO implements BarReportDAO {
 	            connection.commit();
 	            return true;
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	LOG.error(e.getMessage());
 	        }
 	        
 	        return false;
@@ -153,7 +159,7 @@ public class H2BarReportDAO implements BarReportDAO {
                 return runs;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return new ArrayList<BarReport>();
@@ -188,7 +194,7 @@ public class H2BarReportDAO implements BarReportDAO {
                 return runs;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return new ArrayList<BarReport>();
