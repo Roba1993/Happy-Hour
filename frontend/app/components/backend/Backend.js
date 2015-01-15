@@ -79,7 +79,9 @@ angular.module('happyHour.backend.Backend', [])
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {Happy-Hour} happy - JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
-             * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
+       * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
+			 * @param {String} admin Adminname
+			 * @param {String} adminpw Adminpasswort
 			 * @return {Promise(Boolean)} Boolean, ob das Schreiben erfolgreich war
 			 */
 			saveHappy: function(happy, barId, admin, adminpw) {
@@ -139,6 +141,8 @@ angular.module('happyHour.backend.Backend', [])
 			 * Gibt alle Meldungen zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
+			 * @param {String} admin Adminname
+			 * @param {String} adminpw Adminpasswort
 			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			 */
       getReports: function(admin, adminpw) {
@@ -156,10 +160,59 @@ angular.module('happyHour.backend.Backend', [])
 
 			},
 			/**
+			* Loescht eine bestimmte Meldung einer Bar.
+			*
+			* @author Daniel Reichert, Kim Rinderknecht
+			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
+			* @param {Integer} reportId Die ID der zu löschenden Meldung
+			* @param {String} admin Adminname
+			* @param {String} adminpw Adminpasswort
+			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			*/
+			delReport: function(barId, reportId, admin, adminpw) {
+
+				var url = baseUrl+'/bars/'+barId+'/report?reportid='+reportId+'&admin='+admin+'&adminpw='+adminpw;
+
+				var promise = $http({method: 'DELETE', url: url});
+				var deferred = $q.defer();
+
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
+
+			},
+			/**
+			* Loescht alle Meldungen einer Bar.
+			*
+			* @author Daniel Reichert, Kim Rinderknecht
+			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
+			* @param {String} admin Adminname
+			* @param {String} adminpw Adminpasswort
+			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			*/
+			delReports: function(barId, admin, adminpw) {
+
+				var url = baseUrl+'/reports/'+barId+'?admin='+admin+'&adminpw='+adminpw;
+
+				var promise = $http({method: 'DELETE', url: url});
+				var deferred = $q.defer();
+
+				promise.then(function(data){ //data wird befüllt mit der Rückgabe
+					//Rückgabe an den Serviceanfragenden
+					deferred.resolve(data.data.data);
+				});
+				return deferred.promise;
+
+			},
+			/**
 			* Löscht die HappyHour mit der übergebenen ID
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
 			* @param {Integer} hourId Die ID der zu löschenden HappyHour
+			* @param {String} admin Adminname
+			* @param {String} adminpw Adminpasswort
 			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			*/
 			deleteHappy: function(hourId, admin, adminpw) {
