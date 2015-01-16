@@ -44,7 +44,7 @@ public class RoutesREST {
 			Route route = new Route();
 
 			// Route mit Daten aus POST Anfrage befüllen
-			String temp = request.queryParams("route");
+			String temp = request.body();
 			route.setData(temp);
 
 			// Hashwert bilden

@@ -38,12 +38,12 @@ public class HappyHourREST {
 		post("/bars/:barID/hour",
 				"application/json",
 				(request, response) -> {
-					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
+					LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.body());
 
 					// Schreibe Anfrageparameter in neues HappyHour Objekt
 					HappyHour HappyHour = new HappyHour();
 					HappyHour.setBarID(request.params("barID"));
-					HappyHour.setDescription(request.queryParams("description"));
+					HappyHour.setDescription(request.body());
 					
 					//Konvertieren des String mit Format "hh:mm:ss" in ein Java-Time-Objekt
 					String start = request.queryParams("start");
