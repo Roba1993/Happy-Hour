@@ -8,8 +8,8 @@ angular.module('happyHour.views.currentRoute', ['ngRoute'])
 }])
 
 .controller('currentRouteController', 
-['$scope', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService',
-function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService, AppStatusPersistenceService) {
+['$scope', '$location', 'BackendService', 'RouteGeneratorService', 'RoutesPersistenceService', 'AppStatusPersistenceService',
+function($scope, $location, BackendService, RouteGeneratorService, RoutesPersistenceService, AppStatusPersistenceService) {
 	// Aktuellen Pfad persistieren
 	AppStatusPersistenceService.setPath('/currentRoute');
 
@@ -70,7 +70,7 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 		// Alternative Bars für alle Slots abfragen
 		$scope.bars = [];
-		BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
+		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
 			_.forEach($scope.route.timeframes, function() {
 				$scope.bars.push(bars);
 			});
@@ -134,7 +134,8 @@ function($scope, BackendService, RouteGeneratorService, RoutesPersistenceService
 
 	$scope.shareRoute = function() {
 		BackendService.saveRoute($scope.route).then(function(hash) {
-			console.log(hash);
+			$scope.shareLink = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/#/openRoute/' + hash;
+			$scope.sharePopupOpen = true;
 		});
 	};
 

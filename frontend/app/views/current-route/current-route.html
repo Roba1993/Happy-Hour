@@ -9,24 +9,40 @@
 	</div>
 </div>
 
-<div id="e__popup-overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
-    <div class="e__popup-window">
-        <div class="e__popup-window-content">
-            <h1>Bitte Routennamen eingeben</h1>
+<div class="e__popup-overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
+	<div class="e__popup-window">
+		<div class="e__popup-window-content">
+			<h1>Bitte Routennamen eingeben</h1>
 			<p>
 				<form><input type="text" ng-model="routeName"></form>
 			</p>
-        </div>
-        <div class="e__popup-window-button">
-            <div class="e__btn col-6" ng-click="namePopupOpen = false">Abbrechen</div>
-            <div class="e__btn col-6" ng-click="saveRoute()">Speichern</div>
-        </div>
-    </div>
+		</div>
+		<div class="e__popup-window-button">
+			<div class="e__btn col-6" ng-click="namePopupOpen = false">Abbrechen</div>
+			<div class="e__btn col-6" ng-click="saveRoute()">Speichern</div>
+		</div>
+	</div>
+</div>
+
+<div class="e__popup-overlay" ng-class="{is__open: sharePopupOpen}">
+	<div class="e__popup-window">
+		<div class="e__popup-window-content">
+			<h1 class="notification">Link</h1>
+				<p>
+					Folgenden Link weitergeben
+					<form><input type="text" ng-model="shareLink"></form>
+				</p>
+		</div>
+		<div class="e__popup-window-button">
+			<div class="e__btn col-6" ng-click="sharePopupOpen = false">Abbrechen</div>
+			<div class="e__btn col-6">Kopieren</div>
+		</div>
+	</div>
 </div>
 
 <input type="checkbox" id="is__sidebar-open" class="hidden" ng-model="isSidebarOpen" aria-hidden="true"/>
 <div id="main" class="clearfix">
-    <aside id="sidebar">
+	<aside id="sidebar">
 		<div id="sidebar-head-topbar">
 			<div class="sidebar-head-topbar-box">
 				<span class="i-f__options"></span>
@@ -77,56 +93,56 @@
 			<div class="seperator"></div>
 		</div>
 	</aside>
-    <div id="theatre-head" class="grid">
-        <div id="theatre-head-topbar" class="grid">
-            <div class="col-3 col-xs-2_5">
-                <label for="is__sidebar-open" class="i__hamburger e__btn">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </label>
-            </div>
-            <div class="col-6">
-                <h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
-            </div>
-            <div class="col-0_5 col-xs-0"></div>
-            <div id="theatre-head-topbar-icons" class="col-3 col-xs-3_5 align-center">
-                <div class="col-6">
-                    <a href="#refresh" class="e__btn i-f__reload"></a>
-                </div>
-                <div class="col-6">
-                    <a ng-href="#/currentRouteMap" class="e__btn i-f__maps"></a>
-                </div>
-            </div>
-        </div>
-        <nav id="theatre-head-subbar" class="col-12">
-            <ul class="e__navigation-vertical clearfix">
-                <li class="e__navigation-vertical-element col-5"><a class="active" ng-href="#/currentRoute">Aktuelle Route</a></li>
-                <li class="e__navigation-vertical-element col-2"><a ng-href="#/topRoutes">Top 7</a></li>
-                <li class="e__navigation-vertical-element col-5"><a ng-href="#/localRoutes">Offline Routen</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="theatre">
+	<div id="theatre-head" class="grid">
+		<div id="theatre-head-topbar" class="grid">
+			<div class="col-3 col-xs-2_5">
+				<label for="is__sidebar-open" class="i__hamburger e__btn">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</label>
+			</div>
+			<div class="col-6">
+				<h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
+			</div>
+			<div class="col-0_5 col-xs-0"></div>
+			<div id="theatre-head-topbar-icons" class="col-3 col-xs-3_5 align-center">
+				<div class="col-6">
+					<a href="#refresh" class="e__btn i-f__reload"></a>
+				</div>
+				<div class="col-6">
+					<a ng-href="#/currentRouteMap" class="e__btn i-f__maps"></a>
+				</div>
+			</div>
+		</div>
+		<nav id="theatre-head-subbar" class="col-12">
+			<ul class="e__navigation-vertical clearfix">
+				<li class="e__navigation-vertical-element col-5"><a class="active" ng-href="#/currentRoute">Aktuelle Route</a></li>
+				<li class="e__navigation-vertical-element col-2"><a ng-href="#/topRoutes">Top 7</a></li>
+				<li class="e__navigation-vertical-element col-5"><a ng-href="#/localRoutes">Offline Routen</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div id="theatre">
 		
 		<section id="theatre-recentroute" class="grid">			
-            <ul ng-init="frameClicked" class="e__list-big">
-            	<li ng-repeat="timeframe in route.timeframes" ng-class="{is__expanded : $parent.openFrameIndex === $index, is__backside : toDelete, is__switchside : timeframe.bar === null}" class="e__list-big-element clearfix">
-                    <div class="e__list-big-element-frontside e__barcard" ng-click="frameClicked($index)" ng-swipe-left="toDelete = true; frameClicked(-1)" style="background-image: url('images/bars/1.jpg')">
-                        <div class="e__list-big-element-frontside-head e__barcard-head grid">
+			<ul ng-init="frameClicked" class="e__list-big">
+				<li ng-repeat="timeframe in route.timeframes" ng-class="{is__expanded : $parent.openFrameIndex === $index, is__backside : toDelete, is__switchside : timeframe.bar === null}" class="e__list-big-element clearfix">
+					<div class="e__list-big-element-frontside e__barcard" ng-click="frameClicked($index)" ng-swipe-left="toDelete = true; frameClicked(-1)" style="background-image: url('images/bars/1.jpg')">
+						<div class="e__list-big-element-frontside-head e__barcard-head grid">
 							<div class="col-7"><a ng-click="toDelete = true" class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{timeframe.bar.name}}</h3></div>
 							<span class="col-5 align-right timeslot">{{timeframe.startTime}} - {{timeframe.endTime}}</span>
 						</div>
-                        <div class="e__list-big-element-frontside-body e__barcard-body clearfix">
-                            <div class="e__list-big-element-frontside-body-main">
+						<div class="e__list-big-element-frontside-body e__barcard-body clearfix">
+							<div class="e__list-big-element-frontside-body-main">
 								<h4>Happy Hour</h4>
 								<div ng-repeat="happyHour in timeframe.bar.happyHours" class="padding-default">
 									{{happyHour.days | formatDays}} {{happyHour | formatTime}}<br>
 									<strong>{{happyHour.description}}</strong>
 								</div>
 							</div>
-                            <div class="e__list-big-element-frontside-body-expand grid when__expanded__show">
-                            	<p class="e__quote">{{timeframe.bar.description}}</p>
+							<div class="e__list-big-element-frontside-body-expand grid when__expanded__show">
+								<p class="e__quote">{{timeframe.bar.description}}</p>
 								<div class="col-8">
 								<h4>Öffnungszeiten</h4>
 								<table class="e__table grid">
@@ -142,19 +158,19 @@
 									<map markers="[timeframe.bar]" options="{alterable: false, centerLocation: timeframe.bar.location}">
 								</div>
 							</div>
-                        </div>
-                        <div class="e__list-big-element-frontside-footer e__barcard-footer">
+						</div>
+						<div class="e__list-big-element-frontside-footer e__barcard-footer">
 							<span class="col-5"><rating type="'euro'" value="timeframe.bar.costs"></span>
 							<span class="col-2"></span>
 							<span class="col-5 align-right"><rating type="'star'" value="timeframe.bar.rating"></span>
 						</div>
-                    </div>
-                    <div ng-click="timeframe.bar = null; toDelete = false" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">
+					</div>
+					<div ng-click="timeframe.bar = null; toDelete = false" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">
 						<div class="col-12 align-center e__list-big-element-backside-content">
 							<span class="i-f__reload2"></span>
 							<p class="icon-undertitle">Bar austauschen</p>
 						</div>
-                    </div>
+					</div>
 					<div class="e__list-big-element-switchside">
 						<div class="e__slider grid">
 							<div class="e__slider-background padding-default">
@@ -167,10 +183,10 @@
 							<bar-slider bars="bars[$index]" result="barChosen[$index]">
 						</div>
 					</div>
-                </li>
-                
+				</li>
+				
 			</ul>
 		</section>
 
-    </div>
+	</div>
 </div>

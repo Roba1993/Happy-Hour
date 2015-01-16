@@ -137,7 +137,7 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 
 			},
-       /**
+			/**
 			 * Gibt alle Meldungen zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
@@ -145,7 +145,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @param {String} adminpw Adminpasswort
 			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
 			 */
-      getReports: function(admin, adminpw) {
+			getReports: function(admin, adminpw) {
 
 				var url = baseUrl+'/bars/reports?admin='+admin+'&adminpw='+adminpw;
 
