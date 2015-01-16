@@ -46,52 +46,52 @@ describe('MapDirective', function() {
   }));
 
   it('erstellen einer Map mit default Optionen', function() {
-    var element = $compile('<map></map>')($rootScope);
+    var element = $compile('<map />')($rootScope);
 
     $rootScope.$digest();
     expect(api.Map).toHaveBeenCalled();
     expect(api.Map.calls.argsFor(0)[0]).toBe(element.children()[0]);
   });
 
-  /*it('bindet das "place_changed" Event', function() {
-    $compile('<input-places result="test" />')($rootScope);
+  /*it('erstellen einer Map mit Marker', function() {
+    var bar1 = {
+      id: 'd362985702875md5',
+      name: 'Beste Bar',
+      rating: 4,
+      costs: 3,
+      description: 'Die beste Bar in Stuttgart',
+      imageUrl: 'http://www.pic.image.png',
+      openingTimes: [
+        {
+          startTime: '08:00',
+          endTime: '10:00',
+          days: [1,2,3,4,5]
+        },
+        {
+          startTime: '08:00',
+          endTime: '12:00',
+          days: [6,7]
+        }
+      ],
+      location: {
+        'latitude': 35.7348,
+        'longitude': 49.0133
+      },
+      address: 'Coole Straße 49 Stuttgart',
+      happyHours: [{
+        'startTime': '09:00',
+        'endTime': '11:00',
+        'description': 'Nice 2 Happy-Hour',
+        'days': [3,7]
+      }
+      ]
+    };
+    $rootScope.markerArray = {};
+    $rootScope.markerArray.push(bar1);
+    $compile('<map markers="markerArray" />')($rootScope);
 
     $rootScope.$digest();
     expect(api.event.addListener).toHaveBeenCalled();
     expect(api.event.addListener.calls.argsFor(0)[1]).toBe('place_changed');
-  });*/
-
-  /*it('reverse-geokodiert nicht wenn kein "result" gesetzt ist', function() {
-    $compile('<input-places result="test" />')($rootScope);
-
-    $rootScope.$digest();
-
-    expect(geocoderApi.geocode).not.toHaveBeenCalled();
-  });*/
-
-  /*it('bei einer Aenderung des "result"-Attributs wird es reverse-geokodiert', function() {
-    $rootScope.test = {longitude: 1.0, latitude:2.0};
-    $compile('<input-places result="test" />')($rootScope);
-
-    $rootScope.$digest();
-
-    expect(geocoderApi.geocode).toHaveBeenCalled();
-
-    $rootScope.test = {longitude: 3.0, latitude: 4.0};
-    $rootScope.$digest();
-
-    expect(geocoderApi.geocode.calls.count()).toBe(2);
-  });*/
-
-  /*it('wenn ein Platz ausgewählt wird, wird die "result" Variable mit einem Location-Objekt gefuellt', function() {
-    $compile('<input-places result="test" />')($rootScope);
-
-    $rootScope.$digest();
-
-    expect($rootScope.test).toBeUndefined();
-
-    eventCallback();
-
-    expect($rootScope.test).toEqual({latitude: 2.0, longitude: 3.0});
   });*/
 });
