@@ -21,6 +21,7 @@ angular.module('happyHour', [
   'happyHour.views.localRoutes',
   'happyHour.views.topRoutes',
   'happyHour.views.startScreen',
+  'happyHour.views.openRoute',
   'happyHour.views.testview'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
@@ -39,16 +40,18 @@ angular.module('happyHour', [
   // Öffnungszeit der Anwendung auf JETZT setzen
   AppStatusPersistenceService.setTime(now);
 
-  // Wenn ein Path und eine Route vorhanden sind und nicht 24h seit der letzten Öffnungszeit abgelaufen sind, AppStatus nutzen
-  if((path !== null && route !== null) && lastTime + (24*60*60*1000) > now) {
-    $location.path(path);
-  }
-  else {
-    // AppStatus löschen
-    AppStatusPersistenceService.setPath(null);
-    AppStatusPersistenceService.setRoute(null);
+  if($location.path().substring(0, 10) !== '/openRoute') {
+    // Wenn ein Path und eine Route vorhanden sind und nicht 24h seit der letzten Öffnungszeit abgelaufen sind, AppStatus nutzen
+    if((path !== null && route !== null) && lastTime + (24*60*60*1000) > now) {
+      $location.path(path);
+    }
+    else {
+      // AppStatus löschen
+      AppStatusPersistenceService.setPath(null);
+      AppStatusPersistenceService.setRoute(null);
 
-    // Auf Startscreen verlinken
-    $location.path('/startScreen');
+      // Auf Startscreen verlinken
+      $location.path('/startScreen');
+    }
   }
 }]);

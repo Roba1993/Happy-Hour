@@ -70,7 +70,7 @@ describe('der BackendService', function(){
 
 // Test für saveRoute Service
 it('should call $http.post and save JSON Data when calling saveRoute', inject(function (BackendService, $httpBackend) {
-  $httpBackend.expectPOST('http://localhost:8080/routes/').respond(['e98723958987325md5']);
+  $httpBackend.expectPOST('http://localhost:8080/routes').respond(['e98723958987325md5']);
 
 // Hier wird der Service getRoute aufgerufen und somit der Test gestartet. Ein Routenobjekt wird übergeben. Wenn der Service korrekt geschrieben wurde,
 // wird die REST Abfrage mit der oben geschriebenen Funktion abgefangen und ein Hashwert, welches nach respond steht, zurückgeliefert.
@@ -114,7 +114,7 @@ it('should call $http.get and deliver JSON Data when calling getRoute', inject(f
 
 // Test für getToproutes Service
     it('should call $http.get and deliver JSON Data when calling getToproutes', inject(function (BackendService, $httpBackend) {
-      $httpBackend.expectGET('http://localhost:8080/toproutes/').respond([
+      $httpBackend.expectGET('http://localhost:8080/toproutes').respond([
         // Beispielhaftes verkleinertes JSON Objekt, das NICHT dem zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
         { 'name': 'RouteStgt',
           'description': 'Super Route in Stuttgart',
@@ -170,7 +170,7 @@ $httpBackend.flush();
 
 // Test für reportData Service
 it('should call $http.post and save JSON Data when calling reportData', inject(function (BackendService, $httpBackend) {
-  $httpBackend.expectPOST('http://localhost:8080/bars/1241/reports/').respond([
+  $httpBackend.expectPOST('http://localhost:8080/bars/1241/reports').respond([
     // Beispielhaftes verkleinertes JSON Objekt, das NICHT zu zukünftigen Objekt entspricht, aber zu Testzwecken ausreicht.
     {
       'name': 'Daten melden',

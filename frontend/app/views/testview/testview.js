@@ -7,6 +7,7 @@ angular.module('happyHour.views.testview', ['ngRoute'])
   });
 }])
 
-.controller('testViewController', ['$scope', function($scope) {
+.controller('testViewController', ['$scope', 'RouteGeneratorService', function($scope, RouteGeneratorService) {
 	$scope.test = 'testViewController!!';
+	RouteGeneratorService.createRoute([], {});
 }]);
