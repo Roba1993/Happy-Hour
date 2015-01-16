@@ -42,7 +42,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(Boolean)} Gibt `true` zurück wenn die Meldung erfolgreich gespeichert wurde und `false` wenn nicht.
 			 */
 			reportData: function(barId, description) {
-				var url = baseUrl+'/bars/' + barId + '/reports/';
+				var url = baseUrl+'/bars/' + barId + '/reports';
 
 				var promise = $http({method: 'POST', url: url, data: description});
 				var deferred = $q.defer();
@@ -63,7 +63,7 @@ angular.module('happyHour.backend.Backend', [])
 			 */
 			saveRoute: function(route) {
 
-				var url = baseUrl+'/routes/';
+				var url = baseUrl+'/routes';
 
 				var promise = $http({method: 'POST', url: url, data: route});
 				var deferred = $q.defer();
@@ -78,8 +78,8 @@ angular.module('happyHour.backend.Backend', [])
 			 * Speichert Happy-Hours im Backend und übergibt einen Boolean ob das Schreiben erfolgreich war oder nicht.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
-			 * @param  {Happy-Hour} happy - JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
-       * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
+			 * @param  {HappyHour} happy - JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
+			 * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
 			 * @return {Promise(Boolean)} Boolean, ob das Schreiben erfolgreich war
@@ -125,7 +125,7 @@ angular.module('happyHour.backend.Backend', [])
 			 */
 			getToproutes: function() {
 
-				var url = baseUrl+'/toproutes/';
+				var url = baseUrl+'/toproutes';
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
