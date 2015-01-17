@@ -89,21 +89,25 @@ public class H2RouteDAO implements RouteDAO {
 
             // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                // Fügt den Hash-Wert in die SQL-Abfrage ein
+            	// Fügt den Hash-Wert in die SQL-Abfrage ein
                 preparedStatement.setString(1, hash);
 
                 // Daten aus der Datenbank holen
                 ResultSet resultSet = preparedStatement.executeQuery();
                 // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
-                if(resultSet.next()){
-                    Route route = new Route();
-                    route.setHash(resultSet.getString("hash"));
-                    route.setData(resultSet.getString("data"));
-                    route.setTop(resultSet.getBoolean("top"));
-                    return route;
-                }
+                
+            	resultSet.next();
+            	System.out.println("resultset step in");
+            	
+            	
+                Route route = new Route();
+                route.setHash(resultSet.getString("hash"));
+                route.setData(resultSet.getString("data"));
+                route.setTop(resultSet.getBoolean("top"));
+                return route;
+                
                 // Wenn kein Wert vorhanden ist wird null zurückgegegben
-                return null;
+//                return null;
             }catch(Exception e){
             	log.error(e.getMessage());
             }

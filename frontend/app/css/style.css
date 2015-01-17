@@ -50,6 +50,7 @@ h3 {
     height: 100%;
     background:#414141;
     overflow-y: scroll;
+    -webkit-transform: translate3d(0, 0, 0);
     -webkit-overflow-scrolling:touch;
 }
 #theatre {
@@ -59,6 +60,7 @@ h3 {
     float: left;
     box-shadow: -1px 0px 15px #000;
     overflow-y: scroll;
+    -webkit-transform: translate3d(0, 0, 0);
     -webkit-overflow-scrolling:touch;
 }
 #theatre,

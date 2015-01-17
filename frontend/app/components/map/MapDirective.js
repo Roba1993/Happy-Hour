@@ -39,7 +39,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             var zoomLevel;
             var alterable;
 
-            // Defaults setzen
+            // Defaults setzen mit Fokus auf Stuttgart
             centerLocation = new maps.LatLng(48.775556, 9.182778);
             zoomLevel = 14;
             alterable = true;
@@ -62,7 +62,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 
             // mapOptions setzen
             var mapOptions = {};
-            mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
+            mapOptions.mapTypeId = maps.MapTypeId.ROADMAP;
             mapOptions.mapTypeControl = false;
             mapOptions.streetViewControl = false;
 
@@ -84,6 +84,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.zoomControl = alterable;
 
             map = new maps.Map(element.children()[0], mapOptions);
+            console.log(map);
           });
 
           /**
@@ -110,7 +111,8 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            * Route setzen
            */
           $scope.$watch('route', function (route) {
-            if (route != null) {
+            if (route != null && route.timeframes.length > 2) {
+              console.log(route.timeframes);
               var directionsDisplay;
               var directionsService = new maps.DirectionsService();
               //console.log(route);

@@ -44,7 +44,7 @@ public class RoutesREST {
 			Route route = new Route();
 
 			// Route mit Daten aus POST Anfrage befüllen
-			String temp = request.queryParams("route");
+			String temp = request.body();
 			route.setData(temp);
 
 			// Hashwert bilden
@@ -89,6 +89,8 @@ public class RoutesREST {
  		* @author Tabea
  		*/
 		get("/routes/:hash", "application/json", (request, response) -> {
+			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());			
+			
 			// Routen aus der Datenbank holen
 			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
 			
@@ -99,7 +101,7 @@ public class RoutesREST {
 			r.setTimestamp(new Timestamp(new Date().getTime()));
 			
 			//Überprüfen, ob die Route abgerufen werden kann
-			if(HashRoute.isHashEmpty()) {
+			if(HashRoute == null) {
 				//Es wurde keine Route gefunden
 				r.setDescription("Keine Route gefunden");
 				r.setError();
@@ -115,6 +117,10 @@ public class RoutesREST {
 				
 				r.setData(data);
 			}
+			
+			// Log-Eintrag bei Rückgabe
+			LOG.debug(r.getStatus() + r.getDescription() + r.getData());
+			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");
 			return gson.toJson(r);

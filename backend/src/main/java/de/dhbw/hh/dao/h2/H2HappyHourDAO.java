@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import de.dhbw.hh.dao.HappyHourDAO;
@@ -20,6 +23,9 @@ import de.dhbw.hh.models.HappyHour;
  * @author Marcus
  */
 public class H2HappyHourDAO implements HappyHourDAO {
+	
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(H2HappyHourDAO.class);
 	
 	 // Der Connectionpool
     ComboPooledDataSource cpds;
@@ -68,12 +74,18 @@ public class H2HappyHourDAO implements HappyHourDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return false;
 	}
 
+	/**
+     * Diese Funktion löscht eine HappyHour aus der Datenbank anhand seiner ID.
+     *
+     * @param id Die BarID anhand die HappyHour zugeordnet wird.
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean deleteHappyHour(int id) {
 		String sql = "DELETE FROM happyHour WHERE id=?";
@@ -97,7 +109,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
         
         return false;
@@ -105,6 +117,8 @@ public class H2HappyHourDAO implements HappyHourDAO {
 
 	@Override
 	public Collection<HappyHour> findHappyHour(String barID) {
+//		System.out.println("Start findhappyhour");
+		
 		String sql = "SELECT * FROM happyHour WHERE barID=?";
 
         try (Connection connection = cpds.getConnection()) {
@@ -123,24 +137,29 @@ public class H2HappyHourDAO implements HappyHourDAO {
                 // Schreibe die Daten ins Testrun Objekt
                 while(resultSet.next()) {
                     HappyHour happyHour = new HappyHour();
+//                    System.out.println("vor dem Befüllen" +happyHour.toString());
                     happyHour.setBarID(resultSet.getString("barID"));
                     happyHour.setDescription(resultSet.getString("description"));
                     happyHour.setStart(resultSet.getTime("start"));
+//                    System.out.println(resultSet.getTime("start"));
                     happyHour.setEnd(resultSet.getTime("end"));
+//                    System.out.println(resultSet.getTime("end"));
                     happyHour.setMonday(resultSet.getBoolean("monday"));
                     happyHour.setTuesday(resultSet.getBoolean("tuesday"));
                     happyHour.setWednesday(resultSet.getBoolean("wednesday"));
                     happyHour.setThursday(resultSet.getBoolean("thursday"));
                     happyHour.setSaturday(resultSet.getBoolean("saturday"));
                     happyHour.setSunday(resultSet.getBoolean("sunday"));
+//                  System.out.println("nach dem Befüllen" +happyHour.toString());
                     happyHourArray.add(happyHour);
+//                    System.out.println(happyHourArray);
                 }
 
                 // Gebe alle Datenobjekte als Array zurück
                 return happyHourArray;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOG.error(e.getMessage());
         }
 
         return new ArrayList<HappyHour>();

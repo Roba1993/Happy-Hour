@@ -63,6 +63,7 @@ public class ReportsREST {
 			}
 			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -100,6 +101,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -132,6 +134,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -164,6 +167,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});

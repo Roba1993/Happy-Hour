@@ -40,7 +40,7 @@ public class FoursquareTest {
 		// Übergabeparameter für Test definieren und festlegen.
 		float latitude = 48.949034f;
 		float longitude 	= 9.431656f;
-		int radius		= 150;
+		float radius		= 0.15f;
 		
 		// Setze die Anfrage an Foursquare ab und speichere die Ergebnisse in 'results'
 		ArrayList<Bar> results = fsc.getBarsInArea(longitude, latitude, radius);
@@ -57,7 +57,7 @@ public class FoursquareTest {
 		cb.setLocation(new Location(9.433431520350682f, 48.94866611443367f));
 		cb.setName("Waldhorn");
 		cb.setOpeningTimes(null);
-		cb.setRating(-1);
+		cb.setRating(-1f);
 		
 		int totalCount = 2;
 		
@@ -77,7 +77,8 @@ public class FoursquareTest {
 		assertEquals(cb.getLocation().longitude, resultB.getLocation().longitude, 0.001);
 		assertEquals(cb.getName(), resultB.getName());
 //		assertEquals(cb.getOpeningTimes(), resultB.getOpeningTimes());
-		assertEquals(cb.getRating(), resultB.getRating());	
+		System.out.println(resultB.getRating());
+		assertEquals(cb.getRating(), resultB.getRating(), 0.1);	
 	}
 	
 }

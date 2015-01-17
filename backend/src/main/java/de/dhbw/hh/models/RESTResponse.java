@@ -61,5 +61,11 @@ public class RESTResponse {
 	public void setData(@SuppressWarnings("rawtypes") Collection data) {
 		this.data = data;
 	}
+	
+	@Override
+	public String toString() {
+		return "Name: " + getName() + "; Description: " + getDescription() + "; Timestamp: "
+				+ getTimestamp().getTime() + "; Status: " + getStatus() + "; Data " + getData();
+	}
 
 }

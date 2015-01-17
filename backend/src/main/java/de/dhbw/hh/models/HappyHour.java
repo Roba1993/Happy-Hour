@@ -120,5 +120,15 @@ public class HappyHour {
 	public void setEnd(Time end) {
 		this.end = end;
 	}
-
+	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
+	public String toString(){
+		return ("ID:" + id + " barID: " + barID + " description: " +description +" start: " + start +" end: " + end + " Monday true/false?: " + monday + " Tuesday true/false?: " 
+				+ tuesday+ " Wednesday true/false?: " + wednesday+ " Thursday true/false?: " + thursday+ " Friday true/false?: "
+				+ friday+ " Saturday true/false?: " + saturday+ " Sunday true/false?: " + sunday);
+	}
+	
 }

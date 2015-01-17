@@ -50,6 +50,25 @@ angular.module('happyHour.persistence.AppStatusPersistence', ['LocalStorageModul
 				 */
 				getPath: function() {
 					return status.appPath;
+				},
+				/**
+				 * Setzt die letzte Öffnungszeit der Anwendung
+				 *
+				 * @author Markus Thömmes
+				 * @param {Integer} time Zeitstempel in Millisekunden seit 1970
+				 */
+				setTime: function(time) {
+					status.time = time;
+					localStorageService.set('appStatus', status);
+				},
+				/**
+				 * Gibt die letzte Öffnungszeit der Anwendung zurück
+				 *
+				 * @author Markus Thömmes
+				 * @return {Integer} Zeitstempel in Millisekunden seit 1970
+				 */
+				getTime: function() {
+					return status.time;
 				}
 			};
 

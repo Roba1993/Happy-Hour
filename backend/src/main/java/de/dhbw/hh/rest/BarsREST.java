@@ -51,7 +51,7 @@ public class BarsREST {
 			
 			float lng = Float.parseFloat(request.queryParams("longitude"));	//			float lng = 48.957848f;
 			float lat = Float.parseFloat(request.queryParams("latitude"));	//			float lat = 9.422454f;
-			int rad = Integer.parseInt(request.queryParams("radius"));		//			int rad = 2000;
+			float rad = Float.parseFloat(request.queryParams("radius"));		//			int rad = 2000;
 			int day = Integer.parseInt(request.queryParams("weekday"));
 			
 			ArrayList<Bar> rawBars = new ArrayList<Bar>();
@@ -66,7 +66,9 @@ public class BarsREST {
 				int count = rawBars.size();
 				for(int i=0;i<count;i++){
 					String id = rawBars.get(i).getId();
+//					id = "4b540ef4f964a5203db127e3";	TEST-DATEN
 					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHours.findHappyHour(id);
+					System.out.println("Die komplette Happy-Hour Liste: "+hh+" für die ID: "+id);
 					
 					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
 					rawBars.get(i).setHappyHours(hh);
@@ -139,7 +141,7 @@ public class BarsREST {
 	 * @param rad Radius in Metern
 	 * @return
 	 */
-	private boolean isAlreadyInCache(float lng, float lat, int rad){
+	private boolean isAlreadyInCache(float lng, float lat, float rad){
 		// Wird zu einem späteren Zeitpunkt umgesetzt
 		return false;
 	}
