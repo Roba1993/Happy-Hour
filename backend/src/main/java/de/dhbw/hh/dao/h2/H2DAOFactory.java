@@ -1,13 +1,13 @@
 package de.dhbw.hh.dao.h2;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import de.dhbw.hh.dao.BarReportDAO;
-import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.dao.FoursquareDAO;
-import de.dhbw.hh.dao.HappyHourDAO;
-import de.dhbw.hh.dao.RouteDAO;
+
 import de.dhbw.hh.dao.*;
+
 import org.h2.tools.RunScript;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.PropertyVetoException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +21,9 @@ import java.util.Properties;
  * @author Robert
  */
 public class H2DAOFactory extends DAOFactory {
+	
+	// Initialisiert einen Logger für die Fehlerausgabe
+    static final Logger LOG = LoggerFactory.getLogger(H2RouteDAO.class);
 
     // Der Connectionpool
     private ComboPooledDataSource cpds;
@@ -42,7 +45,7 @@ public class H2DAOFactory extends DAOFactory {
         try {
             cpds.setDriverClass("org.h2.Driver");
         } catch (PropertyVetoException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage());
         }
 
         // Setzte die Datenbank Einstellungen
@@ -57,9 +60,9 @@ public class H2DAOFactory extends DAOFactory {
             try (Connection connection = cpds.getConnection()) {
                 RunScript.execute(connection, new FileReader(properties.getProperty("db.h2.startFile")));
             } catch (SQLException e) {
-                e.printStackTrace();
+            	LOG.error(e.getMessage());
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            	LOG.error(e.getMessage());
             }
         }
         
@@ -68,9 +71,9 @@ public class H2DAOFactory extends DAOFactory {
             try (Connection connection = cpds.getConnection()) {
                 RunScript.execute(connection, new FileReader(properties.getProperty("db.h2.dataFile")));
             } catch (SQLException e) {
-                e.printStackTrace();
+            	LOG.error(e.getMessage());
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            	LOG.error(e.getMessage());
             }
         }
 
