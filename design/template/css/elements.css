@@ -498,6 +498,8 @@
     position: absolute;
     width:100%;
     height:100%;
+    top:0;
+    left:0;
     background:#1e7111;
 }
 .i__euro-halfcolored::before {
@@ -539,6 +541,8 @@
     position: absolute;
     width:100%;
     height:100%;
+    top:0;
+    left:0;
     background:#ddbf5d;
 }
 .i__star-halfcolored::before {
