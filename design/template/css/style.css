@@ -270,6 +270,8 @@ h3 {
 	margin-right: 15px;
 	position: relative;
 	top: 1px;
+    line-height: 1.5;
+    font-size: 1rem;
 }
 
 .sidebar-theatre-box input{
