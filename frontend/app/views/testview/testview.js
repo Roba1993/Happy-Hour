@@ -7,7 +7,20 @@ angular.module('happyHour.views.testview', ['ngRoute'])
   });
 }])
 
-.controller('testViewController', ['$scope', 'RouteGeneratorService', function($scope, RouteGeneratorService) {
+.controller('testViewController', ['$scope', 'RouteGeneratorService', 'BackendService', function($scope, RouteGeneratorService, BackendService) {
 	$scope.test = 'testViewController!!';
-	RouteGeneratorService.createRoute([], {});
+
+	BackendService.getBars({longitude:9.1833333, latitude: 48.7666667}, 2.5, 3).then(function(bars) {
+		console.log(bars);
+		var routeOptions = {
+			stayTime: 1,
+			radius: 2.5,
+			location: {longitude:9.1833333, latitude: 48.7666667},
+			startTime: '17:00',
+			endTime: '22:00'
+		};
+		var route = RouteGeneratorService.createRoute(bars, routeOptions);
+
+		console.log(route);
+	});
 }]);

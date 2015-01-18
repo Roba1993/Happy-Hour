@@ -22,10 +22,6 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		console.log(route);
 	}, true);
 
-	BackendService.getBars($scope.route.options.location, 5000, $scope.route.options.weekday).then(function(bars) {
-		console.log(bars);
-	});
-
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {
 		if(!$scope.isSidebarOpen) {
@@ -37,7 +33,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 				var newTimeframes = [];
 
 				// Neues Timeframe-Array erstellen
-				while(startTime.isBefore(endTime)) {
+				while(isBeforeOverNight(startTime, endTime)) {
 					newTimeframes.push({
 						startTime: startTime.toString(),
 						endTime: startTime.add($scope.route.options.stayTime, 'hours').toString(),
@@ -88,6 +84,16 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		// Array leeren um das Erkennen des Indizes jederzeit zu ermöglichen
 		$scope.barChosen = [];
 	}, true);
+
+	/**
+	 * NAVIGATION
+	 */
+	$scope.reloadRoute = function() {
+		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
+			var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
+			$scope.route = route;
+		});
+	};
 
 	/**
 	 * BARS
@@ -143,13 +149,28 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {
 		$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
 	}
-	else {
-		// TODO eventuell löschen
-		$scope.routeTime = ['20:00', '03:00'];
-	}
 	// Ausgabe des Sliders in das Options Format umwandeln
 	$scope.$watch('routeTime', function(routeTime) {
 		$scope.route.options.startTime = routeTime[0];
 		$scope.route.options.endTime = routeTime[1];
 	});
+
+	/**
+	 * HELPER
+	 */
+	
+	/**
+     * Bestimmt ob eine Zeit vor der anderen ist, über die Nacht gesehen
+     * @param  {Time} time1 Erste Zeit
+     * @param  {Time} time2 Zweite Zeit
+     * @return {Boolean} `true` wenn time1 < time2
+     */
+    function isBeforeOverNight(time1, time2) {
+        if(time1.isAfter(time('12:00:00'))) {
+            return !time1.isBefore(time2);
+        }
+        else {
+            return time1.isBefore(time2);
+        }
+    }
 }]);
