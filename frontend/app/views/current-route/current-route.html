@@ -9,6 +9,22 @@
 	</div>
 </div>
 
+<div class="e__popup-overlay" ng-class="{is__open: reportPopupOpen}">
+    <div class="e__popup-window">
+        <div class="e__popup-window-content">
+            <h1 class="notification">Bar melden</h1>
+                <p>
+                    Bitte geben Sie eine Begründung ein
+                    <form><textarea ng-model="reportBarText"></textarea></form>
+                </p>
+        </div>
+        <div class="e__popup-window-button">
+            <div class="e__btn col-6" ng-click="reportPopupOpen = false">Abbrechen</div>
+            <div class="e__btn col-6" ng-click="reportBar(reportBarId, reportBarText); reportPopupOpen = false">Absenden</div>
+        </div>
+    </div>
+</div>
+
 <div class="e__popup-overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
 	<div class="e__popup-window">
 		<div class="e__popup-window-content">
@@ -72,7 +88,7 @@
 			</div>
 			<div class="sidebar-theatre-box">
 				<h3>Uhrzeit (h)</h3>
-				<input-slider options="{type:'double', values: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00', '08:00','09:00','10:00','11:00'], from:8, to:15, hide_min_max:true}" result="routeTime" />
+				<input-slider options="{type:'double', values: ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00', '08:00','09:00','10:00','11:00'], from:8, to:15, hide_min_max:true}" result="routeTime" />
 			</div>
 			<div class="sidebar-theatre-box">
 				<h3>Verweilzeit (h)</h3>
@@ -145,24 +161,21 @@
 								<p class="e__quote">{{timeframe.bar.description}}</p>
 								<div class="col-8">
 								<h4>Öffnungszeiten</h4>
-								<table class="e__table grid">
-									<tbody>
-									<tr ng-repeat="openingTime in timeframe.bar.openingTimes" >
-										<td class="col-5">{{openingTime.days | formatDays}}</td>
-										<td  class="col-7">{{openingTime | formatTime}}</td>
-									</tr>
-									</tbody>
-								</table>
+								<span ng-repeat="openingTime in timeframe.bar.openingTimes" >
+									<p>{{openingTime.days | formatDays}}<br>{{openingTime | formatTime}}</p>
+								</span>
 							</div>
-								<div class="col-4">
-									<map markers="[timeframe.bar]" options="{alterable: false, centerLocation: timeframe.bar.location}">
+								<div class="col-4 align-center">
+									<map markers="[timeframe.bar]" options="{alterable: false, centerLocation: timeframe.bar.location}"></map>
+
+									<div class="e__btn e__btn-danger e__barcard-body-btn-melden" ng-click="$parent.reportPopupOpen = true; $parent.reportBarId = timeframe.bar.id; $event.stopPropagation()">Melden</div>
 								</div>
 							</div>
 						</div>
 						<div class="e__list-big-element-frontside-footer e__barcard-footer">
-							<span class="col-5"><rating type="'euro'" value="timeframe.bar.costs"></span>
+							<span class="col-4 e__rating"><rating type="'euro'" value="timeframe.bar.costs"></span>
 							<span class="col-2"></span>
-							<span class="col-5 align-right"><rating type="'star'" value="timeframe.bar.rating"></span>
+							<span class="col-6 align-right e__rating"><rating type="'star'" value="timeframe.bar.rating"></span>
 						</div>
 					</div>
 					<div ng-click="timeframe.bar = null; toDelete = false" ng-swipe-right="toDelete = false" class="e__list-big-element-backside grid">

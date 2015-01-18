@@ -114,6 +114,10 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		$scope.route.timeframes[index].bar = null;
 	};
 
+	$scope.reportBar = function(barId, reportBarText) {
+		BackendService.reportData(barId, reportBarText);
+	};
+
 	/**
 	 * SIDEBAR
 	 */

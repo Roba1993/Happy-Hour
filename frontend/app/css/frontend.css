@@ -1,9 +1,9 @@
 #e__popup-overlay .e__popup-window {
-	display:none;
+    display:none;
 }
 
 #e__popup-overlay.is__open .e__popup-window {
-	display:block;
+    display:block;
 }
 
 .e__barcard-body .map-canvas {
@@ -14,10 +14,10 @@
 }
 
 #theatre-map .map-canvas {
-	width:100%;
-	height:100vh;
+    width:100%;
+    height:100vh;
 }
 
 .e__slider-stage {
-	transition:left 0.2s;
+    transition:left 0.2s;
 }

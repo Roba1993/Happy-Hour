@@ -1,26 +1,26 @@
 /*** Patrick ***/
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-:before, :after {
+:before,
+:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 html {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-
 body {
-    width:100%;
-    height:100%;
-    overflow-x:hidden;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    font-size:62.5%;
+    font-size: 62.5%;
 }
 a,
 a:active,
@@ -31,16 +31,15 @@ a:focus {
 h1,
 h2,
 h3 {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
-
 #main {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     overflow: hidden;
 }
 #sidebar {
@@ -48,10 +47,10 @@ h3 {
     z-index: -1;
     width: 80%;
     height: 100%;
-    background:#414141;
+    background: #414141;
     overflow-y: scroll;
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling: touch;
 }
 #theatre {
     background: #fff;
@@ -61,7 +60,7 @@ h3 {
     box-shadow: -1px 0px 15px #000;
     overflow-y: scroll;
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling: touch;
 }
 #theatre,
 #theatre-head {
@@ -73,21 +72,20 @@ h3 {
  */
 
 #is__sidebar-open[type=checkbox]:checked + #main #sidebar {
-    z-index:0;
+    z-index: 0;
 }
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre,
 #is__sidebar-open[type=checkbox]:checked + #main > #theatre-head {
     -webkit-transform: translate3d(80%, 0px, 0);
     transform: translate3d(80%, 0px, 0);
 }
-
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:nth-last-of-type(2) {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type,
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:last-of-type {
-    width:20px;
+    width: 20px;
     margin-left: -2px;
 }
 #is__sidebar-open[type=checkbox]:checked + #main #theatre-head-topbar .i__hamburger > .icon-bar:first-of-type {
@@ -100,189 +98,184 @@ h3 {
     transform: rotate(220deg);
     margin-top: -1px;
 }
-
 #theatre-head {
     position: fixed;
-    z-index:99;
+    z-index: 99;
     overflow: hidden;
 }
-
 #theatre-head-topbar {
     height: 65px;
     padding-top: 5px;
     background: #f2f2f2;
     box-shadow: 0px 1px 15px #afafaf;
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling: touch;
 }
 .is__ios-fullscreen #theatre-head-topbar {
     height: 80px;
     padding-top: 20px;
 }
 #theatre-head-topbar-icons .e__btn {
-    height:55px;
-    width:100%;
-    padding:6px 2px;
+    height: 55px;
+    width: 100%;
+    padding: 6px 2px;
 }
 #theatre-head-topbar .i__hamburger {
     float: left;
-    display:inline-block;
-    width:100%;
+    display: inline-block;
+    width: 100%;
 }
 #theatre-head-subbar {
-    height:40px;
+    height: 40px;
     background: #f2f2f2;
-    border-bottom:1px solid #666;
+    border-bottom: 1px solid #666;
 }
 #theatre-head-subbar .e__navigation-vertical-element:first-of-type > a {
-    padding:0px 3px;
+    padding: 0px 3px;
 }
 #theatre-head-subbar .e__navigation-vertical-element:last-of-type > a {
-    padding-right:3px;
+    padding-right: 3px;
 }
 #theatre-head-topbar-title {
-    font-size:1.6rem;
+    font-size: 1.6rem;
     font-weight: 200;
     text-align: center;
-    display:block;
+    display: block;
     line-height: 55px;
     height: 55px;
 }
 /* 120px + 0px */
+
 #theatre {
-    padding-top:105px;
+    padding-top: 105px;
 }
 .is__ios-fullscreen #theatre {
     padding-top: 120px;
 }
 #theatre-myroutes {
-    min-height:100%;
-    background:url('../images/myroutes_background.jpg');
+    min-height: 100%;
+    background: url('../images/myroutes_background.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     padding: 20px 0;
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
 }
 #theatre-recentroute {
-    min-height:100%;
-    float:left;
-    width:100%;
+    min-height: 100%;
+    float: left;
+    width: 100%;
 }
 /** Startscreen **/
+
 #startscreen {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: fixed;
     background: url('../images/background/cocktail-gelb.jpg') no-repeat center;
     background-size: cover;
 }
 #startscreen-icon {
     position: absolute;
-    width:100%;
-    height:250px;
+    width: 100%;
+    height: 250px;
     width: 250px;
-    top:50%;
-    left:50%;
-    margin-left:-125px;
-    margin-top:-125px;
+    top: 50%;
+    left: 50%;
+    margin-left: -125px;
+    margin-top: -125px;
 }
 #startscreen-footer {
     position: absolute;
-    bottom:10px;
-    width:100%;
+    bottom: 10px;
+    width: 100%;
 }
 #startscreen-footer > img {
     max-width: 100%;
 }
 /** /Startscreen **/
+
 /*** /Patrick ***/
+
 /*** Sidebar - Simon ***/
+
 #sidebar-head-topbar {
     height: 65px;
     padding-top: 5px;
     box-shadow: 0px 1px 15px #000;
-	
 }
 .is__ios-fullscreen #sidebar-head-topbar {
     height: 80px;
     padding-top: 20px;
 }
-#sidebar [class*="i-f__"] {
-    margin-right:10px;
+#sidebar[class*="i-f__"] {
+    margin-right: 10px;
 }
 #sidebar-head-topbar-title {
-    font-size:1.6rem;
+    font-size: 1.6rem;
     font-weight: 200;
     text-align: left;
-    display:inline-block;
+    display: inline-block;
     line-height: 55px;
-	color: #fff;
+    color: #fff;
 }
 #sidebar-head-topbar .i__options {
     margin: 5px;
     float: left;
-	position:relative;
-	top: 12px;
-	margin-right: 15px;
+    position: relative;
+    top: 12px;
+    margin-right: 15px;
 }
-.sidebar-head-topbar-box{
-	padding-left: 20px;
+.sidebar-head-topbar-box {
+    padding-left: 20px;
 }
-
 #sidebar-theatre {
-	height: 100%;
-	margin-top: 0px;
+    height: 100%;
+    margin-top: 0px;
 }
-
-#sidebar-theatre h3{
-	font-size:1rem;
+#sidebar-theatre h3 {
+    font-size: 1rem;
     font-weight: 200;
-	line-height: 2;
-	margin:0;
-    padding:0;
+    line-height: 2;
+    margin: 0;
+    padding: 0;
 }
-
 .sidebar-theatre-box {
-	padding-left: 20px;
-	margin-top: 15px;
-	padding-right: 20px;
+    padding-left: 20px;
+    margin-top: 15px;
+    padding-right: 20px;
 }
-
 .sidebar-theatre-box #location {
-	margin-top: -15px;
+    margin-top: -15px;
 }
-
-.sidebar-theatre-box h3{
-	color:#fff;
-	display: inline;
+.sidebar-theatre-box h3 {
+    color: #fff;
+    display: inline;
 }
-
-.sidebar-theatre-box h4{
-	color: #c7c7c7;
-	font-size: 1.0rem;
+.sidebar-theatre-box h4 {
+    color: #c7c7c7;
+    font-size: 1.0rem;
     font-weight: 200;
-	margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
-
-.sidebar-theatre-box img{
-	margin-right: 15px;
-	position: relative;
-	top: 1px;
+.sidebar-theatre-box img {
+    margin-right: 15px;
+    position: relative;
+    top: 1px;
 }
-
-.sidebar-theatre-box input{
-	padding: 4px;
-	background: #d1d1d1;
-	border: 1px solid #1d1d1d;
-	width: 100%;
+.sidebar-theatre-box input {
+    padding: 4px;
+    background: #d1d1d1;
+    border: 1px solid #1d1d1d;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 1rem;
 }
-
-.seperator  {
-	height:1px;
-	min-height:1px;
-	background: #292929;
-	margin-top: 10px;
+.seperator {
+    height: 1px;
+    min-height: 1px;
+    background: #292929;
+    margin-top: 10px;
 }
 /*** /Sidebar - Simon ***/
