@@ -1,14 +1,16 @@
 /***** Grid *****/
+
 .grid {
-    width:100%;
+    width: 100%;
     position: relative;
-    float:left;
+    float: left;
 }
 [class*="col-"] {
-    float:left;
-    min-height:1px;
+    float: left;
+    min-height: 1px;
 }
 /* Clearfix */
+
 [class*="col-"]:before,
 [class*="col-"]:after {
     content: " ";
@@ -21,71 +23,70 @@
     *zoom: 1;
 }
 .col-0_5 {
-    width:4.166;
+    width: 4.166;
 }
 .col-1 {
-    width:8.333%;
+    width: 8.333%;
 }
 .col-2 {
-    width:16.666%;
+    width: 16.666%;
 }
 .col-3 {
-    width:25%;
+    width: 25%;
 }
 .col-3_5 {
-    width:29.166%;
+    width: 29.166%;
 }
 .col-4 {
-    width:33.333%;
+    width: 33.333%;
 }
 .col-5 {
-    width:41.666%;
+    width: 41.666%;
 }
 .col-6 {
-    width:50%;
+    width: 50%;
 }
 .col-6_5 {
-    width:54.166%;
+    width: 54.166%;
 }
 .col-7 {
-    width:58.333%;
+    width: 58.333%;
 }
 .col-8 {
-    width:66.666%;
+    width: 66.666%;
 }
 .col-9 {
-    width:75%;
+    width: 75%;
 }
 .col-10 {
-    width:83.333%;
+    width: 83.333%;
 }
 .col-11 {
-    width:91.666%;
+    width: 91.666%;
 }
 .col-12 {
-    width:100%;
+    width: 100%;
 }
-
 @media (max-width: 350px) {
     .col-xs-0 {
-        width:0%;
+        width: 0%;
     }
     .col-xs-2_5 {
-        width:20.8333%;
+        width: 20.8333%;
     }
     .col-xs-3 {
-        width:25%;
+        width: 25%;
     }
     .col-xs-3_5 {
-        width:29.166%;
+        width: 29.166%;
     }
     .col-xs-4 {
-        width:33.333%;
+        width: 33.333%;
     }
     .col-xs-5 {
-        width:41.666%;
+        width: 41.666%;
     }
     .col-xs-5_5 {
-        width:45.8333%;
+        width: 45.8333%;
     }
 }
