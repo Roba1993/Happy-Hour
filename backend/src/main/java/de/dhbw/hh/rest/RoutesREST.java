@@ -58,12 +58,15 @@ public class RoutesREST {
 			Collection<Object> data = new ArrayList<Object>();
 			data.add(hash);
 
+//			String element = (String) data.iterator().next();
+			
 			// RESTRespone mit Rückgabedaten befüllen
 			RESTResponse restResponse = new RESTResponse();
 			restResponse.setName("/routes");
 			restResponse.setTimestamp(new Timestamp(Calendar
 					.getInstance().getTime().getTime()));
 			restResponse.setData(data);
+			restResponse.setHash(hash);
 			
 			// Route in Datenbank speichern
 			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
