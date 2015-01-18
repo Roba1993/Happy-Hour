@@ -11,36 +11,17 @@ angular.module('happyHour.views.localRoutes', ['ngRoute', 'happyHour.persistence
 ['$scope', 'AppStatusPersistenceService', 'RoutesPersistenceService', '$location',
 function($scope, AppStatusPersistenceService, RoutesPersistenceService, $location) {
 	AppStatusPersistenceService.setPath('/localRoutes');
-	/*var localRoutes = [];
-	var localRoute1 = {
-		id: 'abcdefg',
-		timestamp: new Date(),
-		route: {
-			name: 'Tour1',
-			options: {
-				weekday: 5
-			}
-		}
-	};
-	localRoutes.push(localRoute1);
 	
-	var localRoute2 = {
-		id: 'abcdefgfg',
-		timestamp: new Date(),
-		route: {
-			name: 'Tour2',
-			options: {
-				weekday: 5
-			}
-		}
-	};
-	localRoutes.push(localRoute2);*/
-	
+	// Alle Routen aus dem AppStatus auslesen	
 	$scope.localRoutes = RoutesPersistenceService.getAll();
+	
+	// Gewählte Route aus den gespeicherten Routen löschen
 	$scope.removeRoute = function(routeId) {
 		RoutesPersistenceService.remove(routeId);
 		$scope.localRoutes = RoutesPersistenceService.getAll();
 	};
+	
+	// Gewählte Route in der currentRoute-Ansicht öffnen
 	$scope.openRoute = function(routeId){
 		var localRouteToOpen = RoutesPersistenceService.get(routeId);
 		AppStatusPersistenceService.setRoute(localRouteToOpen.route);
