@@ -2,36 +2,37 @@ package de.dhbw.hh.models;
 
 import java.util.ArrayList;
 
+import de.dhbw.hh.dao.h2.H2FoursquareDAO.OpeningTimes;
 import de.dhbw.hh.models.HappyHour;
 
 /**
  * Diese Klasse repräsentiert eine Bar mit folgenden Eigenschaften:
- * Bar-ID, 
- * Bar-Name, 
- * Rating, 
- * Kosten, 
- * Beschreibung, 
- * URL für eine Bar-Bild, 
- * Geo-Position, 
- * Adresse, 
- * Öffnungszeiten, 
- * Happy-Hour-Zeiten
+ * <li>Bar-ID</li>
+ * <li>Bar-Name</li>
+ * <li>Rating</li>
+ * <li>Kosten</li>
+ * <li>Beschreibung</li>
+ * <li>URL für eine Bar-Bild</li>
+ * <li>Geo-Position</li>
+ * <li>Adresse</li>
+ * <li>Öffnungszeiten</li>
+ * <li>Happy-Hour-Zeiten</li>
  * 
  * @author Tobias Häußermann
  * @version 1.0
  */
 public class Bar {
 
-	private String 	id;
-	private String 	name;
-	private float 	rating;
-	private int 	costs;
-	private String 	description;
-	private String 	imageUrl;
-	private Location location;
-	private String 	adress;
-	private Object[] openingTimes;
-	private ArrayList<HappyHour> happyHours;
+	private String 		id;
+	private String 		name;
+	private float 		rating;
+	private int 		costs;
+	private String 		description;
+	private String 		imageUrl;
+	private Location	location;
+	private String 		address;
+	private ArrayList<OpeningTimes> openingTimes;
+	private ArrayList<HappyHour> 	happyHours;
 	
 	public String getId() {
 		return id;
@@ -90,18 +91,18 @@ public class Bar {
 	}
 	
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 	
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 	
-	public Object[] getOpeningTimes() {
+	public ArrayList<OpeningTimes> getOpeningTimes() {
 		return openingTimes;
 	}
 	
-	public void setOpeningTimes(Object[] openingTimes) {
+	public void setOpeningTimes(ArrayList<OpeningTimes> openingTimes) {
 		this.openingTimes = openingTimes;
 	}
 	
@@ -117,6 +118,6 @@ public class Bar {
 	public String toString(){
 		return ("ID: "+id+"\nName: "+name+"\nRating: "+rating+"\nCosts: "+costs+"\nDescription: "+description+
 			"\nimageURL: "+imageUrl+"\nLongitude: "+location.longitude+"\nLatitude: "+location.latitude+"\nAdresse: "+
-			adress+"\n-----------------");
+			address+"\n-----------------");
 	}
 }

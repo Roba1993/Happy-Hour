@@ -32,8 +32,8 @@ public class BarsREST {
 	
 	public BarsREST(DAOFactory daoFactory) {
 		
-		H2FoursquareDAO foursquareConnection = new H2FoursquareDAO();
-		HappyHourDAO happyHours = daoFactory.getHappyHourDAO();
+		H2FoursquareDAO h2FoursquareDAO = new H2FoursquareDAO();
+		HappyHourDAO happyHourDAO = daoFactory.getHappyHourDAO();
 		
 		/**
 		 * Gibt alle Bars zurück, die zu den Suchoptionen passen.
@@ -49,32 +49,40 @@ public class BarsREST {
 		get("/bars", "application/json", (request, response) -> {
 			LOG.debug("HTTP-GET Anfrage eingetroffen: "+request.queryString());
 			
-			float lng = Float.parseFloat(request.queryParams("longitude"));	//			float lng = 48.957848f;
-			float lat = Float.parseFloat(request.queryParams("latitude"));	//			float lat = 9.422454f;
-			float rad = Float.parseFloat(request.queryParams("radius"));		//			int rad = 2000;
-			int day = Integer.parseInt(request.queryParams("weekday"));
+			float lng = Float.parseFloat(request.queryParams("longitude"));
+			float lat = Float.parseFloat(request.queryParams("latitude"));
+			float rad = Float.parseFloat(request.queryParams("radius"));	//			int rad = 2000;
+			/*
+			 * Folgender Parameter wird nur dann benötigt, wenn die Suchergebnisse über die Methode filterBars()
+			 * auf vorhandene Happy-Hours geprüft werden müssen. 
+			 * 
+			 * int day = Integer.parseInt(request.queryParams("weekday"));
+			 */
 			
 			ArrayList<Bar> rawBars = new ArrayList<Bar>();
 			// Überprüfung ob die Abfrage oder eine Ähnliche schon einmal abgesetzt wurde
 			boolean alreadyCached = isAlreadyInCache(lng, lat, rad);
 			
 			if(alreadyCached){
-				// do nothing
+				// Nichts unternehmen
 			}
 			else{
-				rawBars = foursquareConnection.getBarsInArea(lng, lat, rad);
+				rawBars = h2FoursquareDAO.getBarsInArea(lng, lat, rad);
 				int count = rawBars.size();
 				for(int i=0;i<count;i++){
 					String id = rawBars.get(i).getId();
-//					id = "4b540ef4f964a5203db127e3";	TEST-DATEN
-					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHours.findHappyHour(id);
-					System.out.println("Die komplette Happy-Hour Liste: "+hh+" für die ID: "+id);
+					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHourDAO.findHappyHour(id);
 					
 					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
 					rawBars.get(i).setHappyHours(hh);
 				}
-				//TODO activate filter as soon as happy-hour data is available
-				// rawBars = filterBars(rawBars, day);
+				/*
+				 * Der folgende Methoden-Aufruf filtert diejenigen Bars aus den Suchergebnissen aus, die am 
+				 * verlangten Tag oder generell keine Happy-Hours anbieten. Zur Zeit wird die Funktionalität
+				 * nicht benötigt, ist aber für zukünftige Anforderungen bereits vorbereitet. 
+				 * 
+				 * rawbars = filterBars(rawBars, day);
+				 */
 			}
 			
 			// REST-Response erstellen
@@ -100,6 +108,7 @@ public class BarsREST {
 	 * @param day
 	 * @return Gibt die Liste in aktualisierter Form zurück
 	 */
+	@SuppressWarnings("unused")
 	private ArrayList<Bar> filterBars(ArrayList<Bar> rawBars, int day) {
 		
 		// Schleife durch alle Bars in der übergebenen Liste
@@ -142,14 +151,7 @@ public class BarsREST {
 	 * @return
 	 */
 	private boolean isAlreadyInCache(float lng, float lat, float rad){
-		// Wird zu einem späteren Zeitpunkt umgesetzt
+		// Wird zu einem späteren Zeitpunkt implementiert
 		return false;
-	}
-	
-	@SuppressWarnings("unused")
-	private class OpeningTimes{
-		String startTime;
-		String endTime;
-		int[] days;
 	}
 }

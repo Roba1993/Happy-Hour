@@ -15,7 +15,7 @@ import de.dhbw.hh.models.Location;
  * Diese Klasse testet alle relevanten Methoden der H2FoursquareDAO-Klasse
  * @author Tobias Häußermann
  */
-public class FoursquareTest {
+public class H2FoursquareDAOTest {
 
 	// Die zu testende Klasse
 	private static H2FoursquareDAO fsc;
@@ -38,7 +38,7 @@ public class FoursquareTest {
 	@Test
 	public void testGetBarsInArea() throws Exception {
 		// Übergabeparameter für Test definieren und festlegen.
-		float latitude = 48.949034f;
+		float latitude 		= 48.949034f;
 		float longitude 	= 9.431656f;
 		float radius		= 0.15f;
 		
@@ -52,11 +52,11 @@ public class FoursquareTest {
 		cb.setAdress(null);
 		cb.setCosts(1);
 		cb.setDescription("Pub");
-		cb.setHappyHours(null);
+		cb.setHappyHours(null);		// Test folgt am 19.01.
 		cb.setImageUrl("");
 		cb.setLocation(new Location(9.433431520350682f, 48.94866611443367f));
 		cb.setName("Waldhorn");
-		cb.setOpeningTimes(null);
+		cb.setOpeningTimes(null);	// Test folgt am 19.01.
 		cb.setRating(-1f);
 		
 		int totalCount = 2;
@@ -70,14 +70,13 @@ public class FoursquareTest {
 		assertEquals(cb.getAdress(), resultB.getAdress());
 		assertEquals(cb.getCosts(), resultB.getCosts());
 		assertEquals(cb.getDescription(), resultB.getDescription());
-		assertEquals(cb.getHappyHours(), resultB.getHappyHours());
+//		assertEquals(cb.getHappyHours(), resultB.getHappyHours());
 		assertEquals(cb.getId(), resultB.getId());
 		assertEquals(cb.getImageUrl(), resultB.getImageUrl());
 		assertEquals(cb.getLocation().latitude, resultB.getLocation().latitude, 0.001);
 		assertEquals(cb.getLocation().longitude, resultB.getLocation().longitude, 0.001);
 		assertEquals(cb.getName(), resultB.getName());
 //		assertEquals(cb.getOpeningTimes(), resultB.getOpeningTimes());
-		System.out.println(resultB.getRating());
 		assertEquals(cb.getRating(), resultB.getRating(), 0.1);	
 	}
 	
