@@ -10,7 +10,6 @@
     display: none !important;
     visibility: hidden !important;
 }
-
 .align-center {
     text-align: center;
 }
@@ -21,9 +20,9 @@
     text-align: right;
 }
 .padding-default {
-    padding:8px;
+    padding: 8px;
 }
 .icon-undertitle {
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
