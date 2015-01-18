@@ -8,8 +8,8 @@
  */
 angular.module('happyHour.algorithm.RouteGenerator', [])
 	.factory('RouteGeneratorService', [ function() {
+        var distances;
 		var service = {
-            var distances;
             
             /* Hilfsfunktion um mehrdimensionale Arrays zu erstellen.
              * @author http://stackoverflow.com/a/966938
@@ -22,11 +22,11 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
             
                 if (arguments.length > 1) {
                     var args = Array.prototype.slice.call(arguments, 1);
-                    while(i--) arr[length-1 - i] = createArray.apply(this, args);
+                    while(i--) { arr[length-1 - i] = createArray.apply(this, args); }
                 }
             
                 return arr;
-            }
+            },
             
             /*
              * Hilfsfunktion um einen string in einen integer - Wert umzuwandeln
@@ -50,12 +50,12 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @return {time} Gibt das Objekt von time zurueck
              */
             getTime: function(txt) {
-                if(txt.length < 4) {
+                if(txt.length < 5) {
                     txt += '0';
                 }
                 var t = time(txt);
                 return t;
-            }
+            },
             
             /*
              * Hilfsfunktion um leere Elemente aus einem Array zu entfernen. Bedient sich der Eigenschafft das leere Elemente, undefined etc. 'false' returnen
@@ -281,21 +281,24 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                     return;
                 }
             
-                if (!delay) delay = 100;
+                if (!delay) { delay = 100; }
             
                 var timeoutPointer;
                 var intervalPointer = setInterval(function() {
-                    if (!check()) return; // if check didn't return true, means we need another check in the next interval
+                    if (!check()) { return; } // if check didn't return true, means we need another check in the next interval
             
                     // if the check returned true, means we're done here. clear the interval and the timeout and execute onComplete
                     clearInterval(intervalPointer);
-                    if (timeoutPointer) clearTimeout(timeoutPointer);
+                    if (timeoutPointer) { clearTimeout(timeoutPointer); }
                     onComplete();
                 }, delay);
                 // if after timeout milliseconds function doesn't return true, abort
-                if (timeout) timeoutPointer = setTimeout(function() {
-                    clearInterval(intervalPointer);
-                }, timeout);
+                if (timeout) { 
+                    timeoutPointer = setTimeout(
+                        function() {
+                            clearInterval(intervalPointer);
+                        }, timeout);
+                }
             },
             /*
              * Callback Funktion zur asynchronen Abarbeitung des Google Maps Api Request
@@ -304,7 +307,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
              * @param {string} status Der Status Coder der Abfrage.
              */
             callback: function(response, status) {
-                if (status != google.maps.DistanceMatrixStatus.OK) {
+                if (status !== google.maps.DistanceMatrixStatus.OK) {
                     console.log('Fehler beim Zugriff auf die Google API: ' + status);
                     return false;
                 } else {
@@ -329,9 +332,9 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                 var service = new google.maps.DistanceMatrixService();
                 
                 var barlocs = createArray(jsonbars.length, 2);
-                for (var i = 0; i < jsonbars.length; i++) {
-                    barlocs[i][0] = jsonbars[i].location.latitude;
-                    barlocs[i][1] = jsonbars[i].location.longitude;
+                for (var o = 0; i < jsonbars.length; i++) {
+                    barlocs[o][0] = jsonbars[i].location.latitude;
+                    barlocs[io][1] = jsonbars[i].location.longitude;
                 }
                 var loc = [];
                 loc[0] = options.location.latitude;
@@ -410,15 +413,14 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
                                 mins += 60;
                                 newt.add(mins, 'minutes');
                             } else {
-                                var mins = tend.minutes() - st.minutes();
-                                if(mins !== 0) {
-                                    newt.add(mins, 'minutes');
+                                var mins2 = tend.minutes() - st.minutes();
+                                if(mins2 !== 0) {
+                                    newt.add(mins2, 'minutes');
                                 }
                             }
                             // Setze Duration.
                             bars[i][2] = newt.hours() * 60 + newt.minutes();
                             bars[i][3] = rawbars[i].rating;
-                            delete st, tend, newt;
                             break;
                         }
                     }
@@ -448,6 +450,9 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
             
             /*
              * Gibt ein Routen Objekt zurueck mit der moeglichst logischen Route durch verschiedene Bars.
+             * Benoetigt UNBEDINGT google API JS Code:
+             * <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkJJTY5c87WY8kYx7WXKgdH6q2OHfygE0"></script>
+             * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
              * @author Felix Rieder
              * @param {Bars[]} jsonbars ist ein array bestehend aus mehreren 'bar'-json-objekten
              * @param {Options} options Definiertes Objekt mit allen benoetigten Rahmeninformationen.
