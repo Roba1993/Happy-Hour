@@ -12,7 +12,7 @@
     "angular-animate": "1.2.x",
     "angular-local-storage": "~0.1.5",
     "cryptojslib": "~3.1.2",
-    "time-js": "markusthoemmes/timejs#bcfc7dd2ef6d6c768ab735e81762baf31d78a251",
+    "time-js": "markusthoemmes/timejs#master",
     "lodash": "~2.4.1",
     "ionrangeslider": "~2.0.2",
     "iNoBounce": "lazd/iNoBounce",
