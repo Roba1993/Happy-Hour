@@ -16,7 +16,6 @@ public class RESTResponse {
 	private String status = "";
 	@SuppressWarnings("rawtypes")
 	private Collection data = null;
-	private String hash="";
 
 	public String getName() {
 		return name;
@@ -63,20 +62,10 @@ public class RESTResponse {
 		this.data = data;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "; Description: " + getDescription() + "; Timestamp: "
 				+ getTimestamp().getTime() + "; Status: " + getStatus() + "; Data " + getData();
-	}
-
-	public String getHash() {
-		return hash;
-	}
-
-	public void setHash(String hash) {
-		this.hash = hash;
 	}
 
 }

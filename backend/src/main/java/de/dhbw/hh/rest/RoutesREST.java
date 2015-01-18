@@ -64,7 +64,6 @@ public class RoutesREST {
 			restResponse.setTimestamp(new Timestamp(Calendar
 					.getInstance().getTime().getTime()));
 			restResponse.setData(data);
-			restResponse.setHash(hash);
 			
 			// Route in Datenbank speichern
 			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
