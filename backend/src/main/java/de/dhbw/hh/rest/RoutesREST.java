@@ -47,14 +47,14 @@ public class RoutesREST {
 			String temp = request.body();
 			route.setData(temp);
 
-			// Hashwert bilden
+			// Hashwert bilden und der Route zuweisen
 			String hash = HashConverter.md5(temp);
 			route.setHash(hash);
 
 			// Route ist keine Top Route
 			route.setTop(false);
 
-			// Hash in Rückgabeobjekt einfügen
+			// Hash auch in das Rückgabeobjekt einfügen
 			Collection<Object> data = new ArrayList<Object>();
 			data.add(hash);
 
