@@ -108,7 +108,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            * Route setzen
            */
           $scope.$watch('route', function (route) {
-            if (route != null && route.timeframes.length > 2) {
+            if (route != null && route.timeframes.length >= 2) {
               //console.log(route.timeframes);
               var directionsDisplay;
               var directionsService = new maps.DirectionsService();
