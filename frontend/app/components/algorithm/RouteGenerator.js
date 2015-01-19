@@ -41,7 +41,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 
 					// Bars nach dem Score sortieren
 					var sortedBars = _.sortBy(bars, function(bar) {
-						return score(timeframe, fromLocation, bar);
+						return score(timeframe, fromLocation, bar, options.weekday);
 					});
 					
 					// Den Timeframe mit der Bar befüllen, die den höchsten Score hat
@@ -63,13 +63,33 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 		};
 
 		/**
+		 * Berechnet die Sekunden zwischen 2 Zeiten
+		 * @param  {Time} time1 Die erste Zeit
+		 * @param  {Time} time2 Die zweite Zeit
+		 * @return {Integer} Die Sekunden zwischen beiden Zeiten
+		 */
+		function secondsBetween(time1, time2) {
+			return toSeconds(time2) - toSeconds(time1);
+		}
+
+		/**
+		 * Berechnet das Sekundenäquivalent einer Uhrzeit
+		 * @param  {Time} time Das `time`-Objekt das umgerechnet werden soll
+		 * @return {Integer} Das Sekundenäquivalent
+		 */
+		function toSeconds(time) {
+			return time.hours()*60*60 + time.minutes()*60 + time.seconds();
+		}
+
+		/**
 		 * Bestimmt ob eine Zeit vor der anderen ist, über die Nacht gesehen
 		 * @param  {Time} time1 Erste Zeit
 		 * @param  {Time} time2 Zweite Zeit
 		 * @return {Boolean} `true` wenn time1 < time2
 		 */
 		function isBeforeOverNight(time1, time2) {
-			if(time1.isAfter(time('12:00:00'))) {
+			var referenceTime = time('12:00:00');
+			if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime)) {
 				return !time1.isBefore(time2);
 			}
 			else {
@@ -82,14 +102,53 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 		 * @param  {Timeframe} timeframe Zeitraum, indem die Bar platziert werden soll
 		 * @param  {Location} fromLocation Die Lokation von der aus die nächste Bar angesteuert wird
 		 * @param  {Bar} bar Die Bar die bewertet werden soll
+		 * @param {Integer} weekday Der Wochentag der Route
 		 * @return {Double} Der Score nach dem sortiert werden kann
 		 */
-		function score(timeframe, fromLocation, bar) {
+		function score(timeframe, fromLocation, bar, weekday) {
 			var distance = distanceBetween(fromLocation, bar.location);
 			var rating = bar.rating;
+			var happyHourOverlap = 0;
 
 			// TODO nicht vorhandenes Rating beachten
 			// TODO timeframe/happyHour mit einbeziehen
+			
+			// passende HappyHour finden
+			var happyHour = null;
+			_.forEach(bar.happyHours, function(hour) {
+				if(_.contains(hour.days, weekday)) {
+					happyHour = hour;
+				}
+			});
+
+			// wenn eine HappyHour gefunden wurde berechnen wie genau sie auf den Timeframe passt
+			if(happyHour !== null) {
+				var timeframeStart = time(timeframe.startTime);
+				var timeframeEnd = time(timeframe.endTime);
+				var happyHourStart = time(happyHour.startTime);
+				var happyHourEnd = time(happyHour.endTime);
+
+				// ist eine Überlappung vorhanden?
+				if(
+					(happyHourStart.isAfter(timeframeStart) && happyHourStart.isBefore(timeframeEnd)) ||
+					(happyHourEnd.isAfter(timeframeStart) && happyHourEnd.isBefore(timeframeEnd)) ||
+					happyHourStart.isSame(timeframeStart) || happyHourEnd.isSame(timeframeEnd)
+				) {
+					// Überlappungsanteil berechnen
+					var overlapStart = timeframeStart;
+					if(happyHourStart.isAfter(timeframeStart)) {
+						overlapStart = happyHourStart;
+					}
+					var overlapEnd = timeframeEnd;
+					if(happyHourEnd.isBefore(timeframeEnd)) {
+						overlapEnd = happyHourEnd;
+					}
+
+					var timeframeDuration = secondsBetween(timeframeStart, timeframeEnd);
+					var overlapDuration = secondsBetween(overlapStart, overlapEnd);
+					happyHourOverlap = overlapDuration/timeframeDuration;
+				}
+			}
 
 			return rating/distance;
 		}
