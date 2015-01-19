@@ -91,12 +91,12 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            * Markierungen setzen
            */
           $scope.$watch('markers', function (markers) {
+            var location;
 
             // for-Schleife um durch jede Location in markers zu iterieren
             _.forEach(markers, function (marker) {
               //console.log(marker);
               if (marker != null) {
-                var location;
                 location = new maps.LatLng(marker.location.latitude, marker.location.longitude);
                 //console.log(location);
               }
