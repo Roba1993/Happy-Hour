@@ -107,7 +107,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            */
           $scope.$watch('route', function (route) {
             if (route != null && route.timeframes.length >= 2) {
-              //console.log(route.timeframes);
               var directionsDisplay;
               var directionsService = new maps.DirectionsService();
 
@@ -126,10 +125,8 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                 route.timeframes[route.timeframes.length - 1].bar.location.longitude
               );
 
-              //console.log("Routenlänge: " + route.timeframes.length + " Ziele");
               var waypoints = [];
               if (route.timeframes.length > 2) {
-                //console.log("Route größer als 2 Bars, speichere Zwischenziele");
                 for (var i = 1; i < route.timeframes.length - 1; i++) {
                   var waypointLocation = new maps.LatLng(
                     route.timeframes[i].bar.location.latitude,
