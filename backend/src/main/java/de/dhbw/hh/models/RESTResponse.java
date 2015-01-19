@@ -14,8 +14,7 @@ public class RESTResponse {
 	private String description = "";
 	private Timestamp timestamp = null;
 	private String status = "";
-	@SuppressWarnings("rawtypes")
-	private Collection data = null;
+	private Object data = null;
 
 	public String getName() {
 		return name;
@@ -53,12 +52,12 @@ public class RESTResponse {
 		this.status = "error";
 	}
 
-	@SuppressWarnings("rawtypes")
-	public Collection getData() {
+
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(@SuppressWarnings("rawtypes") Collection data) {
+	public void setData( Object data) {
 		this.data = data;
 	}
 	
