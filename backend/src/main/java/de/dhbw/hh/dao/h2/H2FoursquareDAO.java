@@ -3,7 +3,6 @@ package de.dhbw.hh.dao.h2;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -183,7 +182,6 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @param version
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private ArrayList<OpeningTimes> getOpeningTimesByID(String id){
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
@@ -245,10 +243,23 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					int eH = Integer.parseInt(endString.substring(0,2));
 					int eM = Integer.parseInt(endString.substring(2,4));
 					
+					String shs = ""+sH;
+					String sms = ""+sM;
+					String ehs = ""+eH;
+					String ems = ""+eM;
+					if(shs.length()<2)
+						shs = "0"+shs;
+					if(sms.length()<2)
+						sms = "0"+sms;
+					if(ehs.length()<2)
+						ehs = "0"+ehs;
+					if(ems.length()<2)
+						ems = "0"+ems;
+					
 					OpeningTimes ot = new OpeningTimes();
 					ot.setBarID(id);
-					ot.setStartTime(new Time(sH, sM, 0));
-					ot.setEndTime(new Time(eH, eM, 0));
+					ot.setStartTime(shs+":"+sms);
+					ot.setEndTime(ehs+":"+ems);
 					ot.setDays(days);
 					
 					openingTimes.add(ot);
@@ -261,6 +272,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		return openingTimes;
 	}
 	
+	
 	/**
 	 * Dokumentation folgt
 	 * @author Tobias Häußermann
@@ -269,8 +281,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	public class OpeningTimes{
 		
 		private String 	barID;
-		private Time 	startTime;
-		private Time 	endTime;
+		private String 	startTime;
+		private String 	endTime;
 		private int[] 	days;
 		
 		public String getBarID() {
@@ -281,19 +293,19 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			this.barID = barID;
 		}
 		
-		public Time getStartTime() {
+		public String getStartTime() {
 			return startTime;
 		}
 
-		public void setStartTime(Time startTime) {
+		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
 
-		public Time getEndTime() {
+		public String getEndTime() {
 			return endTime;
 		}
 
-		public void setEndTime(Time endTime) {
+		public void setEndTime(String endTime) {
 			this.endTime = endTime;
 		}
 

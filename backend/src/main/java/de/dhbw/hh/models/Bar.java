@@ -3,7 +3,7 @@ package de.dhbw.hh.models;
 import java.util.ArrayList;
 
 import de.dhbw.hh.dao.h2.H2FoursquareDAO.OpeningTimes;
-import de.dhbw.hh.models.HappyHour;
+import de.dhbw.hh.rest.BarsREST;
 
 /**
  * Diese Klasse repräsentiert eine Bar mit folgenden Eigenschaften:
@@ -32,7 +32,7 @@ public class Bar {
 	private Location	location;
 	private String 		address;
 	private ArrayList<OpeningTimes> openingTimes;
-	private ArrayList<HappyHour> 	happyHours;
+	private ArrayList<BarsREST.HappyHour> 	happyHours;
 	
 	public String getId() {
 		return id;
@@ -106,11 +106,11 @@ public class Bar {
 		this.openingTimes = openingTimes;
 	}
 	
-	public ArrayList<HappyHour> getHappyHours() {
+	public ArrayList<BarsREST.HappyHour> getHappyHours() {
 		return happyHours;
 	}
 	
-	public void setHappyHours(ArrayList<HappyHour> happyHours) {
+	public void setHappyHours(ArrayList<BarsREST.HappyHour> happyHours) {
 		this.happyHours = happyHours;
 	}
 	
