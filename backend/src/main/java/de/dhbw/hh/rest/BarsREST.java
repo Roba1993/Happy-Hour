@@ -158,6 +158,7 @@ public class BarsREST {
 	 * Dokumentation folg
 	 *
 	 */
+	@SuppressWarnings("deprecation")
 	private ArrayList<HappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh){
 		ArrayList<HappyHour> result = new ArrayList<HappyHour>();
 		
@@ -165,10 +166,25 @@ public class BarsREST {
 			HappyHour hour = new HappyHour();
 			de.dhbw.hh.models.HappyHour item = hh.get(i);
 			hour.setBarID(item.getBarID());
-			hour.setStartTime(item.getStart().toString());
-			hour.setEndTime(item.getEnd().toString());
+			int sh = item.getStart().getHours();
+			int sm = item.getStart().getMinutes();
+			int eh = item.getEnd().getHours();
+			int em = item.getEnd().getMinutes();
+			String shs = ""+sh;
+			String sms = ""+sm;
+			String ehs = ""+eh;
+			String ems = ""+em;
+			if(shs.length()<2)
+				shs = "0"+shs;
+			if(sms.length()<2)
+				sms = "0"+sms;
+			if(ehs.length()<2)
+				ehs = "0"+ehs;
+			if(ems.length()<2)
+				ems = "0"+ems;
 			
-//			System.out.println("################\n#############\n"+item.getStart().toString());
+			hour.setStartTime(shs+":"+sms);
+			hour.setEndTime(ehs+":"+ems);
 			
 			ArrayList<Integer> al = new ArrayList<Integer>();
 			if(item.isMonday() == true)
