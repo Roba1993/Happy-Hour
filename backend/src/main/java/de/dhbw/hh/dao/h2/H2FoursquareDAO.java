@@ -247,19 +247,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					
 					OpeningTimes ot = new OpeningTimes();
 					ot.setBarID(id);
-					ot.setStart(new Time(sH, sM, 0));
-					ot.setEnd(new Time(eH, eM, 0));
-					for(int j=0;j<days.length;j++){
-						switch(days[j]){
-						case 1: ot.setMonday(true);break;
-						case 2: ot.setTuesday(true);break;
-						case 3: ot.setWednesday(true);break;
-						case 4: ot.setThursday(true);break;
-						case 5: ot.setFriday(true);break;
-						case 6: ot.setSaturday(true);break;
-						case 7: ot.setSunday(true);break;
-						}
-					}
+					ot.setStartTime(new Time(sH, sM, 0));
+					ot.setEndTime(new Time(eH, eM, 0));
+					ot.setDays(days);
 					
 					openingTimes.add(ot);
 				}
@@ -279,15 +269,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	public class OpeningTimes{
 		
 		private String 	barID;
-		private Time 	start;
-		private Time 	end;
-		private boolean monday;
-		private boolean tuesday;
-		private boolean wednesday;
-		private boolean thursday;
-		private boolean friday;
-		private boolean saturday;
-		private boolean sunday;
+		private Time 	startTime;
+		private Time 	endTime;
+		private int[] 	days;
 		
 		public String getBarID() {
 			return barID;
@@ -297,82 +281,36 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			this.barID = barID;
 		}
 		
-		public Time getStart() {
-			return start;
+		public Time getStartTime() {
+			return startTime;
 		}
-		
-		public void setStart(Time start) {
-			this.start = start;
+
+		public void setStartTime(Time startTime) {
+			this.startTime = startTime;
 		}
-		
-		public Time getEnd() {
-			return end;
+
+		public Time getEndTime() {
+			return endTime;
 		}
-		
-		public void setEnd(Time end) {
-			this.end = end;
+
+		public void setEndTime(Time endTime) {
+			this.endTime = endTime;
 		}
-		
-		public boolean isMonday() {
-			return monday;
+
+		public int[] getDays() {
+			return days;
 		}
-		
-		public void setMonday(boolean monday) {
-			this.monday = monday;
-		}
-		
-		public boolean isTuesday() {
-			return tuesday;
-		}
-		
-		public void setTuesday(boolean tuesday) {
-			this.tuesday = tuesday;
-		}
-		
-		public boolean isWednesday() {
-			return wednesday;
-		}
-		
-		public void setWednesday(boolean wednesday) {
-			this.wednesday = wednesday;
-		}
-		
-		public boolean isThursday() {
-			return thursday;
-		}
-		
-		public void setThursday(boolean thursday) {
-			this.thursday = thursday;
-		}
-		
-		public boolean isFriday() {
-			return friday;
-		}
-		
-		public void setFriday(boolean friday) {
-			this.friday = friday;
-		}
-		
-		public boolean isSaturday() {
-			return saturday;
-		}
-		
-		public void setSaturday(boolean saturday) {
-			this.saturday = saturday;
-		}
-		
-		public boolean isSunday() {
-			return sunday;
-		}
-		
-		public void setSunday(boolean sunday) {
-			this.sunday = sunday;
+
+		public void setDays(int[] days){
+			this.days = days;
 		}
 		
 		public String toString(){
-			return "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+start+"\nEnde: "+end+"\nMontags: "+monday+
-					"\nDienstags: "+tuesday+"\nMittwochs: "+wednesday+"\nDonnerstags: "+thursday+"\nFreitags: "+
-					friday+"\nSamstags: "+saturday+"\nSonntags: "+sunday+"\n}";
+			String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
+			for(int i=0;i<days.length;i++){
+				result += "\n"+days[i];
+			}
+			return result;
 		}
 	}
 }
