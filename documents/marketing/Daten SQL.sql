@@ -61,7 +61,8 @@ VALUES
 ('4babd691f964a520e1cd3ae3' , 'Jeden Tag Caipirinha für 5,50€ und Ouzo für 0,99€' , '10:00:00' , '04:00:00' , false , false , false , false , true , true , false),
 ('4b50a524f964a5201a2b27e3' , 'Jeden normalen Cocktail für 4,50€ und alle Jumbo-Cocktails für 5,90€' , '17:00:00' , '20:00:00' , true , true , true , true , true , true , true),
 ('4bb10b3ff964a52060753ce3' , 'Alle Cocktails für 4,90€' , '20:00:00' , '23:00:00' , true , true , true , true , true , true , true),
-('4ba3d1a2f964a520e96238e3' , 'Alle alkoholischen Cocktails für 4€ und alle alkoholfreien Cocktails für 3€' , '19:00:00' , '20:00:00' , true , true , true , true , true , true , true);
+('4ba3d1a2f964a520e96238e3' , 'Alle alkoholischen Cocktails für 4€ und alle alkoholfreien Cocktails für 3€' , '19:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4b7592cdf964a5203b152ee3' , 'Ausgewählte Cocktails und Burger für jeweils 4€' , '23:00:00' , '02:00:00' , false , false , false , false , true , true , false);
 
 
 
