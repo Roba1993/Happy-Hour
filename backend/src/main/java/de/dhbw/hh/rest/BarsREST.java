@@ -16,7 +16,6 @@ import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.h2.H2FoursquareDAO;
 import de.dhbw.hh.models.Bar;
-import de.dhbw.hh.models.HappyHour;
 import de.dhbw.hh.models.RESTResponse;
 
 /**

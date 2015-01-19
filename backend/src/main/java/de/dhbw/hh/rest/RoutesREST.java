@@ -54,16 +54,12 @@ public class RoutesREST {
 			// Route ist keine Top Route
 			route.setTop(false);
 
-			// Hash auch in das Rückgabeobjekt einfügen
-			Collection<Object> data = new ArrayList<Object>();
-			data.add(hash);
-
 			// RESTRespone mit Rückgabedaten befüllen
 			RESTResponse restResponse = new RESTResponse();
 			restResponse.setName("/routes");
 			restResponse.setTimestamp(new Timestamp(Calendar
 					.getInstance().getTime().getTime()));
-			restResponse.setData(data);
+			restResponse.setData(hash);
 			
 			// Route in Datenbank speichern
 			boolean successfull = daoFactory.getRouteDAO().insertRoute(route);
@@ -92,7 +88,7 @@ public class RoutesREST {
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());			
 			
 			// Routen aus der Datenbank holen
-			Route HashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
+			Route hashRoute = daoFactory.getRouteDAO().findRoute(request.params("hash"));
 			
 			// Es wird ein Rückgabe Objekt erstellt
 			RESTResponse r = new RESTResponse();
@@ -101,7 +97,7 @@ public class RoutesREST {
 			r.setTimestamp(new Timestamp(new Date().getTime()));
 			
 			//Überprüfen, ob die Route abgerufen werden kann
-			if(HashRoute == null) {
+			if(hashRoute == null) {
 				//Es wurde keine Route gefunden
 				r.setDescription("Keine Route gefunden");
 				r.setError();
@@ -111,11 +107,7 @@ public class RoutesREST {
 				r.setDescription("Folgende Route wurde gefunden");
 				r.setSuccess();
 				
-				//Collection erstellen und HashRoute hinzufügen um Methode setData() verwenden zu können
-				Collection<Object> data = new ArrayList<Object>();
-				data.add(HashRoute);
-				
-				r.setData(data);
+				r.setData(hashRoute);
 			}
 			
 			// Log-Eintrag bei Rückgabe
