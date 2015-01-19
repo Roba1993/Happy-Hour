@@ -170,11 +170,12 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
      * @return {Boolean} `true` wenn time1 < time2
      */
     function isBeforeOverNight(time1, time2) {
-        if(time1.isAfter(time('12:00:00'))) {
-            return !time1.isBefore(time2);
-        }
-        else {
-            return time1.isBefore(time2);
-        }
-    }
+		var referenceTime = time('12:00:00');
+		if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime)) {
+			return !time1.isBefore(time2);
+		}
+		else {
+			return time1.isBefore(time2);
+		}
+	}
 }]);
