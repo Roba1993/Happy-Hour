@@ -67,11 +67,9 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.streetViewControl = false;
 
             //centerLocation setzen
-            //console.log('center: ' + centerLocation);
             mapOptions.center = centerLocation;
 
             // zoomLevel setzen
-            //console.log('zoom ' + zoomLevel);
             mapOptions.zoom = zoomLevel;
 
             // Veränderungen an der Karte zulassen/blockieren
@@ -84,21 +82,20 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.zoomControl = alterable;
 
             map = new maps.Map(element.children()[0], mapOptions);
-            console.log(map);
+            //console.log(map);
           });
 
           /**
            * Markierungen setzen
            */
           $scope.$watch('markers', function (markers) {
-            //console.log(markers);
+            var location;
 
             // for-Schleife um durch jede Location in markers zu iterieren
             _.forEach(markers, function (marker) {
-              //console.log(marker);
-              var location;
-              location = new maps.LatLng(marker.location.latitude, marker.location.longitude);
-              //console.log(location);
+              if (marker != null) {
+                location = new maps.LatLng(marker.location.latitude, marker.location.longitude);
+              }
 
               new maps.Marker({
                 map: map,
@@ -112,10 +109,9 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            */
           $scope.$watch('route', function (route) {
             if (route != null && route.timeframes.length > 2) {
-              console.log(route.timeframes);
+              //console.log(route.timeframes);
               var directionsDisplay;
               var directionsService = new maps.DirectionsService();
-              //console.log(route);
 
 
               // initialisieren
@@ -147,7 +143,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                     stopover: true
                   });
                 }
-                //console.log(waypoints);
               }
 
               var request = {
@@ -160,13 +155,14 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 
               directionsService.route(request, function (response, status) {
                 if (status === maps.DirectionsStatus.OK) {
-                  //console.log(response);
+
+                  /*
+                   * DO TRICKY STUFF
+                   * Da es keine Möglichkeit gibt InfoWindows der einzelnen Wegpunkte zu ändern,
+                   * müssen die Adressen der Wegpunkte geändert werden, da diese von der Map angezeigt werden.
+                   */
                   _.forEach(response.routes, function (r) {
-                    //console.log(r);
                     for (var i = 0; i < r.legs.length; i++) {
-                      //console.log(i);
-                      //console.log(r.legs[i]);
-                      //console.log(route.timeframes[i].bar.name);
                       r.legs[i].start_address =
                         '<b>' + route.timeframes[i].bar.name + '</b><br>' +
                         route.timeframes[i].bar.address + '<br>' +
@@ -177,7 +173,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                         route.timeframes[i + 1].bar.address + '<br>' +
                         route.timeframes[i + 1].startTime + ' - ' +
                         route.timeframes[i + 1].endTime;
-                      //console.log(r.legs[i]);
                     }
 
                     // Routenwarnungen loggen
