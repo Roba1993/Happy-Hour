@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.Location;
+import de.dhbw.hh.utils.Settings;
 
 /**
  * Diese Klasse kann dazu verwendet werden, alle Bars innerhalb eines bestimmten 
@@ -29,10 +30,19 @@ import de.dhbw.hh.models.Location;
  */
 public class H2FoursquareDAO implements FoursquareDAO{
 	
+	// Zugriff auf die allgemeinen Settings
+	private Settings settings;
+	
 	// Initialisiert einen Logger für die Fehlerausgabe
     static final Logger LOG = LoggerFactory.getLogger(H2FoursquareDAO.class);
-
-    /**
+    
+    public H2FoursquareDAO(){
+    	// Zugriff auf die allgemeinen Settings
+    	settings = new Settings();
+    	settings.loadDefault();
+    }
+    
+   /**
 	 * Diese Methode liefert gegen eine Liste von Parametern einen Array aus Bar-Objekten
 	 * zurück. Die Methode nutzt ihrerseits die private Methode {@code explore(String query)}
 	 * um Ergebnisse zu bekommen. Die Suchergebnisse können durch folgende Parameter 
@@ -47,30 +57,25 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 */
 	@Override
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius){
+		// Zu finden auf GitHub (zur Authentifizierung)
+		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
+		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
+		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
+		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
+		// GPS-Location
+		float LONGITUDE=0, LATITUDE	= 0;			
+		// Kategorie wie "bars", "food"
+		String CATEGORY				= "bar";
+		// Radius in Metern
+		int RADIUS					= 100;			//Radius in Metern
 		
-		String CLIENT_ID			= "";			//Zu finden auf GitHub (zur Authentifizierung)
-		String CLIENT_SECRET		= "";			//Zu finden auf GitHub (zur Authentifizierung)
-		String VERSION				= "";			//Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
-		float LONGITUDE=0, LATITUDE	= 0;			//GPS-Location
-		String CATEGORY				= "";			//Kategorie wie "bars", "food"
-		int RADIUS					= 0;			//Radius in Metern
-		
-		// Füllen der oben deklarierten Parameter für den Html-Request mit Standartwerten.
-		CLIENT_ID 		= "ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV";
-		CLIENT_SECRET 	= "E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX";
-		VERSION = new SimpleDateFormat("yyyyMMdd").format(new Date());	
-		LONGITUDE 	= 48.949034f;
-		LATITUDE 	= 9.431656f;
-		CATEGORY 	= "bar";
-		RADIUS 		= 100;
-		//TODO Auslagerung in Settings-Datei
-		
+		// Füllen der Parameter Longitude, Latitude und Radius mit den Übergabewerten
 		LONGITUDE = longitude;
 		LATITUDE = latitude;
 		if((int)(radius*1000) >= RADIUS)			//Minimalwert von 100 Metern!
 			RADIUS = (int)(radius*1000);
 		
-		//Fertiger Query-String für eine Foursquare-Abfrage
+		// Fertiger Query-String für eine Foursquare-Abfrage
 		String query = "https://api.foursquare.com/v2/venues/explore"+
 				"?client_id="		+CLIENT_ID+
 				"&client_secret="	+CLIENT_SECRET+
@@ -82,7 +87,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		ArrayList<Bar> bars = explore(query);
 		
 		for(int i=0;i<bars.size();i++){
-			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId(), VERSION));
+			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId()));
 		}
 		return bars;
 	}
@@ -179,14 +184,21 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	private ArrayList<OpeningTimes> getOpeningTimesByID(String id, String version){
+	private ArrayList<OpeningTimes> getOpeningTimesByID(String id){
+		// Zu finden auf GitHub (zur Authentifizierung)
+		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
+		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
+		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
+		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
+		
 		String query = "https://api.foursquare.com/v2/venues/"+id+"/"+
 				"hours"+
-				"?client_id="+"ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV"+
-				"&client_secret="+"E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX"+
-				"&v="+version;
+				"?client_id="+CLIENT_ID+
+				"&client_secret="+CLIENT_SECRET+
+				"&v="+VERSION;
 		
 		ArrayList<OpeningTimes> openingTimes = new ArrayList<OpeningTimes>();
+		
 		try{
 			URL foursquare = new URL(query);
 			HttpURLConnection connection = null;

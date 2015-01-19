@@ -32,7 +32,7 @@ public class BarsREST {
 	
 	public BarsREST(DAOFactory daoFactory) {
 		
-		H2FoursquareDAO h2FoursquareDAO = new H2FoursquareDAO();
+		H2FoursquareDAO h2FoursquareDAO = (H2FoursquareDAO) daoFactory.getFoursquareDAO();
 		HappyHourDAO happyHourDAO = daoFactory.getHappyHourDAO();
 		
 		/**
@@ -72,7 +72,6 @@ public class BarsREST {
 				for(int i=0;i<count;i++){
 					String id = rawBars.get(i).getId();
 					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHourDAO.findHappyHour(id);
-					
 					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
 					rawBars.get(i).setHappyHours(hh);
 				}
