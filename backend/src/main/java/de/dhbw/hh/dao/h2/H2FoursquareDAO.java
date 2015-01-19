@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
 import de.dhbw.hh.models.Location;
+import de.dhbw.hh.utils.Settings;
 
 /**
  * Diese Klasse kann dazu verwendet werden, alle Bars innerhalb eines bestimmten 
@@ -29,10 +30,19 @@ import de.dhbw.hh.models.Location;
  */
 public class H2FoursquareDAO implements FoursquareDAO{
 	
+	// Zugriff auf die allgemeinen Settings
+	private Settings settings;
+	
 	// Initialisiert einen Logger für die Fehlerausgabe
     static final Logger LOG = LoggerFactory.getLogger(H2FoursquareDAO.class);
-
-    /**
+    
+    public H2FoursquareDAO(){
+    	// Zugriff auf die allgemeinen Settings
+    	settings = new Settings();
+    	settings.loadDefault();
+    }
+    
+   /**
 	 * Diese Methode liefert gegen eine Liste von Parametern einen Array aus Bar-Objekten
 	 * zurück. Die Methode nutzt ihrerseits die private Methode {@code explore(String query)}
 	 * um Ergebnisse zu bekommen. Die Suchergebnisse können durch folgende Parameter 
@@ -47,30 +57,25 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 */
 	@Override
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius){
+		// Zu finden auf GitHub (zur Authentifizierung)
+		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
+		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
+		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
+		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
+		// GPS-Location
+		float LONGITUDE=0, LATITUDE	= 0;			
+		// Kategorie wie "bars", "food"
+		String CATEGORY				= "bar";
+		// Radius in Metern
+		int RADIUS					= 100;			//Radius in Metern
 		
-		String CLIENT_ID			= "";			//Zu finden auf GitHub (zur Authentifizierung)
-		String CLIENT_SECRET		= "";			//Zu finden auf GitHub (zur Authentifizierung)
-		String VERSION				= "";			//Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
-		float LONGITUDE=0, LATITUDE	= 0;			//GPS-Location
-		String CATEGORY				= "";			//Kategorie wie "bars", "food"
-		int RADIUS					= 0;			//Radius in Metern
-		
-		// Füllen der oben deklarierten Parameter für den Html-Request mit Standartwerten.
-		CLIENT_ID 		= "ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV";
-		CLIENT_SECRET 	= "E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX";
-		VERSION = new SimpleDateFormat("yyyyMMdd").format(new Date());	
-		LONGITUDE 	= 48.949034f;
-		LATITUDE 	= 9.431656f;
-		CATEGORY 	= "bar";
-		RADIUS 		= 100;
-		//TODO Auslagerung in Settings-Datei
-		
+		// Füllen der Parameter Longitude, Latitude und Radius mit den Übergabewerten
 		LONGITUDE = longitude;
 		LATITUDE = latitude;
 		if((int)(radius*1000) >= RADIUS)			//Minimalwert von 100 Metern!
 			RADIUS = (int)(radius*1000);
 		
-		//Fertiger Query-String für eine Foursquare-Abfrage
+		// Fertiger Query-String für eine Foursquare-Abfrage
 		String query = "https://api.foursquare.com/v2/venues/explore"+
 				"?client_id="		+CLIENT_ID+
 				"&client_secret="	+CLIENT_SECRET+
@@ -82,7 +87,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		ArrayList<Bar> bars = explore(query);
 		
 		for(int i=0;i<bars.size();i++){
-			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId(), VERSION));
+			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId()));
 		}
 		return bars;
 	}
@@ -179,14 +184,21 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	private ArrayList<OpeningTimes> getOpeningTimesByID(String id, String version){
+	private ArrayList<OpeningTimes> getOpeningTimesByID(String id){
+		// Zu finden auf GitHub (zur Authentifizierung)
+		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
+		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
+		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
+		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
+		
 		String query = "https://api.foursquare.com/v2/venues/"+id+"/"+
 				"hours"+
-				"?client_id="+"ZNZQPW20YC1N1VERBVBAVWMN1YZX4Z0OW0IEUYBSOYO5HXTV"+
-				"&client_secret="+"E5IUW33BRPBBVWO1JP4FVJ2Z4DBPLVTZVPX22QEOLNE3ZTFX"+
-				"&v="+version;
+				"?client_id="+CLIENT_ID+
+				"&client_secret="+CLIENT_SECRET+
+				"&v="+VERSION;
 		
 		ArrayList<OpeningTimes> openingTimes = new ArrayList<OpeningTimes>();
+		
 		try{
 			URL foursquare = new URL(query);
 			HttpURLConnection connection = null;
@@ -235,19 +247,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					
 					OpeningTimes ot = new OpeningTimes();
 					ot.setBarID(id);
-					ot.setStart(new Time(sH, sM, 0));
-					ot.setEnd(new Time(eH, eM, 0));
-					for(int j=0;j<days.length;j++){
-						switch(days[j]){
-						case 1: ot.setMonday(true);break;
-						case 2: ot.setTuesday(true);break;
-						case 3: ot.setWednesday(true);break;
-						case 4: ot.setThursday(true);break;
-						case 5: ot.setFriday(true);break;
-						case 6: ot.setSaturday(true);break;
-						case 7: ot.setSunday(true);break;
-						}
-					}
+					ot.setStartTime(new Time(sH, sM, 0));
+					ot.setEndTime(new Time(eH, eM, 0));
+					ot.setDays(days);
 					
 					openingTimes.add(ot);
 				}
@@ -267,15 +269,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	public class OpeningTimes{
 		
 		private String 	barID;
-		private Time 	start;
-		private Time 	end;
-		private boolean monday;
-		private boolean tuesday;
-		private boolean wednesday;
-		private boolean thursday;
-		private boolean friday;
-		private boolean saturday;
-		private boolean sunday;
+		private Time 	startTime;
+		private Time 	endTime;
+		private int[] 	days;
 		
 		public String getBarID() {
 			return barID;
@@ -285,82 +281,36 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			this.barID = barID;
 		}
 		
-		public Time getStart() {
-			return start;
+		public Time getStartTime() {
+			return startTime;
 		}
-		
-		public void setStart(Time start) {
-			this.start = start;
+
+		public void setStartTime(Time startTime) {
+			this.startTime = startTime;
 		}
-		
-		public Time getEnd() {
-			return end;
+
+		public Time getEndTime() {
+			return endTime;
 		}
-		
-		public void setEnd(Time end) {
-			this.end = end;
+
+		public void setEndTime(Time endTime) {
+			this.endTime = endTime;
 		}
-		
-		public boolean isMonday() {
-			return monday;
+
+		public int[] getDays() {
+			return days;
 		}
-		
-		public void setMonday(boolean monday) {
-			this.monday = monday;
-		}
-		
-		public boolean isTuesday() {
-			return tuesday;
-		}
-		
-		public void setTuesday(boolean tuesday) {
-			this.tuesday = tuesday;
-		}
-		
-		public boolean isWednesday() {
-			return wednesday;
-		}
-		
-		public void setWednesday(boolean wednesday) {
-			this.wednesday = wednesday;
-		}
-		
-		public boolean isThursday() {
-			return thursday;
-		}
-		
-		public void setThursday(boolean thursday) {
-			this.thursday = thursday;
-		}
-		
-		public boolean isFriday() {
-			return friday;
-		}
-		
-		public void setFriday(boolean friday) {
-			this.friday = friday;
-		}
-		
-		public boolean isSaturday() {
-			return saturday;
-		}
-		
-		public void setSaturday(boolean saturday) {
-			this.saturday = saturday;
-		}
-		
-		public boolean isSunday() {
-			return sunday;
-		}
-		
-		public void setSunday(boolean sunday) {
-			this.sunday = sunday;
+
+		public void setDays(int[] days){
+			this.days = days;
 		}
 		
 		public String toString(){
-			return "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+start+"\nEnde: "+end+"\nMontags: "+monday+
-					"\nDienstags: "+tuesday+"\nMittwochs: "+wednesday+"\nDonnerstags: "+thursday+"\nFreitags: "+
-					friday+"\nSamstags: "+saturday+"\nSonntags: "+sunday+"\n}";
+			String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
+			for(int i=0;i<days.length;i++){
+				result += "\n"+days[i];
+			}
+			return result;
 		}
 	}
 }

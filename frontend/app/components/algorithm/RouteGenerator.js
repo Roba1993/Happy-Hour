@@ -150,7 +150,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 				}
 			}
 
-			return rating/distance;
+			return (rating/distance) * (1+happyHourOverlap);
 		}
 
 		/**
