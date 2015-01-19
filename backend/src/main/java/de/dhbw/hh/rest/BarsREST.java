@@ -2,6 +2,7 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +16,8 @@ import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.h2.H2FoursquareDAO;
 import de.dhbw.hh.models.Bar;
-import de.dhbw.hh.models.HappyHour;import de.dhbw.hh.models.RESTResponse;
+import de.dhbw.hh.models.HappyHour;
+import de.dhbw.hh.models.RESTResponse;
 
 /**
  * Diese Klasse stellt die Methoden für die REST Schnittstelle für 
@@ -71,9 +73,12 @@ public class BarsREST {
 				int count = rawBars.size();
 				for(int i=0;i<count;i++){
 					String id = rawBars.get(i).getId();
-					ArrayList<HappyHour> hh = (ArrayList<HappyHour>) happyHourDAO.findHappyHour(id);
+					ArrayList<de.dhbw.hh.models.HappyHour> hh = (ArrayList<de.dhbw.hh.models.HappyHour>) happyHourDAO.findHappyHour(id);
+					// Transformiert die Happy-Hours der Datenbank in Happy-Hour-Objekte, die den Schnittstellendefinitionen
+					// zwischen Frontend und Backend entsprechen
+					ArrayList<HappyHour> happyHours = transformHappyHours(hh);
 					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
-					rawBars.get(i).setHappyHours(hh);
+					rawBars.get(i).setHappyHours(happyHours);
 				}
 				/*
 				 * Der folgende Methoden-Aufruf filtert diejenigen Bars aus den Suchergebnissen aus, die am 
@@ -120,14 +125,11 @@ public class BarsREST {
 			for(int j=0;j<size;j++){
 				HappyHour hh = hhList.get(j);
 				// Abgleich des aktuellen Wochentags mit den Einträgen aus der Happy-Hour-Liste
-				switch(day){
-					case 1: if(hh.isMonday()) b = true; break;
-					case 2: if(hh.isTuesday()) b = true; break;
-					case 3: if(hh.isWednesday()) b = true; break;
-					case 4: if(hh.isThursday()) b = true; break;
-					case 5: if(hh.isFriday()) b = true; break;
-					case 6: if(hh.isSaturday()) b = true; break;
-					case 7: if(hh.isSunday()) b = true; break;
+				for(int k=0;k<hh.days.length;k++){
+					if(hh.days[k] == day){
+						b = true;
+						continue;
+					}
 				}
 				if(b)
 					continue;
@@ -152,5 +154,99 @@ public class BarsREST {
 	private boolean isAlreadyInCache(float lng, float lat, float rad){
 		// Wird zu einem späteren Zeitpunkt implementiert
 		return false;
+	}
+	
+	/**
+	 * Dokumentation folg
+	 *
+	 */
+	private ArrayList<HappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh){
+		ArrayList<HappyHour> result = new ArrayList<HappyHour>();
+		
+		for(int i=0;i<hh.size();i++){
+			HappyHour hour = new HappyHour();
+			de.dhbw.hh.models.HappyHour item = hh.get(i);
+			hour.setBarID(item.getBarID());
+			hour.setStartTime(item.getStart());
+			hour.setEndTime(item.getEnd());
+			
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			if(item.isMonday() == true)
+				al.add(1);
+			if(item.isTuesday() == true)
+				al.add(2);
+			if(item.isWednesday() == true)
+				al.add(3);
+			if(item.isThursday() == true)
+				al.add(4);
+			if(item.isFriday() == true)
+				al.add(5);
+			if(item.isSaturday() == true)
+				al.add(6);
+			if(item.isSunday() == true)
+				al.add(7);
+			int[] days = new int[al.size()];
+			for(int j=0;j<al.size();j++){
+				days[j] = al.get(j);
+			}
+			
+			hour.setDays(days);
+			result.add(hour);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Dokumentation folgt
+	 * @author Tobias Häußermann
+	 *
+	 */
+	public class HappyHour{
+		
+		private String 	barID;
+		private Time 	startTime;
+		private Time 	endTime;
+		private int[] 	days;
+		
+		public String getBarID() {
+			return barID;
+		}
+		
+		public void setBarID(String barID) {
+			this.barID = barID;
+		}
+		
+		public Time getStartTime() {
+			return startTime;
+		}
+
+		public void setStartTime(Time startTime) {
+			this.startTime = startTime;
+		}
+
+		public Time getEndTime() {
+			return endTime;
+		}
+
+		public void setEndTime(Time endTime) {
+			this.endTime = endTime;
+		}
+
+		public int[] getDays() {
+			return days;
+		}
+
+		public void setDays(int[] days){
+			this.days = days;
+		}
+		
+		public String toString(){
+			String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
+			for(int i=0;i<days.length;i++){
+				result += "\n"+days[i];
+			}
+			return result;
+		}
 	}
 }

@@ -261,6 +261,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		return openingTimes;
 	}
 	
+	
 	/**
 	 * Dokumentation folgt
 	 * @author Tobias Häußermann
