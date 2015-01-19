@@ -144,7 +144,7 @@
 		<section id="theatre-recentroute" class="grid">			
 			<ul ng-init="frameClicked" class="e__list-big">
 				<li ng-repeat="timeframe in route.timeframes" ng-class="{is__expanded : $parent.openFrameIndex === $index, is__backside : toDelete, is__switchside : timeframe.bar === null}" class="e__list-big-element clearfix">
-					<div class="e__list-big-element-frontside e__barcard" ng-click="frameClicked($index)" ng-swipe-left="toDelete = true; frameClicked(-1)" style="background-image: url('images/bars/1.jpg')">
+					<div class="e__list-big-element-frontside e__barcard" ng-click="frameClicked($index)" ng-swipe-left="toDelete = true; frameClicked(-1)" style="background-image: url('images/bars/{{$index+1}}.jpg')">
 						<div class="e__list-big-element-frontside-head e__barcard-head grid">
 							<div class="col-7"><a ng-click="toDelete = true" class="when__expanded__show i__close"></a><h3><span class="when__expanded__hidden">{{$index+1}}. </span>{{timeframe.bar.name}}</h3></div>
 							<span class="col-5 align-right timeslot">{{timeframe.startTime}} - {{timeframe.endTime}}</span>
