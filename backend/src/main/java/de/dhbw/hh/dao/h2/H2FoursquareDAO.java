@@ -3,7 +3,6 @@ package de.dhbw.hh.dao.h2;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -183,7 +182,6 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @param version
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private ArrayList<OpeningTimes> getOpeningTimesByID(String id){
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
@@ -247,8 +245,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					
 					OpeningTimes ot = new OpeningTimes();
 					ot.setBarID(id);
-					ot.setStartTime(new Time(sH, sM, 0));
-					ot.setEndTime(new Time(eH, eM, 0));
+					ot.setStartTime(sH+":"+sM+":00");
+					ot.setEndTime(eH+":"+eM+":00");
 					ot.setDays(days);
 					
 					openingTimes.add(ot);
@@ -270,8 +268,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	public class OpeningTimes{
 		
 		private String 	barID;
-		private Time 	startTime;
-		private Time 	endTime;
+		private String 	startTime;
+		private String 	endTime;
 		private int[] 	days;
 		
 		public String getBarID() {
@@ -282,19 +280,19 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			this.barID = barID;
 		}
 		
-		public Time getStartTime() {
+		public String getStartTime() {
 			return startTime;
 		}
 
-		public void setStartTime(Time startTime) {
+		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
 
-		public Time getEndTime() {
+		public String getEndTime() {
 			return endTime;
 		}
 
-		public void setEndTime(Time endTime) {
+		public void setEndTime(String endTime) {
 			this.endTime = endTime;
 		}
 

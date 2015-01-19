@@ -2,7 +2,6 @@ package de.dhbw.hh.rest;
 
 import static spark.Spark.get;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,7 +15,6 @@ import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.h2.H2FoursquareDAO;
 import de.dhbw.hh.models.Bar;
-import de.dhbw.hh.models.HappyHour;
 import de.dhbw.hh.models.RESTResponse;
 
 /**
@@ -167,8 +165,10 @@ public class BarsREST {
 			HappyHour hour = new HappyHour();
 			de.dhbw.hh.models.HappyHour item = hh.get(i);
 			hour.setBarID(item.getBarID());
-			hour.setStartTime(item.getStart());
-			hour.setEndTime(item.getEnd());
+			hour.setStartTime(item.getStart().toString());
+			hour.setEndTime(item.getEnd().toString());
+			
+//			System.out.println("################\n#############\n"+item.getStart().toString());
 			
 			ArrayList<Integer> al = new ArrayList<Integer>();
 			if(item.isMonday() == true)
@@ -205,8 +205,8 @@ public class BarsREST {
 	public class HappyHour{
 		
 		private String 	barID;
-		private Time 	startTime;
-		private Time 	endTime;
+		private String 	startTime;
+		private String 	endTime;
 		private int[] 	days;
 		
 		public String getBarID() {
@@ -217,19 +217,19 @@ public class BarsREST {
 			this.barID = barID;
 		}
 		
-		public Time getStartTime() {
+		public String getStartTime() {
 			return startTime;
 		}
 
-		public void setStartTime(Time startTime) {
+		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
 
-		public Time getEndTime() {
+		public String getEndTime() {
 			return endTime;
 		}
 
-		public void setEndTime(Time endTime) {
+		public void setEndTime(String endTime) {
 			this.endTime = endTime;
 		}
 
