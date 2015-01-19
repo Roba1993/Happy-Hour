@@ -82,7 +82,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.zoomControl = alterable;
 
             map = new maps.Map(element.children()[0], mapOptions);
-            console.log(map);
+            //console.log(map);
           });
 
           /**
