@@ -107,7 +107,7 @@ public class RoutesREST {
 				r.setDescription("Folgende Route wurde gefunden");
 				r.setSuccess();
 				
-				r.setData(hashRoute);
+				r.setData(hashRoute.getData());
 			}
 			
 			// Log-Eintrag bei Rückgabe
