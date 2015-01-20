@@ -62,15 +62,15 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 				$scope.route.timeframes = newTimeframes;
 			}
-		}
 
-		// Alternative Bars für alle Slots abfragen
-		$scope.bars = [];
-		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
-			_.forEach($scope.route.timeframes, function() {
-				$scope.bars.push(bars);
+			// Alternative Bars für alle Slots abfragen
+			$scope.bars = [];
+			BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
+				_.forEach($scope.route.timeframes, function() {
+					$scope.bars.push(bars);
+				});
 			});
-		});
+		}
 	});
 
 	$scope.$watch('barChosen', function() {
@@ -149,10 +149,9 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		});
 	};
 
-	// start und endTime defaults binden
-	if($scope.route.options.startTime !== undefined && $scope.route.options.endTime !== undefined) {
-		$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
-	}
+	// startTime und endTime an den Slider binden
+	$scope.routeTime = [$scope.route.options.startTime, $scope.route.options.endTime];
+	
 	// Ausgabe des Sliders in das Options Format umwandeln
 	$scope.$watch('routeTime', function(routeTime) {
 		$scope.route.options.startTime = routeTime[0];

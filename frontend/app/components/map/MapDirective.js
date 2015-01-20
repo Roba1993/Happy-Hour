@@ -83,6 +83,11 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
 
             map = new maps.Map(element.children()[0], mapOptions);
             //console.log(map);
+            //
+            element.children().eq(0).on('resize', function() {
+              console.log('FEUER');
+            });
+
           });
 
           /**
