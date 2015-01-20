@@ -114,7 +114,7 @@ public class RoutesREST {
 				// change to gson string to return the route data in the right format
 				out = gson.toJson(r);
 				out = out.substring(0, out.length()-1);
-				out += ", \"data\": \"" + hashRoute.getData() + "\"}";
+				out += ", \"data\": " + hashRoute.getData() + "}";
 			}
 			
 			// Log-Eintrag bei Rückgabe
