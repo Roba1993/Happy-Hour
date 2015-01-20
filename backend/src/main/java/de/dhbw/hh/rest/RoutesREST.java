@@ -113,7 +113,7 @@ public class RoutesREST {
 
 				out = gson.toJson(r);
 				out = out.substring(0, out.length()-1);
-				out += " \"data\": \"" + hashRoute.getData() + "\"}";
+				out += ", \"data\": \"" + hashRoute.getData() + "\"}";
 			}
 			
 			// Log-Eintrag bei Rückgabe
