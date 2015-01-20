@@ -95,19 +95,26 @@ public class RoutesREST {
 			// Das Rückgabeobjekt wird befüllt
 			r.setName(request.queryString());
 			r.setTimestamp(new Timestamp(new Date().getTime()));
+
+			String out;
 			
 			//Überprüfen, ob die Route abgerufen werden kann
 			if(hashRoute == null) {
 				//Es wurde keine Route gefunden
 				r.setDescription("Keine Route gefunden");
 				r.setError();
-				r.setData(null);				
+				r.setData(null);
+
+				out = gson.toJson(r);
 			} else {
 				//Route wurde gefunden
 				r.setDescription("Folgende Route wurde gefunden");
 				r.setSuccess();
-				
-				r.setData(hashRoute.getData());
+
+				// change to gson string to return the route data in the right format
+				out = gson.toJson(r);
+				out = out.substring(0, out.length()-1);
+				out += ", \"data\": \"" + hashRoute.getData() + "\"}";
 			}
 			
 			// Log-Eintrag bei Rückgabe
@@ -115,7 +122,7 @@ public class RoutesREST {
 			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");
-			return gson.toJson(r);
+			return out;
 		});
 	}
 	
