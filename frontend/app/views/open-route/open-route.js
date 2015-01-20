@@ -11,8 +11,6 @@ angular.module('happyHour.views.openRoute', ['ngRoute'])
 function($scope, $routeParams, AppStatusPersistenceService, $location, BackendService) {
 	BackendService.getRoute($routeParams.hash).then(function(route) {
 		// TODO: an korrekte Schnittstelle anpassen
-		console.log(route);
-		route = JSON.parse(route);
 		AppStatusPersistenceService.setRoute(route);
 		$location.path('/currentRoute');
 	});
