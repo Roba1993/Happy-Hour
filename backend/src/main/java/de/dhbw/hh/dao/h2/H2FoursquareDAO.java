@@ -243,10 +243,23 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					int eH = Integer.parseInt(endString.substring(0,2));
 					int eM = Integer.parseInt(endString.substring(2,4));
 					
+					String shs = ""+sH;
+					String sms = ""+sM;
+					String ehs = ""+eH;
+					String ems = ""+eM;
+					if(shs.length()<2)
+						shs = "0"+shs;
+					if(sms.length()<2)
+						sms = "0"+sms;
+					if(ehs.length()<2)
+						ehs = "0"+ehs;
+					if(ems.length()<2)
+						ems = "0"+ems;
+					
 					OpeningTimes ot = new OpeningTimes();
 					ot.setBarID(id);
-					ot.setStartTime(sH+":"+sM+":00");
-					ot.setEndTime(eH+":"+eM+":00");
+					ot.setStartTime(shs+":"+sms);
+					ot.setEndTime(ehs+":"+ems);
 					ot.setDays(days);
 					
 					openingTimes.add(ot);

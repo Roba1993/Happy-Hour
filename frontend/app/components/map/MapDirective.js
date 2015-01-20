@@ -73,7 +73,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.zoom = zoomLevel;
 
             // Veränderungen an der Karte zulassen/blockieren
-            //console.log('alterable: ' + alterable);
             mapOptions.draggable = alterable;
             mapOptions.panControl = alterable;
             mapOptions.rotateControl = alterable;
@@ -82,12 +81,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
             mapOptions.zoomControl = alterable;
 
             map = new maps.Map(element.children()[0], mapOptions);
-            //console.log(map);
-            //
-            element.children().eq(0).on('resize', function() {
-              console.log('FEUER');
-            });
-
           });
 
           /**
@@ -113,7 +106,7 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
            * Route setzen
            */
           $scope.$watch('route', function (route) {
-            if (route != null && route.timeframes.length > 2) {
+            if (route != null && route.timeframes.length >= 2) {
               //console.log(route.timeframes);
               var directionsDisplay;
               var directionsService = new maps.DirectionsService();
@@ -138,7 +131,6 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
               if (route.timeframes.length > 2) {
                 //console.log("Route größer als 2 Bars, speichere Zwischenziele");
                 for (var i = 1; i < route.timeframes.length - 1; i++) {
-                  //console.log(i);
                   var waypointLocation = new maps.LatLng(
                     route.timeframes[i].bar.location.latitude,
                     route.timeframes[i].bar.location.longitude
