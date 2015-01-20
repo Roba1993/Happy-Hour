@@ -12,7 +12,7 @@ function($scope, $routeParams, AppStatusPersistenceService, $location, BackendSe
 	BackendService.getRoute($routeParams.hash).then(function(route) {
 		// TODO: an korrekte Schnittstelle anpassen
 		console.log(route);
-		route = JSON.parse(route.data);
+		route = JSON.parse(route);
 		AppStatusPersistenceService.setRoute(route);
 		$location.path('/currentRoute');
 	});
