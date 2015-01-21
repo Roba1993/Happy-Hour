@@ -136,7 +136,7 @@ public class HappyHourREST {
 				restResponse.setName(request.queryString());
 				restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 				if (successfull) {
-					restResponse.setDescription("HapyHour erfolgreich aus DB gelöscht");
+					restResponse.setDescription("HappyHour erfolgreich aus DB gelöscht");
 					restResponse.setSuccess();
 				} else {
 					restResponse.setDescription("Es gab einen Fehler beim Löschen der HappyHour aus der DB");
