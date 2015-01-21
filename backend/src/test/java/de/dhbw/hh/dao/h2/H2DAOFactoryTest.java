@@ -45,4 +45,5 @@ public class H2DAOFactoryTest {
     public void testGetTestrunDAO() throws Exception {
         assertNotNull(H2DAOFactory.getDaoFactory(DAOFactory.H2, properties).getBarReportDAO());
     }
+    
 }

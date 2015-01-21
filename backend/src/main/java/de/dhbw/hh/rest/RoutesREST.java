@@ -3,9 +3,7 @@ package de.dhbw.hh.rest;
 import static spark.Spark.post;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -39,6 +37,7 @@ public class RoutesREST {
 		 * @author Michael
 		 */
 		post("/routes", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /routes
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 			// Neue Route erstellen
 			Route route = new Route();
@@ -73,10 +72,11 @@ public class RoutesREST {
 				restResponse.setDescription("Fehler beim Hinzufügen der Route");
 				restResponse.setError();
 			}
+			// Log-Eintrag bei Rückgabe
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			
 			response.type("application/json");
 			return gson.toJson(restResponse);
-
 		});
 
 		/**
@@ -85,6 +85,7 @@ public class RoutesREST {
  		* @author Tabea
  		*/
 		get("/routes/:hash", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /routes/:hash
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());			
 			
 			// Routen aus der Datenbank holen

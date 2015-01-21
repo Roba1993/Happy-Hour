@@ -22,6 +22,7 @@ import static spark.Spark.*;
  */
 public class Spark {
 
+	// Initialisiert einen Logger für die Fehlerausgabe
 	static final Logger LOG = LoggerFactory.getLogger(Spark.class);
 
 	/**
@@ -60,4 +61,5 @@ public class Spark {
 		stop();
 		LOG.info("Spark wurde beendet");
 	}
+	
 }

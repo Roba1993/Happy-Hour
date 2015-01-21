@@ -2,8 +2,6 @@ package de.dhbw.hh.dao;
 
 import java.util.ArrayList;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-
 import de.dhbw.hh.models.Bar;
 
 /**
