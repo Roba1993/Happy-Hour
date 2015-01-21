@@ -39,6 +39,12 @@ public class H2HappyHourDAO implements HappyHourDAO {
         this.cpds = cpds;
     }
 
+    /**
+     * Diese Funktion fügt eine HappyHour in die Datenbank hinzu
+     *
+     * @param HappyHour Das Happy Hour Objekt wird übergeben
+     * @return True bei Erfolg, andernfalls false.
+     */
 	@Override
 	public boolean insertHappyHour(HappyHour happyHour) {
 		String sql = "INSERT INTO happyHour "
@@ -115,6 +121,12 @@ public class H2HappyHourDAO implements HappyHourDAO {
         return false;
 }
 
+	/**
+     * Diese Funktion findet eine HappyHour in der Datenbank anhand seiner ID.
+     *
+     * @param id Die BarID anhand die HappyHour zugeordnet wird.
+     * @return happyHourArray bei Erfolg, andernfalls eine leere ArrayList.
+     */
 	@Override
 	public Collection<HappyHour> findHappyHour(String barID) {
 //		System.out.println("Start findhappyhour");
