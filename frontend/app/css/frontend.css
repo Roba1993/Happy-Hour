@@ -19,5 +19,5 @@
 }
 
 .e__slider-stage {
-    transition:left 0.2s;
+    transition:transform 0.2s;
 }
