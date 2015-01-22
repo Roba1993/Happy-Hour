@@ -20,7 +20,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	$scope.$watch(function() {
 		// String-Version des Objekts watchen um Deep-Watching zu vermeiden
 		return JSON.stringify($scope.route);
-	}, function(route) {
+	}, function() {
 		AppStatusPersistenceService.setRoute($scope.route);
 		console.log($scope.route);
 	});
