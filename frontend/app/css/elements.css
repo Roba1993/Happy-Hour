@@ -447,8 +447,8 @@
 .e__rating {
     height: 25px;
 }
-.e__rating >[class^="i__euro"],
-.e__rating >[class^="i__star"] {
+.e__rating [class^="i__euro"],
+.e__rating [class^="i__star"] {
     margin: 5px 2px;
 }
 .e__rating-description {

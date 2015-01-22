@@ -17,10 +17,12 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	$scope.route = AppStatusPersistenceService.getRoute();
 
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
-	$scope.$watch('route', function(route) {
-		AppStatusPersistenceService.setRoute(route);
-		console.log(route);
-	}, true);
+	$scope.$watch(function() {
+		return JSON.stringify($scope.route);
+	}, function(route) {
+		AppStatusPersistenceService.setRoute($scope.route);
+		console.log($scope.route);
+	});
 
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {
