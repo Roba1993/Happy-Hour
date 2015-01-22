@@ -18,6 +18,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	// Die Route im AppStatus bei jedem Ändern des Routenobjekts aktualisieren
 	$scope.$watch(function() {
+		// String-Version des Objekts watchen um Deep-Watching zu vermeiden
 		return JSON.stringify($scope.route);
 	}, function(route) {
 		AppStatusPersistenceService.setRoute($scope.route);
