@@ -300,6 +300,7 @@
     float: left;
     box-shadow: 0px 5px 16px 2px #666;
     max-height: 155px;
+    width:80vw;
 }
 .e__slider-stage-element .e__barcard {
     padding-top: 10px;
@@ -447,8 +448,8 @@
 .e__rating {
     height: 25px;
 }
-.e__rating >[class^="i__euro"],
-.e__rating >[class^="i__star"] {
+.e__rating [class^="i__euro"],
+.e__rating [class^="i__star"] {
     margin: 5px 2px;
 }
 .e__rating-description {

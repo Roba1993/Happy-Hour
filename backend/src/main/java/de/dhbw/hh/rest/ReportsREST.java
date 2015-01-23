@@ -25,10 +25,16 @@ import de.dhbw.hh.models.RESTResponse;
  */
 public class ReportsREST {
 
+	// Initialisiert einen Logger für die Fehlerausgabe
 	static final Logger LOG = LoggerFactory.getLogger(ReportsREST.class);
 
+	// Erstellt ein Gson Objekt für die Rückgabe
 	private Gson gson = new Gson();
 
+	/**
+	 * Diese Funktion ist ein Konstruktor, um REST Schnittstellen für die Reports zu definieren
+	 * @param daoFactory
+	 */
 	public ReportsREST(DAOFactory daoFactory) {
 		
 		/**
@@ -37,6 +43,7 @@ public class ReportsREST {
 		 * @author Jonas
 		 */
 		get("/bars/reports", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /bars/reports
 			LOG.debug("HTTP-GET Anfrage eingetroffen: " + request.queryString());
 
 			// Holt alle reporteten Bars aus der Datenbank zurück
@@ -74,6 +81,7 @@ public class ReportsREST {
 		 * @author Jonas
 		 */
 		post("/bars/:barID/reports", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /bars/:barID/reports
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
 
 			// Schreibe Anfrageparameter in neues BarReport Objekt
@@ -100,7 +108,8 @@ public class ReportsREST {
 				restResponse.setError();
 			}
 			restResponse.setData(null);
-
+			
+			// Log-Eintrag bei Rückgabe
 			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
@@ -112,6 +121,7 @@ public class ReportsREST {
 		 * @author Jonas
 		 */
 		delete("/bars/:barID/report", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /bars/:barID/report
 			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
 
 			// Lösche alle BarReports mit zugehörigen BarID
@@ -134,6 +144,7 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			// Log-Eintrag bei Rückgabe
 			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
@@ -145,6 +156,7 @@ public class ReportsREST {
 		 * @author Tabea
 		 */
 		delete("/report/:id", "application/json", (request, response) -> {
+			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /report/:id
 			LOG.debug("HTTP-DELETE Anfrage eingetroffen: " + request.queryString());
 			
 			// Lösche den BarReport mit der jeweiligen ID
@@ -167,11 +179,11 @@ public class ReportsREST {
 			}
 			restResponse.setData(null);
 			
+			// Log-Eintrag bei Rückgabe
 			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
-
 	}
 	
 }

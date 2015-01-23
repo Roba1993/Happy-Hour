@@ -9,6 +9,13 @@ angular.module('happyHour.views.startScreen', ['ngRoute'])
 
 .controller('startScreenController', ['$scope', 'AppStatusPersistenceService', '$location', 'BackendService', 'RouteGeneratorService',
 function($scope, AppStatusPersistenceService, $location, BackendService, RouteGeneratorService) {
+	
+	// Heutiger Wochentag setzen (JS hat Sonntag intern auf 0, App auf 7)
+	var weekdayToday = new Date().getDay();
+	if(weekdayToday === 0) {
+		weekdayToday = 7;
+	}
+
 	// Routenstandardwerte
 	var routeOptions = {
 		radius: 2.5,
@@ -16,7 +23,7 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 		startTime: '18:00',
 		endTime: '23:00',
 		stayTime: 1,
-		weekday: 5
+		weekday: weekdayToday
 	};
 
 	$scope.buttonClicked = function() {

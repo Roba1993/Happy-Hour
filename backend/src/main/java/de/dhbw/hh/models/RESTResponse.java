@@ -1,7 +1,6 @@
 package de.dhbw.hh.models;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 
 /**
  * Datenklasse für REST Antwort auf HTTP Anfragen.

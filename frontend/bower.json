@@ -14,7 +14,7 @@
     "cryptojslib": "~3.1.2",
     "time-js": "markusthoemmes/timejs#master",
     "lodash": "~2.4.1",
-    "ionrangeslider": "~2.0.2",
+    "ionrangeslider": "2.0.x",
     "iNoBounce": "lazd/iNoBounce",
     "angular-touch": "~1.2.x"
   }

@@ -29,4 +29,5 @@ public class LoggingConfiguration {
         ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
         root.setLevel(Level.toLevel(logLevel, Level.INFO));
     }
+    
 }

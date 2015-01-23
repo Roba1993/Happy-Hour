@@ -110,8 +110,10 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 			var rating = bar.rating;
 			var happyHourOverlap = 0;
 
-			// TODO nicht vorhandenes Rating beachten
-			// TODO timeframe/happyHour mit einbeziehen
+			// wenn das Rating nicht vorhanden ist, auf festen Durchschnitt setzen
+			if(rating === -1) {
+				rating = 4;
+			}
 			
 			// passende HappyHour finden
 			var happyHour = null;
@@ -150,7 +152,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 				}
 			}
 
-			return (rating/distance) * (1+happyHourOverlap);
+			return (rating*100/Math.pow(distance, 2)) * (1+happyHourOverlap);
 		}
 
 		/**

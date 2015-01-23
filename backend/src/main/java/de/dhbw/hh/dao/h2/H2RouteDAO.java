@@ -40,6 +40,7 @@ public class H2RouteDAO implements RouteDAO {
 	// Im Folgenden kommen die einzelnen Datenbankabfragen für die Route Klasse
     
     /**
+     * Diese Funktion fügt eine Route in die Datenbank hinzu
      * @author Michael
      */
 	@Override
@@ -150,14 +151,12 @@ public class H2RouteDAO implements RouteDAO {
                     route.setTop(resultSet.getBoolean("top"));
                     routes.add(route);
                 }
-
                 // Gibt die Collection zurück
                 return routes;
             }  
         } catch (SQLException e) {
             log.error(e.getMessage());
-        }
-        
+        }       
         // Gibt die leere Collection zurück
         return routes;
     }
