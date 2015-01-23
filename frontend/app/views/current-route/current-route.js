@@ -25,54 +25,74 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		console.log($scope.route);
 	});
 
+	var lastOptions = {};
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {
+		// Sidebar wurde geschlossen
 		if(!$scope.isSidebarOpen) {
-			// Wird nur ausgefürt, wenn sich wirklich etwas geändert hat (nicht beim initialisieren)
+			// Wird nur ausgeführt, wenn sich am Status der Sidebar wirklich etwas verändert hat
 			if(newValue !== oldValue) {
-				// Timeframes anpassen
-				var startTime = time($scope.route.options.startTime);
-				var endTime = time($scope.route.options.endTime);
-				var newTimeframes = [];
+				// Wenn sich an der Routenzeit was geändert hat, Timeframes anpassen
+				if(
+					lastOptions.startTime !== $scope.route.options.startTime ||
+					lastOptions.endTime !== $scope.route.options.endTime ||
+					lastOptions.stayTime !== $scope.route.options.stayTime
+				) {
+					var startTime = time($scope.route.options.startTime);
+					var endTime = time($scope.route.options.endTime);
+					var newTimeframes = [];
 
-				// Neues Timeframe-Array erstellen
-				while(isBeforeOverNight(startTime, endTime)) {
-					newTimeframes.push({
-						startTime: startTime.toString(),
-						endTime: startTime.add($scope.route.options.stayTime, 'hours').toString(),
-						bar: null
+					// Neues Timeframe-Array erstellen
+					while(isBeforeOverNight(startTime, endTime)) {
+						newTimeframes.push({
+							startTime: startTime.toString(),
+							endTime: startTime.add($scope.route.options.stayTime, 'hours').toString(),
+							bar: null
+						});
+					}
+
+					// Neue Timeframes mit alten Timeframes abgleichen und wenn passend übertragen
+					_.forEach(newTimeframes, function(timeframe) {
+						var newStartTime = time(timeframe.startTime);
+						var newEndTime = time(timeframe.endTime);
+						_.forEach($scope.route.timeframes, function(oldTimeframe) {
+							var oldStartTime = time(oldTimeframe.startTime);
+							var oldEndTime = time(oldTimeframe.endTime);
+
+							// Wenn sich die Zeiträume überschneiden Bar übernehmen
+							if(
+								newStartTime.isBefore(oldStartTime) && newEndTime.isAfter(oldStartTime) ||
+								newEndTime.isAfter(oldStartTime) && newStartTime.isBefore(oldEndTime) ||
+								newStartTime.isSame(oldStartTime) || newEndTime.isSame(oldEndTime)
+							) {
+								timeframe.bar = oldTimeframe.bar;
+							}
+						});
 					});
+
+					$scope.route.timeframes = newTimeframes;
 				}
-
-				// Neue Timeframes mit alten Timeframes abgleichen und wenn passend übertragen
-				_.forEach(newTimeframes, function(timeframe) {
-					var newStartTime = time(timeframe.startTime);
-					var newEndTime = time(timeframe.endTime);
-					_.forEach($scope.route.timeframes, function(oldTimeframe) {
-						var oldStartTime = time(oldTimeframe.startTime);
-						var oldEndTime = time(oldTimeframe.endTime);
-
-						// Wenn sich die Zeiträume überschneiden Bar übernehmen
-						if(
-							newStartTime.isBefore(oldStartTime) && newEndTime.isAfter(oldStartTime) ||
-							newEndTime.isAfter(oldStartTime) && newStartTime.isBefore(oldEndTime) ||
-							newStartTime.isSame(oldStartTime) || newEndTime.isSame(oldEndTime)
-						) {
-							timeframe.bar = oldTimeframe.bar;
-						}
-					});
-				});
-
-				$scope.route.timeframes = newTimeframes;
 			}
 
-			// Alternative Bars für alle Slots abfragen
-			$scope.bars = [];
-			BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
-				_.forEach($scope.route.timeframes, function() {
-					$scope.bars.push(bars);
+			// Wenn sich die Bars betreffende Optionen geändert haben
+			if(
+				lastOptions.radius !== $scope.route.options.radius ||
+				lastOptions.weekday !== $scope.route.options.weekday ||
+				lastOptions.location.longitude !== $scope.route.options.location.longitude ||
+				lastOptions.location.latitude !== $scope.route.options.location.latitude
+			) {
+				// Alternative Bars für alle Slots abfragen
+				$scope.bars = [];
+				BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
+					_.forEach($scope.route.timeframes, function() {
+						$scope.bars.push(bars);
+					});
 				});
-			});
+			}
+		}
+		// Sidebar wurde geöffnet
+		else {
+			lastOptions = _.cloneDeep($scope.route.options);
 		}
 	});
 
