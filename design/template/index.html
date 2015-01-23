@@ -52,18 +52,30 @@
 	</div>
 </div>
 <!-- Oeffnen mit .is__open -->
-<div class="e__popup-overlay">
-	<div class="e__popup-window">
-		<div class="e__popup-window-content">
+<div id="overlay-deleteroute" class="e__overlay">
+	<div class="e__overlay-window">
+		<div class="e__overlay-window-content">
 			<h1>Route entfernen</h1>
 			<p>Wollen sie die Route wirklich entfernen?</p>
 		</div>
-		<div class="e__popup-window-button">
+		<div class="e__overlay-window-button">
 			<div class="e__btn col-6">Abbrechen</div>
 			<div class="e__btn col-6">Entfernen</div>
 		</div>
 	</div>
 </div>
+<!-- Oeffnen mit .is__open -->
+<div id="overlay-loader" class="e__overlay">
+	<div class="e__overlay-stage">
+		<div class="e__spinner">
+			<h1>Laden </h1>
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+</div>
+
 <input type="checkbox" id="is__sidebar-open" class="hidden" aria-hidden="true"/>
     <div id="main" class="clearfix">
         <aside id="sidebar">
@@ -106,15 +118,15 @@
 			</div>
 			<div class="seperator"></div>
 			<div class="sidebar-theatre-box">
-					<span class="i-f__star"></span><h3>Sharen</h3>
+					<span class="i-f__star"></span><span class="i-f-label">Sharen</span>
 			</div>
 			<div class="seperator"></div>
 			<div class="sidebar-theatre-box">
-				<span class="i-f__download"></span><h3>Offline speichern</h3>
+				<span class="i-f__download"></span><span class="i-f-label">Offline speichern</span>
 			</div>
 			<div class="seperator"></div>
 			<div class="sidebar-theatre-box">
-				<span class="i-f__impressum"></span><h3>Impressum</h3>
+				<span class="i-f__impressum"></span><span class="i-f-label">Impressum</span>
 			</div>
 			<div class="seperator"></div>
 		</div>
@@ -161,18 +173,16 @@
 							</div>
                             <div class="e__list-big-element-frontside-body e__barcard-body clearfix">
                                 <div class="e__list-big-element-frontside-body-main">
-									<p class="e__quote">„Seit 1991 der temperamentvolle Mexikaner in Stuttgart!
-Erleben Sie die richtige Mischung aus vielfältigen
-										mexikanischen Gaumenfreuden und bester Unterhaltung“</p>
+									<h4>Happy Hour</h4>
+									<p>Jeden Tag 00:00 - 24:00<br>
+										<strong>alle Cocktails für 4,99€</strong>
+									</p>
 								</div>
                                 <div class="e__list-big-element-frontside-body-expand grid when__expanded__show">
 									<div class="col-8">
 									<h4>Öffnungszeigen</h4>
 									<p>Montag bis Freitag<br>ab 09.00 Uhr</p>
 									<p>Samstag und Sonntag<br>ab 12.00 Uhr</p>
-									<h4>Happy Hour</h4>
-									<p>Jeden Tag 00:00 - 24:00<br>
-										<strong>alle Cocktails für 4,99€</strong>
 									</p>
 								</div>
 									<div class="col-4 align-center">
