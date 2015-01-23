@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
+import de.dhbw.hh.models.JSONOpeningTimes;
 import de.dhbw.hh.models.Location;
 import de.dhbw.hh.utils.Settings;
 
@@ -146,7 +147,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
 				if(venue.get("categories") != null && ((JSONArray)venue.get("categories")).get(0) != null)
 					bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
-				bar.setImageUrl("");	//TODO
+				bar.setImageUrl("");
 				
 				float lng = (float) (double) ((JSONObject) venue.get("location")).get("lng");
 				float lat = (float) (double) ((JSONObject) venue.get("location")).get("lat");
@@ -182,7 +183,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @param version
 	 * @return
 	 */
-	private ArrayList<OpeningTimes> getOpeningTimesByID(String id){
+	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id){
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
 		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
@@ -195,7 +196,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				"&client_secret="+CLIENT_SECRET+
 				"&v="+VERSION;
 		
-		ArrayList<OpeningTimes> openingTimes = new ArrayList<OpeningTimes>();
+		ArrayList<JSONOpeningTimes> openingTimes = new ArrayList<JSONOpeningTimes>();
 		
 		try{
 			URL foursquare = new URL(query);
@@ -256,7 +257,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					if(ems.length()<2)
 						ems = "0"+ems;
 					
-					OpeningTimes ot = new OpeningTimes();
+					JSONOpeningTimes ot = new JSONOpeningTimes();
 					ot.setBarID(id);
 					ot.setStartTime(shs+":"+sms);
 					ot.setEndTime(ehs+":"+ems);
@@ -270,59 +271,5 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			LOG.error(e.getMessage());
 		}
 		return openingTimes;
-	}
-	
-	
-	/**
-	 * Dokumentation folgt
-	 * @author Tobias Häußermann
-	 *
-	 */
-	public class OpeningTimes{
-		
-		private String 	barID;
-		private String 	startTime;
-		private String 	endTime;
-		private int[] 	days;
-		
-		public String getBarID() {
-			return barID;
-		}
-		
-		public void setBarID(String barID) {
-			this.barID = barID;
-		}
-		
-		public String getStartTime() {
-			return startTime;
-		}
-
-		public void setStartTime(String startTime) {
-			this.startTime = startTime;
-		}
-
-		public String getEndTime() {
-			return endTime;
-		}
-
-		public void setEndTime(String endTime) {
-			this.endTime = endTime;
-		}
-
-		public int[] getDays() {
-			return days;
-		}
-
-		public void setDays(int[] days){
-			this.days = days;
-		}
-		
-		public String toString(){
-			String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
-			for(int i=0;i<days.length;i++){
-				result += "\n"+days[i];
-			}
-			return result;
-		}
 	}
 }

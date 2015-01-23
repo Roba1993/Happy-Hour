@@ -47,7 +47,7 @@ public interface BarReportDAO {
     /**
      * Diese Funktion sucht alle BarReports in der Datenbank mit dem angegebenen Reported-Wahrheitswert.
      *
-     * @param reported Der Reported-Wahrheitswer nach dem gesucht werden soll.
+     * @param reported Der Reported-Wahrheitswert nach dem gesucht werden soll.
      * @return BarReport-Array mit den gefundenen BarReports.
      */
     public Collection<BarReport> findAllBarReports();

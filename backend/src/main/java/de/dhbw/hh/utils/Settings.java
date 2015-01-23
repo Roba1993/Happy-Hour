@@ -94,7 +94,7 @@ public class Settings extends Properties {
         	LOG.error(e.getMessage());
         } catch (IOException e) {
         	LOG.error(e.getMessage());
-        }
+        }       
     }
 
     /**
@@ -108,4 +108,5 @@ public class Settings extends Properties {
     public String getProperty(String key) {
         return super.getProperty(key);
     }
+    
 }

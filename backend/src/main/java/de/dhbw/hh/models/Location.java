@@ -29,4 +29,13 @@ public class Location {
 	public float getLatitude(){
 		return latitude;
 	}
+	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
+	public String toString(){
+		return ("Longitude: " + longitude + " Latitude: " + latitude);
+	}
+	
 }

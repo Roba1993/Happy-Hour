@@ -10,11 +10,11 @@ describe('DayPickerDirective', function() {
 	beforeEach(module('happyHour.filters.DaysFilter'));
 
 	beforeEach(inject(function(_$compile_, _$rootScope_){
-	  $compile = _$compile_;
-	  $rootScope = _$rootScope_;
+		$compile = _$compile_;
+		$rootScope = _$rootScope_;
 	}));
 
-    it('sollte die Steuerelemente generieren', function() {
+	it('sollte die Steuerelemente generieren', function() {
 		var element = $compile('<input-day result="test" />')($rootScope);
 
 		$rootScope.$digest();
@@ -22,9 +22,9 @@ describe('DayPickerDirective', function() {
 		expect(element.children().length).toBe(3);
 		expect(element.children().eq(0).text()).toBe('<');
 		expect(element.children().eq(2).text()).toBe('>');
-    });
+	});
 
-    it('sollte auf den heutigen Tag als Standardwert zurueckfallen', function() {
+	it('sollte auf den heutigen Tag als Standardwert zurueckfallen', function() {
 		$compile('<input-day result="test" />')($rootScope);
 
 		$rootScope.$digest();
@@ -33,7 +33,7 @@ describe('DayPickerDirective', function() {
 			$rootScope.test = 0;
 		}
 		expect($rootScope.test).toBe(new Date().getDay());
-    });
+	});
 	
 	it('sollte die Tage auf Klick durchschalten', function() {
 		$rootScope.test = 1;

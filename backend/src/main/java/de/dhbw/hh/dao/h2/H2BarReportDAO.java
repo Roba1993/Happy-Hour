@@ -31,7 +31,7 @@ public class H2BarReportDAO implements BarReportDAO {
     ComboPooledDataSource cpds;
 
     /**
-     * Diese Funktion erstellt ein Objekt der Klasse H2TestDAO.
+     * Diese Funktion erstellt ein Objekt der Klasse H2BarReportDAO.
      *
      * @param cpds Der Connectionpool
      */
@@ -171,7 +171,7 @@ public class H2BarReportDAO implements BarReportDAO {
                 
                 Collection<BarReport> runs = new ArrayList<BarReport>();
 
-                // Schreibe die Daten ins Testrun Objekt
+                // Schreibe die Daten ins BarReport Objekt
                 while(resultSet.next()) {
                     BarReport barReport = new BarReport();
                     barReport.setID(resultSet.getInt("id"));
@@ -212,7 +212,7 @@ public class H2BarReportDAO implements BarReportDAO {
 
                 Collection<BarReport> runs = new ArrayList<BarReport>();
 
-                // Schreibe die Daten ins Testrun Objekt
+                // Schreibe die Daten ins BarReport Objekt
                 while(resultSet.next()) {
                     BarReport barReport = new BarReport();
                     barReport.setID(resultSet.getInt("id"));

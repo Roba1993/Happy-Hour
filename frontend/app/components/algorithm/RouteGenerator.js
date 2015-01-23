@@ -30,8 +30,6 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 					});
 				}
 
-				console.log(timeframes);
-
 				_.forEach(timeframes, function(timeframe, index) {
 					// fromLocation entweder auf absoluten Startpunkt, bzw vorherige Bar setzen
 					var fromLocation = options.location;
@@ -41,7 +39,9 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 
 					// Bars nach dem Score sortieren
 					var sortedBars = _.sortBy(bars, function(bar) {
-						return score(timeframe, fromLocation, bar, options.weekday);
+						var barScore = score(timeframe, fromLocation, bar, options.weekday);
+						//console.log(bar.name, barScore);
+						return barScore;
 					});
 					
 					// Den Timeframe mit der Bar befüllen, die den höchsten Score hat
@@ -110,8 +110,10 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 			var rating = bar.rating;
 			var happyHourOverlap = 0;
 
-			// TODO nicht vorhandenes Rating beachten
-			// TODO timeframe/happyHour mit einbeziehen
+			// wenn das Rating nicht vorhanden ist, auf festen Durchschnitt setzen
+			if(rating === -1) {
+				rating = 4;
+			}
 			
 			// passende HappyHour finden
 			var happyHour = null;
@@ -150,7 +152,7 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 				}
 			}
 
-			return (rating/distance) * (1+happyHourOverlap);
+			return (rating*100/Math.pow(distance, 2)) * (1+happyHourOverlap);
 		}
 
 		/**

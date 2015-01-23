@@ -196,10 +196,8 @@ public class H2RouteDAOTest {
 				// Prüfe ob genau eine Route ausgelesen wurde
 				resultSet.last();
 				assertEquals(1, resultSet.getRow());
-
 			}
 		}
-
 	}
 
 }
