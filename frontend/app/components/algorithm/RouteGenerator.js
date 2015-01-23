@@ -30,8 +30,6 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 					});
 				}
 
-				console.log(timeframes);
-
 				_.forEach(timeframes, function(timeframe, index) {
 					// fromLocation entweder auf absoluten Startpunkt, bzw vorherige Bar setzen
 					var fromLocation = options.location;
@@ -41,7 +39,9 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 
 					// Bars nach dem Score sortieren
 					var sortedBars = _.sortBy(bars, function(bar) {
-						return score(timeframe, fromLocation, bar, options.weekday);
+						var barScore = score(timeframe, fromLocation, bar, options.weekday);
+						//console.log(bar.name, barScore);
+						return barScore;
 					});
 					
 					// Den Timeframe mit der Bar befüllen, die den höchsten Score hat

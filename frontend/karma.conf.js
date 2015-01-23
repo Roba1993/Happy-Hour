@@ -5,6 +5,7 @@ module.exports = function(config){
 
     files : [
       'app/bower_components/jquery/dist/jquery.min.js',
+      'app/bower_components/time-js/time.js',
       'app/bower_components/ionrangeslider/js/ion.rangeSlider.min.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
@@ -16,6 +17,10 @@ module.exports = function(config){
       'app/components/**/*.js',
       'app/components/**/*.html',
       'test/**/*.js'
+    ],
+
+    exclude: [
+      'app/components/algorithm/RouteGenerator_Felix.js'
     ],
 
     autoWatch : true,
