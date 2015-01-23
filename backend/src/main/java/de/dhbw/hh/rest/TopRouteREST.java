@@ -3,6 +3,7 @@ package de.dhbw.hh.rest;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,8 @@ public class TopRouteREST {
 			r.setName("/toproutes");
 			// Setzt die aktuelle Zeit der Rückgabe
 			r.setTimestamp(new Timestamp(new Date().getTime()));
+
+			String out;
 			
 			// Überprüfung, ob die Top Routen abgerufen werden können
 			if (toproutes.isEmpty() ){
@@ -56,12 +59,31 @@ public class TopRouteREST {
 				r.setError();
 				r.setDescription("Es konnten keine Top Routen aus der Datenbank abgerufen werden");
 				r.setData(null);
+
+				out = gson.toJson(r);
 			} 
 			else {
 				// Die Top Routen konnten gefunden werden
 				r.setSuccess();
 				r.setDescription("Rückgabe der top Routes als Array");
-				r.setData(toproutes);
+
+				// change to gson string to return the route data in the right format
+				out = gson.toJson(r);
+				out = out.substring(0, out.length()-1);
+				out += ", \"data\": [";
+
+
+				Iterator<Route> rr = toproutes.iterator();
+				while (rr.hasNext()){
+					Route route = rr.next();
+
+					out += route.getData();
+
+					if(rr.hasNext()) {
+						out += ",";
+					}
+				}
+				out += "]}";
 			}	
 			
 			// Log-Eintrag bei Rückgabe
@@ -69,7 +91,7 @@ public class TopRouteREST {
 					
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
 			response.type("application/json");
-			return gson.toJson(r);
+			return out;
 		});		
 	}
 	
