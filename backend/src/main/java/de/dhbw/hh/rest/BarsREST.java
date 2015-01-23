@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
+import de.dhbw.hh.models.JSONHappyHour;
 import de.dhbw.hh.dao.DAOFactory;
 import de.dhbw.hh.dao.HappyHourDAO;
 import de.dhbw.hh.dao.h2.H2FoursquareDAO;
@@ -74,7 +75,7 @@ public class BarsREST {
 					ArrayList<de.dhbw.hh.models.HappyHour> hh = (ArrayList<de.dhbw.hh.models.HappyHour>) happyHourDAO.findHappyHour(id);
 					// Transformiert die Happy-Hours der Datenbank in Happy-Hour-Objekte, die den Schnittstellendefinitionen
 					// zwischen Frontend und Backend entsprechen
-					ArrayList<HappyHour> happyHours = transformHappyHours(hh);
+					ArrayList<JSONHappyHour> happyHours = transformHappyHours(hh);
 					// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu. 
 					rawBars.get(i).setHappyHours(happyHours);
 				}
@@ -115,16 +116,16 @@ public class BarsREST {
 		
 		// Schleife durch alle Bars in der übergebenen Liste
 		for(int i=0;i<rawBars.size();i++){
-			ArrayList<HappyHour> hhList = rawBars.get(i).getHappyHours();
+			ArrayList<JSONHappyHour> hhList = rawBars.get(i).getHappyHours();
 			int size = hhList.size();
 			boolean b = false;
 			
 			//Schleife durch alle Einträge in der Happy-Hour-Liste
 			for(int j=0;j<size;j++){
-				HappyHour hh = hhList.get(j);
+				JSONHappyHour hh = hhList.get(j);
 				// Abgleich des aktuellen Wochentags mit den Einträgen aus der Happy-Hour-Liste
-				for(int k=0;k<hh.days.length;k++){
-					if(hh.days[k] == day){
+				for(int k=0;k<hh.getDays().length;k++){
+					if(hh.getDays()[k] == day){
 						b = true;
 						continue;
 					}
@@ -159,11 +160,11 @@ public class BarsREST {
 	 *
 	 */
 	@SuppressWarnings("deprecation")
-	private ArrayList<HappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh){
-		ArrayList<HappyHour> result = new ArrayList<HappyHour>();
+	private ArrayList<JSONHappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh){
+		ArrayList<JSONHappyHour> result = new ArrayList<JSONHappyHour>();
 		
 		for(int i=0;i<hh.size();i++){
-			HappyHour hour = new HappyHour();
+			JSONHappyHour hour = new JSONHappyHour();
 			de.dhbw.hh.models.HappyHour item = hh.get(i);
 			hour.setBarID(item.getBarID());
 			int sh = item.getStart().getHours();
@@ -211,58 +212,5 @@ public class BarsREST {
 		}
 		
 		return result;
-	}
-	
-	/**
-	 * Dokumentation folgt
-	 * @author Tobias Häußermann
-	 *
-	 */
-	public class HappyHour{
-		
-		private String 	barID;
-		private String 	startTime;
-		private String 	endTime;
-		private int[] 	days;
-		
-		public String getBarID() {
-			return barID;
-		}
-		
-		public void setBarID(String barID) {
-			this.barID = barID;
-		}
-		
-		public String getStartTime() {
-			return startTime;
-		}
-
-		public void setStartTime(String startTime) {
-			this.startTime = startTime;
-		}
-
-		public String getEndTime() {
-			return endTime;
-		}
-
-		public void setEndTime(String endTime) {
-			this.endTime = endTime;
-		}
-
-		public int[] getDays() {
-			return days;
-		}
-
-		public void setDays(int[] days){
-			this.days = days;
-		}
-		
-		public String toString(){
-			String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
-			for(int i=0;i<days.length;i++){
-				result += "\n"+days[i];
-			}
-			return result;
-		}
 	}
 }
