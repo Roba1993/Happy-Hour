@@ -837,13 +837,15 @@
     z-index: 999;
     position: absolute;
     top: -1000%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #e__impressum-header {
     position: fixed;
     z-index: 9999;
     overflow: hidden;
-    height: 10%;
+    height: 50px;
     background: #fff;
     width: 100%;
     padding: 15px;
@@ -860,7 +862,7 @@
 
 #e__impressum-content {
     padding: 15px;
-    padding-top: 5%;
+    padding-top: 55px;
 }
 
 #e__impressum.is__open {
