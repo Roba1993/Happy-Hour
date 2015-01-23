@@ -108,18 +108,19 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
           $scope.$watch('route', function (route) {
             if (route != null && route.timeframes.length >= 2) {
               var directionsDisplay;
-              var directionsService = new maps.DirectionsService();
-
+              var directionsService;
 
               // initialisieren
+              directionsService = new maps.DirectionsService();
               directionsDisplay = new maps.DirectionsRenderer();
               directionsDisplay.setMap(map);
 
-              // Wegpunkte definieren
+              // Wegpunkte definieren und Request bauen
               var startLocation = new maps.LatLng(
                 route.timeframes[0].bar.location.latitude,
                 route.timeframes[0].bar.location.longitude
               );
+
               var endLocation = new maps.LatLng(
                 route.timeframes[route.timeframes.length - 1].bar.location.latitude,
                 route.timeframes[route.timeframes.length - 1].bar.location.longitude
@@ -147,9 +148,9 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                 travelMode: maps.DirectionsTravelMode.WALKING
               };
 
+              // Routenrequest an Google anfragen
               directionsService.route(request, function (response, status) {
                 if (status === maps.DirectionsStatus.OK) {
-
                   /*
                    * DO TRICKY STUFF
                    * Da es keine Möglichkeit gibt InfoWindows der einzelnen Wegpunkte zu ändern,
@@ -175,6 +176,8 @@ angular.module('happyHour.map.MapDirective', ['happyHour.map.MapLoader'])
                     });
                   });
                   directionsDisplay.setDirections(response);
+                } else {
+                  console.error('Error requesting route');
                 }
               });
             }

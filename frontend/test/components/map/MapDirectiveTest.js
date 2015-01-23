@@ -11,7 +11,7 @@ describe('MapDirective', function () {
   var directionsRendererApi;
   var directionsServiceApi;
 
-  var eventCallback;
+  //var eventCallback;
 
   beforeEach(module('happyHour.map.MapDirective'));
 
@@ -35,20 +35,20 @@ describe('MapDirective', function () {
           api.DirectionsTravelMode.WALKING = 'walking';
 
           /*api.Geocoder = function () {
-            geocoderApi = jasmine.createSpyObj('geocoder', ['geocode']);
-            return geocoderApi;
-          };*/
+           geocoderApi = jasmine.createSpyObj('geocoder', ['geocode']);
+           return geocoderApi;
+           };*/
 
           api.MapTypeId = {};
           api.MapTypeId.ROADMAP = 'roadmap';
 
-          api.event = {
-            addListener: function (api, event, callback) {
-              eventCallback = callback;
-            }
-          };
+          /*api.event = {
+           addListener: function (api, event, callback) {
+           eventCallback = callback;
+           }
+           };*/
 
-          spyOn(api.event, 'addListener').and.callThrough();
+          //spyOn(api.event, 'addListener').and.callThrough();
           cb(api);
         }
       });
@@ -85,7 +85,50 @@ describe('MapDirective', function () {
 
     expect(api.Map).toHaveBeenCalled();
     expect(api.Map.calls.argsFor(0)[0]).toBe(element.children()[0]);
-    //expect(api.Map.calls.argsFor(0)[1]).toBe($rootScope.defaultMapOptions);
+    //expect(api.Map.calls.argsFor(0)[1]).toEqual($rootScope.defaultMapOptions);
+  });
+
+  it('erstellen einer Map mit spezieller centerLocation', function () {
+    $rootScope.defaultMapOptions = {};
+    $rootScope.defaultMapOptions = {
+      mapTypeId: 'roadmap',
+      mapTypeControl: false,
+      streetViewControl: false,
+      center: {},
+      zoom: 14,
+      draggable: true,
+      panControl: true,
+      rotateControl: true,
+      scaleControl: true,
+      scrollwheel: true,
+      zoomControl: true
+    };
+    $rootScope.mapOptions = {};
+    $rootScope.mapOptions = {
+      centerLocation: {
+        latitude: 35.7348,
+        longitude: 49.0133
+      },
+      zoomLevel: 2,
+      alterable: false
+    };
+    var element = $compile('<map options="mapOptions"/>')($rootScope);
+
+    $rootScope.$digest();
+
+    expect(api.LatLng).toHaveBeenCalled();
+    expect(api.LatLng.calls.argsFor(1)[0]).toBe(35.7348);
+    expect(api.LatLng.calls.argsFor(1)[1]).toBe(49.0133);
+
+    expect(api.Map).toHaveBeenCalled();
+    expect(api.Map.calls.argsFor(0)[0]).toBe(element.children()[0]);
+    expect(api.Map.calls.argsFor(0)[1].zoom).toBe(2);
+    expect(api.Map.calls.argsFor(0)[1].draggable).toBe(false);
+    expect(api.Map.calls.argsFor(0)[1].panControl).toBe(false);
+    expect(api.Map.calls.argsFor(0)[1].rotateControl).toBe(false);
+    expect(api.Map.calls.argsFor(0)[1].scaleControl).toBe(false);
+    expect(api.Map.calls.argsFor(0)[1].scrollwheel).toBe(false);
+    expect(api.Map.calls.argsFor(0)[1].zoomControl).toBe(false);
   });
 
   it('erstellen einer Map mit Marker', function () {
@@ -127,8 +170,11 @@ describe('MapDirective', function () {
 
     $rootScope.$digest();
 
+    expect(api.LatLng).toHaveBeenCalled();
+    expect(api.LatLng.calls.argsFor(1)[0]).toBe(35.7348);
+    expect(api.LatLng.calls.argsFor(1)[1]).toBe(49.0133);
+
     expect(api.Marker).toHaveBeenCalled();
-    //expect(api.Marker.calls.argsFor(0)[1]).toBe();
   });
 
   it('erstellen einer Map mit Route', function () {
@@ -206,8 +252,8 @@ describe('MapDirective', function () {
               }
             ],
             location: {
-              latitude: 35.7348,
-              longitude: 49.0133
+              latitude: 36.7348,
+              longitude: 47.0133
             },
             address: 'Schlechte Straße 49 Stuttgart',
             happyHours: [{
@@ -225,7 +271,13 @@ describe('MapDirective', function () {
 
     $rootScope.$digest();
 
+    expect(api.LatLng).toHaveBeenCalled();
     expect(directionsRendererApi.setMap).toHaveBeenCalled();
     expect(directionsServiceApi.route).toHaveBeenCalled();
+
+    expect(api.LatLng.calls.argsFor(1)[0]).toBe(35.7348);
+    expect(api.LatLng.calls.argsFor(1)[1]).toBe(49.0133);
+    expect(api.LatLng.calls.argsFor(2)[0]).toBe(36.7348);
+    expect(api.LatLng.calls.argsFor(2)[1]).toBe(47.0133);
   });
 });
