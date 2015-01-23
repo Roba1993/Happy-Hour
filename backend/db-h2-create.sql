@@ -25,7 +25,7 @@ create table happyHour (
 -- Datenbanktabelle für die gespeicherten Routen (Top Routen und Shared Routen)
 create table route (
 	hash				varchar(255),
-	data				varchar(4096) not null,
+	data				varchar(100000) not null,
 	top					boolean not null,
 	constraint pk_route primary key (hash)
 );
