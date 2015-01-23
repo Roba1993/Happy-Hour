@@ -13,7 +13,6 @@ angular.module('happyHour.views.topRoutes', ['ngRoute'])
 	$scope.routes = [];
 	// Toprouten aus dem Backend auslesen
 	BackendService.getToproutes().then(function(routes) {
-		console.log(routes);
 		$scope.routes = routes;
 	});
 
