@@ -49,7 +49,30 @@ VALUES
 ('4e6f30be52b1706317b5b8f6' , 'Ladies Night: Alle Cocktails für 5,50€' , '18:00:00' , '00:00:00' , false , false , true , false , false , false , false),
 ('4b7d9923f964a520f4c82fe3' , 'Alle Flaschenbiere 2€ (außer Echtes/Schwarzes)' , '23:00:00' , '02:00:00' , false , false , false , false , false , true , false),
 ('4b7d9923f964a520f4c82fe3' , 'Alle Getränke: Ein Großes bestellen - Ein Kleines bezahlen' , '23:00:00' , '02:00:00' , false , false , false , false , false , true , false),
-('4b7d9923f964a520f4c82fe3' , 'Alle Cocktails und Longdrinks 1,50€ günstiger' , '23:00:00' , '02:00:00' , false , false , false , false , false , true , false);
+('4b7d9923f964a520f4c82fe3' , 'Alle Cocktails und Longdrinks 1,50€ günstiger' , '23:00:00' , '02:00:00' , false , false , false , false , false , true , false),
+('4b8070a1f964a520807230e3' , 'Alle Cocktails für 5€' , '17:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4b9d0c58f964a5201a8b36e3' , 'Auswahl an Happy Hour Cocktails für 4,90€' , '20:00:00' , '23:00:00' , true , true , true , true , true , true , true),
+('4b9179c3f964a52067bf33e3' , 'Alle Cocktails zum halben Preis und alle Jumbos für nur 5,90€' , '18:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4b9179c3f964a52067bf33e3' , 'Alle Margaritas zum halben Preis und alle Jumbos für nur 5,90€' , '22:30:00' , '01:00:00' , true , true , true , true , false , false , true),
+('4b9179c3f964a52067bf33e3' , 'Alle Margaritas zum halben Preis und alle Jumbos für nur 5,90€' , '22:30:00' , '02:00:00' , false , false , false , false , true , true , false),
+('4b07024af964a5204bf522e3' , 'Zwei Bier zum Preis von einem.' , '18:00:00' , '20:00:00' , true , true , true , false , false , false , false),
+('4b50a524f964a5201a2b27e3' , 'Alle Jumbo-Cocktails der Karte für 5,50€' , '17:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4b7d87fcf964a520d9c42fe3' , 'Alle Cocktails zum halben Preis' , '19:00:00' , '01:00:00' , true , true , true , true , true , true , true),
+('4c153503a9c220a1f1c5589d' , 'Auswahl an Happy Hour Cocktails für 4,90€' , '20:00:00' , '03:00:00' , true , true , true , true , false , false , true),
+('4c153503a9c220a1f1c5589d' , 'Auswahl an Happy Hour Cocktails für 4,90€' , '20:00:00' , '05:00:00' , false , false , false , false , true , true , false),
+('4b59578af964a5209e8528e3' , 'Alle Cocktails für 4,90€' , '19:00:00' , '21:00:00' , true , true , true , true , true , true , true),
+('4d02887137036dcb3eef03fb' , 'Alle Kaffeegetränke für 1,50€' , '15:00:00' , '06:00:00' , true , false , false , false , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Alle Cocktails für 4,50€' , '15:00:00' , '06:00:00' , false , false , true , false , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Krug Bier für 2,50€' , '15:00:00' , '06:00:00' , false , false , false , true , false , false , false),
+('4d02887137036dcb3eef03fb' , 'Ein halber Krug Bier für 2,50€' , '15:00:00' , '06:00:00' , false , false , false , false , true , false , false),
+('4ca097cf03133704c3f07bd5' , 'Alle Cocktails für 5€' , '11:00:00' , '22:00:00' , true , true , true , true , false , false , false),
+('4babd691f964a520e1cd3ae3' , 'Jeden Tag Caipirinha für 5,50€ und Ouzo für 0,99€' , '10:00:00' , '03:00:00' , true , true , true , true , false , false , true),
+('4babd691f964a520e1cd3ae3' , 'Jeden Tag Caipirinha für 5,50€ und Ouzo für 0,99€' , '10:00:00' , '04:00:00' , false , false , false , false , true , true , false),
+('4b50a524f964a5201a2b27e3' , 'Jeden normalen Cocktail für 4,50€ und alle Jumbo-Cocktails für 5,90€' , '17:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4bb10b3ff964a52060753ce3' , 'Alle Cocktails für 4,90€' , '20:00:00' , '23:00:00' , true , true , true , true , true , true , true),
+('4ba3d1a2f964a520e96238e3' , 'Alle alkoholischen Cocktails für 4€ und alle alkoholfreien Cocktails für 3€' , '19:00:00' , '20:00:00' , true , true , true , true , true , true , true),
+('4b7592cdf964a5203b152ee3' , 'Ausgewählte Cocktails und Burger für jeweils 4€' , '23:00:00' , '02:00:00' , false , false , false , false , true , true , false),
+('51c9d74d498e6c80b055d0be' , 'Alle Cocktails für 5,50€' , '20:00:00' , '00:00:00' , true , true , true , true , true , true , true);
 
 -- Fügt Test-Datensätze in die route Datenbanktabelle ein
 INSERT INTO route (hash, data, top)
