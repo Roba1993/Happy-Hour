@@ -300,6 +300,7 @@
     float: left;
     box-shadow: 0px 5px 16px 2px #666;
     max-height: 155px;
+    width:80vw;
 }
 .e__slider-stage-element .e__barcard {
     padding-top: 10px;

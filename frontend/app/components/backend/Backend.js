@@ -15,7 +15,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @param  {Location} location latitude und longitude in einem Objekt.
 			 * @param  {Double} radius Der Radius, der über die GUI vom User eingegeben wurde.
 			 * @param  {Integer} weekday Der Wochentag, der über die GUI vom User eingegeben wurde.
-			 * @return {Promise(Bar[])} Array mit allen passenden Bars
+			 * @return {Promise(Bar[])} Gibt ein Array mit allen passenden Bars zurück.
 			 */
 			getBars: function(location, radius, weekday) {
 				var latitude = location.latitude;
@@ -59,7 +59,7 @@ angular.module('happyHour.backend.Backend', [])
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {Route} route JSON Route Objekt, das direkt ins Backend weitergeleitet werden kann.
-			 * @return {Promise(String)} Übergibt einen Hash zu der erstellten Route
+			 * @return {Promise(String)} Gibt einen Hash zu der erstellten Route zurück.
 			 */
 			saveRoute: function(route) {
 
@@ -82,7 +82,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
-			 * @return {Promise(Boolean)} Boolean, ob das Schreiben erfolgreich war
+			 * @return {Promise(Boolean)} Gibt ein Boolean, ob das Schreiben erfolgreich war zurück.
 			 */
 			saveHappy: function(happy, barId, admin, adminpw) {
 				var url = baseUrl+'/'+barId+'/hour?admin='+admin+'&adminpw='+adminpw;
@@ -184,7 +184,7 @@ angular.module('happyHour.backend.Backend', [])
 
 			},
 			/**
-			* Loescht alle Meldungen einer Bar.
+			* Löscht alle Meldungen einer Bar.
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
 			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
@@ -213,7 +213,7 @@ angular.module('happyHour.backend.Backend', [])
 			* @param {Integer} hourId Die ID der zu löschenden HappyHour
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
 			*/
 			deleteHappy: function(hourId, admin, adminpw) {
 
