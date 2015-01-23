@@ -74,7 +74,8 @@ public class Settings extends Properties {
         setProperty("foursquare.defaultLng", "48.949034");
         setProperty("foursquare.defaultLat", "9.431656");
         setProperty("foursquare.defaultRad", "100");
-        setProperty("foursquare.cacheTimer", "6");
+        setProperty("foursquare.otCacheTimer", "3600");	// Cache für Öffnungszeiten in Minuten 
+        setProperty("foursquare.rqCacheTimer", "120");	// Cache für Requests in Minuten
     }
 
     /**

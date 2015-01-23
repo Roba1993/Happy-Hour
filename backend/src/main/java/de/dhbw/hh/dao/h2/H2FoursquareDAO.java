@@ -42,14 +42,19 @@ public class H2FoursquareDAO implements FoursquareDAO{
     
     // Deklaration des 4SquareCaches
     @SuppressWarnings("rawtypes")
-	private static Cache foursquareCache;
+	private static Cache otFoursquareCache;
+    private static Cache rqFoursquareCache;
     
     // Initialisierung des 4SquareCaches
     public static void initCache(Settings settings){
-    	foursquareCache = CacheBuilder.newBuilder()
+    	otFoursquareCache = CacheBuilder.newBuilder()
         	.maximumSize(10000)
-        	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.cacheTimer")), TimeUnit.HOURS)
+        	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.otCacheTimer")), TimeUnit.MINUTES)
         	.build();
+    	rqFoursquareCache = CacheBuilder.newBuilder()
+            	.maximumSize(10000)
+            	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.rqCacheTimer")), TimeUnit.MINUTES)
+            	.build();
     }
     
     // Zugriff auf die allgemeinen Settings wird erstellt
@@ -71,8 +76,15 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 *
 	 * @author Tobias Häußermann
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius){
+		//TODO Kommentar
+		String key = latitude+","+longitude+","+radius;
+		if(rqFoursquareCache.asMap().containsKey(key)){
+			return (ArrayList<Bar>) rqFoursquareCache.asMap().get(key);
+		}
+		
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
 		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
@@ -105,6 +117,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		for(int i=0;i<bars.size();i++){
 			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId()));
 		}
+		
+		rqFoursquareCache.put(key, bars);
+		
 		return bars;
 	}
 	
@@ -202,12 +217,9 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	@SuppressWarnings("unchecked")
 	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id){
 		//TODO Kommentieren
-		if(foursquareCache.asMap().containsKey(id)){
-			System.out.println("Cache enthält key");
-			return (ArrayList<JSONOpeningTimes>) foursquareCache.asMap().get(id);
+		if(otFoursquareCache.asMap().containsKey(id)){
+			return (ArrayList<JSONOpeningTimes>) otFoursquareCache.asMap().get(id);
 		}
-		
-		System.out.println("Cache enthält den Key nicht");
 		
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
@@ -297,7 +309,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		}
 		
 		// Füge die Öffnungszeiten zum Cache hinzu
-		foursquareCache.put(id, openingTimes);
+		otFoursquareCache.put(id, openingTimes);
 		
 		return openingTimes;
 	}
