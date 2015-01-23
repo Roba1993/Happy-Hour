@@ -1,6 +1,8 @@
 package de.dhbw.hh.dao.h2;
 
 import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.utils.Settings;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class H2DAOFactoryTest {
 
-    private static Properties properties;
+    private static Settings properties;
 
     /**
      * Setzte die benötigten Eigenschaften
@@ -25,7 +27,7 @@ public class H2DAOFactoryTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         //choose the database
-        properties = new Properties();
+        properties = new Settings();
         properties.setProperty("db.type", "h2");
 
         //h2 database settings

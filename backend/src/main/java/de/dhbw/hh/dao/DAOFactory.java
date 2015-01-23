@@ -1,8 +1,7 @@
 package de.dhbw.hh.dao;
 
 import de.dhbw.hh.dao.h2.H2DAOFactory;
-
-import java.util.Properties;
+import de.dhbw.hh.utils.Settings;
 
 /**
  * Mit dieser Klasse kann eine Datenbank-Factory erstellt werden.
@@ -28,7 +27,7 @@ public abstract class DAOFactory {
      * @param properties Einstellungen welche von der Factory benötigt werden.
      * @return Gibt eine Datenbank-Factory zurück-
      */
-    public static DAOFactory getDaoFactory(int database, Properties properties) {
+    public static DAOFactory getDaoFactory(int database, Settings properties) {
         switch (database) {
             case H2:
                 return new H2DAOFactory(properties);

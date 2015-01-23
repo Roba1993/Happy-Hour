@@ -13,6 +13,8 @@ import de.dhbw.hh.models.Location;
 /**
  * Diese Klasse testet alle relevanten Methoden der H2FoursquareDAO-Klasse
  * @author Tobias Häußermann
+ * 
+ * guava
  */
 public class H2FoursquareDAOTest {
 
@@ -39,7 +41,7 @@ public class H2FoursquareDAOTest {
 		// Übergabeparameter für Test definieren und festlegen.
 		float latitude 		= 48.949034f;
 		float longitude 	= 9.431656f;
-		float radius		= 0.25f;
+		float radius		= 0.15f;
 		
 		// Setze die Anfrage an Foursquare ab und speichere die Ergebnisse in 'results'
 		ArrayList<Bar> results = fsc.getBarsInArea(longitude, latitude, radius);

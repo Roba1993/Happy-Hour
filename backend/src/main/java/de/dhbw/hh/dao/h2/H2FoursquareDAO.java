@@ -7,12 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 import de.dhbw.hh.dao.FoursquareDAO;
 import de.dhbw.hh.models.Bar;
@@ -36,8 +40,20 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	// Initialisiert einen Logger für die Fehlerausgabe
     static final Logger LOG = LoggerFactory.getLogger(H2FoursquareDAO.class);
     
+    // Deklaration des 4SquareCaches
+    @SuppressWarnings("rawtypes")
+	private static Cache foursquareCache;
+    
+    // Initialisierung des 4SquareCaches
+    public static void initCache(Settings settings){
+    	foursquareCache = CacheBuilder.newBuilder()
+        	.maximumSize(10000)
+        	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.cacheTimer")), TimeUnit.HOURS)
+        	.build();
+    }
+    
+    // Zugriff auf die allgemeinen Settings wird erstellt
     public H2FoursquareDAO(){
-    	// Zugriff auf die allgemeinen Settings
     	settings = new Settings();
     	settings.loadDefault();
     }
@@ -183,7 +199,16 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @param version
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id){
+		//TODO Kommentieren
+		if(foursquareCache.asMap().containsKey(id)){
+			System.out.println("Cache enthält key");
+			return (ArrayList<JSONOpeningTimes>) foursquareCache.asMap().get(id);
+		}
+		
+		System.out.println("Cache enthält den Key nicht");
+		
 		// Zu finden auf GitHub (zur Authentifizierung)
 		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
 		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
@@ -270,6 +295,10 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		}catch(Exception e){
 			LOG.error(e.getMessage());
 		}
+		
+		// Füge die Öffnungszeiten zum Cache hinzu
+		foursquareCache.put(id, openingTimes);
+		
 		return openingTimes;
 	}
 }

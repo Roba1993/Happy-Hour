@@ -1,19 +1,25 @@
 package de.dhbw.hh.dao.h2;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-
-import de.dhbw.hh.dao.*;
-
-import org.h2.tools.RunScript;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.beans.PropertyVetoException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import org.h2.tools.RunScript;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import de.dhbw.hh.dao.BarReportDAO;
+import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.dao.FoursquareDAO;
+import de.dhbw.hh.dao.HappyHourDAO;
+import de.dhbw.hh.dao.RouteDAO;
+import de.dhbw.hh.dao.UserDAO;
+import de.dhbw.hh.utils.Settings;
 
 /**
  * H2Factory zum erstellen der H2DAO Objekte.
@@ -38,7 +44,7 @@ public class H2DAOFactory extends DAOFactory {
      * @param properties Die Einstellungen zum erstellen der
      *                   Datenbank connection.
      */
-    public H2DAOFactory(Properties properties) {
+    public H2DAOFactory(Settings properties) {
         cpds = new ComboPooledDataSource();
 
         // Versuche den Datenbank Treiber zu laden
@@ -77,6 +83,8 @@ public class H2DAOFactory extends DAOFactory {
             }
         }
 
+        H2FoursquareDAO.initCache(properties);
+        
     }
 
     //******* Folgend die Zugriffsfunktionen auf die DAO Klassen

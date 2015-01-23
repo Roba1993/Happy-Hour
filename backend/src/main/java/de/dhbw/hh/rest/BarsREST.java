@@ -213,4 +213,5 @@ public class BarsREST {
 		
 		return result;
 	}
+
 }
