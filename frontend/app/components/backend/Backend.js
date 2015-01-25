@@ -59,7 +59,7 @@ angular.module('happyHour.backend.Backend', [])
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {Route} route JSON Route Objekt, das direkt ins Backend weitergeleitet werden kann.
-			 * @return {Promise(String)} Gibt einen Hash zu der erstellten Route zurück.
+			 * @return {Promise(String)} Übergibt einen Hash zu der erstellten Route
 			 */
 			saveRoute: function(route) {
 
@@ -78,8 +78,8 @@ angular.module('happyHour.backend.Backend', [])
 			 * Speichert Happy-Hours im Backend und übergibt einen Boolean ob das Schreiben erfolgreich war oder nicht.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
-			 * @param  {HappyHour} happy - JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
-			 * @param  {Integer} barId - Die Bar ID, für die die Happy Hour gilt.
+			 * @param  {HappyHour} happy JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
+			 * @param  {Integer} barId Die Bar ID, für die die Happy Hour gilt.
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
 			 * @return {Promise(Boolean)} Gibt ein Boolean, ob das Schreiben erfolgreich war zurück.
@@ -143,7 +143,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
-			 * @return {Promise(JSON[])} Alle Bar IDs mit den Meldung.
+			 * @return {Promise(Report[])} Alle Bar IDs mit den Meldung.
 			 */
 			getReports: function(admin, adminpw) {
 
