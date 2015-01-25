@@ -124,8 +124,7 @@
 	</div>
 </div>
 
-<input type="checkbox" id="is__sidebar-open" class="hidden" ng-model="isSidebarOpen" aria-hidden="true"/>
-<div id="main" class="clearfix">
+<div id="main" class="clearfix" ng-class="{'sidebar-is-open': isSidebarOpen}">
 	<aside id="sidebar">
 		<div id="sidebar-head-topbar">
 			<div class="sidebar-head-topbar-box">
@@ -180,11 +179,11 @@
 	<div id="theatre-head" class="grid">
 		<div id="theatre-head-topbar" class="grid">
 			<div class="col-3 col-xs-2_5">
-				<label for="is__sidebar-open" class="i__hamburger e__btn">
+				<span ng-click="isSidebarOpen = !isSidebarOpen" class="i__hamburger e__btn">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</label>
+				</span>
 			</div>
 			<div class="col-6">
 				<h1 id="theatre-head-topbar-title" class="i-f__gohappylogo"></h1>
