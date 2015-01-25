@@ -12,8 +12,11 @@ angular.module('happyHour.views.topRoutes', ['ngRoute'])
 
 	$scope.routes = [];
 	// Toprouten aus dem Backend auslesen
+	
+	$scope.showLoading = true;
 	BackendService.getToproutes().then(function(routes) {
 		$scope.routes = routes;
+		$scope.showLoading = false;
 	});
 
 	// Route öffnen
