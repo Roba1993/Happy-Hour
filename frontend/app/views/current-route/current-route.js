@@ -168,11 +168,18 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	// Die Route auf dem Gerät persistieren
 	$scope.saveRoute = function() {
-		// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
-		if($scope.routeName !== '' && $scope.routeName.length <= 50) {
-			$scope.route.name = $scope.routeName;
-			RoutesPersistenceService.add($scope.route);
+		// Wenn der Speicher voll ist Warnung ausgeben
+		if(RoutesPersistenceService.isFull()) {
+			$scope.saveErrorPopupOpen = true;
 			$scope.namePopupOpen = false;
+		}
+		else {
+			// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
+			if($scope.routeName !== '' && $scope.routeName.length <= 50) {
+				$scope.route.name = $scope.routeName;
+				RoutesPersistenceService.add($scope.route);
+				$scope.namePopupOpen = false;
+			}
 		}
 	};
 

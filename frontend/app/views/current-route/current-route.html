@@ -84,7 +84,7 @@
 <div class="e__overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
 	<div class="e__overlay-window">
         <div class="e__overlay-window-content">
-			<h1>Bitte Routennamen eingeben</h1>
+			<h1 class="notification">Bitte Routennamen eingeben</h1>
 			<p>
 				<form><input type="text" ng-model="routeName"></form>
 			</p>
@@ -92,6 +92,18 @@
 		<div class="e__overlay-window-button">
 			<div class="e__btn col-6" ng-click="namePopupOpen = false">Abbrechen</div>
 			<div class="e__btn col-6" ng-click="saveRoute()">Speichern</div>
+		</div>
+	</div>
+</div>
+
+<div class="e__overlay" ng-class="{is__open: saveErrorPopupOpen}">
+	<div class="e__overlay-window">
+        <div class="e__overlay-window-content">
+			<h1 class="error">Maximale Anzahl erreicht!</h1>
+			<p>Lösche zuerst lokale Routen um neue hinzufügen zu können</p>
+		</div>
+		<div class="e__overlay-window-button">
+			<div class="e__btn col-12" ng-click="saveErrorPopupOpen = false">Ok</div>
 		</div>
 	</div>
 </div>
