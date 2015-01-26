@@ -5,7 +5,7 @@ package de.dhbw.hh.models;
  * mehrere verschiedene Öffnungszeiten haben. 
  * @author Tobias Häußermann
  */
-public class JSONOpeningTimes {
+public class JSONOpeningTime {
 
 	// Erstellen der Variablen
 	private String 	barID;

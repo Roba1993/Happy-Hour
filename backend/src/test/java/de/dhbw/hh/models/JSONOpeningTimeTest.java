@@ -10,7 +10,7 @@ import org.junit.Test;
  *  
  * @author Tobias Häußermann
  */
-public class JSONOpeningTimesTest {
+public class JSONOpeningTimeTest {
 
 	private static String barID 		= "abcdefghijklmnopqrstuvwxyz";
 	private static String startTime 	= "18:00";
@@ -18,7 +18,7 @@ public class JSONOpeningTimesTest {
 	private static int[] days 			= {1, 3, 4, 5};
 	
 	// Das Öffnungszeitenobjekt zum Testen
-	private static JSONOpeningTimes ot;
+	private static JSONOpeningTime ot;
 	
 	/**
      * Diese Funktion wird vor jedem Testrun aufgerufen und setzt das
@@ -26,7 +26,7 @@ public class JSONOpeningTimesTest {
      */
 	@Before
 	public void setUp() {	
-		ot = new JSONOpeningTimes();
+		ot = new JSONOpeningTime();
 		ot.setBarID(barID);
 		System.out.println("BarID: "+barID);
 		ot.setStartTime(startTime);
