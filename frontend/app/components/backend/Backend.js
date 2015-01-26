@@ -39,7 +39,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {Integer} barId ID der Bar, für die eine Meldung gespeichert werden soll.
 			 * @param  {String} description Text der Meldung.
-			 * @return {Promise(Boolean)} Gibt `true` zurück wenn die Meldung erfolgreich gespeichert wurde und `false` wenn nicht.
+			 * @return {Promise(Boolean)} Gibt `true` zurück, wenn die Meldung erfolgreich gespeichert wurde und `false` wenn nicht.
 			 */
 			reportData: function(barId, description) {
 				var url = baseUrl+'/bars/' + barId + '/reports';
@@ -55,7 +55,7 @@ angular.module('happyHour.backend.Backend', [])
 
 			},
 			/**
-			 * Speichert Routen im Backend und übergibt einen Link zu der erstellten Route
+			 * Speichert eine Route im Backend und übergibt einen Link zu der erstellten Route
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {Route} route JSON Route Objekt, das direkt ins Backend weitergeleitet werden kann.
@@ -74,15 +74,15 @@ angular.module('happyHour.backend.Backend', [])
 				});
 				return deferred.promise;
 			},
-            /**
-			 * Speichert Happy-Hours im Backend und übergibt einen Boolean ob das Schreiben erfolgreich war oder nicht.
+      /**
+			 * Speichert eine Happy Hour im Backend und übergibt einen Boolean, ob das Schreiben erfolgreich war oder nicht.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {HappyHour} happy JSON Happy-Hour Objekt, das direkt ins Backend weitergeleitet werden kann.
 			 * @param  {Integer} barId Die Bar ID, für die die Happy Hour gilt.
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
-			 * @return {Promise(Boolean)} Gibt ein Boolean, ob das Schreiben erfolgreich war zurück.
+			 * @return {Promise(Boolean)} Gibt `true` zurück, wenn die Happy Hour erfolgreich gespeichert wurde und `false` wenn nicht.
 			 */
 			saveHappy: function(happy, barId, admin, adminpw) {
 				var url = baseUrl+'/'+barId+'/hour?admin='+admin+'&adminpw='+adminpw;
@@ -97,11 +97,11 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 			},
 			/**
-			 * Gibt eine Route mit dem angeforderten hash zurück.
+			 * Gibt eine Route mit dem angeforderten Hash zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param  {String} hash Ein Hashwert, der zuvor beim Speichern einer Route zurückgegeben wurde.
-			 * @return {Promise(Route)} Route mit allen darin enthaltenen Bars.
+			 * @return {Promise(Route)} Ein Routen Objekt, mit allen darin enthaltenen Bars.
 			 */
 			getRoute: function(hash) {
 
@@ -138,12 +138,12 @@ angular.module('happyHour.backend.Backend', [])
 
 			},
 			/**
-			 * Gibt alle Meldungen zurück.
+			 * Gibt alle gemeldeten Bars mit den zugehörigen Meldungen zurück.
 			 *
 			 * @author Daniel Reichert, Kim Rinderknecht
 			 * @param {String} admin Adminname
 			 * @param {String} adminpw Adminpasswort
-			 * @return {Promise(Report[])} Alle Bar IDs mit den Meldung.
+			 * @return {Promise(Report[])} Alle vorliegenden Meldungen zu allen Bars.
 			 */
 			getReports: function(admin, adminpw) {
 
@@ -159,15 +159,15 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 
 			},
-			/**
-			* Loescht eine bestimmte Meldung einer Bar.
+		 /**
+			* Loescht eine bestimmte Meldung zu einer Bar.
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
 			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
-			* @param {Integer} reportId Die ID der zu löschenden Meldung
+			* @param {Integer} reportId Die ID der zu loeschenden Meldung
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
+			* @return {Promise(Boolean)} Gibt `true` zurück, wenn die Meldung erfolgreich gelöscht wurde und `false` wenn nicht.
 			*/
 			delReport: function(barId, reportId, admin, adminpw) {
 
@@ -183,14 +183,14 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 
 			},
-			/**
-			* Löscht alle Meldungen einer Bar.
+		 /**
+			* Löscht alle zu einer Bar vorhandene Meldungen.
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
-			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
+			* @param {Integer} barId Die ID der Bar mit den Meldungen
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
+			* @return {Promise(Boolean)} Gibt `true` zurück, wenn alle Meldungen zu einer Bar erfolgreich gelöscht wurden und `false` wenn nicht.
 			*/
 			delReports: function(barId, admin, adminpw) {
 
@@ -206,14 +206,14 @@ angular.module('happyHour.backend.Backend', [])
 				return deferred.promise;
 
 			},
-			/**
-			* Löscht die HappyHour mit der übergebenen ID
+		 /**
+			* Löscht die Happy Hour Angabe mit der übergebenen ID.
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
 			* @param {Integer} hourId Die ID der zu löschenden HappyHour
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
-			* @return {Promise(Boolean)} true, wenn löschen erfolgreich, sonst false.
+			* @return {Promise(Boolean)} Gibt `true` zurück, wenn die Happy Hour erfolgreich gelöscht wurde und `false` wenn nicht.
 			*/
 			deleteHappy: function(hourId, admin, adminpw) {
 
