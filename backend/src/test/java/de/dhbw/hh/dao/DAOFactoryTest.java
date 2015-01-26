@@ -6,8 +6,6 @@ import de.dhbw.hh.utils.Settings;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Properties;
-
 import static org.junit.Assert.*;
 
 /**
@@ -48,4 +46,5 @@ public class DAOFactoryTest {
     public void testGetDaoFactory() throws Exception {
         assertNotNull(H2DAOFactory.getDaoFactory(DAOFactory.H2, properties));
     }
+    
 }

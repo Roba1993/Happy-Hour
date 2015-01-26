@@ -313,4 +313,5 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		
 		return openingTimes;
 	}
+	
 }
