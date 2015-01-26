@@ -26,13 +26,30 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 		weekday: weekdayToday
 	};
 
+	var createRoute = function() {
+		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
+			if(bars.length > 0) {
+				var route = RouteGeneratorService.createRoute(bars, routeOptions);
+				AppStatusPersistenceService.setRoute(route);
+				$location.path('/currentRoute');
+			}
+			else {
+				$scope.noBarPopupOpen = true;
+			}
+		});
+	};
+
 	$scope.buttonClicked = function() {
 		$scope.showLoading = true;
-		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
-			console.log(bars);
-			var route = RouteGeneratorService.createRoute(bars, routeOptions);
-			AppStatusPersistenceService.setRoute(route);
-			$location.path('/currentRoute');
-		});
+		navigator.geolocation.getCurrentPosition(
+			function(position) {
+				routeOptions.location.latitude = position.coords.latitude;
+				routeOptions.location.longitude = position.coords.longitude;
+				createRoute();
+			},
+			function() {
+				createRoute();
+			}
+		);
 	};
 }]);

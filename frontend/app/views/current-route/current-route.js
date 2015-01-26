@@ -92,9 +92,14 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 				$scope.showLoading = true;
 				BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
 					possibleBars = bars;
-					_.forEach($scope.route.timeframes, function() {
-						$scope.bars.push(possibleBars);
-					});
+					if(possibleBars.length > 0) {
+						_.forEach($scope.route.timeframes, function() {
+							$scope.bars.push(possibleBars);
+						});
+					}
+					else {
+						$scope.noBarPopupOpen = true;
+					}
 					$scope.showLoading = false;
 				});
 			}
@@ -123,8 +128,13 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	$scope.reloadRoute = function() {
 		$scope.showLoading = true;
 		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
-			var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
-			$scope.route = route;
+			if(bars.length > 0) {
+				var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
+				$scope.route = route;
+			}
+			else {
+				$scope.noBarPopupOpen = true;
+			}
 			$scope.showLoading = false;
 		});
 	};
@@ -150,6 +160,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	$scope.reportBar = function(barId, reportBarText) {
 		BackendService.reportData(barId, reportBarText);
+		$scope.reportPopupNotification = true;
 	};
 
 	/**
