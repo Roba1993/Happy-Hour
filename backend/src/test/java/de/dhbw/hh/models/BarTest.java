@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Diese Klasse testet die Klasse Bar
+ * Diese Klasse testet die Datenklasse Bar
  * 
  * @author Tobias Häußermann
  */
