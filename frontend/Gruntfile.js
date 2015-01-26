@@ -23,15 +23,28 @@ module.exports = function(grunt) {
 		},
 
 		copy: {
-			main: {
+			dist: {
 				files: [
-					{expand: true, cwd: 'app/', src: ['images/**'], dest: 'dist/'},
+					//{expand: true, cwd: 'app/', src: ['images/**'], dest: 'dist/'},
 					{expand: true, cwd: 'app/', src: ['fonts/**'], dest: 'dist/'},
-					{expand: true, cwd: 'app/', src: ['*.png', '*.ico'], dest: 'dist/'},
+					{expand: true, cwd: 'app/', src: ['*.ico'], dest: 'dist/'},
 					{expand: true, cwd: 'app/', src: ['views/**/*.html'], dest: 'dist/'},
 					{expand: true, cwd: 'app/', src: ['components/**/*.html'], dest: 'dist/'},
 				]
 			},
+		},
+
+		imagemin: {
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: 'app/',
+						src: '**/*.{png,jpg,gif,svg}',
+						dest: 'dist/'
+					}
+				]
+			}
 		},
 
 		uglify: {
@@ -107,8 +120,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-newer');
 
 	grunt.registerTask('default', ['jshint', 'karma', 'processhtml', 'uglify', 'concat', 'cssmin', 'copy']);
 	grunt.registerTask('test', ['karma']);
-	grunt.registerTask('build', ['processhtml', 'uglify', 'concat', 'cssmin', 'copy']);
+	grunt.registerTask('build', ['processhtml', 'uglify', 'concat', 'cssmin', 'newer:imagemin:dist', 'copy']);
 };
