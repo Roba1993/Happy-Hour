@@ -89,7 +89,8 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 		 */
 		function isBeforeOverNight(time1, time2) {
 			var referenceTime = time('12:00:00');
-			if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime)) {
+			var breakTime = time('00:00:00');
+			if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime) || time1.isSame(breakTime) && time2.isAfter(referenceTime)) {
 				return !time1.isBefore(time2);
 			}
 			else {
