@@ -697,12 +697,12 @@
     width: 20px;
     margin-left: -2px;
 }
-.i__hamburger.is__arrow .i__hamburger > .icon-bar:first-of-type {
+.i__hamburger.is__arrow > .icon-bar:first-of-type {
     -webkit-transform: rotate(140deg);
     transform: rotate(140deg);
     margin-bottom: -1px;
 }
-.i__hamburger.is__arrow .i__hamburger > .icon-bar:last-of-type {
+.i__hamburger.is__arrow > .icon-bar:last-of-type {
     -webkit-transform: rotate(220deg);
     transform: rotate(220deg);
     margin-top: -1px;
