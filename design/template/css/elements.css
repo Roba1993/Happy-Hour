@@ -895,10 +895,12 @@
     z-index: 999;
     position: absolute;
     top: -100%;
+    display: none;
 }
 
 .e__overlay.is__open {
     top: 0;
+    display: block;
 }
 
 .e__overlay-stage {
