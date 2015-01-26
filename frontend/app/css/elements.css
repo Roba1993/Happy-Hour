@@ -55,6 +55,17 @@
 
 /** /Navigationen **/
 
+/** Infobox - Patrick **/
+.e__infobox {
+    padding:15px;
+    background-color: #337ab7;
+    font-size:0.9rem;
+    font-weight:400;
+    margin: 10px;
+    color:#fff;
+
+}
+/** /Infobox - Patrick **/
 /**
  * Liste - BIG
  * Fuer RecentRoute
@@ -677,30 +688,24 @@
     margin: 4px 0px;
 }
 
-.i__back {
-    padding: 18px 21px 18px 15px;
+.i__hamburger.is__arrow > .icon-bar:nth-last-of-type(2) {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
-
-.i__back > .icon-bar {
-    background-color: #ABABAB;
-    display: block;
-    height: 3px;
-    border-radius: 1px;
+.i__hamburger.is__arrow > .icon-bar:first-of-type,
+.i__hamburger.is__arrow > .icon-bar:last-of-type {
+    width: 20px;
+    margin-left: -2px;
 }
-
-.i__back > .icon-bar:first-of-type {
+.i__hamburger.is__arrow > .icon-bar:first-of-type {
+    -webkit-transform: rotate(140deg);
     transform: rotate(140deg);
-    width: 20px;
+    margin-bottom: -1px;
 }
-
-.i__back > .icon-bar:last-of-type {
+.i__hamburger.is__arrow > .icon-bar:last-of-type {
+    -webkit-transform: rotate(220deg);
     transform: rotate(220deg);
-    width: 20px;
-}
-
-.i__back > .icon-bar:nth-of-type(2) {
-    width: 31px;
-    margin: 4px 0px;
+    margin-top: -1px;
 }
 
 /** Icons mit Iconfont **/
@@ -830,46 +835,52 @@
 
 /*** Impressum - Simon ***/
 
-#e__impressum {
+.e__fullscreen {
     background: #fff;
     width: 100%;
     height: 100%;
     z-index: 999;
-    position: absolute;
+    position: fixed;
     top: -1000%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    z-index:9999;
 }
 
-#e__impressum-header {
-    position: fixed;
+.e__fullscreen-header {
     z-index: 9999;
     overflow: hidden;
-    height: 50px;
     background: #fff;
     width: 100%;
     padding: 15px;
     box-shadow: 0px 1px 15px #afafaf;
+    height: 50px;
+    position: absolute;
+    top:0;
 }
 
-#e__impressum-header h1 {
+.e__fullscreen-header h1 {
     display: inline;
 }
 
-#e__impressum-header a {
+.e__fullscreen-header a {
     float: right;
 }
 
-#e__impressum-content {
+.e__fullscreen-content {
     padding: 15px;
-    padding-top: 55px;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-#e__impressum.is__open {
+.e__fullscreen.is__open {
     top: 0;
+    bottom:0;
 }
 
-#e__impressum h1 {
+.e__fullscreen h1 {
     font-size: 1.1rem;
     font-weight: 500;
 }

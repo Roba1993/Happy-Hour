@@ -117,4 +117,5 @@ public class Bar {
 			"\nimageURL: "+imageUrl+"\nLongitude: "+location.longitude+"\nLatitude: "+location.latitude+"\nAdresse: "+
 			address+"\n-----------------");
 	}
+	
 }

@@ -87,7 +87,7 @@ public class TopRouteREST {
 			}	
 			
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(r.getStatus() + r.getDescription() + r.getData());
+			LOG.debug(r.getStatus() + r.getDescription());
 					
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
 			response.type("application/json");

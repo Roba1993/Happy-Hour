@@ -7,6 +7,7 @@ import org.junit.Test;
 
 /**
  * Diese Klasse testet die Klasse JSONHappyHour
+ * 
  * @author Tobias Häußermann
  */
 public class JSONHappyHourTest {
@@ -54,4 +55,5 @@ public class JSONHappyHourTest {
 		}
 		assertEquals(hh.toString(), result);
 	}
+	
 }

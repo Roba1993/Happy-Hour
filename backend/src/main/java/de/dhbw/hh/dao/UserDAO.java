@@ -15,4 +15,5 @@ public interface UserDAO {
 	 * @return gesamte Route-Objekt bei Erfolg. Wenn nichts gefunden wird null
 	 */	
 	public boolean checkLogin(String name, String password);
+	
 }

@@ -40,9 +40,10 @@ public class HashConverter {
 	 
 		}catch (NoSuchAlgorithmException e) {
 			LOG.error(e.getMessage());
-			}
+		}
 		// Rückgabe des MD5 Hash-Werts
 		return hash;
-		}
 	}
+	
+}
 

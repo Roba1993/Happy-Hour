@@ -40,4 +40,5 @@ public abstract class DAOFactory {
      * Schließt eine Factory und deren Connections.
      */
     public abstract void close();
+    
 }

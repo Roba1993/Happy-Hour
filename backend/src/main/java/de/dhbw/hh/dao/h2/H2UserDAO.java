@@ -36,7 +36,7 @@ public class H2UserDAO implements UserDAO {
     }
 		
 	/**
-	 * Überprüft ob das gehashte Passwort mit dem in der Datenbank übereinstimmt
+	 * Überprüft, ob das gehashte Passwort mit dem in der Datenbank übereinstimmt
 	 * @return Boolean
 	 */		
 	@Override

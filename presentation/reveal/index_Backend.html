@@ -70,7 +70,36 @@
 				<section>
 					<section>
 					<h2>Ablaufschema des Backends</h2>
-					<p><img src="images/Ablaufschema.png" width="800px" height="600px00px" alt="Ablaufschema"></p>
+					<p><img src="images/Ablaufschema Präsentation.png" width="800px" height="600px" alt="Ablaufschema"></p>
+					</section>
+					
+					<section>
+						<h2>H2 Datenbank</h2>
+						<p><img src="images/Ablaufschema Präsentation.png" width="400px" height="300px" align="right" alt="Ablaufschema"></p>
+						<p> In der Datenbank sind folgende Tabellen enthalten: </p>
+						<ul>
+							<li>barReport</li>
+							<li>user</li>
+							<li>happyHour</li>
+							<li>route</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Foursquare DAO</h2>
+						<div style="float:left;width:50%">
+							<ul>
+								<li>Auswahl des Datenlieferers durch einen Vergleich</li>
+								<li>Zugriff über Rest API</li> 
+								<li>Die Abfrage der Daten wird durch Suchparameter eingeschränkt</li> 
+									<ul>
+										<li>Umkreis</li>
+									</ul>
+							</ul>
+						</div>
+						<div style="float:left;width:50%">
+							<img src="images/Ablaufschema Präsentation.png" width="400px" height="300px" align="right" alt="Ablaufschema">
+						</div>
 					</section>
 					
 					<section>
@@ -88,7 +117,7 @@
 								<tr>
 									<td>/bars</td>
 									<td>GET</td>
-									<td>Alle Informationen zu den Bars in einem definierten Umkreis eines Standorts auslesen</td>
+									<td>Alle Informationen zu den Bars im Umkreis auslesen</td>
 									<td>Tobias</td>
 								</tr>	
 								<tr>
@@ -102,7 +131,47 @@
 									<td>GET</td>
 									<td>Alle Top Routen auslesen</td>
 									<td>Maren</td>
-								</tr>	
+								</tr>							
+								<tr>
+									<td>/routes</td>
+									<td>POST</td>
+									<td>Route in der Datenbank speichern</td>
+									<td>Michael</td>
+								</tr>
+								<tr>
+									<td>/bars/{id}/reports</td>
+									<td>POST</td>
+									<td>Fehler einer Bar melden</td>
+									<td>Jonas</td>
+								</tr>							
+								<tr>
+									<td>/bar/{id}/hour</td>
+									<td>POST</td>
+									<td>Neue Happy Hour speichern</td>
+									<td>Marcus</td>
+								</tr>
+								<tr>
+									<td>/delHour/{hourId}</td>
+									<td>DELETE</td>
+									<td>Happy Hour löschen</td>
+									<td>Jonas</td>
+								</tr>
+							</body>	
+						</table>									
+					</section>
+					
+					<section>
+						<h2>Administrator Pfade</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Pfad</th>
+									<th>HTTP</th>
+									<th>Beschreibung</th>
+									<th>Verantwortlicher</th>
+								</tr>
+							</thead>
+							<body>
 								<tr>
 									<td>/bars/reports</td>
 									<td>GET</td>
@@ -110,15 +179,21 @@
 									<td>Jonas</td>
 								</tr>
 								<tr>
-									<td>/...</td>
-									<td>...</td>
-									<td>Stellt Frontend das auch vor?</td>
-									<td>...</td>
+									<td>/bars/{barID}/report</td>
+									<td>DELETE</td>
+									<td>Alle Fehlermeldungen einer Bar löschen</td>
+									<td>Jonas</td>
 								</tr>
-							</body>	
-						</table>	
-								
+								<tr>
+									<td>/report/{id}</td>
+									<td>DELETE</td>
+									<td>Bestimmte Fehlermeldung löschen</td>
+									<td>Tabea</td>
+								</tr>
+							</body>
+						</table>
 					</section>
+					
 				</section>
 				
 				<!-- SLIDE 2 -->

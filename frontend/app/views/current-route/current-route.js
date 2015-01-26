@@ -92,9 +92,16 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 				$scope.showLoading = true;
 				BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
 					possibleBars = bars;
-					_.forEach($scope.route.timeframes, function() {
-						$scope.bars.push(possibleBars);
-					});
+					// Wenn Bars verfügbar sind, verfügbar machen
+					if(possibleBars.length > 0) {
+						_.forEach($scope.route.timeframes, function() {
+							$scope.bars.push(possibleBars);
+						});
+					}
+					// Ansonsten Fehlermeldung anzeigen
+					else {
+						$scope.noBarPopupOpen = true;
+					}
 					$scope.showLoading = false;
 				});
 			}
@@ -105,26 +112,23 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		}
 	});
 
-	$scope.$watch('barChosen', function() {
-		// Herausfinden welcher Slot befüllt ist --> passenden Timeframe mit der Bar befüllen
-		_.forEach($scope.barChosen, function(bar, index) {
-			if(bar !== undefined) {
-				$scope.route.timeframes[index].bar = bar;
-			}
-		});
-
-		// Array leeren um das Erkennen des Indizes jederzeit zu ermöglichen
-		$scope.barChosen = [];
-	}, true);
-
 	/**
 	 * NAVIGATION
 	 */
+	
+	// Generiert eine neue Route auf Basis der Routenoptionen
 	$scope.reloadRoute = function() {
 		$scope.showLoading = true;
 		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
-			var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
-			$scope.route = route;
+			// Wenn Bars verfügbar sind, Route generieren
+			if(bars.length > 0) {
+				var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
+				$scope.route = route;
+			}
+			// Ansonsten Fehlermeldung anzeigen
+			else {
+				$scope.noBarPopupOpen = true;
+			}
 			$scope.showLoading = false;
 		});
 	};
@@ -144,12 +148,15 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		}
 	};
 
+	// Löscht eine Bar aus einem Timeframe
 	$scope.removeBar = function(index) {
 		$scope.route.timeframes[index].bar = null;
 	};
 
+	// Sendet eine Reportnachricht an das Backend
 	$scope.reportBar = function(barId, reportBarText) {
 		BackendService.reportData(barId, reportBarText);
+		$scope.reportPopupNotification = true;
 	};
 
 	/**
@@ -183,6 +190,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		}
 	};
 
+	// Sendet eine Route zum sharen an das Backend
 	$scope.shareRoute = function() {
 		BackendService.saveRoute($scope.route).then(function(hash) {
 			$scope.shareLink = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/#/openRoute/' + hash;

@@ -47,13 +47,15 @@ public class H2BarReportDAO implements BarReportDAO {
      */
 	@Override
 	public boolean insertBarReport(BarReport barReport) {
+		// SQL-String, um den Bar Report in die H2 Datenbank einzufügen
 		String sql = "INSERT INTO barReport (barID, description) VALUES (?,?)";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+	        // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, barReport.getBarID());
                 preparedStatement.setString(2, barReport.getDescription());
@@ -83,33 +85,35 @@ public class H2BarReportDAO implements BarReportDAO {
      */
 	@Override
 	public boolean deleteBarReport(String barID) {
-		 String sql = "DELETE FROM barReport WHERE barID=?";
+		// SQL-String, um die Bar Reports aus der H2 Datenbank zu löschen
+		String sql = "DELETE FROM barReport WHERE barID=?";
 		 
-	        try (Connection connection = cpds.getConnection()) {
-	            // Immer ohne Autocommits arbeiten
-	            connection.setAutoCommit(false);
+		 // Holt eine Connection zur Datenbank aus dem Connectionpool 
+		 try (Connection connection = cpds.getConnection()) {
+			 // verbietet den automatischen Commit zur Datenbank
+			 connection.setAutoCommit(false);
 
-	            // Immer mit PreparedStatements arbeiten
-	            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-	                preparedStatement.setString(1, barID);
+			 // Erstellt das Prepared Statement für die Datenbankabfrage
+			 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+				 preparedStatement.setString(1, barID);
 
-	                // Füge das Statement der Ausführungsschlange hinzu
-	                preparedStatement.addBatch();
+				 // Füge das Statement der Ausführungsschlange hinzu
+				 preparedStatement.addBatch();
 
-	                // Führe alle Statements aus
-	                preparedStatement.executeBatch();
-	            }
+				 // Führe alle Statements aus
+				 preparedStatement.executeBatch();
+			 }
 
-	            // Schreibe die Änderungen in die Datenbank
-	            connection.commit();
+			 // Schreibe die Änderungen in die Datenbank
+			 connection.commit();
 
-	            return true;
+			 return true;
 	            
-	        } catch (SQLException e) {
-	        	LOG.error(e.getMessage());
-	        }
+		 } catch (SQLException e) {
+			 LOG.error(e.getMessage());
+		 }
 	        
-	        return false;
+		 return false;
 	}
 	
 	/**
@@ -120,31 +124,33 @@ public class H2BarReportDAO implements BarReportDAO {
      */
 	@Override
 	public boolean deleteSpecificBarReport(int id) {
+		// SQL-String zum Löschen eines spezifischen Bar Reports
 		 String sql = "DELETE FROM barReport WHERE id=?";
 
-	        try (Connection connection = cpds.getConnection()) {
-	            // Immer ohne Autocommits arbeiten
-	            connection.setAutoCommit(false);
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
+		 try (Connection connection = cpds.getConnection()) {
+			// verbietet den automatischen Commit zur Datenbank
+			 connection.setAutoCommit(false);
 
-	            // Immer mit PreparedStatements arbeiten
-	            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-	                preparedStatement.setInt(1, id);
+			// Erstellt das Prepared Statement für die Datenbankabfrage
+			 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+				 preparedStatement.setInt(1, id);
 
-	                // Füge das Statement der Ausführungsschlange hinzu
-	                preparedStatement.addBatch();
+				 // Füge das Statement der Ausführungsschlange hinzu
+				 preparedStatement.addBatch();
 
-	                // Führe alle Statements aus
-	                preparedStatement.executeBatch();
-	            }
+				 // Führe alle Statements aus
+				 preparedStatement.executeBatch();
+			 }
 
-	            // Schreibe die Änderungen in die Datenbank
-	            connection.commit();
-	            return true;
-	        } catch (SQLException e) {
-	        	LOG.error(e.getMessage());
-	        }
+			 // Schreibe die Änderungen in die Datenbank
+			 connection.commit();
+			 return true;
+		 } catch (SQLException e) {
+			 LOG.error(e.getMessage());
+		 }
 	        
-	        return false;
+	return false;
 	}
 
 	/**
@@ -156,19 +162,22 @@ public class H2BarReportDAO implements BarReportDAO {
      */
 	@Override
 	public Collection<BarReport> findBarReport(String barID) {
+		// Abfrage-String, um einen bestimmten Bar Report aus der H2 Datenbank zu holen
 		String sql = "SELECT id, barID, description FROM barReport WHERE barID=?";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, barID);
 
                 // Hole die Daten von der Datenbank
                 ResultSet resultSet = preparedStatement.executeQuery();
                 
+                // Erstellt eine Collection für die Datenrückgabe
                 Collection<BarReport> runs = new ArrayList<BarReport>();
 
                 // Schreibe die Daten ins BarReport Objekt
@@ -198,18 +207,21 @@ public class H2BarReportDAO implements BarReportDAO {
      */
 	@Override
 	public Collection<BarReport> findAllBarReports() {
+		// Abfrage-String, um alle Bar Reports aus der H2 Datenbank zu holen
 		String sql = "SELECT id, barID, description FROM barReport";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
                 // Hole die Daten von der Datenbank
                 ResultSet resultSet = preparedStatement.executeQuery();
 
+                // Erstellt eine Collection für die Datenrückgabe
                 Collection<BarReport> runs = new ArrayList<BarReport>();
 
                 // Schreibe die Daten ins BarReport Objekt
