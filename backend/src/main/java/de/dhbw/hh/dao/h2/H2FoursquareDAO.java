@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.models.JSONHappyHour;
+import de.dhbw.hh.utils.HashConverter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,37 +36,36 @@ import de.dhbw.hh.utils.Settings;
  * @version 0.9
  */
 public class H2FoursquareDAO implements FoursquareDAO{
-	
+
+	// Initialisiert einen Logger für die Fehlerausgabe
+	static final Logger LOG = LoggerFactory.getLogger(H2FoursquareDAO.class);
+	// Deklaration des 4SquareCaches
+	@SuppressWarnings("rawtypes")
+	private static Cache otFoursquareCache;
+	private static Cache rqFoursquareCache;
 	// Zugriff auf die allgemeinen Settings
 	private Settings settings;
-	
-	// Initialisiert einen Logger für die Fehlerausgabe
-    static final Logger LOG = LoggerFactory.getLogger(H2FoursquareDAO.class);
-    
-    // Deklaration des 4SquareCaches
-    @SuppressWarnings("rawtypes")
-	private static Cache otFoursquareCache;
-    private static Cache rqFoursquareCache;
-    
-    // Initialisierung des 4SquareCaches
-    public static void initCache(Settings settings){
-    	otFoursquareCache = CacheBuilder.newBuilder()
-        	.maximumSize(10000)
-        	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.otCacheTimer")), TimeUnit.MINUTES)
-        	.build();
-    	rqFoursquareCache = CacheBuilder.newBuilder()
-            	.maximumSize(10000)
-            	.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.rqCacheTimer")), TimeUnit.MINUTES)
-            	.build();
-    }
-    
-    // Zugriff auf die allgemeinen Settings wird erstellt
-    public H2FoursquareDAO(){
-    	settings = new Settings();
-    	settings.loadDefault();
-    }
-    
-   /**
+	private DAOFactory daoFactory;
+
+	// Zugriff auf die allgemeinen Settings wird erstellt
+	public H2FoursquareDAO(Settings settings, DAOFactory daoFactory){
+		this.settings = settings;
+		this.daoFactory = daoFactory;
+	}
+
+	// Initialisierung des 4SquareCaches
+	public static void initCache(Settings settings){
+		otFoursquareCache = CacheBuilder.newBuilder()
+				.maximumSize(10000)
+				.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.otCacheTimer")), TimeUnit.MINUTES)
+				.build();
+		rqFoursquareCache = CacheBuilder.newBuilder()
+				.maximumSize(10000)
+				.expireAfterWrite(Long.parseLong((String)settings.get("foursquare.rqCacheTimer")), TimeUnit.MINUTES)
+				.build();
+	}
+
+	/**
 	 * Diese Methode liefert gegen eine Liste von Parametern einen Array aus Bar-Objekten
 	 * zurück. Die Methode nutzt ihrerseits die private Methode {@code explore(String query)}
 	 * um Ergebnisse zu bekommen. Die Suchergebnisse können durch folgende Parameter 
@@ -72,170 +74,177 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @param longitude GPS-Location Longitude als float
 	 * @param latitude GPS-Location Latitude als float
 	 * @param radius Radius in Metern
+	 * @param weekday Wochentag im Bereich von 1-7
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
 	 *
 	 * @author Tobias Häußermann
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius){
-		//TODO Kommentar
-		String key = latitude+","+longitude+","+radius;
-		if(rqFoursquareCache.asMap().containsKey(key)){
-			return (ArrayList<Bar>) rqFoursquareCache.asMap().get(key);
+	public ArrayList<Bar> getBarsInArea(float longitude, float latitude, float radius, int weekday){
+		// Erstelle einen Hash aus den übergebenen Werten
+		String hashKey = HashConverter.md5(latitude+","+longitude+","+radius+","+weekday);
+
+		// Überprüfe ob für diesen Hash bereits Bars im Cache enhalten ist
+		if(rqFoursquareCache.asMap().containsKey(hashKey)){
+			// Falls Bars zu diesem Hash existieren, gebe diese zurück
+			return (ArrayList<Bar>) rqFoursquareCache.asMap().get(hashKey);
 		}
-		
-		// Zu finden auf GitHub (zur Authentifizierung)
-		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
-		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
-		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
-		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
-		// GPS-Location
-		float LONGITUDE=0, LATITUDE	= 0;			
-		// Kategorie wie "bars", "food"
-		String CATEGORY				= "bar";
-		// Radius in Metern
-		int RADIUS					= 100;			//Radius in Metern
-		
-		// Füllen der Parameter Longitude, Latitude und Radius mit den Übergabewerten
-		LONGITUDE = longitude;
-		LATITUDE = latitude;
-		if((int)(radius*1000) >= RADIUS)			//Minimalwert von 100 Metern!
-			RADIUS = (int)(radius*1000);
-		
-		// Fertiger Query-String für eine Foursquare-Abfrage
-		String query = "https://api.foursquare.com/v2/venues/explore"+
-				"?client_id="		+CLIENT_ID+
-				"&client_secret="	+CLIENT_SECRET+
-				"&v="				+VERSION+
-				"&ll="				+LATITUDE+","+LONGITUDE+
-				"&query="			+CATEGORY+
-				"&radius="			+RADIUS;
-	
-		ArrayList<Bar> bars = explore(query);
-		
+
+		// Foursquare benötigt die Radius angabe in Metern
+		int rad =  (int) (radius * 1000);
+
+		// Hole alle Bars von Foursqare für die angegebene Position und Radius
+		ArrayList<Bar> bars = getBarsForPositions(latitude, longitude, rad);
+
+
 		for(int i=0;i<bars.size();i++){
 			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId()));
 		}
-		
-		rqFoursquareCache.put(key, bars);
-		
-		return bars;
+
+		ArrayList<Bar> rawBars = new ArrayList<Bar>();
+
+		rawBars = bars;
+		int count = rawBars.size();
+		for (int i = 0; i < count; i++) {
+			String id = rawBars.get(i).getId();
+			ArrayList<de.dhbw.hh.models.HappyHour> hh = (ArrayList<de.dhbw.hh.models.HappyHour>) daoFactory.getHappyHourDAO().findHappyHour(id);
+			// Transformiert die Happy-Hours der Datenbank in Happy-Hour-Objekte, die den Schnittstellendefinitionen
+			// zwischen Frontend und Backend entsprechen
+			ArrayList<JSONHappyHour> happyHours = transformHappyHours(hh);
+			// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu.
+			rawBars.get(i).setHappyHours(happyHours);
+		}
+
+
+		rqFoursquareCache.put(hashKey, rawBars);
+		return rawBars;
 	}
-	
+
 	/**
 	 * Diese private Methode kümmert sich um die Foursquare-Abfrage und interpretiert/ konvertiert 
 	 * anschließend das Ergebnis in eine ArrayList aus Bar-Objekten.
-	 * 
-	 * @param query Der fertige Html-Request als String
+	 *
+	 * @param latitude Latitude der Position
+	 * @param longitude Longitude der Position
+	 * @param radius Umkreis der Abgefragten Position
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
 	 *
 	 * @author Tobias Häußermann
+	 * @author2 Robert Schütte
 	 */
-	private ArrayList<Bar> explore(String query){
+	private ArrayList<Bar> getBarsForPositions(float latitude, float longitude, int radius){
+		// Rückgabe Variable
 		ArrayList<Bar> bars = new ArrayList<Bar>();
-		
+
 		try{
+			// Query-String für die Foursquare-Abfrage
+			String query = "https://api.foursquare.com/v2/venues/explore"+
+					"?client_id="		+ settings.getProperty("foursquare.clientID") +
+					"&client_secret="	+ settings.getProperty("foursquare.clientSecret") +
+					"&v="				+ new SimpleDateFormat("yyyyMMdd").format(new Date()) +
+					"&ll="				+latitude+","+longitude+
+					"&query="			+ "bar" +
+					"&radius="			+radius;
+
 			// Absenden eines Html-Requests mittels der Java-Funktionalität HttpURLConnection
-			URL foursquare = new URL(query);
+			URL url = new URL(query);
 			HttpURLConnection connection = null;
+
+			// Bis zu 3 Versuche um die Daten von Foursquare zu bekommen
 			int counter = 0;
-			while(connection == null || connection.getResponseCode() >= 500){
-				connection	= (HttpURLConnection) foursquare.openConnection();
+			while(connection == null || connection.getResponseCode() != 200){
+				connection	= (HttpURLConnection) url.openConnection();
 				counter++;
 				if(counter > 3)
 					continue;
 			}
-			
+
+			// Lese den String aus der Connection
 			InputStream is = connection.getInputStream();
-			
-			// Konvertierung der Html-Response in einen String
 			@SuppressWarnings("resource")
 			String response = new Scanner(is,"UTF-8").useDelimiter("\\A").next();
-			
-			// Interpretation des Antwort Strings durch einen JSON-Parser
-			final JSONParser jsonPrs = new JSONParser();
-			final JSONObject jsonObj = (JSONObject) jsonPrs.parse( response );
-			
-			JSONObject jsonResp = (JSONObject) jsonObj.get( "response" );
-			JSONArray  jsonTmp0 = (JSONArray)  jsonResp.get("groups");
-			JSONObject jsonGrps = (JSONObject) jsonTmp0.get(0);
-			JSONArray  jsonTmp1 = (JSONArray)  jsonGrps.get("items");
-			int size 			= jsonTmp1.size();
-			
-			for(int i=0;i<size;i++){
-				JSONObject venue = ((JSONObject)((JSONObject) jsonTmp1.get(i)).get("venue"));
-				
-				// Erzeugung & Befüllung eines neuen Bar-Objekts
+			is.close();
+			connection.disconnect();
+
+			// Wandel den Rückgabe String in ein JSON Objekt um
+			JSONObject jObject = (JSONObject) new JSONParser().parse(response);
+
+			// Hole die benötigten Daten aus dem Array
+			JSONObject jResponse = (JSONObject) jObject.get( "response" );
+			JSONArray  jGroups = (JSONArray) jResponse.get("groups");
+			JSONObject jGroup0 = (JSONObject) jGroups.get(0);
+			JSONArray  jItems = (JSONArray) jGroup0.get("items");
+
+			for(Object i : jItems){
+				// Abstrakhiere das JSON Bar Objekt
+				JSONObject jBar = (JSONObject) ((JSONObject) i).get("venue");
+
+				// Erstellen eines neuen Java Bar-Objektes
 				Bar bar = new Bar();
-				bar.setId((String) venue.get("id"));
-				bar.setName((String) venue.get("name"));
-				if(venue.get("rating") != null)
-					bar.setRating((float)((double)venue.get("rating")));
-				else 
-					bar.setRating(-1f);
-				if(venue.get("price") != null)
-					bar.setCosts((int) (long) ((JSONObject) venue.get("price")).get("tier"));
-				if(venue.get("categories") != null && ((JSONArray)venue.get("categories")).get(0) != null)
-					bar.setDescription((String) ((JSONObject)((JSONArray) venue.get("categories")).get(0)).get("name"));
-				bar.setImageUrl("");
-				
-				float lng = (float) (double) ((JSONObject) venue.get("location")).get("lng");
-				float lat = (float) (double) ((JSONObject) venue.get("location")).get("lat");
-				
+				bar.setId((String) jBar.get("id"));
+				bar.setName((String) jBar.get("name"));
+				bar.setAdress((String) ((JSONObject) jBar.get("location")).get("address"));
+				// setzte die Bewertung der Bar
+				if(jBar.get("rating") != null) {
+					bar.setRating((float) ((double) jBar.get("rating")));
+				}
+				else {
+					bar.setRating(-1);
+				}
+				// setze den Preis der Bar
+				if(jBar.get("price") != null) {
+					bar.setCosts((int) (long) ((JSONObject) jBar.get("price")).get("tier"));
+				}
+				else {
+					bar.setCosts(-1);
+				}
+				// setzte die Katregorie der Bar
+				if(jBar.get("categories") != null && ((JSONArray)jBar.get("categories")).get(0) != null) {
+					bar.setDescription((String) ((JSONObject) ((JSONArray) jBar.get("categories")).get(0)).get("name"));
+				}
+				// setzte die Bar Position
+				float lng = (float) (double) ((JSONObject) jBar.get("location")).get("lng");
+				float lat = (float) (double) ((JSONObject) jBar.get("location")).get("lat");
 				bar.setLocation(new Location(lng, lat));
-				bar.setAdress((String) ((JSONObject) venue.get("location")).get("address"));
-								
+
+				// Füge die Bar dem Array hinzu
 				bars.add(bar);
 			}
-			is.close();
-			connection.disconnect();
 		}catch(Exception e){
 			LOG.error(e.getMessage());
 		}
-		
+
+		// Gebe die gefunden Bars zurück
 		return bars;
 	}
-	
+
 	/**
-	 * Bisher noch nicht implementiert, da keine Notwendigkeit für diese Funktionalität
-	 * besteht.
+	 * Funktion um alle Öffnungszeiten einer einzelnen Bar über ihre ID von Foursquare abzurufen
 	 *
-	 * @return Diese Methode gibt nichts zurück.
-	 */
-	@Override
-	public Bar getBarByID(String id){
-		return null;
-	}
-	
-	/**
-	 * Dokumentation folgt
-	 * @param id
-	 * @param version
-	 * @return
+	 * @param barId Eindeutige ID als Grundlage für die Suche
+	 * @return Liste an Öffnungszeiten für eine Bar
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id){
-		//TODO Kommentieren
-		if(otFoursquareCache.asMap().containsKey(id)){
-			return (ArrayList<JSONOpeningTimes>) otFoursquareCache.asMap().get(id);
+	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String barId){
+		// Überprüfe ob die Öffnungszeit für die Angefragte Bar bereits im Cache ist
+		if(otFoursquareCache.asMap().containsKey(barId)){
+			// Wenn die Zeit gecacht ist, gebe diese zurück
+			return (ArrayList<JSONOpeningTimes>) otFoursquareCache.asMap().get(barId);
 		}
-		
-		// Zu finden auf GitHub (zur Authentifizierung)
-		String CLIENT_ID			= settings.getProperty("foursquare.clientID");
-		String CLIENT_SECRET		= settings.getProperty("foursquare.clientSecret");		
-		// Datumsangabe, da Foursquare nur aktuelle Anfragen entgegennimmt
-		String VERSION				= new SimpleDateFormat("yyyyMMdd").format(new Date());
-		
-		String query = "https://api.foursquare.com/v2/venues/"+id+"/"+
-				"hours"+
-				"?client_id="+CLIENT_ID+
-				"&client_secret="+CLIENT_SECRET+
-				"&v="+VERSION;
-		
+
+		// Erstelle die ArrayList zur Rückgabe der Öffnungszeiten
 		ArrayList<JSONOpeningTimes> openingTimes = new ArrayList<JSONOpeningTimes>();
-		
+
 		try{
+			// Erstelle den Foursquare abfrage String
+			String query = "https://api.foursquare.com/v2/venues/"+ barId + "/" +
+					"hours" +
+					"?client_id="+ settings.getProperty("foursquare.clientID") +
+					"&client_secret=" + settings.getProperty("foursquare.clientSecret") +
+					"&v=" + new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+			// Hole die Daten von Foursquare
 			URL foursquare = new URL(query);
 			HttpURLConnection connection = null;
 			int counter = 0;
@@ -245,73 +254,129 @@ public class H2FoursquareDAO implements FoursquareDAO{
 				if(counter > 3)
 					continue;
 			}
-			
-			InputStream is = connection.getInputStream();
-			
+
 			// Konvertierung der Html-Response in einen String
+			InputStream is = connection.getInputStream();
 			@SuppressWarnings("resource")
 			String response = new Scanner(is,"UTF-8").useDelimiter("\\A").next();
-			
-			// Interpretation des Antwort Strings durch einen JSON-Parser
-			final JSONParser jsonPrs = new JSONParser();
-			final JSONObject jsonObj = (JSONObject) jsonPrs.parse( response );
-			
-			JSONObject jsonResp = (JSONObject) jsonObj.get( "response" );
-			JSONObject jsonPopu = (JSONObject)  jsonResp.get("popular");
-			JSONArray  jsonTime = (JSONArray) jsonPopu.get("timeframes");
-			
-			if(jsonTime!=null)
-				for(int i=0;i<jsonTime.size();i++){
-					JSONObject element = (JSONObject) jsonTime.get(i);
-					JSONArray daysArr = (JSONArray) element.get("days");
-					int size = daysArr.size();
-					int[] days = new int[size];
-					for(int j=0;j<size;j++)
-						days[j] = (int) (long) daysArr.get(j);
-					
-					JSONArray open = (JSONArray) element.get("open");
-					if(open.size()<1)
-						continue;
-					String startString = (String) ((JSONObject) open.get(0)).get("start");
-					String endString = (String) ((JSONObject) open.get(0)).get("end");
-					endString = endString.substring(endString.indexOf("+")+1);
-					
-					int sH = Integer.parseInt(startString.substring(0,2));
-					int sM = Integer.parseInt(startString.substring(2,4));
-					int eH = Integer.parseInt(endString.substring(0,2));
-					int eM = Integer.parseInt(endString.substring(2,4));
-					
-					String shs = ""+sH;
-					String sms = ""+sM;
-					String ehs = ""+eH;
-					String ems = ""+eM;
-					if(shs.length()<2)
-						shs = "0"+shs;
-					if(sms.length()<2)
-						sms = "0"+sms;
-					if(ehs.length()<2)
-						ehs = "0"+ehs;
-					if(ems.length()<2)
-						ems = "0"+ems;
-					
-					JSONOpeningTimes ot = new JSONOpeningTimes();
-					ot.setBarID(id);
-					ot.setStartTime(shs+":"+sms);
-					ot.setEndTime(ehs+":"+ems);
-					ot.setDays(days);
-					
-					openingTimes.add(ot);
-				}
 			is.close();
 			connection.disconnect();
+
+			// Interpretation des Antwort Strings durch einen JSON-Parser
+			final JSONObject jsonObj = (JSONObject) new JSONParser().parse(response);
+
+			// Extrahiere das benötigte JSON Objekt
+			JSONObject jsonResp = (JSONObject) jsonObj.get( "response" );
+			JSONObject jsonPopu = (JSONObject)  jsonResp.get("popular");
+			JSONArray  jsonTimes = (JSONArray) jsonPopu.get("timeframes");
+
+			// Es sollte ein Time Object enhaten sein
+			if(jsonTimes!=null)
+				// Jedes Time Objekt beseitzt mehrere Öffnungszeiten
+				for(int i=0;i<jsonTimes.size();i++){
+					// Extrahiere die Öffnungszeit für den Tag
+					JSONObject jsonTime = (JSONObject) jsonTimes.get(i);
+					JSONArray daysArr = (JSONArray) jsonTime.get("days");
+
+					// Lade die Tage in ein Array
+					int[] days = new int[daysArr.size()];
+					for(int j=0;j<daysArr.size();j++) {
+						days[j] = (int) (long) daysArr.get(j);
+					}
+
+					// Extrahiere die Öffnungs- und Schließzeiten
+					JSONArray open = (JSONArray) jsonTime.get("open");
+					if(open.size() < 1) {
+						continue;
+					}
+					String startString = (String) ((JSONObject) open.get(0)).get("start");
+					String endString = (String) ((JSONObject) open.get(0)).get("end");
+
+					// Entferne das vorstehende + Zeichen
+					endString = endString.substring(endString.indexOf("+")+1);
+
+					// Forme die Zeiten um
+					startString = new StringBuffer(startString).insert(2, ":").toString();
+					endString = new StringBuffer(endString).insert(2, ":").toString();
+
+					// Erstelle eine neues Öffnungszeiten Objekt
+					JSONOpeningTimes ot = new JSONOpeningTimes();
+					ot.setBarID(barId);
+					ot.setStartTime(startString);
+					ot.setEndTime(endString);
+					ot.setDays(days);
+
+					// Füge die Öffnungszeiten dem Rückgabe Array hinzu
+					openingTimes.add(ot);
+				}
+
 		}catch(Exception e){
 			LOG.error(e.getMessage());
 		}
-		
+
 		// Füge die Öffnungszeiten zum Cache hinzu
-		otFoursquareCache.put(id, openingTimes);
-		
+		otFoursquareCache.put(barId, openingTimes);
+
 		return openingTimes;
 	}
-	
+
+	/**
+	 * Dokumentation folg
+	 */
+	@SuppressWarnings("deprecation")
+	private ArrayList<JSONHappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh) {
+		ArrayList<JSONHappyHour> result = new ArrayList<JSONHappyHour>();
+
+		for (int i = 0; i < hh.size(); i++) {
+			JSONHappyHour hour = new JSONHappyHour();
+			de.dhbw.hh.models.HappyHour item = hh.get(i);
+			hour.setBarID(item.getBarID());
+			hour.setDescription(item.getDescription());
+			int sh = item.getStart().getHours();
+			int sm = item.getStart().getMinutes();
+			int eh = item.getEnd().getHours();
+			int em = item.getEnd().getMinutes();
+			String shs = "" + sh;
+			String sms = "" + sm;
+			String ehs = "" + eh;
+			String ems = "" + em;
+			if (shs.length() < 2)
+				shs = "0" + shs;
+			if (sms.length() < 2)
+				sms = "0" + sms;
+			if (ehs.length() < 2)
+				ehs = "0" + ehs;
+			if (ems.length() < 2)
+				ems = "0" + ems;
+
+			hour.setStartTime(shs + ":" + sms);
+			hour.setEndTime(ehs + ":" + ems);
+
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			if (item.isMonday() == true)
+				al.add(1);
+			if (item.isTuesday() == true)
+				al.add(2);
+			if (item.isWednesday() == true)
+				al.add(3);
+			if (item.isThursday() == true)
+				al.add(4);
+			if (item.isFriday() == true)
+				al.add(5);
+			if (item.isSaturday() == true)
+				al.add(6);
+			if (item.isSunday() == true)
+				al.add(7);
+			int[] days = new int[al.size()];
+			for (int j = 0; j < al.size(); j++) {
+				days[j] = al.get(j);
+			}
+
+			hour.setDays(days);
+			result.add(hour);
+		}
+
+		return result;
+	}
+
 }
