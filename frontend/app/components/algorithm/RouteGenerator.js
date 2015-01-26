@@ -153,7 +153,8 @@ angular.module('happyHour.algorithm.RouteGenerator', [])
 				}
 			}
 
-			return (rating*100/Math.pow(distance, 2)) * (1+happyHourOverlap);
+			var barScore = (rating*100/distance) * (1+(happyHourOverlap*10));
+			return barScore;
 		}
 
 		/**
