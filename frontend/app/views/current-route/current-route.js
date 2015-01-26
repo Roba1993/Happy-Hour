@@ -150,6 +150,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	$scope.reportBar = function(barId, reportBarText) {
 		BackendService.reportData(barId, reportBarText);
+		$scope.reportPopupNotification = true;
 	};
 
 	/**

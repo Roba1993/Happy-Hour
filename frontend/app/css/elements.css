@@ -55,6 +55,17 @@
 
 /** /Navigationen **/
 
+/** Infobox - Patrick **/
+.e__infobox {
+    padding:15px;
+    background-color: #337ab7;
+    font-size:0.9rem;
+    font-weight:400;
+    margin: 10px;
+    color:#fff;
+
+}
+/** /Infobox - Patrick **/
 /**
  * Liste - BIG
  * Fuer RecentRoute

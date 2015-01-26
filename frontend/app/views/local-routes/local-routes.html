@@ -37,7 +37,8 @@
     <div id="theatre">
 		
 		<section id="theatre-myroutes">
-			<ul class="e__list-small">
+            <p ng-show="localRoutes.length == 0" class="e__infobox e__infobox-danger">Du hast noch keine Routen gespeichert.</p>
+			<ul ng-show="localRoutes.length > 0" class="e__list-small">
 				<li ng-repeat="localRoute in localRoutes" class="e__list-small-element clearfix" ng-click="openRoute(localRoute.id)">
 					<div class="e__list-small-element-icon clearfix"></div>
 					<div class="e__list-small-element-content clearfix">
