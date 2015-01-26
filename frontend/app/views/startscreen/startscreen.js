@@ -26,13 +26,25 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 		weekday: weekdayToday
 	};
 
-	$scope.buttonClicked = function() {
-		$scope.showLoading = true;
+	var createRoute = function() {
 		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
-			console.log(bars);
 			var route = RouteGeneratorService.createRoute(bars, routeOptions);
 			AppStatusPersistenceService.setRoute(route);
 			$location.path('/currentRoute');
 		});
+	};
+
+	$scope.buttonClicked = function() {
+		$scope.showLoading = true;
+		navigator.geolocation.getCurrentPosition(
+			function(position) {
+				routeOptions.location.latitude = position.coords.latitude;
+				routeOptions.location.longitude = position.coords.longitude;
+				createRoute();
+			},
+			function() {
+				createRoute();
+			}
+		);
 	};
 }]);
