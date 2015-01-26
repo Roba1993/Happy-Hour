@@ -1,11 +1,9 @@
-<div id="e__impressum" ng-class="{is__open: showImpressum}">
-	<div id="e__impressum-header">
+<div id="e__impressum" class="e__fullscreen" ng-class="{is__open: showImpressum}">
+	<div class="e__fullscreen-header">
 		<h1>Impressum</h1>
 		<h1><a ng-click="showImpressum = false">Schließen</a></h1>
 	</div>
-	<div id="e__impressum-content">
-		<h1>Impressum:</h1>
-		<p>------------------------------------------------------------------------------------------</p>
+	<div class="e__fullscreen-content">
 		<p>Alle Angaben gemäß § 5 Telemediengesetz:<br>
 		Robert Schütte<br>
 		c/o Kurs WI2012F DHBW Stuttgart <br>
@@ -81,6 +79,20 @@
     </div>
 </div>
 
+<div class="e__overlay" ng-class="{is__open: reportPopupNotification}">
+    <div class="e__overlay-window">
+        <div class="e__overlay-window-content">
+            <h1 class="notification">Bar melden</h1>
+                <p>
+                    Danke für die Meldung!
+                </p>
+        </div>
+        <div class="e__overlay-window-button">
+            <div class="e__btn col-6" ng-click="reportPopupNotification = false">Ok</div>
+        </div>
+    </div>
+</div>
+
 <div class="e__overlay" ng-class="{is__open: namePopupOpen}" ng-init="routeName = route.name">
 	<div class="e__overlay-window">
         <div class="e__overlay-window-content">
@@ -104,6 +116,18 @@
 		</div>
 		<div class="e__overlay-window-button">
 			<div class="e__btn col-12" ng-click="saveErrorPopupOpen = false">Ok</div>
+		</div>
+	</div>
+</div>
+
+<div class="e__overlay" ng-class="{is__open: noBarPopupOpen}">
+	<div class="e__overlay-window">
+        <div class="e__overlay-window-content">
+			<h1 class="error">Keine Bars gefunden!</h1>
+			<p>Es konnten keine Bars zu den angegebenen Parametern gefunden werden.</p>
+		</div>
+		<div class="e__overlay-window-button">
+			<div class="e__btn col-12" ng-click="noBarPopupOpen = false">Ok</div>
 		</div>
 	</div>
 </div>
@@ -155,11 +179,11 @@
 			</div>
 			<div class="sidebar-theatre-box">
 				<h3>Uhrzeit (h)</h3>
-				<input-slider options="{type:'double', values: ['18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00'], from:0, to:6, hide_min_max:true}" result="routeTime" />
+				<input-slider options="{type:'double', values: ['18:00','19:00','20:00','21:00','22:00','23:00','24:00','01:00','02:00','03:00','04:00'], from:0, to:6, min_interval:1, max_interval: 10, hide_min_max:true}" result="routeTime" />
 			</div>
 			<div class="sidebar-theatre-box">
 				<h3>Verweilzeit (h)</h3>
-				<input-slider options="{min:0, max:6, step:0.5, from:1, hide_min_max:true}" result="route.options.stayTime" />
+				<input-slider options="{min:0.5, max:6, step:0.5, from:1, hide_min_max:true}" result="route.options.stayTime" />
 			</div>
 			<div class="seperator"></div>
 			<div ng-click="shareRoute()" class="sidebar-theatre-box">
@@ -263,7 +287,7 @@
 								<span class="e__slider-background-footer align-center">Wählen Sie eine alternative Bar aus</span>
 							</div>
 
-							<bar-slider bars="bars[$index]" result="barChosen[$index]">
+							<bar-slider bars="bars[$index]" result="timeframe.bar">
 						</div>
 					</div>
 				</li>
