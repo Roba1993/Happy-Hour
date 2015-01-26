@@ -3,11 +3,13 @@ package de.dhbw.hh.models;
 /**
  * Location Datenklasse
  *
- * @author Tobias
+ * @author Tobias Häußermann
  */
 public class Location {
 
 	public float longitude, latitude;
+	
+	public Location(){}
 	
 	public Location(float longitude, float latitude){
 		this.longitude = longitude;

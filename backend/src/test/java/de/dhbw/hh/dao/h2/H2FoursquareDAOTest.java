@@ -53,11 +53,11 @@ public class H2FoursquareDAOTest {
 		cb.setAdress(null);
 		cb.setCosts(1);
 		cb.setDescription("Pub");
-		cb.setHappyHours(null);		// Test folgt am 19.01.
+		cb.setHappyHours(null);	
 		cb.setImageUrl("");
 		cb.setLocation(new Location(9.433431520350682f, 48.94866611443367f));
 		cb.setName("Waldhorn");
-		cb.setOpeningTimes(null);	// Test folgt am 19.01.
+		cb.setOpeningTimes(null);
 		cb.setRating(-1f);
 		
 		int totalCount = 2;
