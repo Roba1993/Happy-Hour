@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="de" ng-app="happyHour">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Go Happy</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Go Happy</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-ipad-retina.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-ipad-retina.png">
 
-    <!-- iPhone (Retina) -->
-    <link rel="apple-touch-startup-image"  href="apple-touch-startup-image-640x960.png">
+  <!-- iPhone (Retina) -->
+  <link rel="apple-touch-startup-image"  href="apple-touch-startup-image-640x960.png">
 
-    <!--Android-->
-    <link rel="shortcut icon" href="touch-icon-196x196.png" sizes="196x196">
+  <!--Android-->
+  <link rel="shortcut icon" href="touch-icon-196x196.png" sizes="196x196">
 
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="icon" href="favicon.ico" type="image/x-ico" />
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="icon" href="favicon.ico" type="image/x-ico" />
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,100italic,400italic,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/fonts.css?v=0.2">
-    <link rel="stylesheet" href="css/normalize.css?v=0.2">
-    <link rel="stylesheet" href="css/grid.css?v=0.2">
-    <link rel="stylesheet" href="css/helper.css?v=0.2">
-    <link rel="stylesheet" href="css/elements.css?v=0.2">
-    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.css">
-    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.skinHTML5.css">
-    <link rel="stylesheet" href="css/style.css?v=0.2">
-	<link rel="stylesheet" href="css/frontend.css?v=0.1">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,100italic,400italic,700' rel='stylesheet' type='text/css'>
+  <!-- build:css css/style.min.css -->
+  <link rel="stylesheet" href="css/fonts.css?v=0.2">
+  <link rel="stylesheet" href="css/normalize.css?v=0.2">
+  <link rel="stylesheet" href="css/grid.css?v=0.2">
+  <link rel="stylesheet" href="css/helper.css?v=0.2">
+  <link rel="stylesheet" href="css/elements.css?v=0.2">
+  <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.css">
+  <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.skinHTML5.css">
+  <link rel="stylesheet" href="css/style.css?v=0.2">
+  <link rel="stylesheet" href="css/frontend.css?v=0.1">
+  <!-- /build -->
+
 </head>
 
 <body>
   <div ng-view></div>
 
-  <!-- Template Abhängigkeiten -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/ionrangeslider/js/ion.rangeSlider.min.js"></script>
   <script>
   // Für iOS Geräte, die die App auf dem Homescreen gespeichert haben eine Klasse einfügen
   if ((window.navigator.standalone !== false ) && (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) !== null )) {
@@ -49,6 +49,11 @@
     elm_html.classList.add('is__ios-fullscreen');
   }
   </script>
+
+  <!-- build:js app.min.js -->
+  <!-- Template Abhängigkeiten -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/ionrangeslider/js/ion.rangeSlider.min.js"></script>
 
   <!-- Globale Abhängigkeiten -->
   <script src="bower_components/lodash/dist/lodash.js"></script>
@@ -86,6 +91,6 @@
   <script src="views/top-routes/top-routes.js"></script>
   <script src="views/startscreen/startscreen.js"></script>
   <script src="views/open-route/open-route.js"></script>
-
+  <!-- /build -->
 </body>
 </html>

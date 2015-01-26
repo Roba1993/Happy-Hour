@@ -207,3 +207,6 @@ node_modules
 
 ### Bower ###
 bower_components
+
+### Frontend Build
+frontend/dist
