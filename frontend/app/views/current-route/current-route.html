@@ -120,6 +120,18 @@
 	</div>
 </div>
 
+<div class="e__overlay" ng-class="{is__open: noBarPopupOpen}">
+	<div class="e__overlay-window">
+        <div class="e__overlay-window-content">
+			<h1 class="error">Keine Bars gefunden!</h1>
+			<p>Es konnten keine Bars zu den angegebenen Parametern gefunden werden.</p>
+		</div>
+		<div class="e__overlay-window-button">
+			<div class="e__btn col-12" ng-click="noBarPopupOpen = false">Ok</div>
+		</div>
+	</div>
+</div>
+
 <div class="e__overlay" ng-class="{is__open: sharePopupOpen}">
 	<div class="e__overlay-window">
         <div class="e__overlay-window-content">

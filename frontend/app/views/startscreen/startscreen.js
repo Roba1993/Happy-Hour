@@ -28,9 +28,14 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 
 	var createRoute = function() {
 		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
-			var route = RouteGeneratorService.createRoute(bars, routeOptions);
-			AppStatusPersistenceService.setRoute(route);
-			$location.path('/currentRoute');
+			if(bars.length > 0) {
+				var route = RouteGeneratorService.createRoute(bars, routeOptions);
+				AppStatusPersistenceService.setRoute(route);
+				$location.path('/currentRoute');
+			}
+			else {
+				$scope.noBarPopupOpen = true;
+			}
 		});
 	};
 
