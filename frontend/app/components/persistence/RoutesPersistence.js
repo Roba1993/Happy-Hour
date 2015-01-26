@@ -18,7 +18,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * 
 			 * @author Dorothee Nies, Markus Thömmes
 			 * @param {Route} route Die Route, die in "Meine Routen" gespeichert werden soll.
-			 * @return {String|Boolean} die für das Objekt erzeugte id, false wenn das Einfügen fehlgeschlagen ist
+			 * @return {String} die für das Objekt erzeugte id
 			 */
 			add: function(route) {
 				if (service.isFull()){
@@ -68,7 +68,7 @@ angular.module('happyHour.persistence.RoutesPersistence', ['LocalStorageModule']
 			 * Gibt eine Route aus "Meine Routen" zurück.
 			 * 
 			 * @author Dorothee Nies
-			 * @param  {Integer} routeId Der Identifikator der Route, die zurückgegeben werden soll
+			 * @param  {String} routeId Der Identifikator der Route, die zurückgegeben werden soll
 			 * @return {LocalRoute} Die angeforderte Route
 			 */
 			get: function(routeId) {

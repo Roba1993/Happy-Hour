@@ -1,9 +1,10 @@
 /**
- * Erstellt aus einem Array in dem die Wochentage als Nummern hinterlegt sind die Wochentage in abgekürzter Form.
+ * Erstellt aus einem Array in dem die Wochentage als Nummern hinterlegt sind die Wochentage in lesbarer Form.
  *
  * @author Dorothee Nies
- * @param {Integer[]} Ein Array mit Nummern die stellvertretend für die Wochentage stehen.`
- * @return {String} Eine Aufzählung der abgekürzten Wochentage, getrennt durch einen Schrägstrich.
+ * @param {Integer[]|Integer} input Die Wochentage in Nummernrepräsentation
+ * @param {Boolean} isLong Tage in Langform angeben oder nicht
+ * @return {String} Eine Aufzählung der Wochentage, getrennt durch einen Schrägstrich.
  */
 angular.module('happyHour.filters.DaysFilter', [])
 	.filter('formatDays', function() {
