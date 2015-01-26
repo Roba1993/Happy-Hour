@@ -22,7 +22,7 @@ public class BarTest {
 	private static String imageUrl		= null;
 	private static Location location	= new Location(0.1f, 0.45f);
 	private static String address		= "Teststraße 12";
-	private static ArrayList<JSONOpeningTimes> openingTimes	= new ArrayList<JSONOpeningTimes>();
+	private static ArrayList<JSONOpeningTime> openingTimes	= new ArrayList<JSONOpeningTime>();
 	private static ArrayList<JSONHappyHour> happyHours			= new ArrayList<JSONHappyHour>();
 	
 	// Das Bar Objekt zum Testen

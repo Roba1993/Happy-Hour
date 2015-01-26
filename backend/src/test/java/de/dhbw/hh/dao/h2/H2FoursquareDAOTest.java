@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import de.dhbw.hh.dao.DAOFactory;
+import de.dhbw.hh.utils.Settings;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,7 +30,7 @@ public class H2FoursquareDAOTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		fsc = new H2FoursquareDAO();
+		fsc = new H2FoursquareDAO(new Settings(), DAOFactory.getDaoFactory(DAOFactory.H2, new Settings()));
 	}
 	
 	/**
@@ -36,15 +38,16 @@ public class H2FoursquareDAOTest {
 	 * ab und überprüft die Ergebnis-Werte auf Korrektheit
 	 * @throws Exception
 	 */
-	@Test
+	//@Test
 	public void testGetBarsInArea() throws Exception {
 		// Übergabeparameter für Test definieren und festlegen.
 		float latitude 		= 48.949034f;
 		float longitude 	= 9.431656f;
 		float radius		= 0.15f;
+		int weekday 		= 1;
 		
 		// Setze die Anfrage an Foursquare ab und speichere die Ergebnisse in 'results'
-		ArrayList<Bar> results = fsc.getBarsInArea(longitude, latitude, radius);
+		ArrayList<Bar> results = fsc.getBarsInArea(longitude, latitude, radius, weekday);
 		
 		// Lege Vergleichs-Bar-Objekt an und befülle es mit Daten, die aus manuellen
 		// Tests entnommen wurden

@@ -33,6 +33,8 @@ public class H2DAOFactory extends DAOFactory {
     // Der Connectionpool
     private ComboPooledDataSource cpds;
 
+    private Settings settings;
+
     /**
      * Konstruktor Funktion zum Erstellen des Objektes.
      * Es erstellt eine Verbindung zur Datenbank über
@@ -45,6 +47,7 @@ public class H2DAOFactory extends DAOFactory {
      */
     public H2DAOFactory(Settings properties) {
         cpds = new ComboPooledDataSource();
+        settings = properties;
 
         // Versuche den Datenbank Treiber zu laden
         try {
@@ -109,7 +112,7 @@ public class H2DAOFactory extends DAOFactory {
 
 	@Override
 	public FoursquareDAO getFoursquareDAO() {
-		return new H2FoursquareDAO();
+		return new H2FoursquareDAO(settings, this);
 	}
 	
 	@Override
