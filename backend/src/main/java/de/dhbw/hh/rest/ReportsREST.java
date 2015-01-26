@@ -56,6 +56,7 @@ public class ReportsREST {
 			restResponse.setName(request.queryString());
 			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 			
+			// Überprüfung, ob reportete Bars gefunden wurden oder nicht
 			if (data.isEmpty()) {
 				// Es wurden keine reporteten Bars gefunden
 				restResponse.setDescription("Keine reporteten Bars gefunden");
@@ -69,8 +70,9 @@ public class ReportsREST {
 				restResponse.setData(data);
 			}
 			
+			// Erstellt Log-Eintrag der Rückgabe
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription());
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
-			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -110,7 +112,8 @@ public class ReportsREST {
 			restResponse.setData(null);
 			
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription());
+			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -145,7 +148,7 @@ public class ReportsREST {
 			restResponse.setData(null);
 			
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription());
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -168,6 +171,7 @@ public class ReportsREST {
 			// Das Rückgabeobjekt wird befüllt
 			restResponse.setName(request.queryString());
 			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
+			// Überprüfung, ob das Löschen des Bar Reports erfolgreich war oder nicht
 			if (successfull) {
 				// Antwort bei erfolgreichem Löschen
 				restResponse.setDescription("Der BarReport mit der ID " + request.params(":id") + " wurde gelöscht");
@@ -180,10 +184,12 @@ public class ReportsREST {
 			restResponse.setData(null);
 			
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription());
+			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
+		
 	}
 	
 }

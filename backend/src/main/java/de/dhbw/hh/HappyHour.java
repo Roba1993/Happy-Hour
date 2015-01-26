@@ -33,7 +33,7 @@ public class HappyHour {
     public static boolean testrun;
 
     /**
-     * Die main Funktion in der die Ausführung gestartet wird.
+     * Die main Funktion, in der die Ausführung gestartet wird.
      *
      * @param args Es werden keine Argumente benötigt
      * @return
@@ -43,7 +43,7 @@ public class HappyHour {
     }
 
     /**
-     * Constructor der Klasse und Start der Anwedung
+     * Konstruktor der Klasse und Start der Anwendung
      *
      * @param args
      */
@@ -97,4 +97,5 @@ public class HappyHour {
             System.exit(0);
         }
     }
+    
 }

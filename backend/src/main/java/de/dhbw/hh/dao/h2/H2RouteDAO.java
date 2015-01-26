@@ -45,13 +45,15 @@ public class H2RouteDAO implements RouteDAO {
      */
 	@Override
 	public boolean insertRoute(Route route) {
+		// SQL-String, um die Route in die H2 Datenbank zu schreiben
 		String sql = "INSERT INTO route (hash, data, top) VALUES (?,?,?)";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, route.getHash());
                 preparedStatement.setString(2, route.getData());
@@ -80,7 +82,7 @@ public class H2RouteDAO implements RouteDAO {
      */
 	@Override
 	public Route findRoute(String hash) {
-        //Abfrage aus der Datenbank
+        // Abfrage der Routen aus der H2 Datenbank
         String sql = "SELECT data, top, hash FROM route WHERE hash=?";
 
         // Holt eine Connection zur Datenbank aus dem Connectionpool
@@ -95,27 +97,23 @@ public class H2RouteDAO implements RouteDAO {
 
                 // Daten aus der Datenbank holen
                 ResultSet resultSet = preparedStatement.executeQuery();
-                // Falls ein Wert vorhanden ist, werden diese in route geschrieben und zurückgegeben
                 
+                // Befüllen eines Route-Objekts mit den zurückgegebenen Daten aus der Datenbank
             	resultSet.next();
-            	System.out.println("resultset step in");
-            	
-            	
                 Route route = new Route();
                 route.setHash(resultSet.getString("hash"));
                 route.setData(resultSet.getString("data"));
                 route.setTop(resultSet.getBoolean("top"));
+                // Rückgabe des Routes Objekts
                 return route;
                 
-                // Wenn kein Wert vorhanden ist wird null zurückgegegben
-//                return null;
             }catch(Exception e){
             	log.error(e.getMessage());
             }
         } catch (SQLException e) {
         	log.error(e.getMessage());
         }
-
+        // Rückgabe eines leeren Routes Objekts bei fehlerhaften Durchlauf
         return new Route();
 	}
 		

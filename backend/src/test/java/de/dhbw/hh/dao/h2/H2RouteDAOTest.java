@@ -103,8 +103,7 @@ public class H2RouteDAOTest {
 	public void testFindRoute() throws Exception {
 		// Abfrage der Routen nach einem Hash-Wert
 		Route r = h2RouteDAO.findRoute("kjasifhuidjfelosamnb");
-		// Test: Hash und Data müssen übereinstimmen, der Boolean topRoute muss
-		// false sein
+		// Test: Hash und Data müssen übereinstimmen, der Boolean topRoute muss false sein
 		assertEquals("kjasifhuidjfelosamnb", r.getHash());
 		assertEquals(false, r.isTop());
 		assertEquals("Ich bin ein Json String Objekt", r.getData());

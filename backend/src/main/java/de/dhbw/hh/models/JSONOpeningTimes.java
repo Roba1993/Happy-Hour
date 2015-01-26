@@ -7,11 +7,13 @@ package de.dhbw.hh.models;
  */
 public class JSONOpeningTimes {
 
+	// Erstellen der Variablen
 	private String 	barID;
 	private String 	startTime;
 	private String 	endTime;
 	private int[] 	days;
 	
+	// Folgend alle Getter und Setter
 	public String getBarID() {
 		return barID;
 	}
@@ -43,7 +45,11 @@ public class JSONOpeningTimes {
 	public void setDays(int[] days){
 		this.days = days;
 	}
-	
+		
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
 	public String toString(){
 		String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
 		for(int i=0;i<days.length;i++){
@@ -51,4 +57,5 @@ public class JSONOpeningTimes {
 		}
 		return result;
 	}
+	
 }

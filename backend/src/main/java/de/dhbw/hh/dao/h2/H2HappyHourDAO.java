@@ -31,7 +31,7 @@ public class H2HappyHourDAO implements HappyHourDAO {
     ComboPooledDataSource cpds;
 
     /**
-     * Diese Funktion erstellt ein Objekt der Klasse H2TestDAO.
+     * Diese Konstrukor-Funktion erstellt ein Objekt der Klasse H2HappyHourDAO.
      *
      * @param cpds Der Connectionpool
      */
@@ -47,15 +47,17 @@ public class H2HappyHourDAO implements HappyHourDAO {
      */
 	@Override
 	public boolean insertHappyHour(HappyHour happyHour) {
+		// SQL-String, um Happy Hours in die H2 Datenbank einzutragen
 		String sql = "INSERT INTO happyHour "
 				+ "(barID, description, start, end, monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, happyHour.getBarID());
                 preparedStatement.setString(2, happyHour.getDescription());
@@ -82,7 +84,6 @@ public class H2HappyHourDAO implements HappyHourDAO {
         } catch (SQLException e) {
         	LOG.error(e.getMessage());
         }
-
         return false;
 	}
 
@@ -94,32 +95,33 @@ public class H2HappyHourDAO implements HappyHourDAO {
      */
 	@Override
 	public boolean deleteHappyHour(int id) {
+		// SQL-String, um die Happy Hours aus der Datenbank zu löschen
 		String sql = "DELETE FROM happyHour WHERE id=?";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool 
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, id);
 
-                // Füge das Statement der Ausführungsschlange hinzu
+                // Fügt das Statement der Ausführungsschlange hinzu
                 preparedStatement.addBatch();
 
-                // Führe alle Statements aus
+                // Führt alle Statements aus
                 preparedStatement.executeBatch();
             }
 
-            // Schreibe die Änderungen in die Datenbank
+            // Schreibt die Änderungen in die Datenbank
             connection.commit();
             return true;
         } catch (SQLException e) {
         	LOG.error(e.getMessage());
-        }
-        
+        }        
         return false;
-}
+	}
 
 	/**
      * Diese Funktion findet eine HappyHour in der Datenbank anhand seiner ID.
@@ -129,51 +131,48 @@ public class H2HappyHourDAO implements HappyHourDAO {
      */
 	@Override
 	public Collection<HappyHour> findHappyHour(String barID) {
-//		System.out.println("Start findhappyhour");
-		
+		// Abfrage-String der Happy Hours aus der H2 Datenbank
 		String sql = "SELECT * FROM happyHour WHERE barID=?";
 
+		// Holt eine Connection zur Datenbank aus dem Connectionpool
         try (Connection connection = cpds.getConnection()) {
-            // Immer ohne Autocommits arbeiten
+        	// verbietet den automatischen Commit zur Datenbank
             connection.setAutoCommit(false);
 
-            // Immer mit PreparedStatements arbeiten
+            // Erstellt das Prepared Statement für die Datenbankabfrage
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, barID);
 
-                // Hole die Daten von der Datenbank
+                // Holt die Daten von der Datenbank
                 ResultSet resultSet = preparedStatement.executeQuery();
                 
+                // Erstellt eine Collection für die Datenrückgabe
                 Collection<HappyHour> happyHourArray = new ArrayList<HappyHour>();
 
-                // Schreibe die Daten ins Testrun Objekt
+                /// Schreibt die Daten aus der Datenbank in die Collection
                 while(resultSet.next()) {
                     HappyHour happyHour = new HappyHour();
-//                    System.out.println("vor dem Befüllen" +happyHour.toString());
+
                     happyHour.setBarID(resultSet.getString("barID"));
                     happyHour.setDescription(resultSet.getString("description"));
                     happyHour.setStart(resultSet.getTime("start"));
-//                    System.out.println(resultSet.getTime("start"));
                     happyHour.setEnd(resultSet.getTime("end"));
-//                    System.out.println(resultSet.getTime("end"));
                     happyHour.setMonday(resultSet.getBoolean("monday"));
                     happyHour.setTuesday(resultSet.getBoolean("tuesday"));
                     happyHour.setWednesday(resultSet.getBoolean("wednesday"));
                     happyHour.setThursday(resultSet.getBoolean("thursday"));
                     happyHour.setSaturday(resultSet.getBoolean("saturday"));
                     happyHour.setSunday(resultSet.getBoolean("sunday"));
-//                  System.out.println("nach dem Befüllen" +happyHour.toString());
                     happyHourArray.add(happyHour);
-//                    System.out.println(happyHourArray);
                 }
 
-                // Gebe alle Datenobjekte als Array zurück
+                // Gibt die Collection
                 return happyHourArray;
             }
         } catch (SQLException e) {
         	LOG.error(e.getMessage());
         }
-
+        // Gibt eine leere Collection zurück
         return new ArrayList<HappyHour>();
 	}
 

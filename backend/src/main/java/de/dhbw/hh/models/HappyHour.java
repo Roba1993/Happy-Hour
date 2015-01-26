@@ -7,9 +7,8 @@ import java.sql.Time;
  *
  * @author Marcus
  */
-
 public class HappyHour {
-	
+	// Erstellen der Variablen
 	private int id = 0;
 	private String barID = "";
 	private String description = "";

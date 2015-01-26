@@ -34,7 +34,7 @@ public class H2DAOFactory extends DAOFactory {
     private ComboPooledDataSource cpds;
 
     /**
-     * Constructor Funktion zum erstellen des Objektes.
+     * Konstruktor Funktion zum Erstellen des Objektes.
      * Es erstellt eine Verbindung zur Datenbank über
      * einen Connectionpool her. Zur Konfiguration werden
      * die entsprechenden Einstellungen in den Properties

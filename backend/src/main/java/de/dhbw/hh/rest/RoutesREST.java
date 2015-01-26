@@ -22,6 +22,7 @@ import static spark.Spark.get;
  * die Datenbank eingepflegt werden kann, sowie eine GET-Methode,
  * mit der eine Route mit dem Hash-Wert aus der Datenbank 
  * abgerufen werden kann
+ * @author: Tabea
  */
 public class RoutesREST {
 	
@@ -31,6 +32,10 @@ public class RoutesREST {
 	// Erstellt ein Gson-Objekt für die Rückgabe
 	private Gson gson = new Gson();
 
+	/**
+	 * Diese Funktion ist ein Konstruktor, um REST Schnittstellen für die Routen zu definieren
+	 * @param daoFactory
+	 */
 	public RoutesREST(DAOFactory daoFactory) {
 
 		/**
@@ -39,7 +44,7 @@ public class RoutesREST {
 		post("/routes", "application/json", (request, response) -> {
 			// Erstellt Log-Eintrag bei Zugriff auf den Pfad /routes
 			LOG.debug("HTTP-POST Anfrage eingetroffen: " + request.queryString());
-			// Neue Route erstellen
+			// Neues Route Objekt erstellen
 			Route route = new Route();
 
 			// Route mit Daten aus POST Anfrage befüllen
@@ -56,8 +61,7 @@ public class RoutesREST {
 			// RESTRespone mit Rückgabedaten befüllen
 			RESTResponse restResponse = new RESTResponse();
 			restResponse.setName("/routes");
-			restResponse.setTimestamp(new Timestamp(Calendar
-					.getInstance().getTime().getTime()));
+			restResponse.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 			restResponse.setData(hash);
 			
 			// Route in Datenbank speichern
@@ -73,8 +77,9 @@ public class RoutesREST {
 				restResponse.setError();
 			}
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(restResponse.getStatus() + restResponse.getDescription() + restResponse.getData());
-			
+			LOG.debug(restResponse.getStatus() + restResponse.getDescription());
+
+			// Übergibt das REST Objekt als Json String zur Anfrage zurück 
 			response.type("application/json");
 			return gson.toJson(restResponse);
 		});
@@ -119,7 +124,7 @@ public class RoutesREST {
 			}
 			
 			// Log-Eintrag bei Rückgabe
-			LOG.debug(r.getStatus() + r.getDescription() + r.getData());
+			LOG.debug(r.getStatus() + r.getDescription());
 			
 			// Übergibt das REST Objekt als Json String zur Anfrage zurück
 			response.type("application/json");

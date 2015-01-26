@@ -1,13 +1,20 @@
 package de.dhbw.hh.models;
 
+/**
+ * Datenklasse für die Happy Hour Klasse,
+ * durch die die Daten anschließend ins JSON Format umgewandelt werden können
+ * @author Tobi
+ *
+ */
 public class JSONHappyHour{
-	
+	// Erstellen der Variablen
 	private String 	barID;
 	private String 	startTime;
 	private String 	endTime;
 	private String description;
 	private int[] 	days;
 	
+	// Folgend alle Getter und Setter
 	public String getBarID() {
 		return barID;
 	}
@@ -48,6 +55,10 @@ public class JSONHappyHour{
 		this.description = description;
 	}
 
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
+	@Override
 	public String toString(){
 		String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
 		for(int i=0;i<days.length;i++){
@@ -55,4 +66,5 @@ public class JSONHappyHour{
 		}
 		return result;
 	}
+	
 }

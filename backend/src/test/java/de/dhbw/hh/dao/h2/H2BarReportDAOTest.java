@@ -59,7 +59,6 @@ public class H2BarReportDAOTest {
         h2BarReportDAO = new H2BarReportDAO(cpds);
     }
 
-
     /**
      * Diese Funktion wird vor jedem Testrun aufgerufen und setzt die
      * vorherigen Änderungen an der Datenbank zurück.

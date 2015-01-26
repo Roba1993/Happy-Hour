@@ -2,7 +2,6 @@ package de.dhbw.hh.dao;
 import java.util.Collection;
 import de.dhbw.hh.models.HappyHour;
 
-
 /**
  * Dieses Interface definiert, welche Methoden die jeweiligen DAOs implementieren müssen.
  *

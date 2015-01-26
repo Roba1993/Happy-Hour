@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * 
+ * Diese Klasse testet die Funktionen der H2DAOFactory
  * @author Robert
  *
  */

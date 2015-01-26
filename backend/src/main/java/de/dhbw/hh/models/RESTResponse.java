@@ -8,13 +8,14 @@ import java.sql.Timestamp;
  *
  */
 public class RESTResponse {
-
+	// Erstellen der Variablen
 	private String name = "";
 	private String description = "";
 	private Timestamp timestamp = null;
 	private String status = "";
 	private Object data = null;
 
+	// Folgend alle Getter und Setter
 	public String getName() {
 		return name;
 	}
@@ -60,6 +61,9 @@ public class RESTResponse {
 		this.data = data;
 	}
 	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "; Description: " + getDescription() + "; Timestamp: "

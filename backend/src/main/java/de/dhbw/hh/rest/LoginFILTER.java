@@ -16,7 +16,7 @@ import de.dhbw.hh.dao.h2.H2UserDAO;
 public class LoginFILTER {
 
 	// Initialisiert einen Logger für die Fehlerausgabe
-    static final Logger log = LoggerFactory.getLogger(H2UserDAO.class);
+    static final Logger LOG = LoggerFactory.getLogger(H2UserDAO.class);
     
 	/**
 	 * Diese Funktion ist ein Konstruktor, um Anfragen über die REST Schnittstelle zu filtern
@@ -44,7 +44,7 @@ public class LoginFILTER {
 				// Überprüfung, ob ein Ergebnis zurückgegeben wird
 				if (successful){
 					// Log-Eintrag bei erfolgreichen Zugriff auf Pfade, die eine Adminberechtigung benötigen
-					log.debug("Admin: " + name + " - " + request.requestMethod() + ":" + request.pathInfo());
+					LOG.debug("Admin: " + name + " - " + request.requestMethod() + ":" + request.pathInfo());
 				} 
 				else {
 					// Stimmt das eingegebene Passwort nicht überein, wird die Anfrage abgebrochen

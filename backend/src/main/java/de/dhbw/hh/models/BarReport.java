@@ -5,13 +5,14 @@ package de.dhbw.hh.models;
  *
  * @author Jonas
  */
-
 public class BarReport {
-
+	// Erstellen der Variablen
 	private int id = 0;
 	private String barID = "";
 	private String description = "";
 
+	// Folgend alle Getter und Setter
+	
 	public int getID() {
 		return id;
 	}
@@ -36,6 +37,9 @@ public class BarReport {
 		this.description = description;
 	}
 	
+	/**
+	 * Wandelt alle Datensätze in einen String um
+	 */
 	@Override
 	public String toString() {
 		return "ID: " + getID() + "; BarID: " + getBarID() + "; Description: " + getDescription();

@@ -38,4 +38,5 @@ public interface FoursquareDAO {
 	 * @return Liste an Öffnungszeiten für eine Bar
 	 */
 	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id);
+	
 }

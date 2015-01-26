@@ -54,4 +54,5 @@ public class HappyHourTest {
 				+ " Wednesday true/false?: true Thursday true/false?: true Friday true/false?: false Saturday true/false?: true Sunday true/false?: false",
 				happyHour.toString());
 	}
+	
 }

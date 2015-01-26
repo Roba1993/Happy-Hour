@@ -55,7 +55,6 @@ public class Route {
 	}
 
 	public boolean isHashEmpty() {
-		// TODO Auto-generated method stub
 		return hash.isEmpty();
 	}
 	
