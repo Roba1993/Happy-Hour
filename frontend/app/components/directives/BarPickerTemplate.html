@@ -1,5 +1,5 @@
-<ul ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()" ng-click="slideChosen()" class="e__slider-stage" style="width:{{100*bars.length}}%;transform:translate3d(calc(-{{90*chosenSlide}}vw - {{30*chosenSlide}}px), 0, 0);">
-	<li ng-repeat="bar in bars" class="e__slider-stage-element" style="width:90vw">
+<ul ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()" ng-click="slideChosen()" class="e__slider-stage" style="width:{{100*bars.length}}%;transform:translate3d(calc(-{{85*chosenSlide}}vw - {{10*chosenSlide}}px), 0, 0); -webkit-transform:translate3d(calc(-{{85*chosenSlide}}vw - {{10*chosenSlide}}px), 0, 0);">
+	<li ng-repeat="bar in bars" class="e__slider-stage-element">
 		<div class="e__barcard clearfix">
 			<div class="e__barcard-head grid">
 				<div class="col-7">
@@ -10,9 +10,8 @@
 				<p class="e__quote">{{bar.description}}</p>
 		</div>
 		<div class="e__barcard-footer">
-			<span class="col-5"><rating type="'euro'" value="bar.costs"></span>
-			<span class="col-2"></span>
-			<span class="col-5 align-right"><rating type="'star'" value="bar.rating"></span>
+			<span class="col-5 e__rating"><rating type="'euro'" value="bar.costs"></span>
+			<span class="col-7 align-right e__rating"><rating type="'star'" value="bar.rating"></span>
 		</div>
 		</div>
 	</li>

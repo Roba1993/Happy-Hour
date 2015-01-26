@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import org.h2.tools.RunScript;
 import org.slf4j.Logger;

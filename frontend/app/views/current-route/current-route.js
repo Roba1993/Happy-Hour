@@ -26,6 +26,7 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	});
 
 	var lastOptions = {};
+	var possibleBars = [];
 	// Feuert jedesmal wenn die Sidebar geschlossen wird (auch beim Aufrufen des Controllers)
 	$scope.$watch('isSidebarOpen', function(newValue, oldValue) {
 		// Sidebar wurde geschlossen
@@ -71,6 +72,11 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 					});
 
 					$scope.route.timeframes = newTimeframes;
+
+					// Mögliche Bars entsprechend neu setzen
+					_.forEach($scope.route.timeframes, function() {
+						$scope.bars.push(possibleBars);
+					});
 				}
 			}
 
@@ -83,10 +89,13 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 			) {
 				// Alternative Bars für alle Slots abfragen
 				$scope.bars = [];
+				$scope.showLoading = true;
 				BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
+					possibleBars = bars;
 					_.forEach($scope.route.timeframes, function() {
-						$scope.bars.push(bars);
+						$scope.bars.push(possibleBars);
 					});
+					$scope.showLoading = false;
 				});
 			}
 		}
@@ -112,9 +121,11 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 	 * NAVIGATION
 	 */
 	$scope.reloadRoute = function() {
+		$scope.showLoading = true;
 		BackendService.getBars($scope.route.options.location, $scope.route.options.radius, $scope.route.options.weekday).then(function(bars) {
 			var route = RouteGeneratorService.createRoute(bars, $scope.route.options);
 			$scope.route = route;
+			$scope.showLoading = false;
 		});
 	};
 
@@ -157,11 +168,18 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	// Die Route auf dem Gerät persistieren
 	$scope.saveRoute = function() {
-		// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
-		if($scope.routeName !== '' && $scope.routeName.length <= 50) {
-			$scope.route.name = $scope.routeName;
-			RoutesPersistenceService.add($scope.route);
+		// Wenn der Speicher voll ist Warnung ausgeben
+		if(RoutesPersistenceService.isFull()) {
+			$scope.saveErrorPopupOpen = true;
 			$scope.namePopupOpen = false;
+		}
+		else {
+			// Routenname validieren: Darf nicht leer und nicht länger als 50 Zeichen sein
+			if($scope.routeName !== '' && $scope.routeName.length <= 50) {
+				$scope.route.name = $scope.routeName;
+				RoutesPersistenceService.add($scope.route);
+				$scope.namePopupOpen = false;
+			}
 		}
 	};
 
@@ -193,7 +211,8 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
      */
     function isBeforeOverNight(time1, time2) {
 		var referenceTime = time('12:00:00');
-		if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime)) {
+		var breakTime = time('00:00:00');
+		if(time1.isAfter(referenceTime) && time2.isBefore(referenceTime) || time1.isSame(breakTime) && time2.isAfter(referenceTime)) {
 			return !time1.isBefore(time2);
 		}
 		else {

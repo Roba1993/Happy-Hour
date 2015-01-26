@@ -27,6 +27,7 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 	};
 
 	$scope.buttonClicked = function() {
+		$scope.showLoading = true;
 		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
 			console.log(bars);
 			var route = RouteGeneratorService.createRoute(bars, routeOptions);

@@ -6,7 +6,6 @@ import de.dhbw.hh.utils.Settings;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Properties;
 
 import static org.junit.Assert.*;
 

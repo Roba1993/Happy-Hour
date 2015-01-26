@@ -167,6 +167,7 @@ public class BarsREST {
 			JSONHappyHour hour = new JSONHappyHour();
 			de.dhbw.hh.models.HappyHour item = hh.get(i);
 			hour.setBarID(item.getBarID());
+			hour.setDescription(item.getDescription());
 			int sh = item.getStart().getHours();
 			int sm = item.getStart().getMinutes();
 			int eh = item.getEnd().getHours();

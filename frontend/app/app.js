@@ -21,8 +21,7 @@ angular.module('happyHour', [
   'happyHour.views.localRoutes',
   'happyHour.views.topRoutes',
   'happyHour.views.startScreen',
-  'happyHour.views.openRoute',
-  'happyHour.views.testview'
+  'happyHour.views.openRoute'
 ])
 .config(['$routeProvider', 'localStorageServiceProvider', function($routeProvider, localStorageServiceProvider) {
   // Wenn keine passende Route gefunden wird, leite auf den Startscreen weiter

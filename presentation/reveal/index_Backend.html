@@ -54,6 +54,73 @@
 					</p>
 				</section>
 				
+				<!-- Slide 2 -->
+				<section data-state="firstSlide">
+					<h2> Anforderungen an das Backend </h2>
+						<ul>
+							<li>Datenmodell </li>
+							<li>Daten über vereinbarte Schnittstellen liefern</li>
+							<p><img src="images/Backend Schnittstellen Foursquare.PNG" width="300px" height="300px" alt="Backend Schnittstellen"></p>
+							<li>Administrator Funktionen </li>
+							<li> Wahl des externen Datenzulieferers</li>
+						</ul>
+				</section>
+				
+				<!-- Slide 3 -->
+				<section>
+					<section>
+					<h2>Ablaufschema des Backends</h2>
+					<p><img src="images/Ablaufschema.png" width="800px" height="600px00px" alt="Ablaufschema"></p>
+					</section>
+					
+					<section>
+						<h2>Pfade</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Pfad</th>
+									<th>HTTP</th>
+									<th>Beschreibung</th>
+									<th>Verantwortlicher</th>
+								</tr>
+							</thead>
+							<body>
+								<tr>
+									<td>/bars</td>
+									<td>GET</td>
+									<td>Alle Informationen zu den Bars in einem definierten Umkreis eines Standorts auslesen</td>
+									<td>Tobias</td>
+								</tr>	
+								<tr>
+									<td>/routes/{hash}</td>
+									<td>GET</td>
+									<td>Route eines bestimmten Hashwerts auslesen</td>
+									<td>Tabea</td>
+								</tr>	
+								<tr>
+									<td>/toproutes</td>
+									<td>GET</td>
+									<td>Alle Top Routen auslesen</td>
+									<td>Maren</td>
+								</tr>	
+								<tr>
+									<td>/bars/reports</td>
+									<td>GET</td>
+									<td>Gemeldete Bars anzeigen</td>
+									<td>Jonas</td>
+								</tr>
+								<tr>
+									<td>/...</td>
+									<td>...</td>
+									<td>Stellt Frontend das auch vor?</td>
+									<td>...</td>
+								</tr>
+							</body>	
+						</table>	
+								
+					</section>
+				</section>
+				
 				<!-- SLIDE 2 -->
 				<section>
 				<h2>Agenda</h2>
@@ -258,6 +325,7 @@
 					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
 				</section>
 
+				
 				<section>
 					<h2>Code Example</h2>
 					<pre><code data-trim contenteditable>

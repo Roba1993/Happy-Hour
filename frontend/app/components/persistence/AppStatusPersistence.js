@@ -1,5 +1,5 @@
 /**
- * Dieses Modul dient dem Verwalten des App-Statuses.
+ * Dieses Modul dient dem Verwalten des App-Status.
  *
  * @author Dorothee Nies, Markus Thömmes
  */
