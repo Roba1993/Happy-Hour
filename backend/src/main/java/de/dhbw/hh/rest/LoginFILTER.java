@@ -31,7 +31,9 @@ public class LoginFILTER {
 		 */
 		before( (request, response) -> {
 		   	// Überprüfung, ob auf einen Pfad zugegriffen wird, der eine Admin-Anmeldung benötigt
-			if ("/bars/reports".equals(request.pathInfo()) || "/bars/:barID/report".equals(request.pathInfo()) || "/report/:id".equals(request.pathInfo())){
+			if ("/bars/reports".equals(request.pathInfo()) || "/bars/:barID/report".equals(request.pathInfo()) 
+					|| "/report/:id".equals(request.pathInfo()) || "/bars/:barID/hour".equals(request.pathInfo())
+					|| "/delHour/:hourID".equals(request.pathInfo())){
 				
 				// Frägt den eingegebenen Namen ab
 				String name = request.queryParams("name");

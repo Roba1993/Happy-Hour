@@ -21,7 +21,7 @@ angular.module('happyHour.backend.Backend', [])
 				var latitude = location.latitude;
 				var longitude = location.longitude;
 
-				var url = baseUrl+'/bars?latitude=' + latitude + '&longitude=' + longitude + '&radius=' + radius + '&weekday=' + weekday;
+				var url = baseUrl+'/bars?latitude='+latitude+'&longitude='+longitude+'&radius='+radius+'&weekday='+weekday;
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
@@ -85,7 +85,7 @@ angular.module('happyHour.backend.Backend', [])
 			 * @return {Promise(Boolean)} Gibt `true` zurück, wenn die Happy Hour erfolgreich gespeichert wurde und `false` wenn nicht.
 			 */
 			saveHappy: function(happy, barId, admin, adminpw) {
-				var url = baseUrl+'/'+barId+'/hour?admin='+admin+'&adminpw='+adminpw;
+				var url = baseUrl+'/bars/'+barId+'/hour?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'POST', url: url, data: happy});
 				var deferred = $q.defer();
@@ -105,7 +105,7 @@ angular.module('happyHour.backend.Backend', [])
 			 */
 			getRoute: function(hash) {
 
-				var url = baseUrl+'/routes/' + hash;
+				var url = baseUrl+'/routes/'+hash;
 
 				var promise = $http({method: 'GET', url: url});
 				var deferred = $q.defer();
@@ -169,9 +169,9 @@ angular.module('happyHour.backend.Backend', [])
 			* @param {String} adminpw Adminpasswort
 			* @return {Promise(Boolean)} Gibt `true` zurück, wenn die Meldung erfolgreich gelöscht wurde und `false` wenn nicht.
 			*/
-			delReport: function(barId, reportId, admin, adminpw) {
+			delReport: function(id, admin, adminpw) {
 
-				var url = baseUrl+'/bars/'+barId+'/report?reportid='+reportId+'&admin='+admin+'&adminpw='+adminpw;
+				var url = baseUrl+'/report/'+id+'?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'DELETE', url: url});
 				var deferred = $q.defer();
@@ -194,7 +194,7 @@ angular.module('happyHour.backend.Backend', [])
 			*/
 			delReports: function(barId, admin, adminpw) {
 
-				var url = baseUrl+'/reports/'+barId+'?admin='+admin+'&adminpw='+adminpw;
+				var url = baseUrl+'/bars/'+barId+'/report?admin='+admin+'&adminpw='+adminpw;
 
 				var promise = $http({method: 'DELETE', url: url});
 				var deferred = $q.defer();
