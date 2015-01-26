@@ -5,6 +5,7 @@ public class JSONHappyHour{
 	private String 	barID;
 	private String 	startTime;
 	private String 	endTime;
+	private String description;
 	private int[] 	days;
 	
 	public String getBarID() {
@@ -38,7 +39,15 @@ public class JSONHappyHour{
 	public void setDays(int[] days){
 		this.days = days;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String toString(){
 		String result = "Öffnungszeiten:{\nBarID: "+barID+"\nStart: "+startTime+"\nEnde: "+endTime+"\nTage:";
 		for(int i=0;i<days.length;i++){
