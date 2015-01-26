@@ -28,7 +28,7 @@ public class Bar {
 	private String 		imageUrl;
 	private Location	location;
 	private String 		address;
-	private ArrayList<JSONOpeningTimes> openingTimes;
+	private ArrayList<JSONOpeningTime> openingTimes;
 	private ArrayList<JSONHappyHour> 	happyHours;
 	
 	public String getId() {
@@ -95,11 +95,11 @@ public class Bar {
 		this.address = adress;
 	}
 	
-	public ArrayList<JSONOpeningTimes> getOpeningTimes() {
+	public ArrayList<JSONOpeningTime> getOpeningTimes() {
 		return openingTimes;
 	}
 	
-	public void setOpeningTimes(ArrayList<JSONOpeningTimes> openingTimes) {
+	public void setOpeningTimes(ArrayList<JSONOpeningTime> openingTimes) {
 		this.openingTimes = openingTimes;
 	}
 	

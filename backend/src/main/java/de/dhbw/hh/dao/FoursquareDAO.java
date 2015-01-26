@@ -3,7 +3,7 @@ package de.dhbw.hh.dao;
 import java.util.ArrayList;
 
 import de.dhbw.hh.models.Bar;
-import de.dhbw.hh.models.JSONOpeningTimes;
+import de.dhbw.hh.models.JSONOpeningTime;
 
 /**
  * Interface für die Foursquare-Anbindung
@@ -30,6 +30,6 @@ public interface FoursquareDAO {
 	 * @param id Eindeutige ID als Grundlage für die Suche
 	 * @return Liste an Öffnungszeiten für eine Bar
 	 */
-	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String id);
+	public ArrayList<JSONOpeningTime> getOpeningTimesByID(String id);
 	
 }

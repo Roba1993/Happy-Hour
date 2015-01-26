@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.primitives.Ints;
 import de.dhbw.hh.dao.DAOFactory;
-import de.dhbw.hh.models.JSONHappyHour;
+import de.dhbw.hh.models.*;
+import de.dhbw.hh.models.HappyHour;
 import de.dhbw.hh.utils.HashConverter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,9 +24,6 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import de.dhbw.hh.dao.FoursquareDAO;
-import de.dhbw.hh.models.Bar;
-import de.dhbw.hh.models.JSONOpeningTimes;
-import de.dhbw.hh.models.Location;
 import de.dhbw.hh.utils.Settings;
 
 /**
@@ -33,7 +32,7 @@ import de.dhbw.hh.utils.Settings;
  * zurückgegeben.
  *
  * @author Tobias Häußermann
- * @version 0.9
+ * @author2 Robert Schütte
  */
 public class H2FoursquareDAO implements FoursquareDAO{
 
@@ -78,6 +77,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @return ArrayList mit (unvollständigen) Bar-Objekten gefüllt
 	 *
 	 * @author Tobias Häußermann
+	 * @author2 Robert Schütte
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -97,28 +97,18 @@ public class H2FoursquareDAO implements FoursquareDAO{
 		// Hole alle Bars von Foursqare für die angegebene Position und Radius
 		ArrayList<Bar> bars = getBarsForPositions(latitude, longitude, rad);
 
+		// Überarbeite alle Bars
+		for(Bar bar : bars) {
+			// Die Bar mit Öffnungszeiten befüllen
+			bar.setOpeningTimes(getOpeningTimesByID(bar.getId()));
 
-		for(int i=0;i<bars.size();i++){
-			bars.get(i).setOpeningTimes(getOpeningTimesByID(bars.get(i).getId()));
+			// Die Bar mit Happy Hour Werten befüllen
+			bar.setHappyHours(transformHappyHours((ArrayList<HappyHour>) daoFactory.getHappyHourDAO().findHappyHour(bar.getId())));
 		}
 
-		ArrayList<Bar> rawBars = new ArrayList<Bar>();
-
-		rawBars = bars;
-		int count = rawBars.size();
-		for (int i = 0; i < count; i++) {
-			String id = rawBars.get(i).getId();
-			ArrayList<de.dhbw.hh.models.HappyHour> hh = (ArrayList<de.dhbw.hh.models.HappyHour>) daoFactory.getHappyHourDAO().findHappyHour(id);
-			// Transformiert die Happy-Hours der Datenbank in Happy-Hour-Objekte, die den Schnittstellendefinitionen
-			// zwischen Frontend und Backend entsprechen
-			ArrayList<JSONHappyHour> happyHours = transformHappyHours(hh);
-			// Fügt den gefundenen Bars ihre Happy-Hours aus der Datenbank hinzu.
-			rawBars.get(i).setHappyHours(happyHours);
-		}
-
-
-		rqFoursquareCache.put(hashKey, rawBars);
-		return rawBars;
+		// Füge die Rückgabe den Cache hinzu
+		rqFoursquareCache.put(hashKey, bars);
+		return bars;
 	}
 
 	/**
@@ -226,15 +216,15 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	 * @return Liste an Öffnungszeiten für eine Bar
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<JSONOpeningTimes> getOpeningTimesByID(String barId){
+	public ArrayList<JSONOpeningTime> getOpeningTimesByID(String barId){
 		// Überprüfe ob die Öffnungszeit für die Angefragte Bar bereits im Cache ist
 		if(otFoursquareCache.asMap().containsKey(barId)){
 			// Wenn die Zeit gecacht ist, gebe diese zurück
-			return (ArrayList<JSONOpeningTimes>) otFoursquareCache.asMap().get(barId);
+			return (ArrayList<JSONOpeningTime>) otFoursquareCache.asMap().get(barId);
 		}
 
 		// Erstelle die ArrayList zur Rückgabe der Öffnungszeiten
-		ArrayList<JSONOpeningTimes> openingTimes = new ArrayList<JSONOpeningTimes>();
+		ArrayList<JSONOpeningTime> openingTimes = new ArrayList<JSONOpeningTime>();
 
 		try{
 			// Erstelle den Foursquare abfrage String
@@ -248,7 +238,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			URL foursquare = new URL(query);
 			HttpURLConnection connection = null;
 			int counter = 0;
-			while(connection == null || connection.getResponseCode() >= 500){
+			// 3 Versuche die Daten abzufragen
+			while(connection == null || connection.getResponseCode() != 200){
 				connection	= (HttpURLConnection) foursquare.openConnection();
 				counter++;
 				if(counter > 3)
@@ -300,7 +291,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					endString = new StringBuffer(endString).insert(2, ":").toString();
 
 					// Erstelle eine neues Öffnungszeiten Objekt
-					JSONOpeningTimes ot = new JSONOpeningTimes();
+					JSONOpeningTime ot = new JSONOpeningTime();
 					ot.setBarID(barId);
 					ot.setStartTime(startString);
 					ot.setEndTime(endString);
@@ -321,61 +312,53 @@ public class H2FoursquareDAO implements FoursquareDAO{
 	}
 
 	/**
-	 * Dokumentation folg
+	 * Diese Funktion wandelt ein Liste von Happy Hour
+	 * Objekten in eine Liste mit JSONHappyHoure Objekten
+	 * um. Diese funktionalität wird für die richtige
+	 * Rest-Rückgabe benötigt.
+	 *
+	 * @param happyHours ArrayList mit den Happy Hours
+	 * @return ArrayList mit den JSON Happy Hours
 	 */
 	@SuppressWarnings("deprecation")
-	private ArrayList<JSONHappyHour> transformHappyHours(ArrayList<de.dhbw.hh.models.HappyHour> hh) {
+	private ArrayList<JSONHappyHour> transformHappyHours(ArrayList<HappyHour> happyHours) {
 		ArrayList<JSONHappyHour> result = new ArrayList<JSONHappyHour>();
 
-		for (int i = 0; i < hh.size(); i++) {
-			JSONHappyHour hour = new JSONHappyHour();
-			de.dhbw.hh.models.HappyHour item = hh.get(i);
-			hour.setBarID(item.getBarID());
-			hour.setDescription(item.getDescription());
-			int sh = item.getStart().getHours();
-			int sm = item.getStart().getMinutes();
-			int eh = item.getEnd().getHours();
-			int em = item.getEnd().getMinutes();
-			String shs = "" + sh;
-			String sms = "" + sm;
-			String ehs = "" + eh;
-			String ems = "" + em;
-			if (shs.length() < 2)
-				shs = "0" + shs;
-			if (sms.length() < 2)
-				sms = "0" + sms;
-			if (ehs.length() < 2)
-				ehs = "0" + ehs;
-			if (ems.length() < 2)
-				ems = "0" + ems;
+		// Forme alle Happy Hour Zeiten um
+		for(HappyHour hh : happyHours) {
+			// Übertrage die Standart Werte
+			JSONHappyHour jsonHH = new JSONHappyHour();
+			jsonHH.setBarID(hh.getBarID());
+			jsonHH.setDescription(hh.getDescription());
+			jsonHH.setStartTime(new SimpleDateFormat("hh:mm").format(hh.getStart()));
+			jsonHH.setEndTime(new SimpleDateFormat( "hh:mm" ).format(hh.getEnd()));
 
-			hour.setStartTime(shs + ":" + sms);
-			hour.setEndTime(ehs + ":" + ems);
-
+			// Überprüfe für welche Tage die Happy Hour gilt
 			ArrayList<Integer> al = new ArrayList<Integer>();
-			if (item.isMonday() == true)
+			if (hh.isMonday())
 				al.add(1);
-			if (item.isTuesday() == true)
+			if (hh.isTuesday())
 				al.add(2);
-			if (item.isWednesday() == true)
+			if (hh.isWednesday())
 				al.add(3);
-			if (item.isThursday() == true)
+			if (hh.isThursday())
 				al.add(4);
-			if (item.isFriday() == true)
+			if (hh.isFriday())
 				al.add(5);
-			if (item.isSaturday() == true)
+			if (hh.isSaturday())
 				al.add(6);
-			if (item.isSunday() == true)
+			if (hh.isSunday())
 				al.add(7);
-			int[] days = new int[al.size()];
-			for (int j = 0; j < al.size(); j++) {
-				days[j] = al.get(j);
-			}
 
-			hour.setDays(days);
-			result.add(hour);
+			// Wandel die ArrayList in ein Array um
+			int[] days = Ints.toArray(al);
+			jsonHH.setDays(days);
+
+			// Füge die Happy Hour Zeit der Rückgabe Liste hinzu
+			result.add(jsonHH);
 		}
 
+		// Gebe die Happy Hour Zeiten zurück
 		return result;
 	}
 
