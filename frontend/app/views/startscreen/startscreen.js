@@ -26,27 +26,34 @@ function($scope, AppStatusPersistenceService, $location, BackendService, RouteGe
 		weekday: weekdayToday
 	};
 
+	// Erstellt die Route
 	var createRoute = function() {
 		BackendService.getBars(routeOptions.location, routeOptions.radius, routeOptions.weekday).then(function(bars) {
+			// Wenn Bars verfügbar sind Route erstellen
 			if(bars.length > 0) {
 				var route = RouteGeneratorService.createRoute(bars, routeOptions);
 				AppStatusPersistenceService.setRoute(route);
 				$location.path('/currentRoute');
 			}
+			// Ansonsten Fehlermeldung anzeigen
 			else {
 				$scope.noBarPopupOpen = true;
 			}
 		});
 	};
 
+	// Wird aufgerufen, wenn der GoHappy Button geklickt wurde
 	$scope.buttonClicked = function() {
 		$scope.showLoading = true;
+		// Aktuelle Lokation des Gerätes abfragen
 		navigator.geolocation.getCurrentPosition(
+			// Wenn eine Position zurückgegeben wurde, diese als Routenoption setzen
 			function(position) {
 				routeOptions.location.latitude = position.coords.latitude;
 				routeOptions.location.longitude = position.coords.longitude;
 				createRoute();
 			},
+			// Wenn keine Position zurückgegeben wurde, Route mit Standardoptionen erstellen
 			function() {
 				createRoute();
 			}
