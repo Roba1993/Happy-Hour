@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-newer');
 
-	grunt.registerTask('default', ['jshint', 'karma', 'processhtml', 'uglify', 'concat', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['jshint', 'karma', 'processhtml', 'uglify', 'concat', 'cssmin', 'newer:imagemin:dist', 'copy']);
 	grunt.registerTask('test', ['karma']);
 	grunt.registerTask('build', ['processhtml', 'uglify', 'concat', 'cssmin', 'newer:imagemin:dist', 'copy']);
 };
