@@ -163,7 +163,6 @@ angular.module('happyHour.backend.Backend', [])
 			* Loescht eine bestimmte Meldung zu einer Bar.
 			*
 			* @author Daniel Reichert, Kim Rinderknecht
-			* @param {Integer} barId Die ID der Bar mit der Fehlermeldung
 			* @param {Integer} reportId Die ID der zu loeschenden Meldung
 			* @param {String} admin Adminname
 			* @param {String} adminpw Adminpasswort
