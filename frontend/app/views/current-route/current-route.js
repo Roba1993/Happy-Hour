@@ -22,7 +22,8 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 		return JSON.stringify($scope.route);
 	}, function() {
 		AppStatusPersistenceService.setRoute($scope.route);
-		console.log($scope.route);
+		//console.log($scope.route);
+		console.log(angular.toJson($scope.route));
 	});
 
 	var lastOptions = {};
