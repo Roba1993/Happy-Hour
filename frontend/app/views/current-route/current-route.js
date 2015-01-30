@@ -155,8 +155,10 @@ function($scope, $location, BackendService, RouteGeneratorService, RoutesPersist
 
 	// Sendet eine Reportnachricht an das Backend
 	$scope.reportBar = function(barId, reportBarText) {
-		BackendService.reportData(barId, reportBarText);
-		$scope.reportPopupNotification = true;
+		if(reportBarText.length > 0) {
+			BackendService.reportData(barId, reportBarText);
+			$scope.reportPopupNotification = true;
+		}
 	};
 
 	/**
