@@ -135,6 +135,7 @@ public class H2FoursquareDAO implements FoursquareDAO{
 					"&v="				+ new SimpleDateFormat("yyyyMMdd").format(new Date()) +
 					"&ll="				+latitude+","+longitude+
 					"&query="			+ "bar" +
+					"&sortByDistance=1" + // sortiert die Bars von Foursquare nach Entfernung zum Suchpunkt
 					"&radius="			+radius;
 
 			// Absenden eines Html-Requests mittels der Java-Funktionalität HttpURLConnection
