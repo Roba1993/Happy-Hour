@@ -76,7 +76,34 @@
 
 				<section>
 					<h3 style="text-align:center">Kommunikation der Views</h3>
-					
+					<pre><code>
+AppStatusPersistenceService.setRoute(route);
+var route = AppStatusPersistenceService.getRoute();
+					</code></pre>
+					<br>
+					<ul>
+						<li>Kommunikation über lokale Persistenz</li>
+						<li>Anwendungsstatus geschenkt</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3 style="text-align:center">Anwendungslebenszyklus</h3>
+					<ul class="fragment">
+						<li>Es gibt <strong>kein</strong> "Pausieren" der Anwendung</li>
+					</ul>
+					<br><br>
+					<div class="fragment">
+						<h4>Lösung</h4>
+						<ol class="fragment">
+							<li>Speichern des Anwendungsstatuses</li>
+							<li>Auslesen des Statuses bei jedem Laden der Anwendung</li>
+						</ol>
+					</div>
+
+					<div class="fragment" style="display: block; text-align: center;">
+						<p><img src="images/Frontend-appstatus.png" alt="Zeitplan"></p>
+					</div>
 				</section>
 
 			</div>
