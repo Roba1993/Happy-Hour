@@ -76,15 +76,21 @@
 
 				<section>
 					<h3 style="text-align:center">Kommunikation der Views</h3>
-					<pre><code>
-AppStatusPersistenceService.setRoute(route);
-var route = AppStatusPersistenceService.getRoute();
-					</code></pre>
-					<br>
 					<ul>
 						<li>Kommunikation über lokale Persistenz</li>
-						<li>Anwendungsstatus geschenkt</li>
 					</ul>
+					<br><br>
+					<ol>
+						<li>View speichert Route im Anwendungsstatus
+						<pre><code>
+AppStatusPersistenceService.setRoute(route);
+					</code></pre></li>
+						<li>Weiterleitung auf neuen View</li>
+						<li>Neuer View liest Route aus Anwendungsstatus aus
+						<pre><code>
+var route = AppStatusPersistenceService.getRoute();
+					</code></pre></li>
+					</ol>
 				</section>
 
 				<section>
@@ -106,6 +112,19 @@ var route = AppStatusPersistenceService.getRoute();
 					</div>
 				</section>
 
+				<section>
+					<h3 style="text-align:center">Routenalgorithmus</h3>
+					<ol>
+						<li><strong><code>distance</code>:</strong> Entfernung zur vorhergehenden Bar</li>
+						<li><strong><code>rating</code>:</strong> Foursquare Bewertung (0-10)</li>
+						<li><strong><code>happyHourOverlap</code>:</strong> Prozentuale Überschneidung mit einer Happy-Hour</li>
+					</ol>
+					<br><br>
+					<pre><code>
+var barScore = (rating*100/distance) * (1+(happyHourOverlap*10));
+					</code></pre>
+
+				</section>
 			</div>
 
 		</div>
