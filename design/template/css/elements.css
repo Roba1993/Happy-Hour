@@ -6,21 +6,21 @@
  * Navigationen
  */
 
-.e__navigation-vertical,
-.e__navigation-vertical-element {
+.e__navigation-horizontal,
+.e__navigation-horizontal-element {
     margin: 0;
     padding: 0;
 }
 
-.e__navigation-vertical {
+.e__navigation-horizontal {
     list-style: none;
 }
 
-.e__navigation-vertical-element {
+.e__navigation-horizontal-element {
     text-align: center;
 }
 
-.e__navigation-vertical-element > a {
+.e__navigation-horizontal-element > a {
     display: block;
     height: 100%;
     width: 100%;
@@ -31,19 +31,19 @@
     position: relative
 }
 
-.e__navigation-vertical-element > a:hover,
-.e__navigation-vertical-element > a:focus {
+.e__navigation-horizontal-element > a:hover,
+.e__navigation-horizontal-element > a:focus {
     outline: 0;
     cursor: pointer;
 }
 
-.e__navigation-vertical-element > a.active,
-.e__navigation-vertical-element > a:hover {
+.e__navigation-horizontal-element > a.active,
+.e__navigation-horizontal-element > a:hover {
     font-weight: 400;
 }
 
-.e__navigation-vertical-element > a.active::after,
-.e__navigation-vertical-element > a:hover::after {
+.e__navigation-horizontal-element > a.active::after,
+.e__navigation-horizontal-element > a:hover::after {
     content: ' ';
     position: absolute;
     width: 100%;
@@ -742,6 +742,7 @@
     color: #4d4d4d;
 }
 
+.i-f__trash.active:before,
 .i-f__trash:before {
     content: "\e601";
     font-size: 1.3rem;
