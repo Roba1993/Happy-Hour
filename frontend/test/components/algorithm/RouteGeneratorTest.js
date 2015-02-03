@@ -37,6 +37,20 @@ describe('RouteGenerator', function() {
 		expect(route.timeframes[1].endTime).toBe('12:00');
     }));
 
+    it('sollte eine leere Route zurückgeben, falls keine Bars verfügbar sind', inject(function(RouteGeneratorService) {
+    	var bars = [];
+    	var options = {
+			location: {longitude: 0.0, latitude: 0.0},
+			stayTime: 1,
+			startTime: '10:00',
+			endTime: '12:00'
+		};
+
+		var route = RouteGeneratorService.createRoute(bars, options);
+
+		expect(route.timeframes[0].bar).toBe(null);
+    }));
+
     it('sollte bei gleicher Entfernung das bessere Rating nehmen', inject(function(RouteGeneratorService) {
 		var bars = [
 			{
