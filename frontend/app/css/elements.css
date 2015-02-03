@@ -6,21 +6,21 @@
  * Navigationen
  */
 
-.e__navigation-vertical,
-.e__navigation-vertical-element {
+.e__navigation-horizontal,
+.e__navigation-horizontal-element {
     margin: 0;
     padding: 0;
 }
 
-.e__navigation-vertical {
+.e__navigation-horizontal {
     list-style: none;
 }
 
-.e__navigation-vertical-element {
+.e__navigation-horizontal-element {
     text-align: center;
 }
 
-.e__navigation-vertical-element > a {
+.e__navigation-horizontal-element > a {
     display: block;
     height: 100%;
     width: 100%;
@@ -31,19 +31,19 @@
     position: relative
 }
 
-.e__navigation-vertical-element > a:hover,
-.e__navigation-vertical-element > a:focus {
+.e__navigation-horizontal-element > a:hover,
+.e__navigation-horizontal-element > a:focus {
     outline: 0;
     cursor: pointer;
 }
 
-.e__navigation-vertical-element > a.active,
-.e__navigation-vertical-element > a:hover {
+.e__navigation-horizontal-element > a.active,
+.e__navigation-horizontal-element > a:hover {
     font-weight: 400;
 }
 
-.e__navigation-vertical-element > a.active::after,
-.e__navigation-vertical-element > a:hover::after {
+.e__navigation-horizontal-element > a.active::after,
+.e__navigation-horizontal-element > a:hover::after {
     content: ' ';
     position: absolute;
     width: 100%;
@@ -742,8 +742,7 @@
     color: #4d4d4d;
 }
 
-.i-f__trash:before:active,
-.i-f__trash:before.active,
+.i-f__trash.active:before,
 .i-f__trash:before {
     content: "\e601";
     font-size: 1.3rem;
@@ -751,8 +750,6 @@
     color: #646363;
 }
 
-.i-f__reload:before:active,
-.i-f__reload:before.active,
 .i-f__reload:before {
     content: "\e605";
     font-size: 1.4rem;
@@ -760,8 +757,6 @@
     color: #ABABAB;
 }
 
-.i-f__reload2:before:active,
-.i-f__reload2:before.active,
 .i-f__reload2:before {
     content: "\e606";
     font-size: 1.4rem;
@@ -769,8 +764,6 @@
     color: #ABABAB;
 }
 
-.i-f__maps:before:active,
-.i-f__maps:before.active,
 .i-f__maps:before {
     content: "\e603";
     font-size: 1.4rem;
@@ -778,8 +771,6 @@
     color: #ABABAB;
 }
 
-.i-f__star:before:active,
-.i-f__star:before.active,
 .i-f__star:before {
     content: "\e607";
     font-size: 1rem;
@@ -787,8 +778,6 @@
     color: #c0c0c0;
 }
 
-.i-f__download:before:active,
-.i-f__download:before.active,
 .i-f__download:before {
     content: "\e602";
     font-size: 1rem;
@@ -796,8 +785,6 @@
     color: #c0c0c0;
 }
 
-.i-f__options:before:active,
-.i-f__options:before.active,
 .i-f__options:before {
     content: "\e604";
     font-size: 1.4rem;
@@ -805,8 +792,6 @@
     color: #c0c0c0;
 }
 
-.i-f__impressum:before:active,
-.i-f__impressum:before.active,
 .i-f__impressum:before {
     content: "\e608";
     font-size: 1rem;
@@ -895,10 +880,12 @@
     z-index: 999;
     position: absolute;
     top: -100%;
+    display: none;
 }
 
 .e__overlay.is__open {
     top: 0;
+    display: block;
 }
 
 .e__overlay-stage {
