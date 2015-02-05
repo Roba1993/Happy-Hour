@@ -128,10 +128,10 @@ h3 {
     background: #f2f2f2;
     border-bottom: 1px solid #666;
 }
-#theatre-head-subbar .e__navigation-vertical-element:first-of-type > a {
+#theatre-head-subbar .e__navigation-horizontal-element:first-of-type > a {
     padding: 0px 3px;
 }
-#theatre-head-subbar .e__navigation-vertical-element:last-of-type > a {
+#theatre-head-subbar .e__navigation-horizontal-element:last-of-type > a {
     padding-right: 3px;
 }
 #theatre-head-topbar-title {
