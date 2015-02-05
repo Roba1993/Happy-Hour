@@ -270,15 +270,17 @@ body {
   height: 50px; }
 
   /*********************************************
- * Sources
- *********************************************/
+ * Sources 
+
 
 .reveal .source {
   position: fixed;
-  display: block; 
-  left: 500px;
-  bottom: 20px;
-  font size: 12px; }
+  display: block;
+  text-align: center;
+  bottom: 0px;
+  font-size: 12px; }
+
+*********************************************/
 
 /*********************************************
  * SLIDE NUMBER
