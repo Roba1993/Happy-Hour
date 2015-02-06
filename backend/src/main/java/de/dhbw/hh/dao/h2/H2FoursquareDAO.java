@@ -331,8 +331,8 @@ public class H2FoursquareDAO implements FoursquareDAO{
 			JSONHappyHour jsonHH = new JSONHappyHour();
 			jsonHH.setBarID(hh.getBarID());
 			jsonHH.setDescription(hh.getDescription());
-			jsonHH.setStartTime(new SimpleDateFormat("hh:mm").format(hh.getStart()));
-			jsonHH.setEndTime(new SimpleDateFormat( "hh:mm" ).format(hh.getEnd()));
+			jsonHH.setStartTime(new SimpleDateFormat("HH:mm").format(hh.getStart()));
+			jsonHH.setEndTime(new SimpleDateFormat( "HH:mm" ).format(hh.getEnd()));
 
 			// Überprüfe für welche Tage die Happy Hour gilt
 			ArrayList<Integer> al = new ArrayList<Integer>();
